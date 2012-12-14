@@ -4,16 +4,24 @@
 		<title>Minecraft Server Control</title>
 		
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
-		<script src="js/main.min.js"></script>
-		<link href="css/main.min.css" rel="stylesheet" media="screen">
+		<script src="../assets/js/main.min.js"></script>
+		<link href="../assets/css/main.min.css" rel="stylesheet" media="screen"><!-- Phillip, we need to do some sort of pathfinding here to determine where the css/js files are located. -->
 		<style>
 			body {
 				margin-top: 20px;
 			}
 		</style>
+		<script>
+			$('#tab a').click(function (e) {
+  				e.preventDefault();
+  				$(this).tab('show');
+			})
+		
+		
+		</script>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="css/main-responsive.min.css" rel="stylesheet">
+		<link href="../assets/css/main-responsive.min.css" rel="stylesheet">
 	</head>
 	
 	<body>
@@ -22,11 +30,21 @@
 				<div class="span1"></div>
 				
 				<div class="span10">
+					<div class="navbar">
+						<div class="navbar-inner">
+							<a class="brand" href="">CMC</a>
+							<ul class="nav">
+								<li class="active"><a href="">Home</a></li>
+								<li><a href="">Config</a></li>
+								<li><a href="">Login</a></li>
+							</ul>
+						</div>
+					</div>
 					<h1>Minecraft Server Control</h1><hr>
 					<div class="row-fluid">
 						<div class="span6">
 							<h2>General Info</h2>
-							<strong>Online:</strong> <img height="12px" src="img/Circle_Green.png"><br>
+							<strong>Online:</strong> <img height="12px" src="../assets/site_images/Circle_Green.png"><br>
 							<strong>World:</strong> world<br>
 							<strong>PvP:</strong> false<br>
 							<strong>Difficulty:</strong> 1<br>
@@ -47,11 +65,29 @@
 						</div>
 						
 					</div> <!-- END MAIN CONTENT -->
-					<br><br><strong>Console:</strong>
-					<pre>
-						<br><br><br><br><br><br><br><br><br><br>
-					</pre>
-				</div>
+					<br><br>
+					<div class="tabbable">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#console" data-toggle="tab">Console</a></li>
+							<li><a href="#chat" data-toggle="tab">Chat</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="console">
+								<pre>
+[Plugin X] is now Active!
+Blah Blah Blah...
+									<br><br><br><br><br><br><br><br><br><br>
+								</pre>
+							</div>
+							<div class="tab-pane" id="chat">
+								<pre>
+Bob: Hi!
+Joe: Yo!
+									<br><br><br><br><br><br><br><br><br><br>
+								</pre>
+							</div>
+
+				</div><!-- END 10 SPAN -->
 				<div class="span1"></div>
 			</div> <!-- END ROW -->
 		</div> <!-- END CONTAINER -->
