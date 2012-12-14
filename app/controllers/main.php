@@ -9,16 +9,16 @@ class main extends pf_controller
         
         $this->loadLibrary('server_conf');
         //grab the servers config
+        /*
         if (!server_conf::grabConfig('/bukkit/server.properties')) //@todo:make dynamic from settings.json file
         {
             pf_events::dispayFatal('Server.properties Not Found!');
         }
-        
-        
+        */
+
         //load our main page
         $this->loadView('main_page');
         
     }
-    
 }
 ?>
