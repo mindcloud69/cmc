@@ -124,7 +124,7 @@ class pf_core {
         //if nothing modified addbaseurl, then we add the base url :)
         //if (substr(pf_config::$BASE_URL,1)=="/")
                 
-        if ($addbaseurl) $url = pf_config::get('base_url') . '/' . $url;
+        if ($addbaseurl) $url = pf_config::get('base_url') .pf_config::get ('index_page'). '/' . $url;
         
         echo '<script type="text/javascript">' . "\n";
         echo 'setTimeout("location.href = '. "'$url';".'",'.$time.");";
