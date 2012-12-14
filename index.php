@@ -41,6 +41,7 @@
  * READ SETTINGS - sets up app after loading the config.php file
  * ===========================================================================*/    
     //load settings file with our config and our events logger
+    require_once (SYSTEM_DIR.'core'.DS.'pf_config.php');
     require_once (APPLICATION_DIR.'config'.DS. 'config.php');
     
 /* =============================================================================
@@ -51,31 +52,28 @@
     require_once (SYSTEM_DIR.'core'.DS.'pf_events.php');
     
     //setting of timezone
-    if (key_exists('timezone', $config))
+    if (pf_config::get('timezone'))
     {
-    date_default_timezone_set($config['timezone']); //from settings.php
-    pf_events::eventsAdd('Timezone set: '.$config['timezone']);
+    date_default_timezone_set(pf_config::get('timezone')); 
+    pf_events::eventsAdd('Timezone set: '.pf_config::get('timezone'));
     }
 
     //search for environment in config
-    if (key_exists('environment', $config))
+    if (pf_config::get('environment'))
     {
-        if ($config['environment'] == 'DEV')
+        if (pf_config::get('environment') == 'DEV')
         {
             error_reporting(E_ALL);
-            define('SHOW_DEBUG_MESSAGES',TRUE);
+            pf_events::$show_debug=true;
             pf_events::eventsAdd('Environment Set To DEV');
         }
         else
         {
             error_reporting(0);
-            define('SHOW_DEBUG_MESSAGES',FALSE);
             pf_events::eventsAdd('Environment Set To LIVE');
         }
     }
-    pf_events::eventsDisplay();
-    die();
-
+    
 /* =============================================================================
  * OUTPUT BUFFERING - Turns it on, This is VERY useful for us.
  * ===========================================================================*/    
@@ -85,47 +83,56 @@
  * TURN ON SESSIONS - Turns on sessions for later
  * ===========================================================================*/        
     session_start();
+
+/* =============================================================================
+ * CONFIG BASE URL - Needed for all pf_html settings, and just useful in general
+ * ===========================================================================*/            
+    pf_config::set('base_url', 'http://'.$_SERVER['HTTP_HOST'].'/'.pf_config::get('base_path').'/');
     
 /* =============================================================================
  * ROUTER - Load/Configure the router object and do routing
  * ===========================================================================*/
     
+    //create a router
     pf_events::eventsAdd('Creating Router Object');
     if (!$router=new pf_router())
     {
         pf_events::eventsAdd('Creating Router Object Failed');
     }
     
-    //set the base path of the router  (if we have one)
-    if (!empty(pf_config::$ROUTER_BASE_PATH))
+    //if we don't have a base_url, or index_page assigned we throw an error
+    if ((!pf_config::get('base_path')) || (!pf_config::get('index_page')))
     {
-    pf_events::eventsAdd("Setting Base Path for Router to '".pf_config::$ROUTER_BASE_PATH."'");
-    $router->setBasepath(pf_config::$ROUTER_BASE_PATH);
+        pf_events::dispayFatal('Base_url or index_page not set!');
     }
     
+    //set the base_url and index_page
+    pf_events::eventsAdd("Setting Base Path for Router to '".pf_config::get('base_path').'/'.pf_config::get('index_page')."'");
+    $router->setBasepath(pf_config::get('base_path').'/'.pf_config::get('index_page'));
+        
     //set the router controller dir
-    pf_events::eventsAdd("Setting router controller dir to: ". CONTROLLER_DIR.DS);
-    $router->setControllerDirectory(CONTROLLER_DIR.DS);
+    pf_events::eventsAdd("Setting router controller dir to: ". APPLICATION_DIR.'controllers'.DS);
+    $router->setControllerDirectory(APPLICATION_DIR.'controllers'.DS);
     
     //set the router default controller
-    pf_events::eventsAdd("Setting default controller file/class to: ".DEFAULT_CONTROLLER);
-    $router->setDefaultController(DEFAULT_CONTROLLER);
+    pf_events::eventsAdd("Setting default controller file/class to: ".pf_config::get('default_controller'));
+    $router->setDefaultController(pf_config::get('default_controller'));
     
     //set the default action to call
-    pf_events::eventsAdd('Setting default action method to: '. DEFAULT_ACTION);
-    $router->setDefaultAction(DEFAULT_ACTION);
+    pf_events::eventsAdd('Setting default action method to: '. pf_config::get('default_method'));
+    $router->setDefaultAction(pf_config::get('default_method'));
     
     //parse the URL
     pf_events::eventsAdd('Getting requested URL');
     $route = $router->parseURI();
     
     //require the controller file
-    pf_events::eventsAdd('Loading Controller: '.CONTROLLER_DIR.DS.$route['CONTROLLER'].".php");
+    pf_events::eventsAdd('Loading Controller: '.APPLICATION_DIR.'controllers'.DS.$route['CONTROLLER'].".php");
     
     //if no controller there throw a 404 page at them and throw a fatal error
     if(!$router->loadController($route['CONTROLLER'])) 
     {
-        pf_events::eventsAdd('Failed to load Controller: '.CONTROLLER_DIR.DS.$route['CONTROLLER'].".php");
+        pf_events::eventsAdd('Failed to load Controller: '.APPLICATION_DIR.'controllers'.DS.$route['CONTROLLER'].".php");
         pf_core::loadTemplate('404');
         pf_events::dispayFatal ('The Page Requested Was Not Found');    
     }

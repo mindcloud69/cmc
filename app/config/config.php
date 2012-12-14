@@ -1,45 +1,50 @@
 <?php
 /* =============================================================================
- * CONFIG.PHP - Configuration of the app
+ * CONFIG.PHP - handles our config of the app
  * ===========================================================================*/
-$config = array();
 
 /* =============================================================================
  * APP SPECIFIC - Configuration of the app
  * ===========================================================================*/
-//Our Timezone
-$config['timezone']     ='America/New_York';
-
 //our authors info
-$config['author']       ='Phillip Tarrant';
-$config['author_uri']   ='www.tarrants.net';
+pf_config::set('author', 'Phillip Tarrant');
+pf_config::set('author_uri', 'www.tarrants.net');
 
 //site info
-$config['site_name']    ='Crafty';
-$config['keywords']     ='Minecraft Server Control Crafty';
-$config['description']  ='A php app to control your minecraft serer';
-$config['shortcut_icon']='icon.gif';
-$config['creation_date']='2012';
+pf_config::set('site_name', 'Crafty Minecraft Control');
+pf_config::set('keywords', 'Minecraft Server Control Crafty');
+pf_config::set('description', 'A PHP app to control your minecraft server');
+pf_config::set('shortcut_icon', 'icon.gif');
+pf_config::set('creation_date', '2012');
 
 /* =============================================================================
- * ENVIRONMENT - Configuration of the app
+ * ENVIRONMENT - Some server settings
  * ===========================================================================*/
+//Our Timezone
+pf_config::set('timezone', 'America/New_York');
+
 //set to any subfolder you have if not using one set to ''
-$config['base_url']	= 'CMC'; 
+pf_config::set('base_path', 'cmc');
 
 //if  using mod_rewrite set this to ''
-$config['index_page']   = 'index.php'; 
+pf_config::set('index_page', 'index.php');
 
 //this should be set to "DEV" or "LIVE"
-$config['environment']  = 'DEV';
-
+pf_config::set('environment', 'DEV');
 
 /* =============================================================================
- * ROUTER SETUP - Configuration of the app
+ * ROUTER SETUP - Configuration of the router
  * ===========================================================================*/
 //our default controller
-$config['default_controller']= 'main';
+pf_config::set('default_controller', 'main');
 
 //our default method
-$config['default_method']= 'index';
+pf_config::set('deafult_method', 'index');
+
+/* =============================================================================
+ * ASSETS SETUP - Configuration of the Assets Dir
+ * ===========================================================================*/
+pf_config::set('stylesheet_dir', 'app/assets/css/');
+pf_config::set('java_dir', 'app/assets/js/');
+
 ?>

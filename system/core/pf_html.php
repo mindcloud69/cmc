@@ -45,7 +45,7 @@ class pf_html
         }
         else
         {
-            self::$headobjects[]='<link rel="stylesheet" media="all" type="text/css" href="'.pf_config::$BASE_URL.STYLESHEET_DIR.$stylesheet.'" />';
+            self::$headobjects[]='<link rel="stylesheet" media="all" type="text/css" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').$stylesheet.'" />';
         }
     }
     public static function setTitle($title)
@@ -54,7 +54,7 @@ class pf_html
     }
     public static function addShortcutIcon($file)
     {
-        self::$headobjects[]='<link rel="shortcut icon" href="'.pf_config::$BASE_URL.STYLESHEET_DIR.'/images/'.$file.'" type="image/gif" />';
+        self::$headobjects[]='<link rel="shortcut icon" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').'images/'.$file.'" type="image/gif" />';
     }
     public static function addScriptExternal($url)
     {
@@ -62,7 +62,7 @@ class pf_html
     }
     public static function addScriptInternal($file)
     {
-        self::$headobjects[]='<script src="'.pf_config::$BASE_URL.JAVA_DIR.$file.'"></script>';
+        self::$headobjects[]='<script src="'.pf_config::get('base_url').pf_config::get('java_dir').$file.'"></script>';
     }
     
     public static function clearPreviousBuffer()
@@ -77,7 +77,7 @@ class pf_html
     }
     public static function addImage($file,$alt=null,$title=null,$class=null)
     {
-        $link = pf_config::$BASE_URL.'/'.APPLICATION_DIR.'/'.SITE_IMAGES_FOLDER.'/'.$file;
+        $link = pf_router::$basepath.'/'.APPLICATION_DIR.'/'.SITE_IMAGES_FOLDER.'/'.$file;
         if (!file_exists(APPLICATION_DIR.DS.SITE_IMAGES_FOLDER.DS.$file))
         {
             pf_events::eventsAdd ('Unable to find: '.$file . ' in ' . APPLICATION_DIR. DS . SITE_IMAGES_FOLDER);
