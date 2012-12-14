@@ -41,7 +41,7 @@ class pf_router
         
         //convert URL parts into array
         $url_parts = explode("/",$path,2); //explode the URI into parts
-        var_dump($url_parts);
+
         /*if no page specified we use the default*/
         if (empty($url_parts[0])) 
             $this->route['CONTROLLER'] = self::$default_controller;
