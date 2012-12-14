@@ -86,6 +86,14 @@ class pf_events {
         die();
     }
     
+    public static function display404($reason = 'Unknown')
+    {
+        pf_html::clearPreviousBuffer();
+        self::eventsAdd('Throwing 404:' . $reason);
+        pf_core::loadTemplate('404',$reason);
+    }
+            
+    
     
 }
 
