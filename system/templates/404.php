@@ -17,6 +17,9 @@
     Perhaps you should double check your link and make sure it's correct or <br/>
     <a href="<?php echo pf_config::get('base_url').pf_config::get('index_page');?>"> Hit up the main site</a>
 </p>
+<div id="error" class="alert" style="text-align:center;"><b>FATAL ERROR</b>:<?php echo $data;?> </div>
 <p class="center">Powered by <?php echo APP_NAME . '-' . APP_VERSION; ?></p>
 </div>
-<?php pf_core::loadTemplate('footer');?>
+<?php pf_core::loadTemplate('footer');
+die();
+?>
