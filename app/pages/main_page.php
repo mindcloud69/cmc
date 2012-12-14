@@ -4,11 +4,12 @@
 		<title>Minecraft Server Control</title>
 		
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
-                <script src="<?php echo pf_config::get('base_url'); ?>app/assets/js/main.min.js"></script>
+        <script src="<?php echo pf_config::get('base_url'); ?>app/assets/js/main.min.js"></script>
 		<link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/main.min.css" rel="stylesheet" media="screen">
 		<style>
 			body {
 				margin-top: 20px;
+				background-color: #f5f5f5;
 			}
 		</style>
 		<script>
