@@ -35,7 +35,8 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
  * Split server.log into [info] and chat
  * color chat messages and remove the color format from log output
  * Prettiness :P
-
+ * Manage Backup/Server_Check/Server_Restart Script Schedules
+ * Manage Backups and Schedule them.
 
 
 ##License / Copyright
