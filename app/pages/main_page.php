@@ -4,8 +4,8 @@
 		<title>Minecraft Server Control</title>
 		
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
-		<script src="../assets/js/main.min.js"></script>
-		<link href="../assets/css/main.min.css" rel="stylesheet" media="screen"><!-- Phillip, we need to do some sort of pathfinding here to determine where the css/js files are located. -->
+                <script src="<?php echo pf_config::get('base_url'); ?>app/assets/js/main.min.js"></script>
+		<link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/main.min.css" rel="stylesheet" media="screen">
 		<style>
 			body {
 				margin-top: 20px;
