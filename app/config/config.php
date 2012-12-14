@@ -44,6 +44,7 @@ pf_config::set('default_method', 'index');
 
 //our default login page
 pf_config::set('login_page', 'login');
+
 /* =============================================================================
  * ASSETS SETUP - Configuration of the Assets Dir
  * ===========================================================================*/
