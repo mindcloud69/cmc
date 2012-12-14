@@ -27,6 +27,7 @@ pf_config::set('timezone', 'America/New_York');
 pf_config::set('base_path', 'cmc');
 
 //if  using mod_rewrite set this to ''
+//if you are using mod_rewrite, don't forget to change your links to remove the index.php
 pf_config::set('index_page', 'index.php');
 
 //this should be set to "DEV" or "LIVE"
@@ -35,10 +36,10 @@ pf_config::set('environment', 'DEV');
 /* =============================================================================
  * ROUTER SETUP - Configuration of the router
  * ===========================================================================*/
-//our default controller
+//our default controller (main is default)
 pf_config::set('default_controller', 'main');
 
-//our default method
+//our default method (index is default)
 pf_config::set('deafult_method', 'index');
 
 /* =============================================================================
@@ -46,5 +47,10 @@ pf_config::set('deafult_method', 'index');
  * ===========================================================================*/
 pf_config::set('stylesheet_dir', 'app/assets/css/');
 pf_config::set('java_dir', 'app/assets/js/');
+
+
+/* =============================================================================
+ * YOUR VARIABLES - A place for all your variables
+ * ===========================================================================*/
 
 ?>
