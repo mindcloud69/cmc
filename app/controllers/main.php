@@ -4,7 +4,11 @@ class main
 {
     public function index()
     {
-        echo 'your page sir';
+        //check if logged in, if not redirect to /login
+        pf_auth::checkLogin('login');
+        //load our main page
+        
+        pf_core::loadPage('main');
     }
     
 }

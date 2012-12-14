@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('APP_NAME')) die('NO DIRECT SCRIPT ACCESS!');
 
 class pf_auth {
     
