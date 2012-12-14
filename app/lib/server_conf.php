@@ -10,6 +10,9 @@ class server_conf
     {
         //for right now, we turn off errors (this isn't a proper ini file)
         ini_set('display_errors','Off');
+
+        //check to make sure file is there.
+        if (!file_exists($filename)) return false;
         
         $data=parse_ini_file($filename);
         
