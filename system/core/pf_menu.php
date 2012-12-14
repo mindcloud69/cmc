@@ -14,7 +14,7 @@ class pf_menu {
     {
         pf_events::eventsadd("Adding Menu Item: $title");
         //if an internal link, we add our base URL to it.
-        if ($internal) $url = pf_config::get('base_url')."/".$url;
+        if ($internal) $url = pf_config::get('base_url').pf_config::get ('index_page')."/".$url;
         self::$menu[] = array ('title'=>$title,'url'=>$url,'children'=>$has_children);
     }
     
