@@ -15,7 +15,7 @@
 <p class="center">
     Not really, but the page your looking for doesn't actually exist.<br />
     Perhaps you should double check your link and make sure it's correct or <br/>
-    <a href="<?php echo pf_config::get('base_url');?>"> Hit up the main site</a>
+    <a href="<?php echo pf_config::get('base_url').pf_config::get('index_page');?>"> Hit up the main site</a>
 </p>
 <p class="center">Powered by <?php echo APP_NAME . '-' . APP_VERSION; ?></p>
 </div>
