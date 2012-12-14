@@ -20,7 +20,7 @@ class pf_core {
 /* =============================================================================
  * Loads a Template from the system dir
  * ===========================================================================*/
-    public static function loadTemplate ($file)
+    public static function loadTemplate ($file,$data=array())
     {
         //try to load the template from the app folder
         if (!self::loadFile($file, APPLICATION_DIR.'templates'))
