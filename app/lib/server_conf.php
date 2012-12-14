@@ -25,8 +25,10 @@ class server_conf
             if (($setting=='texture-pack') && ($value=='false')) $value='';
             self::$server_data[$setting]=$value;
         }
+        
         //turn errors back on
         ini_set('display_errors','On');
+        return true;
     }
     
     public static function getSetting($setting,$as_String=false)
