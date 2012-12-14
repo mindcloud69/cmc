@@ -1,4 +1,4 @@
-Crafty-Server-Control
+Crafty-Minecraft-Controller
 ===========================
 *A Completely OPEN SOURCE Server Controller for Bukkit (or Minecraft)*
 
