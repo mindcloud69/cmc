@@ -8,7 +8,7 @@ Crafty-Server-Control
 This system requires the following:
 Apache Version: 2.2.20 (default on ubuntu)
 PHP Version 5.3.6 (default on ubuntu)
-Rewrite Mod Enabled (as this system uses clean URL's)
+
 
 ###fresh install help
 If doing a fresh install on ubuntu you can select the LAMP setup config, or
@@ -21,28 +21,26 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
 
 * sudo /etc/init.d/apache2 restart
 
-* sudo a2enmod rewrite
-
-* sudo nano /etc/apache2/sites-available/000-default
-
-    * Look for: **AllowOverride None** and change to **AllowOverride None**
-    * ctl+o
-    * ctrl+x
-
-* service apache2 restart
-
 * Currently to save data www-data must have access to /var/www and the dir bukkit is installed to.
     * chown -R www-data /var/www
     * chown -R www-data /bukkit (or where ever bukkit is installed)
 
 ##Todo List
-Auto-Install Script
+Save/Read Logins to JSON file
+Finish porting over old repo to this one (with no need for mod_rewrite)
 save Server.properties file via the form
+Op/Kick/Ban players
+Auto-Install Script!!!
+More Error checking if /bukkit info not found etc...
+Split server.log into [info] and chat
+color chat messages and remove the color format from log output
+Prettiness :P
+
 
 
 ##License / Copyright
 
-Copyright (c) 2012, Phillip Tarrant
+Copyright (c) 2012, Phillip Tarrant and Noah Rossi
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
