@@ -40,7 +40,7 @@ pf_config::set('environment', 'DEV');
 pf_config::set('default_controller', 'main');
 
 //our default method (index is default)
-pf_config::set('deafult_method', 'index');
+pf_config::set('default_method', 'index');
 
 /* =============================================================================
  * ASSETS SETUP - Configuration of the Assets Dir
