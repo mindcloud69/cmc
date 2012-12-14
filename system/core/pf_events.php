@@ -7,6 +7,7 @@
 class pf_events {
     
     private static $log = array();
+    public static $show_debug=false; //show debug data?
     
     //logs an event
     public static function eventsAdd($message,$caller=null,$line=null)
@@ -65,7 +66,7 @@ class pf_events {
     {
         echo '<div id="error" class="alert" style="text-align:center;"><b>FATAL ERROR</b>: '.$message."</div>\n";
         self::eventsAdd('Throwing Fatal Message then dying');
-        if (SHOW_DEBUG_MESSAGES) pf_events::eventsDisplay ();
+        if (self::$show_debug) pf_events::eventsDisplay ();
         die();
     }
     
