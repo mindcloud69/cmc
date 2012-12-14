@@ -26,19 +26,16 @@ class pf_router
     public function parseURI()
     {
         
-        $basepath = self::$basepath;
+        $basepath = strtolower(self::$basepath);
+        
         $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
-        $path = preg_replace('/[^a-zA-Z0-9]\//', "", $path);
-
+        $path = strtolower(preg_replace('/[^a-zA-Z0-9]\//', "", $path));
+        
         //remove basepath from path
         if (strpos($path, $basepath) === 0) 
         {
             $path = substr($path, strlen($basepath));
-            
         }
-        
-        //convert to lower
-        $path=  strtolower($path);
         
         //remove first / if there is one
         if (substr($path,1) == "/")
