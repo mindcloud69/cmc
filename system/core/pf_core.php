@@ -7,6 +7,7 @@ class pf_core {
  * ===========================================================================*/
     private static function loadFile($file,$dir,$data=array())
     {
+        //make sure the config file is carried along anytime a file is loaded
         $file = self::makePHPExtention($file);
         if (file_exists($dir. DS. $file))
         {
