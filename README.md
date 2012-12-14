@@ -34,7 +34,7 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
  * More Error checking if /bukkit info not found etc...
  * Split server.log into [info] and chat
  * color chat messages and remove the color format from log output
- * Prettiness :P
+ * ~~Prettiness :P~~ (Zippy's says- done!)
  * Manage Backup/Server_Check/Server_Restart Script Schedules
  * Manage Backups and Schedule them.
 
