@@ -44,20 +44,6 @@ class pf_core {
     }
 
 /* =============================================================================
- * Loads a Template from the pages dir
- * ===========================================================================*/
-    public static function loadPage($file,$data=null)
-    {
-        $result = self::loadFile($file, APPLICATION_DIR.'pages',$data);
-        if (!$result) 
-        {
-            pf_events::eventsAdd ('Unable to load Page Template: '.$file);
-            return;
-        }
-        pf_events::eventsAdd('Loaded Page Template: '.$file);
-    }    
-    
-/* =============================================================================
  * Makes sure the file ends in .php
  * ===========================================================================*/
     public static function makePHPExtention($file)
@@ -73,35 +59,6 @@ class pf_core {
         return $file;
     }
     
-/* =============================================================================
- * Loads an external libarary such as phpmailer or other class we didn't write
- * ===========================================================================*/    
-    public static function loadExternalLibrary($file)
-    {
-        //trying APPLICATION DIR FIRST
-        if (!self::loadFile($file, APPLICATION_DIR.'ext-lib'))
-        {
-            //try the system dir
-            if (!self::loadFile($file, SYSTEM_DIR.'ext-lib'))
-            {
-                pf_events::eventsAdd ('Unable to load External Library: '.$file);
-                pf_events::displayWarning('Unable to load External Library: '.$file);
-                return false;
-            }
-            //loaded from ssytem dir
-            else
-            {
-                pf_events::eventsAdd('Loaded External Library: '.$file . ' from System/ext-lib');
-                return true;
-            }
-                
-        }
-        else
-        {
-            pf_events::eventsAdd('Loaded External Library: '.$file . ' from Application/ext-lib');
-        }
-        
-    }
     
 /* =============================================================================
  * Redirects our page via javascript (it's the most reliable and flexible system
@@ -131,6 +88,9 @@ class pf_core {
         echo '</script>'. "\n";
     }
 
+/* =============================================================================
+ * Compares Strings
+ * ===========================================================================*/
     public static function compareStrings($s1,$s2)
     {
         $s1 = strtolower($s1);
