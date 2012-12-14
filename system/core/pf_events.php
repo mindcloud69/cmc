@@ -64,9 +64,25 @@ class pf_events {
     //displays a fatal warning then dies;
     public static function dispayFatal($message)
     {
-        echo '<div id="error" class="alert" style="text-align:center;"><b>FATAL ERROR</b>: '.$message."</div>\n";
+        //create a data array with error message
+        $data=array('error'=>$message);
+        
+        //if debug is show, we add that to the data array
+        if (self::$show_debug)
+        {
+        pf_events::eventsDisplay ();
+        $data['debug']= ob_get_contents();
+        }
+        //clear any output
+        self::eventsAdd('Clearing Any Output');
+        pf_html::clearPreviousBuffer();
+        
+
+        //load the error template
         self::eventsAdd('Throwing Fatal Message then dying');
-        if (self::$show_debug) pf_events::eventsDisplay ();
+        pf_core::loadTemplate('error',$data);
+        
+        //die
         die();
     }
     
