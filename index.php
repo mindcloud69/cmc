@@ -133,8 +133,7 @@
     if(!$router->loadController($route['CONTROLLER'])) 
     {
         pf_events::eventsAdd('Failed to load Controller: '.APPLICATION_DIR.'controllers'.DS.$route['CONTROLLER'].".php");
-        pf_core::loadTemplate('404');
-        pf_events::dispayFatal ('The Page Requested Was Not Found');    
+        pf_events::display404('The Page Requested Was Not Found');
     }
     
     //create a new controller object
@@ -158,7 +157,6 @@
     else 
     {
         pf_events::eventsAdd('Failed to load action: '.$route['ACTION'].".php");
-        pf_core::loadTemplate('404');
-        pf_events::dispayFatal ('The Page Requested Was Not Found');
+        pf_events::display404('The Page Requested Was Not Found');
     }
 ?>
