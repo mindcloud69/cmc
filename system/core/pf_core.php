@@ -23,10 +23,10 @@ class pf_core {
     public static function loadTemplate ($file,$data=array())
     {
         //try to load the template from the app folder
-        if (!self::loadFile($file, APPLICATION_DIR.'templates'))
+        if (!self::loadFile($file, APPLICATION_DIR.'templates',$data))
         {
                 //if that didn't work we try the main system template
-            if (!self::loadFile($file, SYSTEM_DIR.'templates'))
+            if (!self::loadFile($file, SYSTEM_DIR.'templates',$data))
             {
                 //if that fails, we say unable to load template and return false
                 pf_events::eventsAdd ('Unable to load System Template: '.$file);
