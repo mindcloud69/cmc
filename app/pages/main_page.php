@@ -36,7 +36,7 @@
 							<a class="brand" href="">CMC</a>
 							<ul class="nav">
 								<li class="active"><a href="">Home</a></li>
-								<li><a href="">Config</a></li>
+								<li><a href="<?php echo pf_config::get('base_url'); ?>app/assets/pages/install/install_page.php">Config</a></li>
 								<li><a href="">Login</a></li>
 							</ul>
 						</div>
