@@ -58,7 +58,7 @@
 							<a class="brand" href="">CMC</a>
 							<ul class="nav">
 								<li><a href="<?php echo pf_config::get('base_url'); ?>index.php">Home</a></li>
-								<li class="active"><a href="">Config</a></li>
+								<li class="active"><a href="">Install</a></li>
 								<li><a href="">Login</a></li>
 							</ul>
 						</div>
