@@ -1,3 +1,6 @@
+## Version 1.2.3 (Build #89)
+New server config screen and styles added. Not fully complete. Started adding build (commit) numbers to changelog. Minor bug fixes.
+
 ## Version 1.2.1
 Slight changes in the install screen.
 
