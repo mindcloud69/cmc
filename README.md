@@ -42,7 +42,7 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
  * Put PHP variables in main view
  * Config forms
  * Login forms
- * Setup forms
+ * ~~Setup forms~~
  * Style the config page
  * Work on learning PHP
  * Ban/OP/Kick buttons
@@ -51,6 +51,7 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
 **Done**
  * General prettiness
  * New PHP system
+ * Setup Login
 
 
 ##License / Copyright
