@@ -57,7 +57,7 @@
 						<div class="navbar-inner">
 							<a class="brand" href="">CMC</a>
 							<ul class="nav">
-								<li><a href="">Home</a></li>
+								<li><a href="<?php echo pf_config::get('base_url'); ?>index.php">Home</a></li>
 								<li class="active"><a href="">Config</a></li>
 								<li><a href="">Login</a></li>
 							</ul>

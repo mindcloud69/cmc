@@ -9,8 +9,7 @@
 		<style>
 			body {
 				margin-top: 20px;
-				background-color: #f5f5f5;
-			}
+				background:url('<?php echo pf_config::get('base_url'); ?>app/assets/site_images/noise.png') repeat 0px 0px;
 		</style>
 		<script>
 			$('#tab a').click(function (e) {
@@ -36,7 +35,7 @@
 							<a class="brand" href="">CMC</a>
 							<ul class="nav">
 								<li class="active"><a href="">Home</a></li>
-								<li><a href="<?php echo pf_config::get('base_url'); ?>app/assets/pages/install/install_page.php">Config</a></li>
+								<li><a href="<?php echo pf_config::get('base_url'); ?>index.php/install">Install</a></li>
 								<li><a href="">Login</a></li>
 							</ul>
 						</div>
