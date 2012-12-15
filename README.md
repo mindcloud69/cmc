@@ -1,7 +1,7 @@
 Crafty-Minecraft-Controller
 ===========================
-*A Completely OPEN SOURCE Server Controller for Bukkit (or Minecraft)*
-
+*A Completely OPEN SOURCE Server Controller for Bukkit (or Minecraft)*<br />
+[ChangeLog -->](https://github.com/ptarrant/cmc/blob/master/changelog.md)
 
 
 ##Requirements
