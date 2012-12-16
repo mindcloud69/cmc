@@ -1,8 +1,8 @@
 <?php
 //get the active URL
-$url = $_SERVER['REQUEST_URI'];
-$parts = explode('.php', $url);
-$page = end($parts);
+$url = $_SERVER['REQUEST_URI']; //grab the URL used
+$parts = explode('.php', $url); //explode anything after .php into an array with 2 parts
+$page = end($parts);  // basically anything after index.php is our page with a slash in front
 
 //check to see if the user is logged in
 if (pf_auth::checkLogin()===TRUE) //if logged in, we show a "logout" button
@@ -13,6 +13,12 @@ else //if not logged in, we show a login link :)
 {
     $loginlink = '<a href="'.pf_config::get('base_url').'index.php/login">Login</a>';
 }
+
+
+//links are as so:
+//basically $page will be == to anything after index.php so if there is nothing after it, it's the home page
+//if there is /install after index.php then $page will be /install
+//if the page == the condition, it echos (prints) the 'class=active' inside the <li> tag. :)
 ?>
 
 <div class="navbar"><!--START NAV-->
