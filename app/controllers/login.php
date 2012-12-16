@@ -24,7 +24,7 @@ class login extends pf_controller
             $users = $data->get('users');
             
             //check if admin is logging in.
-            if ( ($admin['admin_name'] == $username) && ($admin['admin_pass'] == $password) )
+            if ( ($admin['admin_name'] == $username) && ($admin['admin_pass'] == $password) ) //@todo: all passwords need to be encoded to MD5 from the file and the form.
             {
                 //we are admin - //we might do something different with this later
                 $loginaccepted=true;
