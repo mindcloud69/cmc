@@ -1,8 +1,9 @@
 ## Version 1.2.5 (Build #115)
-Installer fixes.
-Menu fixes.
-General CSS stuff.
-As usually, I added some random CSS possibly usable in the future.
+Installer fixes.<br />
+Menu fixes.<br />
+General CSS stuff.<br />
+As usually, I added some random CSS possibly usable in the future.<br />
+Added potential logo to app/assets/favicon.gif.
 
 ## Version 1.2.4 (Build #112)
 Added Menu Template with dynamic login/logout and active links
