@@ -78,9 +78,9 @@ class server_conf
         echo "</table>";
     }
     
-    public static function checkEssentials()
+    public static function checkEssentials($bukkit_dir)
     {
-        if (file_exists(BUKKIT_DIR.'plugins/Essentials.jar'))
+        if (file_exists($bukkit_dir.'plugins/Essentials.jar'))
         {
             self::$essentials_installed=true;
             return true;
