@@ -7,8 +7,8 @@
  * APP SPECIFIC - Configuration of the app
  * ===========================================================================*/
 //our authors info
-pf_config::set('author', 'Phillip Tarrant');
-pf_config::set('author_uri', 'www.tarrants.net');
+pf_config::set('author', 'Github');
+pf_config::set('author_uri', 'https://github.com/ptarrant/cmc');
 
 //site info
 pf_config::set('site_name', 'Crafty Minecraft Control');
