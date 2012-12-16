@@ -24,14 +24,14 @@ class pf_auth {
         self::saveVar('loggedin', TRUE);
     }
     
-    public static function checkLogin($redirect=null)
+    public static function checkLogin()
     {
-        if ((isset($redirect)) && (!self::getVar('loggedin')))
+        if (!self::getVar('loggedin'))
         {
-            pf_core::redirectUrl($redirect);
+            return false;
         }
         
-        return self::getVar('loggedin');
+        return true;
     }
     
     public static function loggout()
