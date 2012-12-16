@@ -88,9 +88,9 @@ class server_conf
         else return false;
     }
     
-    public static function checkPluggins()
+    public static function checkPluggins($bukkit_dir)
     {
-        $pluggins = glob(BUKKIT_DIR.'plugins/*.jar');
+        $pluggins = glob($bukkit_dir.'plugins/*.jar');
         foreach ($pluggins as $plugin)
         {
             $plugin = substr($plugin,  strlen(BUKKIT_DIR.'plugins/'));
