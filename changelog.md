@@ -1,3 +1,9 @@
+## Version 1.2.5 (Build #115)
+Installer fixes.
+Menu fixes.
+General CSS stuff.
+As usually, I added some random CSS possibly usable in the future.
+
 ## Version 1.2.4 (Build #112)
 Added Menu Template with dynamic login/logout and active links
 Added pages/install/complete_page.php

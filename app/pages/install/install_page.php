@@ -65,19 +65,25 @@ else $installed=false;
 				<div class="span10">
 					<?php pf_core::loadTemplate('menu'); ?>
                                     
-                                        <?php if ($installed){?>
-                                    <!-- anything between these php tags is our error message -->
-                                    Oh SNAP - you already installed this once!
+                                    <?php if ($installed){?>
+                                    	<!-- anything between these php tags is our error message -->
+                                    	<h1>Oh SNAP - you already installed this before!</h1>
+                                    	<lead>It's OK, don't panic, we can get through this together. Let's look at our options:<br>
+                                    	<ol>
+                                    		<li>"I didn't want this, send me back!" <a href="<?php echo pf_config::get('base_url'); ?>index.php">Click here</a></li>
+                                    		<li>"Yes, I know what I'm doing, I know this WILL reset my install data" <a href="<?php echo pf_config::get('base_url'); ?>index.php/install/go">Click here</a></li>
+                                    	</ol>
+                                    	</lead>
                                     <?php }?>
 					<center>
 						<form class="form-signin" name="installform" method="POST" action="install/go">
 							<legend>Administrator Details</legend>
 							<input type="text" name="adminname" placeholder="Admin Username"><br>
-							<input type="text" name="adminpass" placeholder="Password"><br>
+							<input type="text" name="adminpass" placeholder="Password"><br><br>
 						
 							<legend>Bukkit Details</legend>
 							<input type="text" name="bukkitdir" placeholder="Bukkit Install Directory"><br><br>
-                                                        <input type="submit" value="SAVE" />
+                            <input type="submit" value="SAVE" />
 						</form>
 					</center>
 				</div><!-- END MAIN SPAN -->
