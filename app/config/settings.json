@@ -1,1 +1,1 @@
-{"logins":[{"username":"ptarrant","password":"minecraft"},{"username":"zippy","password":"1001zippy"}]}
+{"users":[{"username":"ptarrant","password":"minecraft"},{"username":"zippy","password":"1001zippy"}],"bukkit_dir":"\/bukkit","admin_data":{"admin_name":"admin","admin_pass":"123"}}
