@@ -22,7 +22,7 @@ abstract class pf_controller
     
     public static function loadView($file,$data=array())
     {
-        if (!self::loadFile($file, APPLICATION_DIR.'pages'))
+        if (!self::loadFile($file, APPLICATION_DIR.'pages',$data))
         {
         pf_core::loadTemplate('404');
         }
@@ -38,7 +38,12 @@ abstract class pf_controller
     //checks to see if logged in, if not, loads the login page specified in config file
     public static function checkLogin()
     {
-        pf_auth::checkLogin(pf_config::get('login_page'));
+        if(!pf_auth::checkLogin())
+        {
+            pf_core::redirectUrl(pf_config::get('login_page'));
+        }
+        else return true;
+        
     }
 
     //loads a model
