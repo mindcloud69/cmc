@@ -2,8 +2,9 @@
 //let's see if they installed the system already? (this data gets passed from the controller)
 if ($data['installed'])
 {
-    echo 'installed already';
+    $installed = true;
 }
+else $installed=false;
 ?>
 
 
@@ -12,7 +13,7 @@ if ($data['installed'])
 		<title>Minecraft Server Control</title>
 		
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="<?php echo pf_config::get('base_url'); ?>app/assets/js/main.min.js"></script>
+        <script src="<?php echo pf_config::get("base_url"); ?>app/assets/js/main.min.js"></script>
 		<link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/main.min.css" rel="stylesheet" media="screen">
 		<style>
 			body {
@@ -63,6 +64,11 @@ if ($data['installed'])
 				<div class="span1"></div>
 				<div class="span10">
 					<?php pf_core::loadTemplate('menu'); ?>
+                                    
+                                        <?php if ($installed){?>
+                                    <!-- anything between these php tags is our error message -->
+                                    Oh SNAP - you already installed this once!
+                                    <?php }?>
 					<center>
 						<form class="form-signin" name="installform" method="POST" action="install/go">
 							<legend>Administrator Details</legend>
