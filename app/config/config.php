@@ -56,10 +56,5 @@ pf_config::set('java_dir', 'app/assets/js/');
  * YOUR VARIABLES - A place for all your variables
  * ===========================================================================*/
 
-//allowed logins - this is temporary 
-//@TODO: Add Settings Write To JSON file etc.
-$logins = array();
-$logins[]=array('username'=>'ptarrant','password'=>'minecraft');
-$logins[]=array('username'=>'zippy','password'=>'1001zippy');
-pf_config::set('logins', $logins);
+
 ?>
