@@ -22,7 +22,7 @@ class install extends pf_controller
         
         $admin=array();
         $admin['admin_name']=$adminname;
-        $admin['admin_pass']=$adminpass;
+        $admin['admin_pass']=$adminpass; //@TODO: this needs to be encoded with MD5 before writing
         
         $data = new pf_json();
         $data->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
