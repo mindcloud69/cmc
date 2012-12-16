@@ -51,6 +51,7 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
 **Done**
  * General prettiness
  * New PHP system
+ * Menu's redone with templates
  * Setup Login
 
 
