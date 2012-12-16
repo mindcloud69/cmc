@@ -1,4 +1,4 @@
-## Version 1.2.4 (build #?)
+## Version 1.2.4 (build 112?)
 Added Menu Template with dynamic login/logout and active links
 Added pages/install/complete_page.php
 Added Admin/User seperation in settings.json
