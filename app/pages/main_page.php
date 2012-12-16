@@ -1,3 +1,18 @@
+<?php
+//makes our image src dynamic based on if online or not:)
+if ($data['online'])
+{
+    $online = '<img height="12px" src="'.pf_config::get("base_url").'app/assets/site_images/Circle_Green.png" width="15px">';
+    $status = '<span class="online" >ONLINE!</span>';
+}
+else
+{
+    $online = '<img height="12px" src="'.pf_config::get("base_url").'app/assets/site_images/Circle_Red.png" width="15px">';
+    $status = '<span class="offline" >OFFLINE!</span>';
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,6 +25,9 @@
 			body {
 				margin-top: 20px;
 				background:url('<?php echo pf_config::get('base_url'); ?>app/assets/site_images/noise.png') repeat 0px 0px;
+                        }
+                        .online{color:green;}
+                        .offline{color:red;}
 		</style>
 		<script>
 			$('#tab a').click(function (e) {
@@ -35,13 +53,14 @@
 					<div class="row-fluid">
 						<div class="span6">
 							<h2>General Info</h2>
-							<strong>Online:</strong> <img height="12px" src="<?php echo pf_config::get('base_url'); ?>app/assets/site_images/Circle_Green.png" width='15px'><br>
-							<strong>World:</strong> world<br>
-							<strong>PvP:</strong> false<br>
-							<strong>Difficulty:</strong> 1<br>
-							<strong>Game Type:</strong> Survival<br>
-							<strong>Essentials Installed:</strong> Yes<br>
-							<strong>Other Plugins:</strong> Blobcraft, piecraft, cheesecraft, this text can wrap as well
+							<strong>Online: </strong> <?php echo $status . " " .$online; ?> <br>
+							<strong>Bukkit Dir:</strong> <?php echo $data['bukkit_dir'];?> <br>
+                                                        <strong>World:</strong> <?php echo $data['world'];?><br>
+							<strong>PvP:</strong><?php echo $data['pvp'];?><br>
+							<strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
+							<strong>Game Type:</strong> <?php echo $data['gamemode'];?><br>
+							<strong>Essentials Installed:</strong><?php echo $data['essentials'];?> <br>
+							<strong>Other Plugins:</strong> <?php echo $data['pluggins'];?>
 						</div>
 						
 						<div class="span6">
