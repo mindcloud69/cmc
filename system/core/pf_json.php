@@ -28,7 +28,8 @@ class pf_json
     }
     public function get($setting)
     {
-        if (key_exists($setting, $this->data))
+        
+        if ((is_array($this->data)) && (key_exists($setting, $this->data)))
         {
             return $this->data[$setting];
         }
