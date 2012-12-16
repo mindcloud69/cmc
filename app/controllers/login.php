@@ -1,11 +1,10 @@
 <?php
 
-class login
+class login extends pf_controller
 {
     public function index()
     {
-        pf_core::loadTemplate('header');
-        pf_core::loadTemplate('login');
+        $this->loadView('login/login_page.php');
     }
     public function action()
     {
@@ -16,11 +15,27 @@ class login
     
             $loginaccepted=false;
 
+            //get the admin password
+            $data = new pf_json();
+            $data->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
+            $admin = $data->get('admin_data');
+            
+            //get the users data
+            $users = $data->get('users');
+            
+            //check if admin is logging in.
+            if ( ($admin['admin_name'] == $username) && ($admin['admin_pass'] == $password) )
+            {
+                //we are admin - //we might do something different with this later
+                $loginaccepted=true;
+            }
+            
             //check the credentials
-            foreach (pf_config::get('logins') as $login)
+            foreach ($users as $login)
             {
                 if (( $username == $login['username']) && ($password == $login['password']))
                 {
+                    //we are a user
                     $loginaccepted=true;
                 }
             }
@@ -41,7 +56,7 @@ class login
     public function logout()
     {
         pf_auth::loggout();
-        pf_core::redirectUrl('index');
+        pf_core::redirectUrl('');
     
     }
 }
