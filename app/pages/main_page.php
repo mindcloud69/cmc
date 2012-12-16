@@ -30,21 +30,12 @@
 				<div class="span1"></div>
 				
 				<div class="span10">
-					<div class="navbar">
-						<div class="navbar-inner">
-							<a class="brand" href="">CMC</a>
-							<ul class="nav">
-								<li class="active"><a href="">Home</a></li>
-								<li><a href="<?php echo pf_config::get('base_url'); ?>index.php/install">Install</a></li>
-								<li><a href="">Login</a></li>
-							</ul>
-						</div>
-					</div>
+					<?php pf_core::loadTemplate('menu'); ?>
 					<h1>Minecraft Server Control</h1><hr>
 					<div class="row-fluid">
 						<div class="span6">
 							<h2>General Info</h2>
-							<strong>Online:</strong> <img height="12px" src="<?php echo pf_config::get('base_url'); ?>app/assets/site_images/Circle_Green.png"><br>
+							<strong>Online:</strong> <img height="12px" src="<?php echo pf_config::get('base_url'); ?>app/assets/site_images/Circle_Green.png" width='15px'><br>
 							<strong>World:</strong> world<br>
 							<strong>PvP:</strong> false<br>
 							<strong>Difficulty:</strong> 1<br>
@@ -90,6 +81,9 @@ Joe: Yo!
 				</div><!-- END 10 SPAN -->
 				<div class="span1"></div>
 			</div> <!-- END ROW -->
+                        <div class="footer center">
+            <?php pf_core::loadTemplate('footer'); ?>
+        </div>
 		</div> <!-- END CONTAINER -->
 
 	</body>
