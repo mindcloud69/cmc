@@ -1,3 +1,12 @@
+<?php
+//let's see if they installed the system already? (this data gets passed from the controller)
+if ($data['installed'])
+{
+    echo 'installed already';
+}
+?>
+
+
 <html>	
 	<head>
 		<title>Minecraft Server Control</title>
@@ -53,34 +62,24 @@
 			<div class="row-fluid">
 				<div class="span1"></div>
 				<div class="span10">
-					<div class="navbar"><!--START NAV-->
-						<div class="navbar-inner">
-							<a class="brand" href="">CMC</a>
-							<ul class="nav">
-								<li><a href="<?php echo pf_config::get('base_url'); ?>index.php">Home</a></li>
-								<li class="active"><a href="">Install</a></li>
-								<li><a href="">Login</a></li>
-							</ul>
-						</div>
-					</div><!-- END NAV -->
+					<?php pf_core::loadTemplate('menu'); ?>
 					<center>
-						<form class="form-signin">
+						<form class="form-signin" name="installform" method="POST" action="install/go">
 							<legend>Administrator Details</legend>
-							<input type="text" placeholder="Admin Username"><br>
-							<input type="password" placeholder="Password"><br>
-						</form>
-						<form class="form-signin">
+							<input type="text" name="adminname" placeholder="Admin Username"><br>
+							<input type="text" name="adminpass" placeholder="Password"><br>
+						
 							<legend>Bukkit Details</legend>
-							<input type="text" placeholder="Bukkit Install Directory"><br><br>
+							<input type="text" name="bukkitdir" placeholder="Bukkit Install Directory"><br><br>
+                                                        <input type="submit" value="SAVE" />
 						</form>
 					</center>
 				</div><!-- END MAIN SPAN -->
 				<div class="span1"></div>
 			</div><!-- END ROW -->
+                        <div class="footer center">
+            <?php pf_core::loadTemplate('footer'); ?>
+        </div>
 		</div><!-- END CONTAINER -->
-		Admin User<br />
-		Admin Password<br />
-		Bukkit Installed Dir<br />
-
 	</body>
 </html>
