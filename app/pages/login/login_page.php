@@ -49,7 +49,7 @@
 					<?php pf_core::loadTemplate('menu'); ?>
                                     
                                     
-            <div id="login" class="" style="padding-top:100px;">
+            <div id="login" class="">
                 <form class="form-signin" id="login" action="<?php echo pf_config::get('base_url').pf_config::get('index_page')?>/login/action" method="POST">
                         
                     <legend>Please Login</legend>
