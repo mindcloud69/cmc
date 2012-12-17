@@ -80,7 +80,7 @@ class server_conf
     
     public static function checkEssentials($bukkit_dir)
     {
-        if (file_exists($bukkit_dir.'plugins/Essentials.jar'))
+        if (file_exists($bukkit_dir.DS.'plugins/Essentials.jar'))
         {
             self::$essentials_installed=true;
             return true;
@@ -90,10 +90,13 @@ class server_conf
     
     public static function checkPluggins($bukkit_dir)
     {
-        $pluggins = glob($bukkit_dir.'plugins/*.jar');
+        //list all jar files in plugins
+        $pluggins = glob($bukkit_dir.DS.'plugins/*.jar');
+        
+        //for every plugin, we add to a the array
         foreach ($pluggins as $plugin)
         {
-            $plugin = substr($plugin,  strlen(BUKKIT_DIR.'plugins/'));
+            $plugin = substr($plugin,  strlen($bukkit_dir.DS.'plugins/'));
             $plugin = substr($plugin,0,-4);
             self::$pluggins[]=$plugin;
         }
