@@ -37,6 +37,7 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
  * Manage Backups and Schedule them.
 
 **Zippy**
+ * Read all the emails p.t. sent me :D
  * Put PHP variables in main view
  * Config forms
  * Login forms
