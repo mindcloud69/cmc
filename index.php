@@ -88,7 +88,7 @@
  * CONFIG BASE URL - Needed for all pf_html settings, and just useful in general
  * ===========================================================================*/            
     pf_config::set('base_url', 'http://'.$_SERVER['HTTP_HOST'].'/'.pf_config::get('base_path').'/');
-    
+    pf_config::set('main_page', 'http://'.$_SERVER['HTTP_HOST'].'/'.pf_config::get('base_path').'/'.pf_config::get('index_page'));
 /* =============================================================================
  * ROUTER - Load/Configure the router object and do routing
  * ===========================================================================*/

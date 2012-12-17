@@ -7,11 +7,11 @@ $page = end($parts);  // basically anything after index.php is our page with a s
 //check to see if the user is logged in
 if (pf_auth::checkLogin()===TRUE) //if logged in, we show a "logout" button
 {
-    $loginlink = '<a href="'.pf_config::get('base_url').'index.php/login/logout">Logout</a>';
+    $loginlink = '<a href="'.pf_config::get('main_page').'/login/logout">Logout</a>';
 }
 else //if not logged in, we show a login link :)
 {
-    $loginlink = '<a href="'.pf_config::get('base_url').'index.php/login">Login</a>';
+    $loginlink = '<a href="'.pf_config::get('main_page').'/login">Login</a>';
 }
 
 
@@ -25,8 +25,8 @@ else //if not logged in, we show a login link :)
         <div class="navbar-inner">
                 <a class="brand" href="<?php echo pf_config::get('base_url'); ?>index.php">CMC</a>
                 <ul class="nav">
-                        <li <?php if ($page == '') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('base_url'); ?>index.php">Home</a></li>
-                        <li <?php if ($page == '/install') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('base_url'); ?>index.php/install">Install/Config</a></li>
+                        <li <?php if ($page == '') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>">Home</a></li>
+                        <li <?php if ($page == '/install') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/install">Install/Config</a></li>
                         <li <?php if ($page == '/login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li> <!-- dynamic login/logout link-->
                 </ul>
         </div>
