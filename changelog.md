@@ -1,8 +1,8 @@
 ##Version 1.2.6.a (Build #144) -zippy
-Menu fixes.
-Login fixes.
-Big form fix.
-Started working on new styles.
+Menu fixes. <br />
+Login fixes. <br />
+Big form fix. <br />
+Started working on new styles. <br />
 
 ##Version 1.2.6.a (Build #136) -pt
 Added new pf_config::get('main_page') call.
