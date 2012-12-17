@@ -15,7 +15,8 @@ class server_info
          $info['MultiJavas']=TRUE;
         }
         else $info['MultiJavas']=FALSE;
-            
+        
+        $info['cores'] = exec($nproc);
         
         return $info;
     }
