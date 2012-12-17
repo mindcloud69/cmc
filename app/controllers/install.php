@@ -28,7 +28,7 @@ class install extends pf_controller
         $data->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
         $data->set('bukkit_dir', $bukkitdir);
         $data->set('admin_data', $admin);
-        if ($data->writeJsonFile(APPLICATION_DIR.'config1'.DS.'settings.json'))
+        if ($data->writeJsonFile(APPLICATION_DIR.'config'.DS.'settings.json'))
         {
             $this->loadView('install/complete_page.php');
         }
