@@ -26,7 +26,8 @@ else //if not logged in, we show a login link :)
                 <a class="brand" href="<?php echo pf_config::get('base_url'); ?>index.php">CMC</a>
                 <ul class="nav">
                         <li <?php if ($page == '') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>">Home</a></li>
-                        <li <?php if ($page == '/install') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/install">Install/Config</a></li>
+                        <li <?php if ($page == '/install') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/install">Install</a></li>
+                        <li <?php if ($page == '/server') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/install">Config</a></li>
                         <li <?php if ($page == '/login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li> <!-- dynamic login/logout link-->
                 </ul>
         </div>
