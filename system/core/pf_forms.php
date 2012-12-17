@@ -47,7 +47,7 @@ class pf_forms {
         {
             $input = '<input type="submit" value="'.$label.'"';
         }
-        else $input .= '<input type="button" value="'.$label.'"';
+        else $input = '<input type="button" value="'.$label.'"';
         
         if (isset($name)) $input .= ' name="'.$name.'"';
         if (isset($class)) $input .= ' class="'.$class.'"';

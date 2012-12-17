@@ -1,6 +1,8 @@
-##Version 1.2.6.a (Build #133) -pt
-Fixed Security hole, if installed, you must still login to access the install page.
-Changed Redirect Function - Faster and more secure
+##Version 1.2.6.a (Build #135) -pt
+Added Config Server Page with default values set to whatever the server has now <br />
+Added Requirement of Sqlite 3 support in PHP (see readme.md)
+Fixed Security hole, if installed, you must still login to access the install page.<br />
+Changed Redirect Function - Faster and more secure.<br />
 
 ##Version 1.2.6.a (Build #132) - pt
 Added SQLite DB to save users<br />

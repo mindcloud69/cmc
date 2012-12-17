@@ -8,7 +8,7 @@ Crafty-Minecraft-Controller
 This system requires the following:
 Apache Version: 2.2.20 (default on ubuntu)
 PHP Version 5.3.6 (default on ubuntu)
-
+SQLite 3 Support
 
 ###fresh install help
 If doing a fresh install on ubuntu you can select the LAMP setup config, or
@@ -18,6 +18,8 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
 * sudo apt-get install php5
 
 * sudo apt-get install libapache2-mod-php5
+
+* sudo apt-get install php5-sqlite
 
 * sudo /etc/init.d/apache2 restart
 

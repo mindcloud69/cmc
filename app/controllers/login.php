@@ -8,6 +8,8 @@ class login extends pf_controller
     }
     public function action()
     {
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
         if ($_SERVER['REQUEST_METHOD']=="POST")
         {
             $username = $_POST['username'];
@@ -16,7 +18,8 @@ class login extends pf_controller
             $loginaccepted=false;
 
             $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
-            $db = new db($sqlite);
+            require_once(SYSTEM_DIR.'core'.DS.'db.php');
+            $db = new db($sqlite) or die('unable to use SQLite');
             
             //get all users
             $results= $db->select('Users');
@@ -41,7 +44,7 @@ class login extends pf_controller
         else 
             {
             echo 'Invalid Login!';
-            pf_core::redirectUrl('index', 3);
+            pf_core::redirectUrl('index');
             }
         }
     }
