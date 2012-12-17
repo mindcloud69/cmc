@@ -28,6 +28,8 @@ else
                         }
                         .online{color:green;}
                         .offline{color:red;}
+                        
+                        #cpuwrap,#memwrap{color:black;border:1px solid black;width:400px;}
 		</style>
 		<script>
 			$('#tab a').click(function (e) {
@@ -35,7 +37,62 @@ else
   				$(this).tab('show');
 			})
 		
-		
+                        function updatestats ()
+                        {
+                            //grab some general stats from the server
+                            $.getJSON('<?php echo pf_config::get('base_url'); ?>index.php/data/general',function(data){
+                            
+                            //assign some vars based off the data
+                            var cores = (data['CORES']); //number of cores on the server
+                            var cpu = data['CPU'] / cores;
+                            var mem = data['MEM'] ;
+                            
+                            cores = 8;
+                            
+                            $('#cpuwrap').css({'width':cores*100});
+                            
+                            
+                            //set the HTML to the correct value
+                            $( "#cpu").html("CPU: "+ cpu +'%');
+                            $( "#mem").html("MEM: "+ mem +'%');
+                            
+                            $( "#cpu").animate({width: cpu},500);
+                            $( "#mem").animate({width: mem},500);
+                            
+                            });
+                            
+                            colors("#cpu",cpu);
+                            colors("#mem",mem);
+                            
+                            serverinfo();
+                            //call yourself again after 5 seconds
+                            setTimeout(updatestats,5000);
+                        }
+                        
+                        function colors(selector,value)
+                        {
+                            if (value > 70){
+                                $(selector ).css({ 'background': 'Red' });
+                            } else if (value > 50){
+                                $(selector ).css({ 'background': 'Yellow' });
+                            } else{
+                                $(selector ).css({ 'background': '#0A0' });
+                            }
+                        }
+                        
+                        function serverinfo()
+                        {
+                            $.getJSON('<?php echo pf_config::get('base_url'); ?>index.php/data/info',function(data){
+                                $( '#info' ).html ("Craftbukkit "+data['version'] +":<br />"
+                                + data['players'] + " of " + data['max_players'] + ' players connected<br />' +
+                                'MOTD:' + data['motd'] +'<br />')
+                            });
+                        }
+                        
+                        $(document).ready(function(){ 
+                            updatestats();
+                        });
+                        
 		</script>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,7 +108,7 @@ else
 					<?php pf_core::loadTemplate('menu'); ?>
 					<h1>Minecraft Server Control</h1><hr>
 					<div class="row-fluid">
-						<div class="span6">
+						<div class="span4">
 							<h2>General Info</h2>
 							<strong>Online: </strong> <?php echo $status . " " .$online; ?> <br>
 							<strong>Bukkit Dir:</strong> <?php echo $data['bukkit_dir'];?> <br>
@@ -65,13 +122,15 @@ else
 						
 						<div class="span6">
 							<h2>Server Load</h2>
-							<div class="progress progress-warning progress-striped active">
-  								<div class="bar" style="width: 40%;">CPU (40%)</div>
+							<div id="cpuwrap" class="">
+  								<div id="cpu" class="bar" style="width: 40%;">CPU (40%)</div>
 							</div><br>
-							<div class="progress progress-success progress-striped active">
-								
-  								<div class="bar" style="width: 20%;">RAM (20%)</div>
+							<div id="memwrap" class="">
+  								<div id="mem" class="bar" style="width: 20%;">RAM (20%)</div>
 							</div>
+                                                        <div id="info">
+                                                            
+                                                        </div>
 						</div>
 						
 					</div> <!-- END MAIN CONTENT -->
