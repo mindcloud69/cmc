@@ -1,3 +1,9 @@
+##Version 1.2.7.a (Build #144) -zippy
+Menu fixes.
+Login fixes.
+Big form fix.
+Started working on new styles.
+
 ##Version 1.2.6.a (Build #136) -pt
 Added new pf_config::get('main_page') call.
 Added Users listing at index.php/users (with delete button)
