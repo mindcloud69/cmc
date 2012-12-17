@@ -43,13 +43,14 @@ class main extends pf_controller
         server_conf::checkPluggins($data['bukkit_dir']);
         foreach (server_conf::$pluggins as $plugin)
         {
-            $list .= $plugin;
+            $list .= ", ".$plugin;
         }
         
-        $data['pluggins']=$list; //@TODO: FIND OUT WHY NOT REPORTING!
+        $data['pluggins']=$list;
 
         //load our main page
         $this->loadView('main_page',$data);
+        
         
     }
 }
