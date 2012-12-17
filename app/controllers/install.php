@@ -7,6 +7,12 @@ class install extends pf_controller
         $data = new pf_json();
         $data->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');  //grab data from json
         $page_data = array('installed'=> $data->get('bukkit_dir')); //do we have a bukkit_dir?
+        
+        if ($page_data['installed']) 
+        {
+        $this->checkLogin ();
+        }
+        
         $this->loadView('install/install_page.php',$page_data); //pass the array to the page
     }
     

@@ -61,11 +61,11 @@ class pf_core {
     
     
 /* =============================================================================
- * Redirects our page via javascript (it's the most reliable and flexible system
+ * Redirects our page via headerlocation (it's faster, and more secure)
  * ===========================================================================*/
     public static function redirectUrl($url,$time=0)
     {
-        $time = $time * 1000;
+        //$time = $time * 1000;
         $addbaseurl = true;
         
         //if it starts with http we assume its a fully complete URL
@@ -78,14 +78,11 @@ class pf_core {
         $url = 'http://'.$url;    
         }
         
-        //if nothing modified addbaseurl, then we add the base url :)
-        //if (substr(pf_config::$BASE_URL,1)=="/")
                 
         if ($addbaseurl) $url = pf_config::get('base_url') .pf_config::get ('index_page'). '/' . $url;
         
-        echo '<script type="text/javascript">' . "\n";
-        echo 'setTimeout("location.href = '. "'$url';".'",'.$time.");";
-        echo '</script>'. "\n";
+        header('Location: '.$url);
+       
     }
 
 /* =============================================================================

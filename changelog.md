@@ -1,4 +1,8 @@
-##Version 1.2.6.a (Build #132)
+##Version 1.2.6.a (Build #133) -pt
+Fixed Security hole, if installed, you must still login to access the install page.
+Changed Redirect Function - Faster and more secure
+
+##Version 1.2.6.a (Build #132) - pt
 Added SQLite DB to save users<br />
 Added Users list page<br />
 Added DB.php to extend PDO to system core (helps with sqlite)<br />
