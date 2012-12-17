@@ -1,3 +1,17 @@
+##Version 1.2.5 (Build #118)  - pt
+Added better CPU % usage due to server_info reporting number of cores 
+Added dynamic CPU / MEM bars to main page.
+Added dynamic server info (such as version, number of players etc) to main page.
+Added data controller to report lots of stuff via json values for jquery in pages.
+Added data controller log dump support, will format it later
+
+Fixed Server_conf lib not reporting plugins
+Fixed Server_conf lib not reporting essentials properly
+Fixed Main Controller to report plugins properly.
+
+Changed License to Attribution-ShareAlike 3.0 Unported 
+Changed main controller to redirect the user to the installer if no settings file found.
+
 ## Version 1.2.5 (Build #115)
 Installer fixes.<br />
 Menu fixes.<br />
