@@ -19,7 +19,7 @@ class main extends pf_controller
         
         if (!server_conf::grabConfig($data['bukkit_dir'].'/server.properties'))
         {
-            pf_events::dispayFatal('Server.properties Not Found!');
+            pf_core::redirectUrl('install');
         }
         
         //get some info from the config file
