@@ -22,5 +22,5 @@ foreach ($data as $user)
 }
 
 $table->renderTable();
-
 ?>
+<a href="<?php echo pf_config::get('main_page');?>/users/add">Add A User</a>
