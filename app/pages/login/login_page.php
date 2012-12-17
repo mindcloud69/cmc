@@ -69,7 +69,7 @@
 				<div class="span1"></div>
 			</div><!-- END ROW -->
                         <div class="footer center">
-            <?php pf_core::loadTemplate('footer'); ?>
+            <center><?php pf_core::loadTemplate('footer'); ?></center>
         </div>
 		</div><!-- END CONTAINER -->
 	</body>
