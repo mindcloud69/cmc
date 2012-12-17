@@ -1,4 +1,4 @@
-##Version 1.2.5 (Build #118)  - pt
+##Version 1.2.5 (Build #130)  - pt
 Added better CPU % usage due to server_info reporting number of cores 
 Added dynamic CPU / MEM bars to main page.
 Added dynamic server info (such as version, number of players etc) to main page.
