@@ -27,12 +27,8 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
 
 ##Todo List
  **ptarrant**
- * Save/Read Logins to JSON file
- * Finish porting over old repo to this one (with no need for mod_rewrite)
  * save Server.properties file via the form
  * Op/Kick/Ban players
- * Auto-Install Script!!!
- * More Error checking if /bukkit info not found etc...
  * Split server.log into [info] and chat
  * color chat messages and remove the color format from log output
  * Manage Backup/Server_Check/Server_Restart Script Schedules
@@ -53,6 +49,10 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
  * New PHP system
  * Menu's redone with templates
  * Setup Login
+ * Login System
+ * SQLite for storage of Users
+ * General Server Info delivered via JSON
+ 
 
 
 ##License / Copyright
