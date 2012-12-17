@@ -16,24 +16,42 @@ class install extends pf_controller
         {
             pf_events::dispayFatal('Invalid Form Submission, Please Try Again');
         }
-        $adminname=trim($_POST['adminname']);
-        $adminpass=trim($_POST['adminpass']);
-        $bukkitdir=trim($_POST['bukkitdir']);
         
-        $admin=array();
-        $admin['admin_name']=$adminname;
-        $admin['admin_pass']=$adminpass; //@TODO: this needs to be encoded with MD5 before writing
+        //clean up the data really fast
+        $adminname= trim($_POST['adminname']);
+        $adminpass= trim($_POST['adminpass']);
+        $bukkitdir= trim($_POST['bukkitdir']);
         
-        $data = new pf_json();
-        $data->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
-        $data->set('bukkit_dir', $bukkitdir);
-        $data->set('admin_data', $admin);
-        if ($data->writeJsonFile(APPLICATION_DIR.'config'.DS.'settings.json'))
+        
+        $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
+        $db = new db($sqlite);
+        
+        //remove all users
+        $db->exec('DELETE FROM USERS');
+        
+        
+        $insert = array(
+            'ID'    =>  1,
+            'User'  =>  $adminname,
+            'Pass'  =>  $adminpass,
+            'Level' =>  'Admin'
+        );
+        
+        //insert user data
+        $db->insert('Users', $insert);
+        
+        //write settings for bukkit dir
+        $settings = new pf_json();
+        $settings->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
+        $settings->set('bukkit_dir', $bukkitdir);
+        if (!$settings->writeJsonFile(APPLICATION_DIR.'config'.DS.'settings.json'))
         {
-            $this->loadView('install/complete_page.php');
+            pf_events::dispayFatal ('Unable to Save Config - Is /cmc/app/config writable?');
+
         }
-        else            pf_events::dispayFatal ('Unable to Save Config - Is /cmc/app/config writable?');
-            
+        
+        $this->loadView('install/complete_page.php');
+        
     }
 }
 ?>

@@ -1,3 +1,9 @@
+##Version 1.2.6.a (Build #132)
+Added SQLite DB to save users<br />
+Added Users list page<br />
+Added DB.php to extend PDO to system core (helps with sqlite)<br />
+Changed Install to install Admin user to DB<br />
+
 ##Version 1.2.5 (Build #130)  - pt
 Added better CPU % usage due to server_info reporting number of cores <br />
 Added dynamic CPU / MEM bars to main page.<br />

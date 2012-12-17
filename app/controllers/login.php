@@ -15,31 +15,23 @@ class login extends pf_controller
     
             $loginaccepted=false;
 
-            //get the admin password
-            $data = new pf_json();
-            $data->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
-            $admin = $data->get('admin_data');
+            $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
+            $db = new db($sqlite);
             
-            //get the users data
-            $users = $data->get('users');
+            //get all users
+            $results= $db->select('Users');
             
-            //check if admin is logging in.
-            if ( ($admin['admin_name'] == $username) && ($admin['admin_pass'] == $password) ) //@todo: all passwords need to be encoded to MD5 from the file and the form.
+            //loop through checking user/pass
+            foreach ($results as $user)
             {
-                //we are admin - //we might do something different with this later
-                $loginaccepted=true;
-            }
-            
-            //check the credentials
-            foreach ($users as $login)
-            {
-                if (( $username == $login['username']) && ($password == $login['password']))
+                if ( ($user['User'] == $username) && ($user['Pass'] == $password) )
                 {
-                    //we are a user
+                    // don't forget $user['Level']
                     $loginaccepted=true;
+                    break;
                 }
             }
-    
+            
         if ($loginaccepted)
         {
             pf_auth::setLoggedin();
