@@ -52,7 +52,7 @@ else $installed=false;
   				$(this).tab('show');
 			})
 		
-		
+			$(".alert").alert()
 		</script>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,13 +67,15 @@ else $installed=false;
                                     
                                     <?php if ($installed){?>
                                     	<!-- anything between these php tags is our error message -->
-                                    	<h1>Oh SNAP - you already installed this before!</h1>
-                                    	<lead>It's OK, don't panic, we can get through this together. Let's look at our options:<br>
-                                    	<ol>
-                                    		<li>"I didn't want this, send me back!" <a href="<?php echo pf_config::get('base_url'); ?>index.php">Click here</a></li>
-                                    		<li>"Yes, I know what I'm doing, I know this WILL reset my install data" <a href="<?php echo pf_config::get('base_url'); ?>index.php/install/go">Click here</a></li>
-                                    	</ol>
-                                    	</lead>
+                                    	<div class="alert alert-error">
+											<button type="button" class="close" data-dismiss="alert">x</button>
+											<h4>Oh SNAP - you've already installed CMC!</h4>It's OK, don't panic, we can get through this together.
+											Let's look at our options:<br>
+											<ol>
+												<li>"I didn't want this, send me back!" <button type="button" class="btn" data-dismiss="alert"><a href="<?php echo pf_config::get('base_url'); ?>index.php">Click here</a></button></li>
+												<li>"Yes, I know what I'm doing, I know this WILL reset my install data" <button type="button" class="btn btn-danger" data-dismiss="alert">Click here</button></li>
+											</ol>
+										</div>
                                     <?php }?>
 					<center>
 						<form class="form-signin" name="installform" method="POST" action="install/go">
