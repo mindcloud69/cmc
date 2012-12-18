@@ -1,3 +1,15 @@
+##version 1.2.6.a (Build #162) - ptarrant
+Added Users Link to Menu <br />
+added an error template page.<br />
+Added the console log to the front page.<br />
+<br />
+Changed made install link dynamic, only shows if not installed<br />
+<br />
+Fixed cpu/mem div width issue. it's set to 400, data values are manipulated to fit based on # of cores<br />
+Fixed server config page<br />
+<br />
+Removed todo from readme, added to todo.md <br />
+
 ##Version 1.2.6.a (Build #144) -zippy
 Menu fixes. <br />
 Login fixes. <br />
