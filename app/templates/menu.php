@@ -35,6 +35,8 @@ $installed = $data->get('bukkit_dir'); //do we have a bukkit_dir?
                         
                         <li <?php if ($page == '/server') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/server">Config</a></li>
                         
+                        <li <?php if ($page == '/users') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/users">Users</a></li>
+                        
                         <!--dynamic login link-->
                         <li <?php if ($page == '/login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li>
 
