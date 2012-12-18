@@ -30,7 +30,10 @@ class server_conf
         ini_set('display_errors','On');
         return true;
     }
-    
+    public static function savesetting($setting,$value)
+    {
+        self::$server_data[$setting]=$value;
+    }
     public static function getSetting($setting,$as_String=false)
     {
         if (key_exists($setting, self::$server_data))

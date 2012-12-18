@@ -73,7 +73,7 @@ else
                                 }
                                 
                             //same with mem usage                                
-                            $( "#mem").animate({width: mem},500);
+                            $( "#mem").animate({width: mem*4},500);
                                 
                             //change the bar's colors based on new usage (values)'
                             colors("#cpu",cpu);

@@ -36,7 +36,7 @@
                                             <tr>
                                                 <td>Difficulty: </td>
                                                 <td>
-                                                    <select name="Difficulty">
+                                                    <select name="difficulty">
                                                         <option name="0">Peaceful</option>
                                                         <option name="1">Easy</option>
                                                         <option selected="selected" name="2">Normal</option>
@@ -50,7 +50,7 @@
                                             <tr>
                                                 <td>Game Mode</td>
                                                 <td>
-                                                    <select name="GameMode">
+                                                    <select name="gamemode">
                                                         <option selected="selected" name="0">Survival</option>
                                                         <option name="1">Creative</option>
                                                         <option name="2">Adventure</option>
@@ -61,7 +61,7 @@
                                             <tr>
                                                 <td>Hardcore</td>
                                                 <td>
-                                                    <select name="Hardcore">
+                                                    <select name="hardcore">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -70,28 +70,28 @@
                                             </tr>
                                             <tr>
                                                 <td>World</td>
-                                                <td><input type="text" name="World"  required placeholder="World Name"/></td>
+                                                <td><input type="text" name="level-name"  required value="<?php echo $data['level-name']; ?>"/></td>
                                                 <td>Currently Set As: <?php echo $data['level-name']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Seed</td>
-                                                <td><input type="text" name="Seed"  required placeholder="World Seed"/></td>
+                                                <td><input type="text" name="level-seed"  placeholder="World Seed"/></td>
                                                 <td>Currently Set As: <?php echo $data['level-seed']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Max Players</td>
-                                                <td><input type="text" name="Max_Players"  required placeholder="10"/></td>
+                                                <td><input type="text" name="max-players" required value="<?php echo $data['max-players']; ?>"/></td>
                                                 <td>Currently Set As: <?php echo $data['max-players']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>MOTD</td>
-                                                <td><input type="text" name="MOTD"  required placeholder="Message Of The Day"/></td>
+                                                <td><input type="text" name="motd"  required value="<?php echo $data['motd']; ?>"/></td>
                                                 <td>Currently Set As: <?php echo $data['motd']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>PVP</td>
                                                 <td>
-                                                    <select name="PVP">
+                                                    <select name="pvp">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -101,7 +101,7 @@
                                             <tr>
                                                 <td>Spawn Animals</td>
                                                 <td>
-                                                    <select name="Spawn_Animals">
+                                                    <select name="spawn-animals">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -111,7 +111,7 @@
                                              <tr>
                                                 <td>Spawn Monsters</td>
                                                 <td>
-                                                    <select name="Spawn_Monsters">
+                                                    <select name="spawn-monsters">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -121,7 +121,7 @@
                                              <tr>
                                                 <td>Spawn NPC's</td>
                                                 <td>
-                                                    <select name="Spawn_NPC">
+                                                    <select name="spawn-npcs">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -130,13 +130,13 @@
                                             </tr>
                                              <tr>
                                                 <td>Texture Pack</td>
-                                                <td><input type="text" name="Texture_Pack"  required placeholder="Texture Pack URL"/></td>
+                                                <td><input type="text" name="texture-pack" placeholder="Texture Pack URL"/></td>
                                                 <td>Currently Set As: <?php echo $data['texture-pack']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>View Distance:</td>
                                                 <td>
-                                                    <select name="View_Distance">
+                                                    <select name="view-distance">
                                                         <option name="3">Close</option>
                                                         <option selected="selected" name="4">4</option>
                                                         <option name="5">5</option>
@@ -160,7 +160,7 @@
                                             <tr>
                                                 <td>Allow Flight:</td>
                                                 <td>
-                                                    <select name="Allow_Flight">
+                                                    <select name="allow-flight">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -170,7 +170,7 @@
                                             <tr>
                                                 <td>Enable Query:</td>
                                                 <td>
-                                                    <select name="Enable_Query">
+                                                    <select name="enable-query">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -180,7 +180,7 @@
                                             <tr>
                                                 <td>Enable Rcon:</td>
                                                 <td>
-                                                    <select name="Enable_Rcon">
+                                                    <select name="enable-rcon">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -190,7 +190,7 @@
                                             <tr>
                                                 <td>Enable Command Block:</td>
                                                 <td>
-                                                    <select name="Enable_Command_Block">
+                                                    <select name="enable-command-block">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -200,7 +200,7 @@
                                             <tr>
                                                 <td>Generate Structures:</td>
                                                 <td>
-                                                    <select name="Generate_Structures">
+                                                    <select name="generate-structures">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -209,13 +209,13 @@
                                             </tr>
                                             <tr>
                                                 <td>Generator Settings:</td>
-                                                <td><input type="text" name="Generator_Settings"  required placeholder="Generator Settings"/></td>
+                                                <td><input type="text" name="generator-settings" placeholder="Generator Settings"/></td>
                                                 <td>Currently Set As: <?php if (key_exists('generator-settings', $data)) echo $data['generator-settings']; else echo 'No Setting Found'?></td>
                                             </tr>
                                             <tr>
                                                 <td>Level Type:</td>
                                                 <td>
-                                                    <select name="Level_Type">
+                                                    <select name="level-type">
                                                         <option name="DEFAULT">DEFAULT</option>
                                                         <option name="FLAT">FLAT</option>
                                                         <option name="LARGEBIOMES">LARGEBIOMES</option>
@@ -225,13 +225,13 @@
                                             </tr>
                                             <tr>
                                                 <td>Max Build Height:</td>
-                                                <td><input type="text" name="Max_Build_Height"  required placeholder="256"/></td>
+                                                <td><input type="text" name="max-build-height"  required value="<?php echo $data['max-build-height']; ?>"/></td>
                                                 <td>Currently Set As: <?php echo $data['max-build-height']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Online Mode:</td>
                                                 <td>
-                                                    <select name="Online_Mode">
+                                                    <select name="online-mode">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -240,33 +240,28 @@
                                             </tr>
                                             <tr>
                                                 <td>Query Port:</td>
-                                                <td><input type="text" name="Query_Port"  required placeholder="Query Port"/></td>
+                                                <td><input type="text" name="query-port" placeholder="Query Port"/></td>
                                                 <td>Currently Set As: <?php if (key_exists('query-port', $data)) echo $data['query-port']; else echo 'No Setting Found'?></td>
                                             </tr>
                                             <tr>
                                                 <td>Rcon Password:</td>
-                                                <td><input type="text" name="Rcon_Password"  required placeholder="rcon password"/></td>
+                                                <td><input type="text" name="rcon-password" placeholder="rcon password"/></td>
                                                 <td>Currently Set As: <?php if (key_exists('rcon-password', $data)) echo $data['rcon-password']; else echo 'No Setting Found'?></td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Currently Set As: <?php echo $data['allow-flight']; ?></td>
-                                            </tr>
-                                            <tr>
                                                 <td>Server IP:</td>
-                                                <td><input type="text" name="Server_IP"  required placeholder=""/></td>
+                                                <td><input type="text" name="server-ip" placeholder=""/></td>
                                                 <td>Currently Set As: <?php echo $data['server-ip']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Server Port:</td>
-                                                <td><input type="text" name="Server_Port"  required placeholder="25565"/></td>
+                                                <td><input type="text" name="server-port" required value="<?php echo $data['server-port']; ?>"/></td>
                                                 <td>Currently Set As: <?php echo $data['server-port']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Scooper Enabled:</td>
                                                 <td>
-                                                    <select name="Scooper_Enabled">
+                                                    <select name="scooper-enabled">
                                                         <option name="True">True</option>
                                                         <option name="False">False</option>
                                                     </select>
@@ -275,21 +270,21 @@
                                             </tr>
                                             <tr>
                                                 <td>Spawn Protection:</td>
-                                                <td><input type="text" name="Spawn_Protection"  required placeholder="5"/></td>
+                                                <td><input type="text" name="spawn-protection"  required value="<?php echo $data['spawn-protection']; ?>"/></td>
                                                 <td>Currently Set As: <?php echo $data['spawn-protection']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>White List:</td>
                                                 <td>
-                                                    <select name="White_List">
+                                                    <select name="white-list">
                                                         <option name="True">True</option>
-                                                        <option name="False">False</option>
+                                                        <option name="False" selected>False</option>
                                                     </select>
                                                 </td>
                                                 <td>Currently Set As: <?php echo $data['white-list']; ?></td>
                                             </tr>
                                          </table>
-                                        <input type="button" value="Save"/>
+                                        <input type="submit" value="Save"/>
                                     </form>
                                     </div><!-- END MAIN SPAN -->
 				<div class="span1"></div>
