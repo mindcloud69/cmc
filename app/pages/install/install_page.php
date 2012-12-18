@@ -73,9 +73,9 @@ else $installed=false;
 											Let's look at our options:<br>
 											<ol>
 												<li>"I didn't want this, send me back!" </li>
-												<li>"Yes, I know what I'm doing, I know this WILL reset my install data" <button type="button" class="btn btn-danger" data-dismiss="alert">Click here</button></li>
+												<li>"Yes, I know what I'm doing, I know this WILL reset my install data"</li>
 											</ol><br>
-											<button type="button" class="btn btn-danger" data-dismiss="alert">Click here</button>&nbsp;<button type="button" class="btn" href="<?php echo pf_config::get('base_url'); ?>index.php" data-dismiss="alert"></button>
+											<a class="btn btn-danger" data-dismiss="alert">Continue</a>&nbsp;<a class="btn" href="<?php echo pf_config::get('base_url'); ?>index.php" data-dismiss="alert">Send me back!</a>
 										</div>
                                     <?php }?>
 					<center>
