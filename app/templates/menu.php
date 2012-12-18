@@ -31,17 +31,13 @@ $installed = $data->get('bukkit_dir'); //do we have a bukkit_dir?
                         <!--Dynamic Install Link-->
                         <?php if (!$installed) {?>
                         <li <?php if ($page == '/install') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/install">Install</a></li>
-<<<<<<< HEAD
-                        <li <?php if ($page == '/server') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/server">Config</a></li>
-                        <li <?php if ($page == '/login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li> <!-- dynamic login/logout link-->
-=======
                         <?php }?> 
                         
                         <li <?php if ($page == '/server') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/server">Config</a></li>
                         
                         <!--dynamic login link-->
                         <li <?php if ($page == '/login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li>
->>>>>>> Made Install Link Dynamic
+
                 </ul>
         </div>
 </div><!-- END NAV -->
