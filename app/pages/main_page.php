@@ -128,7 +128,7 @@ else
 				
 				<div class="span10">
 					<?php pf_core::loadTemplate('menu'); ?>
-					<h1>Minecraft Server Control</h1><hr>
+					<h1>Crafty Minecraft Control</h1><hr>
 					<div class="row-fluid">
 						<div class="span4">
 							<h2>General Info</h2>
