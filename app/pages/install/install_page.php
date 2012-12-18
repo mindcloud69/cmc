@@ -72,9 +72,10 @@ else $installed=false;
 											<h4>Oh SNAP - you've already installed CMC!</h4>It's OK, don't panic, we can get through this together.
 											Let's look at our options:<br>
 											<ol>
-												<li>"I didn't want this, send me back!" <button type="button" class="btn" data-dismiss="alert"><a href="<?php echo pf_config::get('base_url'); ?>index.php">Click here</a></button></li>
+												<li>"I didn't want this, send me back!" </li>
 												<li>"Yes, I know what I'm doing, I know this WILL reset my install data" <button type="button" class="btn btn-danger" data-dismiss="alert">Click here</button></li>
-											</ol>
+											</ol><br>
+											<button type="button" class="btn btn-danger" data-dismiss="alert">Click here</button>&nbsp;<button type="button" class="btn" href="<?php echo pf_config::get('base_url'); ?>index.php" data-dismiss="alert"></button>
 										</div>
                                     <?php }?>
 					<center>
