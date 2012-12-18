@@ -30,7 +30,7 @@ else
                         .offline{color:red;}
                         
                         #cpuwrap,#memwrap{color:black;border:1px solid black;width:400px;}
-                        #console { white-space: pre; }
+                        #console { white-space: pre; height:300px;overflow:auto;}
 		</style>
 		<script>
 			$('#tab a').click(function (e) {
@@ -159,7 +159,9 @@ else
 						</div>
 						
 					</div> <!-- END MAIN CONTENT -->
-					<br><br>
+					<br>
+                                        <br>
+                                        *newest entries at the top*
 					<div class="tabbable">
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#console" data-toggle="tab">Console</a></li>

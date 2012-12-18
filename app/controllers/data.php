@@ -46,8 +46,8 @@ class data extends pf_controller
         $settings->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
         
         $bukkit_dir = $settings->get('bukkit_dir');
-        
-        $command = 'cat '.$bukkit_dir.DS.'server.log | grep -v 127.0.0.1 | tail -75';
+        //tac reverse reads a file | grep -v removes any connections from localhost | head -75 displays the top 75 entries (which is actally the last 75)
+        $command = 'tac '.$bukkit_dir.DS.'server.log | grep -v 127.0.0.1 | head -75';
         //put output in to array
         exec($command,$output);
 
