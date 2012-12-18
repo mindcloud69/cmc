@@ -69,7 +69,7 @@ else $installed=false;
                                     	<!-- anything between these php tags is our error message -->
                                     	<div class="alert alert-error">
 											<button type="button" class="close" data-dismiss="alert">x</button>
-											<h4>Oh SNAP - you've already installed CMC!</h4>It's OK, don't panic, we can get through this together.
+											<h3>Oh SNAP - you've already installed CMC!</h3>It's OK, don't panic, we can get through this together.
 											Let's look at our options:<br>
 											<ol>
 												<li>"I didn't want this, send me back!" </li>
