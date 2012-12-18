@@ -1,7 +1,8 @@
-##Todo List
+#Todo List
 
 
- **ptarrant**
+## ptarrant
+
  * Remove errand no base_url's left in links
  * save Server.properties file via the form
  * Op/Kick/Ban players
@@ -11,7 +12,9 @@
  * Manage Backups and Schedule them.
  * Eventually add Essentials config to this beast!
 
-**Zippy**
+
+ 
+## Zippy
  * Read all the emails p.t. sent me :D
  * Config forms
  * Style the config page
