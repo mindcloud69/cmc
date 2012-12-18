@@ -55,11 +55,6 @@ class data extends pf_controller
         {
             echo $line."\n";
         }
-        
-        
-        
-        
     }
-    
 }
 ?>

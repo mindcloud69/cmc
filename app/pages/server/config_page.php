@@ -23,7 +23,7 @@
 				<div class="span10">
 					<?php pf_core::loadTemplate('menu'); ?>
                                     <h1>Config Your Server</h1>
-                                    
+                                    <p style="color:red;">Currently only letters and number are allowed in text. All spaces/special characters are removed</p>
 
                                     <form id="form" class= "" action="<?php echo pf_config::get('main_page');?>/server/savesettings" method="POST">                                    
                                         <legend>Common Settings</legend>
@@ -233,7 +233,7 @@
                                                 <td>
                                                     <select name="online-mode">
                                                         <option name="True">True</option>
-                                                        <option name="False">False</option>
+                                                        <option selected name="False">False</option>
                                                     </select>
                                                 </td>
                                                 <td>Currently Set As: <?php echo $data['online-mode']; ?></td>

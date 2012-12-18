@@ -2,9 +2,9 @@
 
 
 ## ptarrant
-
+ * Start/Stop/Restart Server from page <-- next on list.
+ * Script Scheduling
  * Remove errand no base_url's left in links
- * save Server.properties file via the form
  * Op/Kick/Ban players
  * Split server.log into [info] and chat 1/2 done :/
  * color chat messages and remove the color format from log output
