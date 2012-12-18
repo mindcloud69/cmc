@@ -27,35 +27,6 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
     * chown -R www-data /var/www
     * chown -R www-data /bukkit (or where ever bukkit is installed)
 
-##Todo List
- **ptarrant**
- * save Server.properties file via the form
- * Op/Kick/Ban players
- * Split server.log into [info] and chat
- * color chat messages and remove the color format from log output
- * Manage Backup/Server_Check/Server_Restart Script Schedules
- * Manage Backups and Schedule them.
-
-**Zippy**
- * Read all the emails p.t. sent me :D
- * Put PHP variables in main view
- * Config forms
- * Style the config page
- * Work on learning PHP
- * Ban/OP/Kick buttons
- * General interface improvement
-
-**Done**
- * General prettiness
- * New PHP system
- * Menu's redone with templates
- * Setup Login
- * Login System
- * SQLite for storage of Users
- * General Server Info delivered via JSON
- * Login forms
- 
-
 
 ##License / Copyright
 
