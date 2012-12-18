@@ -22,6 +22,7 @@
  * Ban/OP/Kick buttons
  * General interface improvement
  * Figure out a way to make the progress bar width match the processor core number
+ * Possibly revamp CPU/RAM bars.
  
 
 ##Major Projects
@@ -30,7 +31,7 @@ Every page needs to have styling done in 1 css file (assets/css/style.css is goo
 ###pages/main_page.php
 the console now has the raw server log (only 75 lines)
 I did some quick css to limit the height and overflow scroll
-change as you see fit to make it pretty.
+change as you see fit to make it pretty. Possibly revamp CPU/RAM bars.
   
 ###pages/users/add_users_page.php
 Prettify it's a new page
