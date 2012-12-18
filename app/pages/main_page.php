@@ -30,6 +30,7 @@ else
                         .offline{color:red;}
                         
                         #cpuwrap,#memwrap{color:black;border:1px solid black;width:400px;}
+                        #console { white-space: pre; }
 		</style>
 		<script>
 			$('#tab a').click(function (e) {
@@ -47,34 +48,55 @@ else
                             var cpu = data['CPU'] / cores;
                             var mem = data['MEM'] ;
                             
-                            cores = 8;
-                            
-                            $('#cpuwrap').css({'width':cores*100});
-                            
-                            
                             //set the HTML to the correct value
-                            $( "#cpu").html("CPU: "+ cpu +'%');
-                            $( "#mem").html("MEM: "+ mem +'%');
+                            $( "#cpu").html(cpu +'%');
+                            $( "#mem").html(mem +'%');
+                            $( "#cores").html('CPU Usage Based On '+ cores +' Cores');
                             
-                            $( "#cpu").animate({width: cpu},500);
+                            
+                            //change the bar's width based on cpu and core
+                            if (cores = 1)
+                                {
+                                    $( "#cpu").animate({width: cpu * 4},500);
+                                }
+                            else if (cores = 2)
+                                {
+                                    $( "#cpu").animate({width: cpu * 2},500);
+                                }
+                            else if (cores = 4)
+                                {
+                                    $( "#cpu").animate({width: cpu},500);
+                                }
+                            else if (cores = 8)
+                                {
+                                    $( "#cpu").animate({width: cpu / 2},500);
+                                }
+                                
+                            //same with mem usage                                
                             $( "#mem").animate({width: mem},500);
-                            
-                            });
-                            
+                                
+                            //change the bar's colors based on new usage (values)'
                             colors("#cpu",cpu);
                             colors("#mem",mem);
                             
+                            }); //end main json data call
+                            
+                            //updates player info etc
                             serverinfo();
+                            
+                            //updates our server log
+                            $('#console').load('<?php echo pf_config::get('main_page')?>/data/log');
+                            
                             //call yourself again after 5 seconds
                             setTimeout(updatestats,5000);
                         }
                         
                         function colors(selector,value)
                         {
-                            if (value > 70){
-                                $(selector ).css({ 'background': 'Red' });
-                            } else if (value > 50){
-                                $(selector ).css({ 'background': 'Yellow' });
+                            if (value >= 75){
+                                $(selector ).css({ 'background': '#D00' });
+                            } else if (value >= 50){
+                                $(selector ).css({ 'background': '#EE0' });
                             } else{
                                 $(selector ).css({ 'background': '#0A0' });
                             }
@@ -82,7 +104,7 @@ else
                         
                         function serverinfo()
                         {
-                            $.getJSON('<?php echo pf_config::get('base_url'); ?>index.php/data/info',function(data){
+                            $.getJSON('<?php echo pf_config::get('main_page'); ?>/data/info',function(data){
                                 $( '#info' ).html ("Craftbukkit "+data['version'] +":<br />"
                                 + data['players'] + " of " + data['max_players'] + ' players connected<br />' +
                                 'MOTD:' + data['motd'] +'<br />')
@@ -122,11 +144,14 @@ else
 						
 						<div class="span6">
 							<h2>Server Load</h2>
+                                                        <span id='cores'>CPU Usage Based On X Cores</span>
 							<div id="cpuwrap" class="">
-  								<div id="cpu" class="bar" style="width: 40%;">CPU (40%)</div>
-							</div><br>
+  								<div id="cpu" class="bar"></div>
+							</div>
+                                                        <br>
+                                                        MEM Usage
 							<div id="memwrap" class="">
-  								<div id="mem" class="bar" style="width: 20%;">RAM (20%)</div>
+  								<div id="mem" class="bar"></div>
 							</div>
                                                         <div id="info">
                                                             
@@ -142,11 +167,7 @@ else
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="console">
-								<pre>
-[Plugin X] is now Active!
-Blah Blah Blah...
-									<br><br><br><br><br><br><br><br><br><br>
-								</pre>
+								
 							</div>
 							<div class="tab-pane" id="chat">
 								<pre>

@@ -47,14 +47,18 @@ class data extends pf_controller
         
         $bukkit_dir = $settings->get('bukkit_dir');
         
-        $log = file_get_contents($bukkit_dir.DS.'server.log');
-        $logarray = explode("\n",$log);
-        
-        foreach ($logarray as $line)
+        $command = 'cat '.$bukkit_dir.DS.'server.log | grep -v 127.0.0.1 | tail -75';
+        //put output in to array
+        exec($command,$output);
+
+        foreach ($output as $line)
         {
-            if (strpos($line, '127.0.0.1')) continue; //skip anything from ourselves
             echo $line."\n";
         }
+        
+        
+        
+        
     }
     
 }
