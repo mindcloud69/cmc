@@ -40,8 +40,6 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
  * Read all the emails p.t. sent me :D
  * Put PHP variables in main view
  * Config forms
- * ~~Login forms~~
- * ~~Setup forms~~
  * Style the config page
  * Work on learning PHP
  * Ban/OP/Kick buttons
