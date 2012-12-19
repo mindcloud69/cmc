@@ -2,30 +2,44 @@
 
 class scripts extends pf_controller
 {
-    
-    public function start()
+    public function index()
     {
+        $this->checkLogin();
         
-        //get the server data
-        $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
-        $db = new db($sqlite);
-        $results = $db->select('Startup');
-        $data = $results;
+        $this->loadView('scripts/main_page');
+    }
+    public function startup()
+    {
+        $this->checkLogin();
+        
+        //get settings
+        $settings = new pf_json();
+        $settings->readJsonFile(pf_config::get('Json_Settings'));
+        $data = $settings->get('startup_script');
         
         if ($_SERVER['REQUEST_METHOD']=='POST')
         {
-            $insert = array(
+            //simple error checking
+            
+            if ($_POST['maxram'] <= $_POST['startram'])
+            {
+                pf_events::dispayFatal('Max Memory MUST BE equal or larger to Startup Memory');
+            }
+            
+            $startup = array(
                 'Startram'  =>  $_POST['startram'],
                 'Maxram'  =>  $_POST['maxram'],
             );
+            
+            $settings->set('startup_script', $startup);
+            
+            $settings->writeJsonFile(pf_config::get('Json_Settings'));
         
-            $db->insert('Startup', $insert);
-            $this->loadView('scripts/start_complete_page');
+            $this->loadView('scripts/start_complete_page',$data);
         }
         
         else 
         {
-            var_dump($data);
             $this->loadView('scripts/start_page',$data);
         }
         

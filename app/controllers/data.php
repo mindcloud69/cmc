@@ -43,7 +43,7 @@ class data extends pf_controller
         //grab the servers config
         $data = array();
         $settings = new pf_json();
-        $settings->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
+        $settings->readJsonFile(pf_config::get('Json_Settings'));
         
         $bukkit_dir = $settings->get('bukkit_dir');
         //tac reverse reads a file | grep -v removes any connections from localhost | head -75 displays the top 75 entries (which is actally the last 75)

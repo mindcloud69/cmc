@@ -20,7 +20,7 @@ class server extends pf_controller
     {
         $data = array();
         $settings = new pf_json();
-        $settings->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
+        $settings->readJsonFile(pf_config::get('Json_Settings'));
         
         $bukkit_dir = $settings->get('bukkit_dir');
         return $bukkit_dir;

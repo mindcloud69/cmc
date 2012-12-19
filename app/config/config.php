@@ -51,6 +51,10 @@ pf_config::set('login_page', 'login');
 pf_config::set('stylesheet_dir', 'app/assets/css/');
 pf_config::set('java_dir', 'app/assets/js/');
 
+/* =============================================================================
+ * SETTINGS SETUP - Our Json File to use for settings
+ * ===========================================================================*/
+pf_config::set('Json_Settings', APPLICATION_DIR.'config'.DS.'settings.json');
 
 /* =============================================================================
  * YOUR VARIABLES - A place for all your variables

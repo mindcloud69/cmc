@@ -5,7 +5,7 @@ class install extends pf_controller
     public function index()
     {
         $data = new pf_json();
-        $data->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');  //grab data from json
+        $data->readJsonFile(pf_config::get('Json_Settings'));  //grab data from json
         $page_data = array('installed'=> $data->get('bukkit_dir')); //do we have a bukkit_dir?
         
         if ($page_data['installed']) 
@@ -48,9 +48,9 @@ class install extends pf_controller
         
         //write settings for bukkit dir
         $settings = new pf_json();
-        $settings->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');
+        $settings->readJsonFile(pf_config::get('Json_Settings'));
         $settings->set('bukkit_dir', $bukkitdir);
-        if (!$settings->writeJsonFile(APPLICATION_DIR.'config'.DS.'settings.json'))
+        if (!$settings->writeJsonFile(pf_config::get('Json_Settings')))
         {
             pf_events::dispayFatal ('Unable to Save Config - Is /cmc/app/config writable?');
 
