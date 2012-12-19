@@ -4,6 +4,7 @@ class users extends pf_controller
 {
     public function index()
     {
+        $this->checkLogin();
         
         $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
         $db = new db($sqlite);
@@ -17,6 +18,8 @@ class users extends pf_controller
     
     public function add()
     {
+        $this->checkLogin();
+        
         if ($_SERVER['REQUEST_METHOD']=='POST')
         {
             
@@ -43,10 +46,12 @@ class users extends pf_controller
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
         }
         
-        $this->loadView('users/add_users_page.php');
+        else $this->loadView('users/add_users_page.php');
     }
     public function delete()
     {
+        $this->checkLogin();
+        
         if (isset($_GET['id'])==false)
         {
             pf_events::dispayFatal('Invalide ID Specified');

@@ -6,6 +6,8 @@ class server extends pf_controller
     
     public function index()
     {
+        $this->checkLogin();
+        
         $data = array('bukkit_dir'=>$this->getdir());
         $this->loadLibrary('server_conf');
         server_conf::grabConfig($data['bukkit_dir'].DS.'server.properties');
