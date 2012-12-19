@@ -53,6 +53,8 @@ class data extends pf_controller
 
         foreach ($output as $line)
         {
+            if (preg_match('/WARNING/', $line))
+                    $line = '<span class=warning>'.$line."</span>";
             echo $line."\n";
         }
     }

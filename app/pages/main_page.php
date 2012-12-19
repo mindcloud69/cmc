@@ -31,6 +31,8 @@ else
                         
                         #cpuwrap,#memwrap{color:black;border:1px solid black;width:400px;}
                         #console { white-space: pre; height:300px;overflow:auto;}
+                        .warning {color:red;}
+                        #multijava{font-size:14px;color:red;}
 		</style>
 		<script>
 			$('#tab a').click(function (e) {
@@ -47,6 +49,12 @@ else
                             var cores = (data['CORES']); //number of cores on the server
                             var cpu = data['CPU'] / cores;
                             var mem = data['MEM'] ;
+                            var multi = data['MULTI'];
+                            
+                            //if multiple java's are found we show the error
+                            if (multi == true){
+                                $('#multijava').show();
+                            }
                             
                             //set the HTML to the correct value
                             $( "#cpu").html(cpu +'%');
@@ -112,6 +120,7 @@ else
                         }
                         
                         $(document).ready(function(){ 
+                            $('#multijava').hide();
                             updatestats();
                         });
                         
@@ -155,6 +164,11 @@ else
 							</div>
                                                         <div id="info">
                                                             
+                                                        </div>
+                                                        <div id="multijava">
+                                                            Multiple Java's have been found, perhaps you have
+                                                            multiple server running due to an error? You should
+                                                            fix this. Time to break out ssh! <--later we will offer to fix this
                                                         </div>
 						</div>
 						
