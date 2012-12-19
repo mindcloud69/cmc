@@ -21,6 +21,12 @@ else
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="<?php echo pf_config::get('base_url'); ?>app/assets/js/main.min.js"></script>
 		<link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/main.min.css" rel="stylesheet" media="screen">
+		
+		<script src="jquery-1.4.min.js"></script>
+		<script src="jquery.speedometer.js"></script>
+		<script src="jquery.jqcanvas-modified.js"></script>
+		<script src="excanvas-modified.js"></script>
+
 		<style>
 			body {
 				margin-top: 20px;
@@ -124,6 +130,16 @@ else
                             updatestats();
                         });
                         
+                        $(function(){
+							$('#test').speedometer();
+
+							$('.changeSpeedometer').click(function(){
+								$('#test').speedometer({ percentage: $('.speedometer').val() || 0 });
+							});
+
+						});
+
+                        
 		</script>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -168,7 +184,7 @@ else
                                                         <div id="multijava">
                                                             Multiple Java's have been found, perhaps you have
                                                             multiple server running due to an error? You should
-                                                            fix this. Time to break out ssh! <--later we will offer to fix this
+                                                            fix this. Time to break out SSH! <--later we will offer to fix this
                                                         </div>
 						</div>
 						
