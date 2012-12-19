@@ -9,6 +9,7 @@ This system requires the following:
  * Apache Version: 2.2.20 (default on ubuntu)
  * PHP Version 5.3.6 (default on ubuntu)
  * SQLite 3 Support
+ * Bukkit and some type of Java.
 
 ###fresh install help
 If doing a fresh install on ubuntu you can select the LAMP setup config, or
