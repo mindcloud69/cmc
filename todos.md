@@ -1,10 +1,15 @@
 #Todo List
 
+I suggest we use github for this, they have issue tracking and milestones.
+I'm testing things out with it now. Seems better as we can just reference 
+issue #'s in our commits etc. We can even have Milestones (versions).
+
+If you like the system, let me know and I'll start assigning things to you
+via github. might be easier than the flat file we are using.
 
 ## ptarrant
  * Start/Stop/Restart Server from page <-- next on list.
  * Script Scheduling
- * Remove errand no base_url's left in links
  * Op/Kick/Ban players
  * Split server.log into [info] and chat 1/2 done :/
  * color chat messages and remove the color format from log output
