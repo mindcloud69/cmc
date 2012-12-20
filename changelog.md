@@ -1,11 +1,16 @@
-##version 1.2.6.a (Build #167) - ptarrant
+##Version 1.2.6.a (Build #178) - Zippy
+ * Added new icons
+ * Started work on users page
+ * New navbars?
+
+##Version 1.2.6.a (Build #167) - ptarrant
  * added server config page now SAVES data WOOT!
  * changed the todo's formatting alot
  * changed changelog config
  * fixed some required values in pages/config_page.php (install.php/server)
  * fixed mem amount on progress bar (needed *4)
 
-##version 1.2.6.a (Build #162) - ptarrant
+##Version 1.2.6.a (Build #162) - ptarrant
  * Added Users Link to Menu <br />
  * added an error template page.<br />
  * Added the console log to the front page.<br />
