@@ -9,6 +9,14 @@ class scripts extends pf_controller
         $this->loadView('scripts/main_page');
     }
     
+    public function stop()
+    {
+        $this->checkLogin();
+        $command = 'screen -S bukkitserver -p CMC -X stuff "stop" `echo \015`';
+        exec($command,$return);
+        var_dump($return);
+    }
+    
     public function startup()
     {
         $this->checkLogin();
@@ -48,7 +56,7 @@ class scripts extends pf_controller
             
             $dir = $settings->get('bukkit_dir');
             
-            $command = 'screen -S bukkitserver -d -m java -Xincgc -Xmx'.$_POST['maxram'].'M -jar '.$dir.'/craftbukkit.jar';
+            $command = 'screen -S bukkitserver -t CMC -d -m java -Xincgc -Xmx'.$_POST['maxram'].'M -jar '.$dir.'/craftbukkit.jar';
             exec($command);
         
             $this->loadView('scripts/start_complete_page',$data);
