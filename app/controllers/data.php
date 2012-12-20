@@ -47,13 +47,14 @@ class data extends pf_controller
         
         $bukkit_dir = $settings->get('bukkit_dir');
         //tac reverse reads a file | grep -v removes any connections from localhost | head -75 displays the top 75 entries (which is actally the last 75)
-        $command = 'tac '.$bukkit_dir.DS.'server.log | grep -v 127.0.0.1 | head -75';
+        $command = 'tac '.$bukkit_dir.DS.'server.log | grep -v 127.0.0.1 | grep -v /login | head -75';
         //put output in to array
         exec($command,$output);
 
         foreach ($output as $line)
         {
-            if (preg_match('/WARNING/', $line))
+            //any warnings or severe logged actions, we highlight red.
+            if ( (preg_match('/WARNING/', $line)) || (preg_match('/SEVERE/', $line)) )
                     $line = '<span class=warning>'.$line."</span>";
             echo $line."\n";
         }
