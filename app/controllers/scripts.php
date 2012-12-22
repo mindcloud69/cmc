@@ -9,12 +9,58 @@ class scripts extends pf_controller
         $this->loadView('scripts/main_page');
     }
     
+    public function test()
+    {
+        exec('pwd',$return);
+        var_dump($return);
+    }
+    
+    public function say()
+    {
+        //if no command passed via url
+        if (!isset($_GET['command']))
+        {
+            $this->loadView('scripts/say_page');
+        }
+        
+        else 
+        {
+            //what did they want to say?
+            $say = $_GET['command'];
+
+            //write the script to the mcscripts folder
+            $file = "screen -S bukkit -p 0 -X stuff $'say test\\n' ";
+            //$file = 'screen -S bukkit -p 0 -X stuff "say '.$say. '$echo -ne \'r\'"'."\n";
+
+            //if we can't write, we throw an error
+            if (! file_put_contents(APPLICATION_DIR.'mcscripts'.DS.'say.sh', $file))
+            {
+                pf_events::dispayFatal('Unable to save script! Is app/mcscripts writable?');
+            }
+
+            $chmod = 'chmod +x ' . APPLICATION_DIR.'mcscripts'.DS.'say.sh';
+            exec($chmod);
+
+            exec(APPLICATION_DIR.'mcscripts'.DS.'say.sh');
+            echo $file;
+            //pf_core::redirectUrl(pf_config::get('main_page'));
+        }
+        
+    }  
+    
+    public function restart()
+    {
+        $this->checkLogin();
+        exec('nohup ' . APPLICATION_DIR.'mcscripts'.DS.'restart.sh');
+        pf_core::redirectUrl(pf_config::get('main_page'));
+    }
+
+
     public function stop()
     {
         $this->checkLogin();
-        $command = 'screen -S bukkitserver -p CMC -X stuff "stop" `echo \015`';
-        exec($command,$return);
-        var_dump($return);
+        exec(APPLICATION_DIR.'mcscripts'.DS.'shutdown.sh');
+        pf_core::redirectUrl(pf_config::get('main_page'));
     }
     
     public function startup()
@@ -38,28 +84,35 @@ class scripts extends pf_controller
         
         if ($_SERVER['REQUEST_METHOD']=='POST')
         {
-            //simple error checking
-            /*
-            if ($_POST['maxram'] <= $_POST['startram'])
-            {
-                pf_events::dispayFatal('Max Memory MUST BE equal or larger to Startup Memory');
-            }
-            */
             $startup = array(
-                'Startram'  =>  $_POST['startram'],
                 'Maxram'  =>  $_POST['maxram'],
             );
             
+            //save this to the settings file for later
             $settings->set('startup_script', $startup);
             
+            //write the settings file
             $settings->writeJsonFile(pf_config::get('Json_Settings'));
             
+            //get the bukkit_dir
             $dir = $settings->get('bukkit_dir');
             
-            $command = 'screen -S bukkitserver -t CMC -d -m java -Xincgc -Xmx'.$_POST['maxram'].'M -jar '.$dir.'/craftbukkit.jar';
-            exec($command);
-        
-            $this->loadView('scripts/start_complete_page',$data);
+            //write the script to the mcscripts folder
+            $file = 'cd '.$dir."\n";
+            $file .= 'screen -dmS bukkit java -Xincgc -Xmx'.$_POST['maxram'].'M -jar craftbukkit.jar'."\n";
+            
+            //if we can't write, we throw an error
+            if (! file_put_contents(APPLICATION_DIR.'mcscripts'.DS.'startup.sh', $file))
+            {
+                pf_events::dispayFatal('Unable to save script! Is app/mcscripts writable?');
+            }
+            
+            $chmod = 'chmod +x ' . APPLICATION_DIR.'mcscripts'.DS.'startup.sh';
+            exec($chmod);
+            
+            exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
+            
+            pf_core::redirectUrl(pf_config::get('main_page'));
         }
         
         else 
