@@ -8,8 +8,8 @@
 
 			$table = new pf_tables();
         
-			//create some pretty (?) tables
-			$table->startTable('users');
+			//create some pretty (?) tables  $table->startTable($id, $border, $width, $class) <-- note you can set multiple classes
+			$table->startTable('users',0,NULL,'table table-striped');
 			$table->startRow();
 			$table->addCell('ID');
 			$table->addCell('Name');
