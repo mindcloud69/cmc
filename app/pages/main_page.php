@@ -95,9 +95,6 @@ else
                             
                             }); //end main json data call
                             
-                            //updates player info etc
-                            serverinfo();
-                            
                             //updates our server log
                             $('#console').load('<?php echo pf_config::get('main_page')?>/data/log');
                             
@@ -128,6 +125,8 @@ else
                         $(document).ready(function(){ 
                             $('#multijava').hide();
                             updatestats();
+                            //updates player info etc
+                            serverinfo();
                         });
                         
                         $(function(){
