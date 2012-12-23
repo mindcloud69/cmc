@@ -9,12 +9,15 @@ class scripts extends pf_controller
         $this->loadView('scripts/main_page');
     }
     
-    public function test()
+    //send a command to screen
+    private function send($command)
     {
-        exec('pwd',$return);
-        var_dump($return);
+        //$command = 'screen -S bukkit -p 0 -X stuff "' . $command .'" '."`echo -ne '\015'`";
+        $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
+        exec($command);
     }
     
+    //send a say command
     public function say()
     {
         //if no command passed via url
@@ -28,41 +31,90 @@ class scripts extends pf_controller
             //what did they want to say?
             $say = $_GET['command'];
 
-            //write the script to the mcscripts folder
-            $file = "screen -S bukkit -p 0 -X stuff $'say test\\n' ";
-            //$file = 'screen -S bukkit -p 0 -X stuff "say '.$say. '$echo -ne \'r\'"'."\n";
-
-            //if we can't write, we throw an error
-            if (! file_put_contents(APPLICATION_DIR.'mcscripts'.DS.'say.sh', $file))
-            {
-                pf_events::dispayFatal('Unable to save script! Is app/mcscripts writable?');
-            }
-
-            $chmod = 'chmod +x ' . APPLICATION_DIR.'mcscripts'.DS.'say.sh';
-            exec($chmod);
-
-            exec(APPLICATION_DIR.'mcscripts'.DS.'say.sh');
-            echo $file;
-            //pf_core::redirectUrl(pf_config::get('main_page'));
+            $this->send('say '.$say);
         }
-        
-    }  
+    }
     
+    //restart the server
     public function restart()
     {
-        $this->checkLogin();
-        exec('nohup ' . APPLICATION_DIR.'mcscripts'.DS.'restart.sh');
+        $this->send('say ###Restart In 1 Minute###');
+        sleep(50);
+        $this->send('say ###Restart In 10 Seconds###');
+        sleep(5);
+        $this->send('say ###Restart In 5 Seconds###');
+        $this->send('save-all');
+        sleep(5);
+        $this->send('stop');
+        sleep(10);
+        
+        //load our online checker library
+        $this->loadLibrary('server_conf');
+        
+        //make sure the server is offline
+        $online = server_conf::checkOnline();
+        $i=1;
+        
+        //while the server is online, we sleep 10 seconds, unless it's been 100 seconds,
+        //in which case we FORCE it to close
+        while ($online==true)
+        {
+            $i++;
+            sleep(10);
+            //if not died in 100 seconds, we FORCE it to close
+            if ($i <= 10)
+            {
+                exec ('pkill java'); //force all java's to close
+                break;
+            }
+        }
+        
+        if (file_exists(APPLICATION_DIR.'mcscripts'.DS.'startup.sh'))
+        {
+        //exec the last startup we used        
+        exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
+        //redirect to main page
         pf_core::redirectUrl(pf_config::get('main_page'));
+        }
+        else $this->loadView ('scripts/start_page');
     }
 
-
+    //stop the server
     public function stop()
     {
-        $this->checkLogin();
-        exec(APPLICATION_DIR.'mcscripts'.DS.'shutdown.sh');
-        pf_core::redirectUrl(pf_config::get('main_page'));
+        $this->send('say ###SERVER SHUTDOWN In 1 Minute###');
+        sleep(50);
+        $this->send('say ###SERVER SHUTDOWN In 10 Seconds###');
+        sleep(5);
+        $this->send('say ###SERVER SHUTDOWN In 5 Seconds###');
+        $this->send('save-all');
+        sleep(5);
+        $this->send('stop');
+        sleep(10);
+        
+        //load our online checker library
+        $this->loadLibrary('server_conf');
+        
+        //make sure the server is offline
+        $online = server_conf::checkOnline();
+        $i=1;
+        
+        //while the server is online, we sleep 10 seconds, unless it's been 100 seconds,
+        //in which case we FORCE it to close
+        while ($online==true)
+        {
+            $i++;
+            sleep(10);
+            //if not died in 100 seconds, we FORCE it to close
+            if ($i <= 10)
+            {
+                exec ('pkill java'); //force all java's to close
+                break;
+            }
+        }
     }
     
+    //start the server
     public function startup()
     {
         $this->checkLogin();
