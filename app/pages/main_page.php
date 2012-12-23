@@ -1,18 +1,3 @@
-<?php
-//makes our image src dynamic based on if online or not:)
-if ($data['online'])
-{
-    $online = '<img height="12px" src="'.pf_config::get("base_url").'app/assets/site_images/Circle_Green.png" width="15px">';
-    $status = '<span class="online" >ONLINE!</span>';
-}
-else
-{
-    $online = '<img height="12px" src="'.pf_config::get("base_url").'app/assets/site_images/Circle_Red.png" width="15px">';
-    $status = '<span class="offline" >OFFLINE!</span>';
-
-}
-?>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -98,8 +83,11 @@ else
                             //updates our server log
                             $('#console').load('<?php echo pf_config::get('main_page')?>/data/log');
                             
-                            //call yourself again after 5 seconds
-                            setTimeout(updatestats,5000);
+                            //updates player info etc
+                            serverinfo();
+                            
+                            //call yourself again after 10 seconds
+                            setTimeout(updatestats,10000);
                         }
                         
                         function colors(selector,value)
@@ -116,17 +104,31 @@ else
                         function serverinfo()
                         {
                             $.getJSON('<?php echo pf_config::get('main_page'); ?>/data/info',function(data){
+                                var online = data['online'];
+                                
                                 $( '#info' ).html ("Craftbukkit "+data['version'] +":<br />"
                                 + data['players'] + " of " + data['max_players'] + ' players connected<br />' +
                                 'MOTD:' + data['motd'] +'<br />')
+                                
+                                //if online
+                                if (online)
+                                    {
+                                    $('#online').html('Online:Online!')
+                                    $('#online').css({'color':'green'});
+                                    }
+                                else
+                                    {
+                                    $('#online').html('Online:Offline!')
+                                    $('#online').css({'color':'red'});    
+                                    }
+                            
                             });
                         }
                         
                         $(document).ready(function(){ 
                             $('#multijava').hide();
                             updatestats();
-                            //updates player info etc
-                            serverinfo();
+                            
                         });
                         
                         $(function(){
@@ -156,7 +158,6 @@ else
 					<div class="row-fluid">
 						<div class="span4">
 							<h2>General Info</h2>
-							<strong>Online: </strong> <?php echo $status . " " .$online; ?> <br>
 							<strong>Bukkit Dir:</strong> <?php echo $data['bukkit_dir'];?> <br>
                                                         <strong>World:</strong> <?php echo $data['world'];?><br>
 							<strong>PvP:</strong><?php echo $data['pvp'];?><br>
@@ -179,6 +180,9 @@ else
 							</div>
                                                         <div id="info">
                                                             
+                                                        </div>
+                                                        <div id="online">
+                                                            Online!
                                                         </div>
                                                         <div id="multijava">
                                                             Multiple Java's have been found, perhaps you have

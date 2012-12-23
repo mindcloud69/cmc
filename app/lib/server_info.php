@@ -48,6 +48,7 @@ class server_info
                 'motd'            => $data[0],
                 'players'        => intval($data[1]),
                 'max_players'    => intval($data[2]),
+                'online'         => TRUE
             );
         }else{
             $info = array(
@@ -55,6 +56,7 @@ class server_info
                 'motd'            => $data[1],
                 'players'        => intval($data[2]),
                 'max_players'    => intval($data[3]),
+                'online'         => TRUE
             );
         }
    

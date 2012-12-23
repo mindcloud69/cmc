@@ -25,11 +25,16 @@
 
                                     <h1>Server Scripts</h1>
                                     <h3>Please pick a script to run.</h3>
+                                    <h4>
+                                        Please NOTE: Stopping / Restarting the server takes time, 
+                                        your browser will "lock up" for a minute or more. Give the scripts
+                                        time to work. You will be redirected to the main page after they have completed.
+                                    </h4>
                                     
-                                        <a href="<?php echo pf_config::get('main_page') ?>/scripts/startup">Startup Script</a>
-                                        <a href="<?php echo pf_config::get('main_page') ?>/scripts/stop">Stop Script</a>
-                                        <a href="<?php echo pf_config::get('main_page') ?>/scripts/restart">Restart Script</a>
-                                        <a href="<?php echo pf_config::get('main_page') ?>/scripts/say">Say</a>
+                                        <a href="<?php echo pf_config::get('main_page') ?>/scripts/startup">Startup Script</a><br />
+                                        <a href="<?php echo pf_config::get('main_page') ?>/scripts/stop">Stop Script</a><br />
+                                        <a href="<?php echo pf_config::get('main_page') ?>/scripts/restart">Restart Script</a><br />
+                                        <a href="<?php echo pf_config::get('main_page') ?>/scripts/say">Say</a><br />
 
 
                                     </div><!-- END MAIN SPAN -->
