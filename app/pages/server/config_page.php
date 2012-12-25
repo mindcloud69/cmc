@@ -1,7 +1,3 @@
-<?php
-
-var_dump($data);
-?>
 
 <html>	
 	<head>
@@ -63,7 +59,7 @@ var_dump($data);
                                             </tr>
                                             <tr>
                                                 <td>Seed</td>
-                                                <td><?php pf_forms::text('level-seed', FALSE, $data['level-seed'],'Level Seed')?></td>
+                                                <td><?php pf_forms::text('level-seed', NULL, $data['level-seed'],'Level Seed')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Max Players</td>
@@ -99,7 +95,7 @@ var_dump($data);
                                             </tr>
                                              <tr>
                                                 <td>Texture Pack</td>
-                                                <td><?php pf_forms::text('texture-pack', FALSE, $data['texture-pack'],'Texture-Pack')?></td>
+                                                <td><?php pf_forms::text('texture-pack', NULL, $data['texture-pack'],'Texture-Pack')?></td>
                                             </tr>
                                             <tr>
                                                 <td>View Distance:</td>
@@ -143,7 +139,7 @@ var_dump($data);
                                             <tr>
                                                 <td>Generator Settings:</td>
                                                 <?php if (!key_exists('generator-settings', $data)) $data['generator-settings']=''?>
-                                                <td><?php pf_forms::text('generator-settings', FALSE, $data['generator-settings'],'generator-settings')?></td>
+                                                <td><?php pf_forms::text('generator-settings', NULL, $data['generator-settings'],'generator-settings')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Level Type:</td>
@@ -164,16 +160,16 @@ var_dump($data);
                                             <tr>
                                                 <td>Query Port:</td>
                                                 <?php if (!key_exists('query-port', $data)) $data['query-port']=''?>
-                                                <td><?php pf_forms::text('query-port', false, $data['query-port'],'query-port')?></td>
+                                                <td><?php pf_forms::text('query-port', NULL, $data['query-port'],'query-port')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Rcon Password:</td>
                                                 <?php if (!key_exists('rcon-password', $data)) $data['rcon-password']=''?>
-                                                <td><?php pf_forms::text('rcon-password', false, $data['rcon-password'],'rcon-password')?></td>
+                                                <td><?php pf_forms::text('rcon-password', NULL, $data['rcon-password'],'rcon-password')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Server IP:</td>
-                                                <td><?php pf_forms::text('server-ip', false, $data['server-ip'],'server-ip')?></td>
+                                                <td><?php pf_forms::text('server-ip', NULL, $data['server-ip'],'server-ip')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Server Port:</td>

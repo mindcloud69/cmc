@@ -4,4 +4,4 @@ Here is your config file
 </pre>
 It has been saved already for you.
 
---Link to restart script.-pt still needs to make that whole section.
+<a href="<?php echo pf_config::get('main_page').'/scripts'; ?>">Click Here To Start/Restart The Server</a>
