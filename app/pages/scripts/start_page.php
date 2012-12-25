@@ -25,22 +25,23 @@
 
 <h1>Start Server Script</h1>
 
-<form id="startserver" action="<?php echo pf_config::get('main_page');?>/scripts/startup" method="POST">
-    Max Amount Of Ram To Use:
-    <select name="maxram">
-        <option value="1024">1Gb Memory</option>
-        <option value="2048">2Gb Memory</option>
-        <option value="3072">3Gb Memory</option>
-        <option value="4096">4Gb Memory</option>
-        <option value="5120">5Gb Memory</option>
-        <option value="6144">6Gb Memory</option>
-        <option value="7168">7Gb Memory</option>
-        <option value="8192">8Gb Memory</option>
-    </select>
-    Previously <?php echo ($data['Maxram']/1024); ?>GB
-    <br />
-    <input type="submit" value="Save and Start Server"/>
-</form>
+<?php pf_forms::createForm('startserver', 'startserver', pf_config::get('main_page').'/scripts/startup', "POST");?>
+Max Amount Of Ram To Use:<br />
+
+    <? pf_forms::options('maxram', 'maxram',array(
+     '1024'=>'1GB Memory',
+     '2048'=>'2GB Memory',
+     '3072'=>'3GB Memory',
+     '4096'=>'4GB Memory',
+     '5120'=>'5GB Memory',
+     '6144'=>'6GB Memory',
+     '7168'=>'7GB Memory',
+     '8192'=>'8GB Memory'
+     ),$data['Maxram'])
+?>
+<br />
+<?php pf_forms::button('submit','Start Server');?>
+<?php pf_forms::closeForm();?>
 
 
 </div><!-- END MAIN SPAN -->
