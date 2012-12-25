@@ -25,134 +25,82 @@
                                     <h1>Config Your Server</h1>
                                     <p style="color:red;">Currently only letters and number are allowed in text. All spaces/special characters are removed</p>
 
-                                    <form id="form" class= "" action="<?php echo pf_config::get('main_page');?>/server/savesettings" method="POST">                                    
+                                    
+                                    <?php pf_forms::createForm('form', 'config_form', pf_config::get('main_page') . '/server/savesettings', 'POST')?>
+                                    
                                         <legend>Common Settings</legend>
                                         <table>
                                             <tr>
                                             <th width="33%">Setting</th>
-                                            <th width="33%">New Setting</th>
-                                            <th width="33%">Current Setting</th>
+                                            <th width="33%">Value</th>
                                             </tr>
                                             <tr>
                                                 <td>Difficulty: </td>
                                                 <td>
-                                                    <select name="difficulty">
-                                                        <option name="0">Peaceful</option>
-                                                        <option name="1">Easy</option>
-                                                        <option selected="selected" name="2">Normal</option>
-                                                        <option name="3">Hard</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    Currently Set As: <?php echo $data['difficulty']; ?>
+                                                    <?php pf_forms::options('difficulty', 'difficulty',array('0'=>'Peaceful','1'=>'Easy','2'=>'Normal','3'=>'Hard'),$data['difficulty'])?>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Game Mode</td>
                                                 <td>
-                                                    <select name="gamemode">
-                                                        <option selected="selected" name="0">Survival</option>
-                                                        <option name="1">Creative</option>
-                                                        <option name="2">Adventure</option>
-                                                    </select>
+                                                    <?php pf_forms::options('gamemode', 'gamemode',array('0'=>'Survival','1'=>'Creative','2'=>'Adventure'),$data['gamemode'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['gamemode']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Hardcore</td>
                                                 <td>
-                                                    <select name="hardcore">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('hardcore', 'hardcore',array('TRUE'=>'True','FALSE'=>'False'),$data['hardcore'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['difficulty']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>World</td>
-                                                <td><input type="text" name="level-name"  required value="<?php echo $data['level-name']; ?>"/></td>
-                                                <td>Currently Set As: <?php echo $data['level-name']; ?></td>
+                                                <td><?php pf_forms::text('level-name', TRUE, $data['level-name'])?></td>
                                             </tr>
                                             <tr>
                                                 <td>Seed</td>
-                                                <td><input type="text" name="level-seed"  placeholder="World Seed"/></td>
-                                                <td>Currently Set As: <?php echo $data['level-seed']; ?></td>
+                                                <td><?php pf_forms::text('level-seed', TRUE, $data['level-seed'],'Level Seed')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Max Players</td>
-                                                <td><input type="text" name="max-players" required value="<?php echo $data['max-players']; ?>"/></td>
-                                                <td>Currently Set As: <?php echo $data['max-players']; ?></td>
+                                                <td><?php pf_forms::text('max-players', TRUE, $data['max-players'],'Max-Players')?></td>
                                             </tr>
                                             <tr>
                                                 <td>MOTD</td>
                                                 <td><input type="text" name="motd"  required value="<?php echo $data['motd']; ?>"/></td>
-                                                <td>Currently Set As: <?php echo $data['motd']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>PVP</td>
                                                 <td>
-                                                    <select name="pvp">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('pvp', 'pvp',array('TRUE'=>'True','FALSE'=>'False'),$data['pvp'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['pvp']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Spawn Animals</td>
                                                 <td>
-                                                    <select name="spawn-animals">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('spawn-animals', 'spawn-animals',array('TRUE'=>'True','FALSE'=>'False'),$data['spawn-animals'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['spawn-animals']; ?></td>
                                             </tr>
                                              <tr>
                                                 <td>Spawn Monsters</td>
                                                 <td>
-                                                    <select name="spawn-monsters">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('spawn-monsters', 'spawn-monsters',array('TRUE'=>'True','FALSE'=>'False'),$data['spawn-monsters'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['spawn-monsters']; ?></td>
                                             </tr>
                                              <tr>
                                                 <td>Spawn NPC's</td>
                                                 <td>
-                                                    <select name="spawn-npcs">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('spawn-npcs', 'spawn-npcs',array('TRUE'=>'True','FALSE'=>'False'),$data['spawn-npcs'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['spawn-npcs']; ?></td>
                                             </tr>
                                              <tr>
                                                 <td>Texture Pack</td>
-                                                <td><input type="text" name="texture-pack" placeholder="Texture Pack URL"/></td>
-                                                <td>Currently Set As: <?php echo $data['texture-pack']; ?></td>
+                                                <td><?php pf_forms::text('texture-pack', TRUE, $data['texture-pack'],'Texture-Pack')?></td>
                                             </tr>
                                             <tr>
                                                 <td>View Distance:</td>
                                                 <td>
-                                                    <select name="view-distance">
-                                                        <option name="3">Close</option>
-                                                        <option selected="selected" name="4">4</option>
-                                                        <option name="5">5</option>
-                                                        <option name="6">6</option>
-                                                        <option name="7">7</option>
-                                                        <option name="8">8</option>
-                                                        <option name="9">9</option>
-                                                        <option name="10">Default</option>
-                                                        <option name="11">11</option>
-                                                        <option name="12">12</option>
-                                                        <option name="13">13</option>
-                                                        <option name="14">14</option>
-                                                        <option name="15">Far</option>
-                                                    </select>
+                                                    <?php pf_forms::options('view-distance', 'view-distance',array('3'=>'Close','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'Default','11'=>'11','12'=>'12','13'=>'13','14'=>'14'),$data['view-distance'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['view-distance']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="3"><legend>Other Settings</legend></td>
@@ -160,128 +108,87 @@
                                             <tr>
                                                 <td>Allow Flight:</td>
                                                 <td>
-                                                    <select name="allow-flight">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('allow-flight', 'allow-flight',array('TRUE'=>'True','FALSE'=>'False'),$data['allow-flight'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['allow-flight']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Enable Query:</td>
                                                 <td>
-                                                    <select name="enable-query">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('enable-query', 'enable-query',array('TRUE'=>'True','FALSE'=>'False'),$data['enable-query'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['enable-query']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Enable Rcon:</td>
                                                 <td>
-                                                    <select name="enable-rcon">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('enable-rcon', 'enable-rcon',array('TRUE'=>'True','FALSE'=>'False'),$data['enable-rcon'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['enable-rcon']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Enable Command Block:</td>
                                                 <td>
-                                                    <select name="enable-command-block">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('enable-command-block', 'enable-command-block',array('TRUE'=>'True','FALSE'=>'False'),$data['enable-command-block'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php if (key_exists('enable-command-block', $data)) echo $data['enable-command-block']; else echo 'No Setting Found'?></td>
                                             </tr>
                                             <tr>
                                                 <td>Generate Structures:</td>
                                                 <td>
-                                                    <select name="generate-structures">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('generate-structures', 'generate-structures',array('TRUE'=>'True','FALSE'=>'False'),$data['generate-structures'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['generate-structures']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Generator Settings:</td>
-                                                <td><input type="text" name="generator-settings" placeholder="Generator Settings"/></td>
-                                                <td>Currently Set As: <?php if (key_exists('generator-settings', $data)) echo $data['generator-settings']; else echo 'No Setting Found'?></td>
+                                                <?php if (!key_exists('generator-settings', $data)) $data['generator-settings']=''?>
+                                                <td><?php pf_forms::text('generator-settings', TRUE, $data['generator-settings'],'generator-settings')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Level Type:</td>
                                                 <td>
-                                                    <select name="level-type">
-                                                        <option name="DEFAULT">DEFAULT</option>
-                                                        <option name="FLAT">FLAT</option>
-                                                        <option name="LARGEBIOMES">LARGEBIOMES</option>
-                                                    </select>
+                                                    <?php pf_forms::options('level-type', 'level-type',array('DEFAULT'=>'DEFAULT','FLAT'=>'FLAT','LARGEBIOMES'=>'LARGEBIOMES'),$data['level-type'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['level-type']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Max Build Height:</td>
-                                                <td><input type="text" name="max-build-height"  required value="<?php echo $data['max-build-height']; ?>"/></td>
-                                                <td>Currently Set As: <?php echo $data['max-build-height']; ?></td>
+                                                <td><?php pf_forms::text('max-build-height', TRUE, $data['max-build-height'],'max-build-height')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Online Mode:</td>
                                                 <td>
-                                                    <select name="online-mode">
-                                                        <option name="True">True</option>
-                                                        <option selected name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('online-mode', 'online-mode',array('TRUE'=>'True','FALSE'=>'False'),$data['online-mode'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['online-mode']; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Query Port:</td>
-                                                <td><input type="text" name="query-port" placeholder="Query Port"/></td>
-                                                <td>Currently Set As: <?php if (key_exists('query-port', $data)) echo $data['query-port']; else echo 'No Setting Found'?></td>
+                                                <?php if (!key_exists('query-port', $data)) $data['query-port']=''?>
+                                                <td><?php pf_forms::text('query-port', TRUE, $data['query-port'],'query-port')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Rcon Password:</td>
-                                                <td><input type="text" name="rcon-password" placeholder="rcon password"/></td>
-                                                <td>Currently Set As: <?php if (key_exists('rcon-password', $data)) echo $data['rcon-password']; else echo 'No Setting Found'?></td>
+                                                <?php if (!key_exists('rcon-password', $data)) $data['rcon-password']=''?>
+                                                <td><?php pf_forms::text('rcon-password', TRUE, $data['rcon-password'],'rcon-password')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Server IP:</td>
-                                                <td><input type="text" name="server-ip" placeholder=""/></td>
-                                                <td>Currently Set As: <?php echo $data['server-ip']; ?></td>
+                                                <td><?php pf_forms::text('server-ip', TRUE, $data['server-ip'],'server-ip')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Server Port:</td>
-                                                <td><input type="text" name="server-port" required value="<?php echo $data['server-port']; ?>"/></td>
-                                                <td>Currently Set As: <?php echo $data['server-port']; ?></td>
+                                                <td><?php pf_forms::text('server-port', TRUE, $data['server-port'],'server-port')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Scooper Enabled:</td>
                                                 <td>
-                                                    <select name="scooper-enabled">
-                                                        <option name="True">True</option>
-                                                        <option name="False">False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('scooper-enabled', 'scooper-enabled',array('TRUE'=>'True','FALSE'=>'False'),$data['scooper-enabled'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php if (key_exists('scooper-enabled', $data)) echo $data['scooper-enabled']; else echo 'No Setting Found'?></td>
                                             </tr>
                                             <tr>
                                                 <td>Spawn Protection:</td>
-                                                <td><input type="text" name="spawn-protection"  required value="<?php echo $data['spawn-protection']; ?>"/></td>
-                                                <td>Currently Set As: <?php echo $data['spawn-protection']; ?></td>
+                                                <td><?php pf_forms::text('spawn-protection', TRUE, $data['spawn-protection'],'spawn-protection')?></td>
                                             </tr>
                                             <tr>
                                                 <td>White List:</td>
                                                 <td>
-                                                    <select name="white-list">
-                                                        <option name="True">True</option>
-                                                        <option name="False" selected>False</option>
-                                                    </select>
+                                                    <?php pf_forms::options('white-list', 'white-list',array('TRUE'=>'True','FALSE'=>'False'),$data['white-list'])?>
                                                 </td>
-                                                <td>Currently Set As: <?php echo $data['white-list']; ?></td>
                                             </tr>
                                          </table>
                                         <input type="submit" value="Save"/>
