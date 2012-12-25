@@ -9,12 +9,12 @@
 		<link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/main-responsive.min.css" rel="stylesheet">
                 <link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/style.css" rel="stylesheet">
         
-        <style>
-			body {
-				margin-top: 20px;
-				background-color: #f5f5f5;
-			}
-		</style>
+            <style>
+                            body {
+                                    margin-top: 20px;
+                                    background-color: #f5f5f5;
+                            }
+            </style>
 	</head>
         <body>
             <div class="container-fluid"> <!-- START CONTAINER -->

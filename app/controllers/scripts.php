@@ -38,6 +38,8 @@ class scripts extends pf_controller
     //restart the server
     public function restart()
     {
+        echo 'working on this script';
+        /*
         $this->send('say ###Restart In 1 Minute###');
         sleep(50);
         $this->send('say ###Restart In 10 Seconds###');
@@ -77,41 +79,15 @@ class scripts extends pf_controller
         pf_core::redirectUrl(pf_config::get('main_page'));
         }
         else $this->loadView ('scripts/start_page');
+         * 
+         */
     }
 
     //stop the server
     public function stop()
     {
-        $this->send('say ###SERVER SHUTDOWN In 1 Minute###');
-        sleep(50);
-        $this->send('say ###SERVER SHUTDOWN In 10 Seconds###');
-        sleep(5);
-        $this->send('say ###SERVER SHUTDOWN In 5 Seconds###');
-        $this->send('save-all');
-        sleep(5);
-        $this->send('stop');
-        sleep(10);
-        
-        //load our online checker library
-        $this->loadLibrary('server_conf');
-        
-        //make sure the server is offline
-        $online = server_conf::checkOnline();
-        $i=1;
-        
-        //while the server is online, we sleep 10 seconds, unless it's been 100 seconds,
-        //in which case we FORCE it to close
-        while ($online==true)
-        {
-            $i++;
-            sleep(10);
-            //if not died in 100 seconds, we FORCE it to close
-            if ($i <= 10)
-            {
-                exec ('pkill java'); //force all java's to close
-                break;
-            }
-        }
+        exec('nohup /usr/bin/php '.APPLICATION_DIR.'mcscripts'.DS.'stop.php'."> /dev/null 2>/dev/null &");
+        pf_core::redirectUrl(pf_config::get('main_page'));
     }
     
     //start the server
