@@ -4,7 +4,8 @@ class login extends pf_controller
 {
     public function index()
     {
-        $this->loadView('login/login_page.php');
+        if (isset($_GET['failed'])) $data = array('failed' => TRUE);
+        $this->loadView('login/login_page.php',$data);
     }
     public function action()
     {
@@ -44,7 +45,7 @@ class login extends pf_controller
         else 
             {
             echo 'Invalid Login!';
-            pf_core::redirectUrl('index');
+            pf_core::redirectUrl(pf_config::get('main_page').'/login?failed=true');
             }
         }
     }

@@ -1,3 +1,8 @@
+<?php
+if (key_exists('failed', $data))$failed=true;
+else $failed=FALSE;
+?>
+
 <html>	
 	<head>
 		<title>Minecraft Server Control</title>
@@ -38,9 +43,23 @@
         		height: auto;
         		margin-bottom: 15px;
         		padding: 7px 9px;
+                        
       		}
+                #failed{
+                    border: 1px solid #A00;
+        		-webkit-border-radius: 5px;
+           		-moz-border-radius: 5px;
+                border-radius: 5px;
+                background: #ecc;
+                max-width:300px;
+                color:#A00;
+                padding:10px;
+                }
 		</style>
 	</head>
+        
+        
+        
         <body>
             <div class="container-fluid"> <!-- START CONTAINER -->
 			<div class="row-fluid">
@@ -52,8 +71,8 @@
             <div id="login" class="">
                 <form class="form-signin" id="login" action="<?php echo pf_config::get('base_url').pf_config::get('index_page')?>/login/action" method="POST">
                         
+                    <?php if ($failed) echo '<div id="failed" class="">Invalid Username/Password Combination</div>'; ?>
                     <legend>Please Login</legend>
-                    
                     <center><label for="username">
                         <input type="text" name="username" placeholder="Username" required/>
                     </label></center>
