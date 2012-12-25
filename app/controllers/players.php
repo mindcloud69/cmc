@@ -4,7 +4,7 @@ class players extends pf_controller
 {
     public function index()
     {
-        echo 'work in progress';
+        echo 'This is a work in progress,showing banned players, listing all players in the world, with the ability to delete them....also a list of ops i guess';
     }
     
     public function banned()
