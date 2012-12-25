@@ -62,8 +62,8 @@ class pf_forms {
         
         foreach ($options as $value=>$text)
         {
-            if ($value == $selected) $html .= pf_html::indent ().'<option selected="selected" name="'.$value.'">'.$text.'</option>'."\n";
-            else $html .= pf_html::indent ().'<option name="'.$value.'">'.$text.'</option>'."\n";
+            if (strtolower($value) == strtolower($selected)) $html .= pf_html::indent ().'<option selected="selected" value="'.$value.'">'.$text.'</option>'."\n";
+            else $html .= pf_html::indent ().'<option value="'.$value.'">'.$text.'</option>'."\n";
         }
         
         $html .= '</select>'."\n";

@@ -1,3 +1,8 @@
+<?php
+
+var_dump($data);
+?>
+
 <html>	
 	<head>
 		<title>Minecraft Server Control</title>
@@ -49,7 +54,7 @@
                                             <tr>
                                                 <td>Hardcore</td>
                                                 <td>
-                                                    <?php pf_forms::options('hardcore', 'hardcore',array('TRUE'=>'True','FALSE'=>'False'),$data['hardcore'])?>
+                                                    <?php pf_forms::options('hardcore', 'hardcore',array('True'=>'True','False'=>'False'),$data['hardcore'])?>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -58,7 +63,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Seed</td>
-                                                <td><?php pf_forms::text('level-seed', TRUE, $data['level-seed'],'Level Seed')?></td>
+                                                <td><?php pf_forms::text('level-seed', FALSE, $data['level-seed'],'Level Seed')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Max Players</td>
@@ -94,7 +99,7 @@
                                             </tr>
                                              <tr>
                                                 <td>Texture Pack</td>
-                                                <td><?php pf_forms::text('texture-pack', TRUE, $data['texture-pack'],'Texture-Pack')?></td>
+                                                <td><?php pf_forms::text('texture-pack', FALSE, $data['texture-pack'],'Texture-Pack')?></td>
                                             </tr>
                                             <tr>
                                                 <td>View Distance:</td>
@@ -138,7 +143,7 @@
                                             <tr>
                                                 <td>Generator Settings:</td>
                                                 <?php if (!key_exists('generator-settings', $data)) $data['generator-settings']=''?>
-                                                <td><?php pf_forms::text('generator-settings', TRUE, $data['generator-settings'],'generator-settings')?></td>
+                                                <td><?php pf_forms::text('generator-settings', FALSE, $data['generator-settings'],'generator-settings')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Level Type:</td>
@@ -159,16 +164,16 @@
                                             <tr>
                                                 <td>Query Port:</td>
                                                 <?php if (!key_exists('query-port', $data)) $data['query-port']=''?>
-                                                <td><?php pf_forms::text('query-port', TRUE, $data['query-port'],'query-port')?></td>
+                                                <td><?php pf_forms::text('query-port', false, $data['query-port'],'query-port')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Rcon Password:</td>
                                                 <?php if (!key_exists('rcon-password', $data)) $data['rcon-password']=''?>
-                                                <td><?php pf_forms::text('rcon-password', TRUE, $data['rcon-password'],'rcon-password')?></td>
+                                                <td><?php pf_forms::text('rcon-password', false, $data['rcon-password'],'rcon-password')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Server IP:</td>
-                                                <td><?php pf_forms::text('server-ip', TRUE, $data['server-ip'],'server-ip')?></td>
+                                                <td><?php pf_forms::text('server-ip', false, $data['server-ip'],'server-ip')?></td>
                                             </tr>
                                             <tr>
                                                 <td>Server Port:</td>
