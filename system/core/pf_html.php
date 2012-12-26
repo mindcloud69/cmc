@@ -1,9 +1,13 @@
-<?php if (!defined('APP_NAME')) die('NO DIRECT SCRIPT ACCESS!');
+<?php
+/*
+ * Copyright 2012 - Phillip Tarrant
+ * License: http://creativecommons.org/licenses/by-sa/3.0/deed.en_US
+ */
+if (!defined('APP_NAME')) die('NO DIRECT SCRIPT ACCESS!');
 
 /* -----------------------------------------------------------------------------
  * PF_HTML - Helper class for common HTML stuff
  * -----------------------------------------------------------------------------
- * @author      Phillip Tarrant <ptarrant@gmail.com>
  */
 class pf_html
 {
@@ -23,34 +27,34 @@ class pf_html
     
     public static function metaTag($type,$data)
     {
-        echo '<meta name="'.$type.'" content="'.$data.'"/>';
+        echo '<meta name="'.$type.'" content="'.$data.'"/>'."\n";
     }
     
     public static function stylesheet($stylesheet)
     {
         if (substr($stylesheet, 0,4)=="http")
         {
-        echo '<link rel="stylesheet" media="all" type="text/css" href="'.$stylesheet.'" />';
+        echo '<link rel="stylesheet" media="all" type="text/css" href="'.$stylesheet.'" />'."\n";
         }
         else
         {
-            echo '<link rel="stylesheet" media="all" type="text/css" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').$stylesheet.'" />';
+            echo '<link rel="stylesheet" media="all" type="text/css" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').$stylesheet.'" />'."\n";
         }
     }
     
     public static function shortcutIcon($file)
     {
-        echo '<link rel="shortcut icon" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').'images/'.$file.'" type="image/gif" />';
+        echo '<link rel="shortcut icon" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').'images/'.$file.'" type="image/gif" />'."\n";
     }
     
     public static function scriptExternal($url)
     {
-        echo '<script src="'.$url.'"></script>';
+        echo '<script src="'.$url.'"></script>'."\n";
     }
     
     public static function scriptInternal($file)
     {
-        echo '<script src="'.pf_config::get('base_url').pf_config::get('java_dir').$file.'"></script>';
+        echo '<script src="'.pf_config::get('base_url').pf_config::get('java_dir').$file.'"></script>'."\n";
     }
     
     public static function clearPreviousBuffer()

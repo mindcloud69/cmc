@@ -1,4 +1,8 @@
 <?php
+/*
+ * Copyright 2012 - Phillip Tarrant
+ * License: http://creativecommons.org/licenses/by-sa/3.0/deed.en_US
+ */
 /* =============================================================================
  * AUTOLOADER - here we setup our auto-loading of classes
  * ===========================================================================*/
@@ -69,7 +73,7 @@
         }
         else
         {
-            error_reporting(0);
+            error_reporting(0);//@TODO: Change this before Beta
             pf_events::eventsAdd('Environment Set To LIVE');
         }
     }

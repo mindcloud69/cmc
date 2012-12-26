@@ -1,33 +1,25 @@
-
-<html>	
+<!DOCTYPE html>
+<html>
 	<head>
-		<title>Minecraft Server Control</title>
-		
-		<script src="http://code.jquery.com/jquery-latest.js"></script>
-                <script src="<?php echo pf_config::get('base_url'); ?>app/assets/js/main.min.js"></script>
-		<link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/main.min.css" rel="stylesheet" media="screen">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/main-responsive.min.css" rel="stylesheet">
-                <link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/style.css" rel="stylesheet">
-                
+		<?php pf_core::loadTemplate('header'); ?>
                 <style>
                     select {width:100px;}
                     input[type=text] {
-                       width: 150px;
+                       width: 100px;
                     }
                 </style>
 	</head>
+        
         <body>
-            <div class="container-fluid"> <!-- START CONTAINER -->
-			<div class="row-fluid">
-				<div class="span1"></div>
-				<div class="span10">
-					<?php pf_core::loadTemplate('menu'); ?>
-                                    <h1>Config Your Server</h1>
-                                    <p style="color:red;">Currently only letters and number are allowed in text. All spaces/special characters are removed</p>
+        <?php pf_core::loadTemplate('menu'); ?>
+            
+            <div class="container">
+                <h1>Config Your Server</h1>
+                <p style="color:red;">Currently only letters and number are allowed in text. All spaces/special characters are removed</p>
 
+                <div class="row">
                                     
-                                    <?php pf_forms::createForm('form', 'config_form', pf_config::get('main_page') . '/server/savesettings', 'POST')?>
+                                    <?php pf_forms::createForm('form', 'config_form span_5', pf_config::get('main_page') . '/server/savesettings', 'POST')?>
                                     
                                         <legend>Common Settings</legend>
                                         <table>
@@ -194,12 +186,8 @@
                                          </table>
                                         <input type="submit" value="Save"/>
                                     </form>
-                                    </div><!-- END MAIN SPAN -->
-				<div class="span1"></div>
 			</div><!-- END ROW -->
-                        <div class="footer center">
+                    </div>
             <?php pf_core::loadTemplate('footer'); ?>
-        </div>
-		</div><!-- END CONTAINER -->
 	</body>
 </html>

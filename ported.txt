@@ -1,0 +1,6 @@
+These files have been ported / cleaned up
+
+main_page.php -pt
+login/login_page.php -pt
+server/config_page.php  -pt
+server/complete_page.php  -pt

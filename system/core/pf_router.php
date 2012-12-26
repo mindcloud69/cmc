@@ -1,13 +1,15 @@
-<?php if ( !defined('SYSTEM_DIR')) exit ('No direct script access allowed');
+<?php
+/*
+ * Copyright 2012 - Phillip Tarrant
+ * License: http://creativecommons.org/licenses/by-sa/3.0/deed.en_US
+ */
+
+if ( !defined('SYSTEM_DIR')) exit ('No direct script access allowed');
 /*
  * File: class_router.php
  * Purpose: Handles All Routing and Dispatches
  * Author: Phillip Tarrant
- * License: See license.txt in Root Folder
  * Created: 9/4/2012
- * 
- * Changelog:
- * 9/5/2012 - if no action specified, the default is used.
  */
 
 class pf_router

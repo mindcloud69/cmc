@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Minecraft Server Control</title>
-		
-		<script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="<?php echo pf_config::get('base_url'); ?>app/assets/js/main.min.js"></script>
-		<link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/main.min.css" rel="stylesheet" media="screen">
-		
-		<script src="jquery-1.4.min.js"></script>
-		<script src="jquery.speedometer.js"></script>
-		<script src="jquery.jqcanvas-modified.js"></script>
-		<script src="excanvas-modified.js"></script>
-
+		<?php pf_core::loadTemplate('header'); ?>
 		<style>
-			body {
-				margin-top: 20px;
-				background:url('<?php echo pf_config::get('base_url'); ?>app/assets/site_images/noise.png') repeat 0px 0px;
-                        }
-                        .online{color:green;}
-                        .offline{color:red;}
-                        
-                        #cpuwrap,#memwrap{color:black;border:1px solid black;width:400px;}
-                        #console { white-space: pre; height:300px;overflow:auto;}
-                        .warning {color:red;}
-                        #multijava{font-size:14px;color:red;}
+                    .online{color:green;}
+                    .offline{color:red;}
+
+                    #cpuwrap,#memwrap{color:black;border:1px solid black;width:400px;}
+                    #console { white-space: pre; height:300px;overflow:auto;}
+                    #multijava{font-size:14px;color:red;}
+                    
+                    .serverwarning {color:red;}
+                    .serverlog{margin-top:25px;}
 		</style>
+                
 		<script>
 			$('#tab a').click(function (e) {
   				e.preventDefault();
@@ -148,78 +137,68 @@
 	</head>
 	
 	<body>
-		<div class="container-fluid"> <!-- START CONTAINER -->
-			<div class="row-fluid">
-				<div class="span1"></div>
-				
-				<div class="span10">
-					<?php pf_core::loadTemplate('menu'); ?>
-					<h1>Crafty Minecraft Control</h1><hr>
-					<div class="row-fluid">
-						<div class="span4">
-							<h2>General Info</h2>
-							<strong>Bukkit Dir:</strong> <?php echo $data['bukkit_dir'];?> <br>
-                                                        <strong>World:</strong> <?php echo $data['world'];?><br>
-							<strong>PvP:</strong><?php echo $data['pvp'];?><br>
-							<strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
-							<strong>Game Type:</strong> <?php echo $data['gamemode'];?><br>
-							<strong>Essentials Installed:</strong><?php echo $data['essentials'];?> <br>
-							<strong>Other Plugins:</strong> <?php echo $data['pluggins'];?>
-						</div>
-						
-						<div class="span6">
-							<h2>Server Load</h2>
-                                                        <span id='cores'>CPU Usage Based On X Cores</span>
-							<div id="cpuwrap" class="">
-  								<div id="cpu" class="bar"></div>
-							</div>
-                                                        <br>
-                                                        MEM Usage
-							<div id="memwrap" class="">
-  								<div id="mem" class="bar"></div>
-							</div>
-                                                        <div id="info">
-                                                            
-                                                        </div>
-                                                        <div id="online">
-                                                            Online!
-                                                        </div>
-                                                        <div id="multijava">
-                                                            Multiple Java's have been found, perhaps you have
-                                                            multiple server running due to an error? You should
-                                                            fix this. Time to break out SSH! <--later we will offer to fix this
-                                                        </div>
-						</div>
-						
-					</div> <!-- END MAIN CONTENT -->
-					<br>
-                                        <br>
-                                        *newest entries at the top*
-					<div class="tabbable">
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="#console" data-toggle="tab">Console</a></li>
-							<li><a href="#chat" data-toggle="tab">Chat</a></li>
-						</ul>
-						<div class="tab-content">
-							<div class="tab-pane active" id="console">
-								
-							</div>
-							<div class="tab-pane" id="chat">
-								<pre>
-Bob: Hi!
-Joe: Yo!
-									<br><br><br><br><br><br><br><br><br><br>
-								</pre>
-							</div>
+        <?php pf_core::loadTemplate('menu'); ?>
+            <div class="container">
+                <h1>Crafty Minecraft Control</h1><hr>
+                <div class="row">
+                    <div class="span4">
+                            <h2>General Info</h2>
+                            <strong>Bukkit Dir:</strong> <?php echo $data['bukkit_dir'];?> <br>
+                            <strong>World:</strong> <?php echo $data['world'];?><br>
+                            <strong>PvP:</strong><?php echo $data['pvp'];?><br>
+                            <strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
+                            <strong>Game Type:</strong> <?php echo $data['gamemode'];?><br>
+                            <strong>Essentials Installed:</strong><?php echo $data['essentials'];?> <br>
+                            <strong>Other Plugins:</strong> <?php echo $data['pluggins'];?>
+                    </div>
 
-				</div><!-- END 10 SPAN -->
-				<div class="span1"></div>
-			</div> <!-- END ROW -->
-                        <div class="footer center">
-            <?php pf_core::loadTemplate('footer'); ?>
-        </div>
-		</div> <!-- END CONTAINER -->
+                    <div class="span6">
+                            <h2>Server Load</h2>
+                            <span id='cores'>CPU Usage Based On X Cores</span>
+                            <div id="cpuwrap" class="">
+                                    <div id="cpu" class="bar"></div>
+                            </div>
+                            <br>
+                            MEM Usage
+                            <div id="memwrap" class="">
+                                    <div id="mem" class="bar"></div>
+                            </div>
+                            <div id="info">
 
-	</body>
+                            </div>
+                            <div id="online">
+                                Online!
+                            </div>
+                            <div id="multijava">
+                                Multiple Java's have been found, perhaps you have
+                                multiple server running due to an error? You should
+                                fix this. Time to break out SSH! <--later we will offer to fix this
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container serverlog">
+            *newest entries at the top*
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#console" data-toggle="tab">Console</a></li>
+                        <li><a href="#chat" data-toggle="tab">Chat</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="console">
+                    
+                        </div>
+                    <div class="tab-pane" id="chat">
+                        <pre>
+                            Bob: Hi!
+                            Joe: Yo!
+                            <br><br><br><br><br><br><br><br><br><br>
+                        </pre>
+                    </div>
+                    </div><!-- END 10 SPAN -->
+                </div> <!-- END ROW -->
 
+        <?php pf_core::loadTemplate('footer'); ?>
+    </body>
 </html>

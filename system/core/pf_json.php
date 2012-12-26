@@ -1,5 +1,8 @@
 <?php
-
+/*
+ * Copyright 2012 - Phillip Tarrant
+ * License: http://creativecommons.org/licenses/by-sa/3.0/deed.en_US
+ */
 class pf_json
 {
     private $data = array();        //our json data

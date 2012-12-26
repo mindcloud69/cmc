@@ -5,6 +5,7 @@ class login extends pf_controller
     public function index()
     {
         if (isset($_GET['failed'])) $data = array('failed' => TRUE);
+        else $data = array();
         $this->loadView('login/login_page.php',$data);
     }
     public function action()

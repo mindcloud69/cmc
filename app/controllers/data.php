@@ -55,7 +55,7 @@ class data extends pf_controller
         {
             //any warnings or severe logged actions, we highlight red.
             if ( (preg_match('/WARNING/', $line)) || (preg_match('/SEVERE/', $line)) )
-                    $line = '<span class=warning>'.$line."</span>";
+                    $line = '<span class=serverwarning>'.$line."</span>";
             echo $line."\n";
         }
     }
