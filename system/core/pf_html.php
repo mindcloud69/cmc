@@ -3,11 +3,12 @@
 /* -----------------------------------------------------------------------------
  * PF_HTML - Helper class for common HTML stuff
  * -----------------------------------------------------------------------------
+ * @author      Phillip Tarrant <ptarrant@gmail.com>
  */
 class pf_html
 {
     private static $headobjects = array();      //array full of header info
-        
+
     public static function indent($times=null)
     {
         if (empty($times)) $times=1;
@@ -20,61 +21,49 @@ class pf_html
         return $indent;
     }
     
-    public static function addMetaTag($type,$data)
+    public static function metaTag($type,$data)
     {
-        self::$headobjects[]='<meta name="'.$type.'" content="'.$data.'"/>';
+        echo '<meta name="'.$type.'" content="'.$data.'"/>';
     }
-    public static function renderHead()
-    {
-        $html = "<!DOCTYPE html> \n<html>\n".pf_html::indent()."<head>\n";
-        $html .= pf_html::indent(2).'<meta name="generator" content="'.APP_NAME ." - ". APP_VERSION .'" />'."\n";
-        
-        foreach (self::$headobjects as $line)
-        {
-           $html.= pf_html::indent(2)."$line \n";
-        }
-        
-        $html .= pf_html::indent()."</head>\n";
-        echo $html;
-    }
-    public static function addStylesheet($stylesheet)
+    
+    public static function stylesheet($stylesheet)
     {
         if (substr($stylesheet, 0,4)=="http")
         {
-        self::$headobjects[]='<link rel="stylesheet" media="all" type="text/css" href="'.$stylesheet.'" />';
+        echo '<link rel="stylesheet" media="all" type="text/css" href="'.$stylesheet.'" />';
         }
         else
         {
-            self::$headobjects[]='<link rel="stylesheet" media="all" type="text/css" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').$stylesheet.'" />';
+            echo '<link rel="stylesheet" media="all" type="text/css" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').$stylesheet.'" />';
         }
     }
-    public static function setTitle($title)
+    
+    public static function shortcutIcon($file)
     {
-        self::$headobjects['title']="<title>$title</title>";
+        echo '<link rel="shortcut icon" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').'images/'.$file.'" type="image/gif" />';
     }
-    public static function addShortcutIcon($file)
+    
+    public static function scriptExternal($url)
     {
-        self::$headobjects[]='<link rel="shortcut icon" href="'.pf_config::get('base_url').pf_config::get('stylesheet_dir').'images/'.$file.'" type="image/gif" />';
+        echo '<script src="'.$url.'"></script>';
     }
-    public static function addScriptExternal($url)
+    
+    public static function scriptInternal($file)
     {
-        self::$headobjects[]='<script src="'.$url.'"></script>';
-    }
-    public static function addScriptInternal($file)
-    {
-        self::$headobjects[]='<script src="'.pf_config::get('base_url').pf_config::get('java_dir').$file.'"></script>';
+        echo '<script src="'.pf_config::get('base_url').pf_config::get('java_dir').$file.'"></script>';
     }
     
     public static function clearPreviousBuffer()
     {
         ob_clean();
     }
+    
     public static function endPage()
     {
         echo "\n</html>\n";
         ob_flush();
-        
     }
+    
     public static function addImage($file,$alt=null,$title=null,$class=null)
     {
         $link = pf_router::$basepath.'/'.APPLICATION_DIR.'/'.SITE_IMAGES_FOLDER.'/'.$file;
@@ -88,9 +77,7 @@ class pf_html
         if ($title) echo 'title="'.$title.'" ';
         if ($class) echo 'class="'.$class.'" ';
         echo '/>';
-        
     }
-    
 }
 
 ?>
