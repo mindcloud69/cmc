@@ -13,7 +13,7 @@ else //if not logged in, we show a login link :)
 {
     $loginlink = '<a href="'.pf_config::get('main_page').'/login">Login</a>';
 }
-echo 'page:'.$page;
+//echo 'page:'.$page;
 //check to see if we are installed
 $data = new pf_json();
 $data->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');  //grab data from json
