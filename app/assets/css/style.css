@@ -32,14 +32,7 @@ body {
     margin-bottom: 15px;
     padding: 7px 9px;
 }
-.startserver > input[type="submit"]{
-    width:340px;
-    
-}
-.serversay > input[type="submit"]{
-    width:340px;
-    
-}
+
 
 /*Navbar customization*/
 .navbar .nav > li > a:hover {

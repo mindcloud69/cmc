@@ -129,7 +129,7 @@
     //parse the URL
     pf_events::eventsAdd('Getting requested URL');
     $route = $router->parseURI();
-    
+    pf_config::set('ROUTE', $route);
     //require the controller file
     pf_events::eventsAdd('Loading Controller: '.APPLICATION_DIR.'controllers'.DS.$route['CONTROLLER'].".php");
     

@@ -58,8 +58,8 @@ input.button:hover {background:#fff;}
 #login label {text-align:center;display:block;}
 
 /*Button*/
-.button, .button > a{
-    padding:10px 15px !important;
+.button{
+    padding:5px;
     text-align:center;
     background:#08C;
     color:#fff;
@@ -73,7 +73,7 @@ input.button:hover {background:#fff;}
     user-select:none;
     height:40px;
 }
-.button, .button > a:hover{
+.button:hover{
     background: #FFF;
     border: solid 1px #2A4E77;
     color:#000;

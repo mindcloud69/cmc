@@ -12,12 +12,29 @@ class server extends pf_controller
     //send a command to screen
     private function send($command)
     {
-        //$command = 'screen -S bukkit -p 0 -X stuff "' . $command .'" '."`echo -ne '\015'`";
+        //load the server config library
+        $this->loadLibrary('server_conf');
+        
+        //get settings
+        $settings = new pf_json();
+        $settings->readJsonFile(pf_config::get('Json_Settings'));
+        
+        $bukkit_dir = $settings->get('bukkit_dir');
+        
+        //our server log file
+        $log = $bukkit_dir . DS . 'server.log';
+        
+        //current time
+        $time = date('m/d/y g:i:s a');
+        
+        //log it in the server.log
+        exec("echo $command issued at $time >> $log");
+        
         $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
         exec($command);
     }
     
-    private function action()
+    public function action()
     {
         //if no action/command passed via url we load the main page again
         if ( (!isset($_GET['action'])) && (!isset($_GET['command'])) )

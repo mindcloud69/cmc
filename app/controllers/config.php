@@ -16,7 +16,6 @@ class config extends pf_controller
     
     private function getdir()
     {
-        $data = array();
         $settings = new pf_json();
         $settings->readJsonFile(pf_config::get('Json_Settings'));
         
