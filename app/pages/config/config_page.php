@@ -19,7 +19,7 @@
 
                 <div class="row">
                                     
-                                    <?php pf_forms::createForm('form', 'config_form span_5', pf_config::get('main_page') . '/server/savesettings', 'POST')?>
+                                    <?php pf_forms::createForm('form', 'config_form span_5', pf_config::get('main_page') . '/config/savesettings', 'POST')?>
                                     
                                         <legend>Common Settings</legend>
                                         <table>

@@ -36,9 +36,9 @@ $installed = $data->get('bukkit_dir'); //do we have a bukkit_dir?
                                     <li <?php if ($page == '/install') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/install">Install</a></li>
                                     <?php }?> 
 
-                                    <li <?php if ($page == '/server') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/server">Config</a></li>
+                                    <li <?php if ($page == '/config') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/config">Config</a></li>
 
-                                    <li <?php if ($page == '/scripts') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/scripts">Scripts</a></li>
+                                    <li <?php if ($page == '/server') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/server">Server</a></li>
 
                                     <li <?php if ($page == '/users') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/users">Users</a></li>
 

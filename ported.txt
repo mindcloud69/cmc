@@ -1,6 +1,16 @@
 These files have been ported / cleaned up
 
 main_page.php -pt
+
 login/login_page.php -pt
-server/config_page.php  -pt
-server/complete_page.php  -pt
+
+config/config_page.php  -pt
+config/complete_page.php  -pt
+
+server/main_page.php -pt
+server/start_page.php -pt
+server/say_page.php -pt
+
+TEMPLATES
+error.php -pt
+404 -pt

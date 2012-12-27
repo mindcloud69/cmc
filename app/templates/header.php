@@ -12,6 +12,7 @@
 
         //jquery love
         pf_html::scriptExternal('http://code.jquery.com/jquery-latest.js');//perhaps we should use Googles CDN?
+        pf_html::scriptInternal('showHideToggle.js');//framework show/hide jquery plugin
         pf_html::scriptInternal('bootstrap.js'); //bootstrap js
         ?>
 

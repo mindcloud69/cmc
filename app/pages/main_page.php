@@ -133,7 +133,6 @@
 		</script>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="<?php echo pf_config::get('base_url'); ?>app/assets/css/main-responsive.min.css" rel="stylesheet">
 	</head>
 	
 	<body>

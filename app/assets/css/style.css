@@ -7,6 +7,7 @@ body {
     margin-top: 20px;
 }
 
+/*Forms*/
 .form-signin {
     max-width: 300px;
     padding: 19px 29px 29px;
@@ -30,4 +31,24 @@ body {
     height: auto;
     margin-bottom: 15px;
     padding: 7px 9px;
+}
+.startserver > input[type="submit"]{
+    width:340px;
+    
+}
+.serversay > input[type="submit"]{
+    width:340px;
+    
+}
+
+/*Navbar customization*/
+.navbar .nav > li > a:hover {
+    background:#08C;
+    color:#fff;
+}
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus {
+    background:#08C;
+    color:#fff;
 }
