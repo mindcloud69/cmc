@@ -36,6 +36,8 @@ class server extends pf_controller
     
     public function action()
     {
+        $this->checkLogin();
+        
         //if no action/command passed via url we load the main page again
         if ( (!isset($_GET['action'])) && (!isset($_GET['command'])) )
         {
@@ -59,6 +61,8 @@ class server extends pf_controller
     //send a say command
     public function say()
     {
+        $this->checkLogin();
+        
         //if no command passed via url
         if (!isset($_GET['command']))
         {
@@ -80,6 +84,8 @@ class server extends pf_controller
     //stop the server
     public function stop()
     {
+        $this->checkLogin();
+        
         exec('nohup /usr/bin/php '.APPLICATION_DIR.'mcscripts'.DS.'stop.php'."> /dev/null 2>/dev/null &");
         pf_core::redirectUrl(pf_config::get('main_page'));
     }
