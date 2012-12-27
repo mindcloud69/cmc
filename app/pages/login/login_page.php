@@ -22,7 +22,7 @@ else $failed=FALSE;
                     <center><label for="password">
                         <input type="password" name="password" placeholder="Password" required />
                     </label></center>
-                    <center><input class="btn-primary" type="submit" value="Login"/></center>
+                    <center><input class="button" type="submit" value="Login"/></center>
                     
                 </form>
             </div>
