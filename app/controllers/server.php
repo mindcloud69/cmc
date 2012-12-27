@@ -19,7 +19,24 @@ class server extends pf_controller
     
     private function action()
     {
+        //if no action/command passed via url we load the main page again
+        if ( (!isset($_GET['action'])) && (!isset($_GET['command'])) )
+        {
+            $this->loadView('server/action_page');
+        }
         
+        //we issue the actions / commands
+        else 
+        {
+            //what did they want to say?
+            $action = $_GET['action'];
+            $command = $_GET['command'];
+
+            $this->send($action . ' '.$command);
+            
+            pf_core::redirectUrl(pf_config::get('main_page'));
+            
+        }
     }
     
     //send a say command

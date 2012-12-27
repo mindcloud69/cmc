@@ -8,7 +8,7 @@
         <?php pf_core::loadTemplate('menu'); ?>
             <div class="container">
                 <div class="row">
-                    <div class="span6 offset3">
+                    <div class="span6">
                         <h3>Please pick a script to run.</h3>
                         <p>
                             Please NOTE: Stopping / Starting the server takes time and is ran in the background.
@@ -16,11 +16,12 @@
                             Please Give the scripts time to work. These will be configurable in the next version.
                         </p>
                         <br />
-                        <div class="row">
-                            <div class="span2"><a class="button rounded" href="<?php echo pf_config::get('main_page') ?>/server/startup">Startup Script</a></div>
-                            <div class="span2"><a class="button rounded" href="<?php echo pf_config::get('main_page') ?>/server/stop">Stop Script</a><br /></div>
-                            <div class="span2"><a class="button rounded" href="<?php echo pf_config::get('main_page') ?>/server/say">Say</a><br /></div>
-                        </div>
+                    </div>
+                    <div class="span6">
+                            <span class="button rounded"><a href="<?php echo pf_config::get('main_page') ?>/server/startup">Startup Script</a></span><br />
+                            <span class="button rounded"><a href="<?php echo pf_config::get('main_page') ?>/server/stop">Stop Script</a></span><br />
+                            <span class="button rounded"><a href="<?php echo pf_config::get('main_page') ?>/server/say">Say</a></span><br />
+                            <span class="button rounded"><a href="<?php echo pf_config::get('main_page') ?>/server/action">Issue Command</a></span><br />
                     </div>
                 </div>
             </div>
