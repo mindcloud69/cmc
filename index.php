@@ -23,8 +23,8 @@
 /* =============================================================================
  * APP SETTINGS
  * ===========================================================================*/
-    define('APP_NAME','Phils Framework');
-    define('APP_VERSION', 'v1.2a.r1'); //Major.Minor (a/b).Revision #
+    define('APP_NAME','Crafty Minecraft Controller');
+    define('APP_VERSION', '1.2.6.a');
 
 /* =============================================================================
  * BASIC SETTINGS - used for increased readablity
