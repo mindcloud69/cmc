@@ -57,6 +57,15 @@ class pf_tables {
         $this->temprow.=$cell;
     }
     
+    //adds a table heading
+    public function addHeading($content,$span=0)
+    {
+        if ($span > 0) $cell= "\t\t\t<td colspan='$span'>";
+        else $cell= "\t\t\t<th>";
+        $cell .=$content."</th>\n";
+        $this->temprow.=$cell;
+    }
+    
     //sets the tables caption
     public function setTableCaption($caption)
     {
