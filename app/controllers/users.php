@@ -6,14 +6,14 @@ class users extends pf_controller
     {
         $this->checkLogin();
         
+        //load up the database
         $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
         $db = new db($sqlite);
         
         //grab our users
         $results= $db->select('Users');
         
-        //load the page and pass data
-        $this->loadView('users/all_users_page.php',$results);
+        $this->loadView('users/main_page.php',$results);
     }
     
     public function add()

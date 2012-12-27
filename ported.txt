@@ -11,6 +11,12 @@ server/main_page.php -pt
 server/start_page.php -pt
 server/say_page.php -pt
 
+users/main_page -pt
+users/add_page -pt
+
+
 TEMPLATES
 error.php -pt
 404 -pt
+footer.php -pt
+header.php -pt

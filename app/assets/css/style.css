@@ -45,3 +45,8 @@ body {
     background:#08C;
     color:#fff;
 }
+/*override*/
+#users th{
+    background:#08c;
+    color:white;
+}

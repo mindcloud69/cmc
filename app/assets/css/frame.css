@@ -42,7 +42,7 @@
 #debug caption  {margin-top:25px;text-align: center;font-size:20px;padding:5px;color:red;background:#ccc;border:5px solid black;}
 
 /*Table Odd Rows*/
-.odd        {background:#ccc;}
+.even       {background:#aaa;}
 
 /*Form Styles*/
 form {font:bold 14px georgia;text-decoration: none;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;padding:10px;border: 1px solid #999;background:#eee;}
