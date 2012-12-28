@@ -16,7 +16,8 @@
                             <?php pf_forms::options('action', 'action',array(
                                 'Ban'=>'Ban',
                                 'Unban'=>'Unban',
-                                'Kick'=>'Kick'
+                                'Kick'=>'Kick',
+                                'Custom' => 'Custom'
                                 )); ?>
                         Command Object: <?php pf_forms::text('command', true, null, 'Object Of Command I.E. Username');
                         pf_forms::button('submit','Do It!','button rounded span4');
