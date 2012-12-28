@@ -7,6 +7,12 @@ body {
     margin-top: 20px;
 }
 
+/*Global Tables*/
+.table{
+    border:1px solid black;
+}
+.table td{padding:12px 0px;}
+
 /*Forms*/
 .form-signin {
     max-width: 300px;

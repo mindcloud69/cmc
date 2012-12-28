@@ -59,7 +59,7 @@ input.button:hover {background:#fff;}
 
 /*Button*/
 .button{
-    padding:5px;
+    padding:10px 5px;
     text-align:center;
     background:#08C;
     color:#fff;
@@ -71,8 +71,13 @@ input.button:hover {background:#fff;}
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
-    height:40px;
 }
+
+input[type="submit"]
+{
+    min-height: 40px;
+}
+
 .button:hover{
     background: #FFF;
     border: solid 1px #2A4E77;
