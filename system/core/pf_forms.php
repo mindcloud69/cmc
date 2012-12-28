@@ -74,9 +74,15 @@ class pf_forms {
         $html .= '</select>'."\n";
         echo $html;
     }
+    
     public static function closeForm()
     {
         echo '</form>';
+    }
+    
+    public static function checkbox($name,$label,$value,$class=null)
+    {
+        echo '<input type="checkbox" name="'.$name.'" value="'.$value.'" class="'.$class.'">'.$label.'<br />'."\n";
     }
     
 }
