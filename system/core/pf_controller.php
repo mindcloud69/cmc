@@ -27,9 +27,11 @@ abstract class pf_controller
     
     public static function loadView($file,$data=array())
     {
+        pf_events::eventsAdd('Attempting To Load File: '.$file);
         if (!self::loadFile($file, APPLICATION_DIR.'pages',$data))
         {
-        pf_core::loadTemplate('404');
+            pf_events::eventsAdd('Unable To Load File: '.$file);
+            pf_core::loadTemplate('404');
         }
     }
     
