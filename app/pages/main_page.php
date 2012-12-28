@@ -189,11 +189,7 @@
                     
                         </div>
                     <div class="tab-pane" id="chat">
-                        <pre>
-                            Bob: Hi!
-                            Joe: Yo!
-                            <br><br><br><br><br><br><br><br><br><br>
-                        </pre>
+                        <div class="warning">Scheduled for Beta Release</div>
                     </div>
                     </div><!-- END 10 SPAN -->
                 </div> <!-- END ROW -->
