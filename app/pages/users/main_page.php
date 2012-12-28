@@ -20,10 +20,10 @@
         
 			$table->startTable('users',0,NULL,'table table-striped span5');
 			$table->startRow();
-			$table->addHeading('ID');
-			$table->addHeading('Name');
-			$table->addHeading('Level');
-			$table->addHeading('Delete');
+			$table->addTableHeading('ID');
+			$table->addTableHeading('Name');
+			$table->addTableHeading('Level');
+			$table->addTableHeading('Delete');
 			$table->endRow();
 
 			foreach ($data as $user)
@@ -32,7 +32,7 @@
     			$table->addCell($user['ID']);
    				$table->addCell($user['User']);
     			$table->addCell($user['Level']);
-    			$table->addCell('<a href="'.pf_config::get('main_page').'/users/delete?id='.$user['ID'].'">Delete </a>');
+    			$table->addCell('<a class="button rounded center" href="'.pf_config::get('main_page').'/users/delete?id='.$user['ID'].'">Delete </a>');
     			$table->endRow();
 			}
 
