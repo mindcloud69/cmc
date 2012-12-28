@@ -25,10 +25,12 @@ class server extends pf_controller
         $log = $bukkit_dir . DS . 'server.log';
         
         //current time
-        $time = date('m/d/y g:i:s a');
+        $time = date('Y-m-d G:i:s');
         
         //log it in the server.log
-        exec("echo $command issued at $time >> $log");
+        
+        //exec('echo '.$time.' [CMC] Command: '.$command.' issued by User >> $log');
+        exec("echo $time [CMC] Command:$command issued by User >> $log");
         
         $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
         exec($command);
