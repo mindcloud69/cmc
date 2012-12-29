@@ -14,12 +14,14 @@
         <?php pf_core::loadTemplate('menu'); ?>
             
             <div class="container">
-                <h1>Config Your Server</h1>
-                <p style="color:red;">Currently only letters and number are allowed in text. All spaces/special characters are removed</p>
+                <div class="row">
+                    <h1 class="center">Config Your Server</h1>
+                    <p class="warning center span6 offset3"><b>WARNING</b>:Currently only letters and number are allowed in text. All spaces/special characters are removed</p>
+                </div>
 
                 <div class="row">
                                     
-                                    <?php pf_forms::createForm('form', 'config_form span_5', pf_config::get('main_page') . '/config/savesettings', 'POST')?>
+                                    <?php pf_forms::createForm('form', 'config_form span6 offset3', pf_config::get('main_page') . '/config/savesettings', 'POST')?>
                                     
                                         <legend>Common Settings</legend>
                                         <table>
@@ -184,7 +186,7 @@
                                                 </td>
                                             </tr>
                                          </table>
-                                        <input type="submit" value="Save"/>
+                                        <input type="submit" value="Save" class="button rounded span4"/>
                                     </form>
 			</div><!-- END ROW -->
                     </div>
