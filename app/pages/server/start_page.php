@@ -24,7 +24,7 @@
                                      '6144'=>'6GB Memory',
                                      '7168'=>'7GB Memory',
                                      '8192'=>'8GB Memory'
-                                     ),$data['Maxram'])
+                                     ),$data)
                                 ?>
                                 
                                 <?php pf_forms::button('submit','Start','button rounded center');?>

@@ -103,8 +103,8 @@ class server extends pf_controller
         //get settings
         $settings = new pf_json();
         $settings->readJsonFile(pf_config::get('Json_Settings'));
-        $data = $settings->get('startup_script');
-        
+        $data = $settings->get('startup_ram');
+
         //check if server is online
         if (server_conf::checkOnline())
         {
@@ -114,12 +114,10 @@ class server extends pf_controller
         
         if ($_SERVER['REQUEST_METHOD']=='POST')
         {
-            $startup = array(
-                'Maxram'  =>  $_POST['maxram'],
-            );
+            $ram = $_POST['maxram'];
             
             //save this to the settings file for later
-            $settings->set('startup_script', $startup);
+            $settings->set('startup_ram', $ram);
             
             //write the settings file
             $settings->writeJsonFile(pf_config::get('Json_Settings'));
@@ -129,7 +127,7 @@ class server extends pf_controller
             
             //write the script to the mcscripts folder
             $file = 'cd '.$dir."\n";
-            $file .= 'screen -dmS bukkit java -Xincgc -Xmx'.$_POST['maxram'].'M -jar craftbukkit.jar'."\n";
+            $file .= 'screen -dmS bukkit java -Xincgc -Xmx'.$ram.'M -jar craftbukkit.jar'."\n";
             
             //if we can't write, we throw an error
             if (! file_put_contents(APPLICATION_DIR.'mcscripts'.DS.'startup.sh', $file))
