@@ -36,8 +36,7 @@ else $last_backup = $data['last_backup'];
                 <div id='loading'class="row"><div id='backingup' class="info span4 offset4 " style="margin-bottom:25px;">BACKUP IN PROGRESS!<br /></div><br /><br /></div>
                 <div id="main" class="row">
                     <h3 class="center">Manual Backup</h3>
-                    <a class="button rounded span2 offset2" href="<?php echo pf_config::get('main_page')?>/backups/view">List Old Backups</a>
-                    <?php pf_forms::createForm('backup', 'backupform span4', pf_config::get('main_page')."/backups/action", 'POST'); ?>
+                    <?php pf_forms::createForm('backup', 'backupform span4 offset4', pf_config::get('main_page')."/backups/action", 'POST'); ?>
                     
                     <p>Your Last Backup Was:<br />
                     <?php echo $last_backup; ?><br /></p>
