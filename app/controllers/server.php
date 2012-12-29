@@ -25,7 +25,7 @@ class server extends pf_controller
         $log = $bukkit_dir . DS . 'server.log';
         
         //current time
-        $time = date('Y-m-d G:i:s');
+        $time = date('Y-m-d H:i:s');
         
         //log it in the server.log
         

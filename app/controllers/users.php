@@ -8,10 +8,12 @@ class users extends pf_controller
         
         //load up the database
         $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
-        $db = new db($sqlite);
+        $db = new PDO($sqlite);
         
         //grab our users
-        $results= $db->select('Users');
+        $results= $db->query('SELECT * FROM Users');
+        
+        $db=null;
         
         $this->loadView('users/main_page.php',$results);
     }
@@ -26,22 +28,24 @@ class users extends pf_controller
         //get the data
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
+        $level = trim($_POST['level']);
+        
+        //get our salt
+        $settings = new pf_json();
+        $settings->readJsonFile(pf_config::get('Json_Settings'));
+        $salt = $settings->get('salt');
+        
+        //salt our password
+        $password=  pf_auth::hashThis($password, $salt);
         
         $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
-        $db = new db($sqlite);
+        $db = new PDO($sqlite);
         
-        if($db->select('Users', 'User = '.$username))
-        {
-            pf_events::dispayFatal('Username Already Taken, Try Again!');
-        }    
-        
-        $insert = array(
-            'User'  =>  $username,
-            'Pass'  =>  $password,
-            'Level' =>  'User'
-        );
-        
-        $db->insert('Users', $insert);
+        $q = $db->prepare('INSERT INTO Users (User,Pass,Level) values(:User,:Pass,:Level)');
+        $q->bindParam(':User', $username);
+        $q->bindParam(':Pass', $password);
+        $q->bindParam(':Level', $level);
+        $q->execute();
         
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
         }

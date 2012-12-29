@@ -45,6 +45,12 @@ class pf_auth {
         $_SESSION=array();
         session_destroy();
     }
+    
+    public static function hashThis($data,$salt)
+    {
+        return hash('sha256',$data.$salt);
+    }
+            
 }
 
 ?>

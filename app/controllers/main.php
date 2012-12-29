@@ -4,8 +4,6 @@ class main extends pf_controller
 {
     public function index()
     {
-        //check if logged in
-        $this->checkLogin();
         
         $this->loadLibrary('server_conf');
         
@@ -16,11 +14,13 @@ class main extends pf_controller
         
         $data['bukkit_dir'] = $settings->get('bukkit_dir');
         
-        
         if (!server_conf::grabConfig($data['bukkit_dir'].'/server.properties'))
         {
-            pf_events::dispayFatal('Unable To Find Server.Properties!');
+            pf_events::dispayFatal('Unable To Find Server.Properties!<br /><a href="'.pf_config::get('main_page').'/install">Click Here To Install/Reinstall</a>');
         }
+        
+        //check if logged in
+        $this->checkLogin();
         
         //get some info from the config file
         $data['online']=server_conf::checkOnline();

@@ -14,17 +14,22 @@ class login extends pf_controller
         ini_set('display_errors', 1);
         if ($_SERVER['REQUEST_METHOD']=="POST")
         {
+            //get our salt
+            $settings = new pf_json;
+            $settings->readJsonFile(pf_config::get('Json_Settings'));
+            $salt=$settings->get('salt');
+            
             $username = $_POST['username'];
-            $password = $_POST['password'];
+            $password = pf_auth::hashThis($_POST['password'], $salt);
     
             $loginaccepted=false;
 
             $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
             require_once(SYSTEM_DIR.'core'.DS.'db.php');
-            $db = new db($sqlite) or die('unable to use SQLite');
+            $db = new PDO($sqlite) or die('unable to use SQLite');
             
             //get all users
-            $results= $db->select('Users');
+            $results= $db->query('SELECT * FROM Users');
             
             //loop through checking user/pass
             foreach ($results as $user)
