@@ -17,6 +17,8 @@
                                 'Ban'=>'Ban',
                                 'Unban'=>'Unban',
                                 'Kick'=>'Kick',
+                                'Op'=>'Op',
+                                'Deop'=>'Deop',
                                 'Custom' => 'Custom'
                                 )); ?>
                         Command Object: <?php pf_forms::text('command', true, null, 'Object Of Command I.E. Username');
