@@ -124,7 +124,7 @@ class backups extends pf_controller
         $settings->set('last_backup', date('m/d/Y'));
         
         //write the file
-        if (!$settings->writeJsonFile(APPLICATION_DIR.'config'.DS.'settings.json'))
+        if (!$settings->writeJsonFile(pf_config::get('Json_Settings')))
         {
             pf_html::clearPreviousBuffer();
             pf_events::dispayFatal('Unable to save settings! Is app/config writeable?');
