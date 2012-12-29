@@ -7,7 +7,7 @@
  * APP SPECIFIC - Configuration of the app
  * ===========================================================================*/
 //our authors info
-pf_config::set('author', 'Github');
+pf_config::set('author', 'Phillip Tarrant');
 pf_config::set('author_uri', 'https://github.com/ptarrant/cmc');
 
 //site info
@@ -24,7 +24,9 @@ pf_config::set('creation_date', '2012');
 pf_config::set('timezone', 'America/New_York');
 
 //set to any subfolder you have if not using one set to ''
-pf_config::set('base_path', 'cmc');
+//
+pf_config::set('DEV_PATH', 'cmc'); //our dev subfolder if any
+pf_config::set('LIVE_PATH',''); //our live subfolder if any
 
 //if  using mod_rewrite set this to ''
 //if you are using mod_rewrite, don't forget to change your links to remove the index.php

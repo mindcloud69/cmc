@@ -67,15 +67,30 @@
     {
         if (pf_config::get('environment') == 'DEV')
         {
+            //setup error reporting
             error_reporting(E_ALL);
             ini_set("display_errors", 1);
             
+            //set basepath
+            pf_config::set('base_path', pf_config::get('DEV_PATH'));
+            pf_events::eventsAdd('base_path set to: '.pf_config::get('DEV_PATH'));
+            
+            //setup pf_events
             pf_events::$show_debug=true;
             pf_events::eventsAdd('Environment Set To DEV');
         }
         else
         {
-            error_reporting(0);//@TODO: Change this before Beta
+            //setup error reporting
+            error_reporting(0);
+            ini_set("display_errors", 0);
+            
+            //set basepath
+            pf_config::set('base_path', pf_config::get('LIVE_PATH'));
+            pf_events::eventsAdd('base_path set to: '.pf_config::get('LIVE_PATH'));
+            
+            //setup pf_events
+            pf_events::$show_debug=false;
             pf_events::eventsAdd('Environment Set To LIVE');
         }
     }
