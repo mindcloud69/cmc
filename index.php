@@ -68,6 +68,8 @@
         if (pf_config::get('environment') == 'DEV')
         {
             error_reporting(E_ALL);
+            ini_set("display_errors", 1);
+            
             pf_events::$show_debug=true;
             pf_events::eventsAdd('Environment Set To DEV');
         }
