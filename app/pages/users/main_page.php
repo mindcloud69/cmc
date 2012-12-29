@@ -10,15 +10,13 @@
                         
             <div class="container">
                 <div class="row">
-                    <div class="span3 right">
-                            <a class="button rounded" href="<?php echo pf_config::get('main_page') ?>/users/add">Add User</a><br /><br />
-                    </div>
-                    <div class="span9">
+                    
+                    
                         <?php
 
 			$table = new pf_tables();
         
-			$table->startTable('users',0,NULL,'table table-striped span5');
+			$table->startTable('users',0,NULL,'table table-striped span6 offset3');
 			$table->startRow();
 			$table->addTableHeading('ID');
 			$table->addTableHeading('Name');
@@ -38,7 +36,6 @@
 
 			$table->renderTable();
                         ?>
-                    </div>
                     
                 </div>
                 <div class="row">

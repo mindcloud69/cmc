@@ -50,6 +50,7 @@ else: ?>
 
             <div class="navbar"><!--START NAV-->
                     <div class="navbar-inner">
+                        
                             <a class="brand" href="<?php echo pf_config::get('main_page'); ?>">CMC</a>
                             <ul class="nav">
                                     <!--Home-->
@@ -59,12 +60,26 @@ else: ?>
 
                                     <li <?php if ($page == 'server') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/server">Server</a></li>
                                     
-                                    <li <?php if ($page == 'backups') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/backups">Backups</a></li>
+                                    <li <?php if ($page == 'backups') echo 'class="active"'; ?> class="dropdown">
+                                        <a href="#" class='dropdown-toggle' data-toggle="dropdown">Backups<b class="caret"></b></a>
+                                        <ul class="dropdown-menu" roll="menu">
+                                            <li><a href="<?php echo pf_config::get('main_page');?>/backups">Backups</a></li>
+                                            <li><a href="<?php echo pf_config::get('main_page');?>/backups/view">List Backups</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li <?php if ($page == 'users') echo 'class="active"'; ?> class="dropdown">
+                                        <a href="#" class='dropdown-toggle' data-toggle="dropdown">Users<b class="caret"></b></a>
+                                        <ul class="dropdown-menu" roll="menu">
+                                            <li><a href="<?php echo pf_config::get('main_page');?>/users">View Users</a></li>
+                                            <li><a href="<?php echo pf_config::get('main_page');?>/users/add">Add User</a></li>
+                                        </ul>
+                                    </li>
 
-                                    <li <?php if ($page == 'users') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/users">Users</a></li>
-
-                                    <!--dynamic login link-->
-                                    <li <?php if ($page == 'login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li>
+                                    
+                                    <ul class="nav pull-right">
+                                        <li <?php if ($page == 'login') echo 'class="active"'; ?> class="pull-right"> <?php echo $loginlink; ?> </li>
+                                    </ul>
                                     
                             </ul>
                     </div>

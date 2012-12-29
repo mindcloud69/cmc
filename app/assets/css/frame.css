@@ -44,10 +44,14 @@
 /*Table Odd Rows*/
 .even       {background:#aaa;}
 
-/*Form Styles*/
+form {font:bold 14px georgia;padding:0px 30px;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;border: 1px solid #999;background:#eee;}
+input.button{margin-left:10px;}
+/*Form Styles
+
 form {font:bold 14px georgia;text-decoration: none;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;border: 1px solid #999;background:#eee;}
 form h1 {text-align:center;padding:5px 0px 10px;}
 input {display:block;border: 1px solid #999;height: 25px;padding:2px;margin:5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;border: 1px solid #999;}
+*/
 textarea {display:block;}
 /*input.button {width:100px;font:bold 14px georgia;height:30px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;border: 1px solid #999;}*/
 input.button:hover {background:#fff;}
