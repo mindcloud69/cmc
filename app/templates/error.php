@@ -15,9 +15,7 @@
         <?php pf_core::loadTemplate('menu'); ?>
             <div class="container">
                 <div class="row">
-                    <div class="span6 offset3">
-                        <div id="error" class="alert" style="text-align:center;"><b>FATAL ERROR</b>:<?php echo $data['error']?> </div>
-                    </div>
+                        <div id="error" class="alert span6 offset3" style="text-align:center;"><b>FATAL ERROR</b>:<?php echo $data['error']?> </div>                    
                 </div>
                 <div class="row">
                     <div class="span12">
