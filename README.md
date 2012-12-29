@@ -31,8 +31,10 @@ If doing a fresh install on ubuntu you can select the LAMP setup config, or
 
 ##License / Copyright
 
-Copyright (c) 2012, Phillip Tarrant and Noah Rossi
+Copyright (c) 2012, Phillip Tarrant
 All rights reserved.
+
+Design Interface by: Noah Rossi and Phillip Tarrant
 
 License: http://creativecommons.org/licenses/by-sa/3.0/legalcode
 
