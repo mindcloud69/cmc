@@ -3,8 +3,10 @@
  * Server Configuration
  * Server Start/Stop/Say/Op/Deop/Ban/Unban/Kick/Custom Commands
  * Manual Backups with some management (deletion)
- * Users
-**************************
+ * Users<br />
+
+-------------------------------------------------
+
  Overview Page showing:
  * Server Log 
  * Server LOAD CPU and MEM via nice pretty bars
