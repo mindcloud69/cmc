@@ -95,9 +95,9 @@
                             $.getJSON('<?php echo pf_config::get('main_page'); ?>/data/info',function(data){
                                 var online = data['online'];
                                 
-                                $( '#info' ).html ("Craftbukkit "+data['version'] +":<br />"
-                                + data['players'] + " of " + data['max_players'] + ' players connected<br />' +
-                                'MOTD:' + data['motd'] +'<br />')
+                                $( '#info' ).html ("<b>Craftbukkit Version:</b> "+data['version'] +"<br /><b>Players Connected:</b>"
+                                + data['players'] + " of " + data['max_players'] + '<br />' +
+                                '<b>MOTD:</b>' + data['motd'] +'<br />')
                                 
                                 //if online
                                 if (online)
@@ -142,6 +142,9 @@
                 <div class="row">
                     <div class="span4">
                             <h2>General Info</h2>
+                            <div id="online">
+                                Online!
+                            </div>
                             <strong>Bukkit Dir:</strong> <?php echo $data['bukkit_dir'];?> <br>
                             <strong>World:</strong> <?php echo $data['world'];?><br>
                             <strong>PvP:</strong><?php echo $data['pvp'];?><br>
@@ -165,9 +168,7 @@
                             <div id="info">
 
                             </div>
-                            <div id="online">
-                                Online!
-                            </div>
+                            
                             <div id="multijava">
                                 Multiple Java's have been found, perhaps you have
                                 multiple server running due to an error? You should
