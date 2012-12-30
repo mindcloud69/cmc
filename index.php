@@ -45,8 +45,8 @@
  * READ SETTINGS - sets up app after loading the config.php file
  * ===========================================================================*/    
     //load settings file with our config and our events logger
-    require_once (SYSTEM_DIR.'core'.DS.'pf_config.php');
-    require_once (APPLICATION_DIR.'config'.DS. 'config.php');
+    require_once (SYSTEM_DIR.'core'.DS.'pf_config.php'); //loads our settings class
+    require_once (APPLICATION_DIR.'config'.DS. 'config.php'); //loads our config
     
 /* =============================================================================
  * EVENTS REPORTING - setup events reporting/timezone
@@ -54,62 +54,85 @@
 
     //manually load our logging/error system (pf_events.php)
     require_once (SYSTEM_DIR.'core'.DS.'pf_events.php');
+    pf_events::eventsAdd('pf_events Loaded');
     
     //setting of timezone
-    if (pf_config::get('timezone'))
-    {
-    date_default_timezone_set(pf_config::get('timezone')); 
-    pf_events::eventsAdd('Timezone set: '.pf_config::get('timezone'));
-    }
+    date_default_timezone_set(TIMEZONE); 
+    pf_events::eventsAdd('Timezone set: '.TIMEZONE);
 
-    //search for environment in config
-    if (pf_config::get('environment'))
+    //setup environment
+    if (ENVIRONMENT == 'DEV')
     {
-        if (pf_config::get('environment') == 'DEV')
-        {
-            //setup error reporting
-            error_reporting(E_ALL);
-            ini_set("display_errors", 1);
-            
-            //set basepath
-            pf_config::set('base_path', pf_config::get('DEV_PATH'));
-            pf_events::eventsAdd('base_path set to: '.pf_config::get('DEV_PATH'));
-            
-            //setup pf_events
-            pf_events::$show_debug=true;
-            pf_events::eventsAdd('Environment Set To DEV');
-        }
-        else
-        {
-            //setup error reporting
-            error_reporting(0);
-            ini_set("display_errors", 0);
-            
-            //set basepath
-            pf_config::set('base_path', pf_config::get('LIVE_PATH'));
-            pf_events::eventsAdd('base_path set to: '.pf_config::get('LIVE_PATH'));
-            
-            //setup pf_events
-            pf_events::$show_debug=false;
-            pf_events::eventsAdd('Environment Set To LIVE');
-        }
+        //setup error reporting
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+        pf_events::eventsAdd('Displaying All Errors');
+
+        //set basepath
+        
+        pf_config::set('base_path', DEVPATH);
+        pf_events::eventsAdd('base_path set to: '.DEVPATH);
+
+        //setup pf_events
+        pf_events::$show_debug=true;
+        pf_events::eventsAdd('Environment Set To DEV');
+    }
+    else
+    {
+        //setup error reporting
+        error_reporting(0);
+        ini_set("display_errors", 0);
+        pf_events::eventsAdd('Displaying NO Errors');
+        
+        //set basepath
+        pf_config::set('base_path', LIVEPATH);
+        pf_events::eventsAdd('base_path set to: '.LIVEPATH);
+
+        //setup pf_events
+        pf_events::$show_debug=false;
+        pf_events::eventsAdd('Environment Set To LIVE');
     }
     
 /* =============================================================================
  * OUTPUT BUFFERING - Turns it on, This is VERY useful for us.
  * ===========================================================================*/    
+    pf_events::eventsAdd('Starting Output Buffering');
     if (!ob_start()) ob_start ();
     
 /* =============================================================================
  * TURN ON SESSIONS - Turns on sessions for later
  * ===========================================================================*/        
     session_start();
-
+    pf_events::eventsAdd('Sessions Started');
 /* =============================================================================
  * CONFIG BASE URL - Needed for all pf_html settings, and just useful in general
- * ===========================================================================*/            
-    pf_config::set('base_url', 'http://'.$_SERVER['HTTP_HOST'].'/'.pf_config::get('base_path').'/');
-    pf_config::set('main_page', 'http://'.$_SERVER['HTTP_HOST'].'/'.pf_config::get('base_path').'/'.pf_config::get('index_page'));
+ * ===========================================================================*/
+    
+    //if in /var/www and no subfolder
+    if (pf_config::get('base_path')=='')
+    {
+        pf_config::set('base_url', 'http://'.$_SERVER['HTTP_HOST'].'/');
+        pf_events::eventsAdd('base_url set to: '.'http://'.$_SERVER['HTTP_HOST'].'/');
+    }
+    //if using a subfolder
+    else 
+    {
+        pf_config::set('base_url', 'http://'.$_SERVER['HTTP_HOST'].'/'.pf_config::get('base_path').'/');
+        pf_events::eventsAdd('base_url set to: '.'http://'.$_SERVER['HTTP_HOST'].'/'.pf_config::get('base_path').'/');
+    }
+    
+    //if not using an index page (mod_rewrite)
+    if (INDEXPAGE == '')
+    {
+        pf_config::set('main_page', pf_config::get('base_url'));
+        pf_events::eventsAdd('main_page set to: '. pf_config::get('main_page'));
+    }
+    else
+    {
+        pf_config::set('main_page', pf_config::get('base_url') . INDEXPAGE);
+        pf_events::eventsAdd('main_page set to: '. pf_config::get('main_page'));
+    }
+    
 /* =============================================================================
  * ROUTER - Load/Configure the router object and do routing
  * ===========================================================================*/
@@ -121,16 +144,16 @@
         pf_events::eventsAdd('Creating Router Object Failed');
     }
     
+    
     //if we don't have a base_url, or index_page assigned we throw an error
-    if ((!pf_config::get('base_path')) || (!pf_config::get('index_page')))
+    if ((!pf_config::get('base_url')) || (!pf_config::get('main_page')))
     {
         pf_events::dispayFatal('Base_url or index_page not set!');
     }
     
-    //set the base_url and index_page
-    pf_events::eventsAdd("Setting Base Path for Router to '".pf_config::get('base_path').'/'.pf_config::get('index_page')."'");
-    $router->setBasepath(pf_config::get('base_path').'/'.pf_config::get('index_page'));
-        
+   pf_events::eventsAdd('Setting Base URL for Router to: ' . pf_config::get('main_page'));
+    $router->setBaseURL(pf_config::get('main_page'));
+    
     //set the router controller dir
     pf_events::eventsAdd("Setting router controller dir to: ". APPLICATION_DIR.'controllers'.DS);
     $router->setControllerDirectory(APPLICATION_DIR.'controllers'.DS);

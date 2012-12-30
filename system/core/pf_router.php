@@ -5,16 +5,10 @@
  */
 
 if ( !defined('SYSTEM_DIR')) exit ('No direct script access allowed');
-/*
- * File: class_router.php
- * Purpose: Handles All Routing and Dispatches
- * Author: Phillip Tarrant
- * Created: 9/4/2012
- */
 
 class pf_router
 {
-    public static $basepath; //our base path for the app (subfolder)
+    public static $baseURL; //our base path for the app (subfolder)
     public static $controller_directory = 'controllers'; //directory that holds controllers
     public static $default_controller = 'home'; //our default controller
     public static $default_action = 'index'; //our default action
@@ -27,9 +21,11 @@ class pf_router
      */
     public function parseURI()
     {
+        //setup the base path (basically anything after the base_url (determined by index.php)
+        $basepath = strtolower(self::$baseURL);
+        $basepath = substr($basepath, strlen(pf_config::get('base_url')));
         
-        $basepath = strtolower(self::$basepath);
-        
+        //get path
         $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
         $path = strtolower(preg_replace('/[^a-zA-Z0-9]\//', "", $path));
         
@@ -38,12 +34,18 @@ class pf_router
         {
             $path = substr($path, strlen($basepath));
         }
-        //remove first /
-        $path = substr($path, 1); //remove the first /
+        
+        //remove the first /
+        if (substr($path, 0,1)=="/")
+        {
+            $path = substr($path, 1);
+        }
         
         //convert URL parts into array
         $url_parts = explode("/",$path,2); //explode the URI into parts
 
+        
+        
         /*if no page specified we use the default*/
         if (empty($url_parts[0])) 
             $this->route['CONTROLLER'] = self::$default_controller;
@@ -63,6 +65,7 @@ class pf_router
         {
             $this->route['PARAMS']=explode("/", $url_parts[1]);
         }
+        
         return $this->route;
     }
     
@@ -78,7 +81,7 @@ class pf_router
         else return false;
     }
     
-    public function setBasepath($basepath) {self::$basepath = $basepath;}
+    public function setBaseURL($baseURL) {self::$baseURL = $baseURL;}
     public function setDefaultController($controller) {self::$default_controller = $controller;}
     public function setDefaultAction($action){self::$default_action=$action;}
     public function setControllerDirectory($dir) {self::$controller_directory = $dir;}

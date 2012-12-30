@@ -7,18 +7,19 @@
  * ENVIRONMENT - Your server settings, Feel free to change these as you need.
  * ===========================================================================*/
 //Our Timezone
-pf_config::set('timezone', 'America/New_York');
-
-//set to any subfolder you have if not using one set to ''
-pf_config::set('DEV_PATH', 'cmc'); //our dev subfolder if any <-- this is mainly used by developers
-pf_config::set('LIVE_PATH',''); //our live subfolder if any <- any folder inside /var/www
-
-//if  using mod_rewrite set this to ''
-//if you are using mod_rewrite, don't forget to change your links to remove the index.php
-pf_config::set('index_page', 'index.php');
+define('TIMEZONE','America/New_York');
 
 //this should be set to "DEV" or "LIVE"
-pf_config::set('environment', 'LIVE'); //<--default LIVE
+define('ENVIRONMENT','DEV'); //<-- default LIVE
+
+//set to any subfolder you have if not using one set to ''
+define('DEVPATH',''); //our dev subfolder if any <-- this is mainly used by developers
+define('LIVEPATH',''); //our live subfolder if any <- any folder inside /var/www
+
+//Currently this is SUPER untested...will test later in beta?
+//if  using mod_rewrite set this to ''
+//if you are using mod_rewrite, don't forget to change your links to remove the index.php
+define('INDEXPAGE', 'index.php');
 
 /* =============================================================================
  * WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING
