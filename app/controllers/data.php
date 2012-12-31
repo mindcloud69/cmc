@@ -38,8 +38,34 @@ class data extends pf_controller
         echo json_encode($info);
     }
     
-    public function log()
+    public function mainlog()
     {
+        echo $this->parselog('main');
+    }
+    
+    public function errorlog()
+    {
+        echo $this->parselog('error');
+    }
+    
+    public function chatlog()
+    {
+        echo $this->parselog('chat');
+    }
+    
+    public function connectionlog()
+    {
+        echo $this->parselog('connection');
+    }
+    
+    private function parselog($type=null)
+    {
+        //log types
+        $mainlog = '';
+        $errorlog = '';
+        $chatlog = '';
+        $conlog = '';
+        
         //grab the servers config
         $data = array();
         $settings = new pf_json();
@@ -53,11 +79,43 @@ class data extends pf_controller
 
         foreach ($output as $line)
         {
+            //terminal color codes
+            $colorcodes=array('[31;1m','[37;1m','[m');
+            
+            //removes color codes from the line
+            $line = str_replace($colorcodes, "", $line);
+            
             //any warnings or severe logged actions, we highlight red.
             if ( (preg_match('/WARNING/', $line)) || (preg_match('/SEVERE/', $line)) )
-                    $line = '<span class=serverwarning>'.$line."</span>";
-            echo $line."\n";
+            {
+                $line = '<span class=serverwarning>'.$line."</span>";
+                $errorlog .= $line."\n";
+                
+            }
+            
+            //look for chat
+            if (strpos($line,' [INFO] <') !==false)
+            {
+                $chatlog .=$line."\n";
+            }
+            
+            //look for connect/disconnect
+            if ( (strpos($line,'disconnect.quitting') !==false) || (strpos($line,' logged in with entity id ') !==false) )
+            {
+                $conlog .=$line."\n";
+            }
+            
+            
+            //always log to the main log
+            $mainlog .= $line."\n";
+            
+            
         }
+        
+        if ($type == 'error') return $errorlog;
+        if ($type == 'chat') return $chatlog;
+        if ($type == 'connection') return $conlog;
+        else return $mainlog;
     }
 }
 ?>
