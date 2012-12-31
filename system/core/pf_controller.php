@@ -47,7 +47,7 @@ abstract class pf_controller
     {
         if(!pf_auth::checkLogin())
         {
-            pf_core::redirectUrl(pf_config::get('login_page'));
+            pf_core::redirectUrl(pf_config::get('main_page')."/".pf_config::get('login_page'));
         }
         else return true;
         
