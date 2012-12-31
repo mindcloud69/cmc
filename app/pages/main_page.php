@@ -191,7 +191,7 @@
             *newest entries at the top*
                 <div class="tabbable">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#console" data-toggle="tab">Console</a></li>
+                        <li class="active"><a href="#console" data-toggle="tab">All</a></li>
                         <li><a href="#chat" data-toggle="tab">Chat</a></li>
                         <li><a href="#errors" data-toggle="tab">Errors</a></li>
                         <li><a href="#connection" data-toggle="tab">Connections</a></li>
