@@ -44,40 +44,48 @@ class backups extends pf_controller
         $files = glob($backup_dir."*.tar*");
         $data['backups']=$files;
         
+        
+        if (empty($data['backups']))
+        {
+            $data['error']='No Backups Found!';
+        }
+        
         $this->loadView('backups/list_backups_page.php',$data);
     }
     
     public function delete()
     {
-       $this->checkLogin();
-       
-       if (empty($_GET['file']))
-       {
-           pf_core::redirectUrl(pf_config::get('main_page').'/backups');
-       }
-       $file = $_GET['file'];
-       
-       //get our dir
+        //var_dump($_POST);
+        $this->checkLogin();
+        
+        if ($_SERVER['REQUEST_METHOD'] !='POST')
+        {
+            pf_core::redirectUrl(pf_config::get('main_page').'/backups');
+        }
+        
+        //get our dir
         $settings = new pf_json();
         $settings->readJsonFile(pf_config::get('Json_Settings'));
         $bukkit_dir = $settings->get('bukkit_dir');
         
-        //if the file is in the bukkit dir we assume it's safe
-        if (pf_core::compareStrings(substr($file, 0, strlen($bukkit_dir)),$bukkit_dir))
+        foreach ($_POST['file'] as $file)
         {
-            if (unlink($file))
+            //make sure in bukkit dir
+            if (pf_core::compareStrings(substr($file, 0, strlen($bukkit_dir)),$bukkit_dir))
             {
-                $data = array($file);
-                $this->loadView('backups/delete_page.php',$data);
-            }
-            else
-            {
-                pf_events::dispayFatal('Unable To Delete: '.$file);
+                if (unlink($file)) //delete the file
+                {
+                    $this->loadView('backups/delete_page.php');
+                }
+                else //can't delete, throw error
+                {
+                    pf_events::dispayFatal('Unable To Delete: '.$file);
+                }
             }
         }
     }
-            
-    
+
+
     public function action()
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST')
