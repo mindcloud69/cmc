@@ -24,7 +24,7 @@ else $installed=false;
 	</head>
 	<body>
             <?php pf_core::loadTemplate('menu'); ?>
-            <h3 class="center">Backup Management</h3>
+            <h3 class="center">Install Crafty Minecraft Controller</h3>
                         
             <div class="container">
                 <div class="row">
