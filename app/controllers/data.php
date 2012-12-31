@@ -80,7 +80,7 @@ class data extends pf_controller
         foreach ($output as $line)
         {
             //terminal color codes
-            $colorcodes=array('[31;1m','[37;1m','[m');
+            $colorcodes=array('[31;1m','[37;1m','[m','[35;1m');
             
             //removes color codes from the line
             $line = str_replace($colorcodes, "", $line);
