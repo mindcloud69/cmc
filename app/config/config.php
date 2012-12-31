@@ -79,5 +79,10 @@ pf_config::set('java_dir', 'app/assets/js/');
  * ===========================================================================*/
 pf_config::set('Json_Settings', APPLICATION_DIR.'config'.DS.'settings.json');
 
-
+/* =============================================================================
+ * REQUIRED VERSIONS - Our Required Versions of required sofware
+ *                     I am using an array so if we need to add stuff later we can.
+ * ===========================================================================*/
+$required = array('PHP'=>5.3);
+pf_config::set('requirements',$required);
 ?>
