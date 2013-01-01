@@ -24,7 +24,7 @@
  * APP SETTINGS
  * ===========================================================================*/
     define('APP_NAME','Crafty Minecraft Controller');
-    define('APP_VERSION', '1.2.6.b');
+    define('APP_VERSION', '1.2.6-beta');
 
 /* =============================================================================
  * BASIC SETTINGS - used for increased readablity

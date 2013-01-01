@@ -19,11 +19,13 @@ $installed = $data->get('bukkit_dir'); //do we have a bukkit_dir?
 
 ?>
 
+<div class="container"> <!-- START CONTAINER -->
+    <div class="row">
+
 <?php 
 // if not installed we shorten the menu
 if (!$installed): ?>
-<div class="container"> <!-- START CONTAINER -->
-    <div class="row">
+
         <div class="span12">
 
             <div class="navbar"><!--START NAV-->
@@ -37,15 +39,11 @@ if (!$installed): ?>
                     </div>
             </div><!-- END NAV -->
         </div>
-    </div>
-</div>
 
 <?php 
 // WE ARE INSTALLED! WOOHOO!
 else: ?>
 
-<div class="container"> <!-- START CONTAINER -->
-    <div class="row">
         <div class="span12">
 
             <div class="navbar"><!--START NAV-->
@@ -85,11 +83,8 @@ else: ?>
                     </div>
             </div><!-- END NAV -->
         </div>
-    </div>
-</div>
+
 
 <?php endif;?>
-
-    
-
-
+    </div>
+</div>
