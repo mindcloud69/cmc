@@ -58,6 +58,10 @@ class backups extends pf_controller
         //var_dump($_POST);
         $this->checkLogin();
         
+        //for logging to server
+        $this->loadLibrary('log_server');
+        
+        
         if ($_SERVER['REQUEST_METHOD'] !='POST')
         {
             pf_core::redirectUrl(pf_config::get('main_page').'/backups');
@@ -75,12 +79,13 @@ class backups extends pf_controller
             {
                 if (unlink($file)) //delete the file
                 {
-                    $this->loadView('backups/delete_page.php');
+                    log_server::log('Backup '.$file .' Deleted');
                 }
                 else //can't delete, throw error
                 {
                     pf_events::dispayFatal('Unable To Delete: '.$file);
                 }
+                $this->loadView('backups/delete_page.php');
             }
         }
     }
@@ -93,6 +98,9 @@ class backups extends pf_controller
             pf_core::redirectUrl(pf_config::get('main_page'));
         }
 
+        //for logging to server
+        $this->loadLibrary('log_server');
+        
         //get our dir
         $settings = new pf_json();
         $settings->readJsonFile(pf_config::get('Json_Settings'));
@@ -118,7 +126,8 @@ class backups extends pf_controller
             //for each dir, back it up
             if (is_dir($dir))
             {
-                //$script .= 'tar -zcvf ' . $dir . ' ' . $backup_dir.DS.$name[2]."\n";
+                //log to server log the backup was started
+                log_server::log('Backup Started For World:'. $name[2]);
                 $command = 'tar -zcf ' . $backup_dir.DS.$name[2] . "-".date('m-d-y-Gis').'.tar.gz ' . $dir."\n";
                 exec('nohup '.$command."> /dev/null 2>/dev/null &");
             }
@@ -137,7 +146,7 @@ class backups extends pf_controller
             pf_html::clearPreviousBuffer();
             pf_events::dispayFatal('Unable to save settings! Is app/config writeable?');
         }
-        
+        log_server::log('Backups Complete For World:'. $name[2]);
         $this->loadView('/backups/backup_complete_page.php');
         
     }

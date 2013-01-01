@@ -15,22 +15,9 @@ class server extends pf_controller
         //load the server config library
         $this->loadLibrary('server_conf');
         
-        //get settings
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        
-        $bukkit_dir = $settings->get('bukkit_dir');
-        
-        //our server log file
-        $log = $bukkit_dir . DS . 'server.log';
-        
-        //current time
-        $time = date('Y-m-d H:i:s');
-        
-        //log it in the server.log
-        
-        //exec('echo '.$time.' [CMC] Command: '.$command.' issued by User >> $log');
-        exec("echo $time [CMC] Command:$command issued by User >> $log");
+        //logging to server
+        $this->loadLibrary('log_server');
+        log_server::log($command . " issued by User");
         
         $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
         exec($command);
