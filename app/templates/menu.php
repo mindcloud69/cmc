@@ -77,11 +77,11 @@ else: ?>
                                     </li>
 
                                     
+                            </ul>
                                     <ul class="nav pull-right">
-                                        <li <?php if ($page == 'login') echo 'class="active"'; ?> class="pull-right"> <?php echo $loginlink; ?> </li>
+                                        <li <?php if ($page == 'login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li>
                                     </ul>
                                     
-                            </ul>
                     </div>
             </div><!-- END NAV -->
         </div>
