@@ -9,7 +9,7 @@ class pf_forms {
     
     private static $form;       //our form
     
-    public static function createForm ($id='form',$class=null,$action = null, $method=null,$tableclass=null)
+    public static function createForm ($id='form',$class=null,$action = null, $method=null)
     {
         if (!isset($method)) $method="POST";
         if (!isset($action)) $action = $_SERVER['REQUEST_URI'];
