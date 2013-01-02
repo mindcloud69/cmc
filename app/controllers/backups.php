@@ -59,7 +59,7 @@ class backups extends pf_controller
         $this->checkLogin();
         
         //for logging to server
-        $this->loadLibrary('log_server');
+        $this->loadLibrary('server_control');
         
         
         if ($_SERVER['REQUEST_METHOD'] !='POST')
@@ -79,7 +79,7 @@ class backups extends pf_controller
             {
                 if (unlink($file)) //delete the file
                 {
-                    log_server::log('Backup '.$file .' Deleted');
+                    server_control::log('Backup '.$file .' Deleted');
                 }
                 else //can't delete, throw error
                 {
@@ -99,7 +99,7 @@ class backups extends pf_controller
         }
 
         //for logging to server
-        $this->loadLibrary('log_server');
+        $this->loadLibrary('server_control');
         
         //get our dir
         $settings = new pf_json();
@@ -127,7 +127,7 @@ class backups extends pf_controller
             if (is_dir($dir))
             {
                 //log to server log the backup was started
-                log_server::log('Backup Started For World:'. $name[2]);
+                server_control::log('Backup Started For World:'. $name[2]);
                 $command = 'tar -zcf ' . $backup_dir.DS.$name[2] . "-".date('m-d-y-Gis').'.tar.gz ' . $dir."\n";
                 exec('nohup '.$command."> /dev/null 2>/dev/null &");
             }
@@ -146,7 +146,7 @@ class backups extends pf_controller
             pf_html::clearPreviousBuffer();
             pf_events::dispayFatal('Unable to save settings! Is app/config writeable?');
         }
-        log_server::log('Backups Complete For World:'. $name[2]);
+        server_control::log('Backups Complete For World:'. $name[2]);
         $this->loadView('/backups/backup_complete_page.php');
         
     }

@@ -91,17 +91,22 @@ class server extends pf_controller
         $settings = new pf_json();
         $settings->readJsonFile(pf_config::get('Json_Settings'));
         $data = $settings->get('startup_ram');
-
+        
+        /*
         //check if server is online
         if (server_conf::checkOnline())
         {
             //we are online
             pf_events::dispayFatal('Server Already Running, Perhaps you should stop it first?');
         }
-        
+        */
         if ($_SERVER['REQUEST_METHOD']=='POST')
         {
             $ram = $_POST['maxram'];
+            $restart = $_POST['restart'];
+            
+            var_dump($restart);
+            die();
             
             //save this to the settings file for later
             $settings->set('startup_ram', $ram);

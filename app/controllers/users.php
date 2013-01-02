@@ -47,9 +47,9 @@ class users extends pf_controller
         $q->bindParam(':Level', $level);
         $q->execute();
         
-        $this->loadLibrary('log_server');
+        $this->loadLibrary('server_control');
         
-        log_server::log('User Added: '.$username);
+        server_control::log('User Added: '.$username);
         
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
         }
@@ -69,9 +69,9 @@ class users extends pf_controller
         $db = new db($sqlite);
         $db->delete('Users', 'ID = '.$_GET['id']);
         
-        $this->loadLibrary('log_server');
+        $this->loadLibrary('server_control');
         
-        log_server::log('User Deleted:');
+        server_control::log('User Deleted:');
         
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
     }
