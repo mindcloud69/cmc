@@ -75,10 +75,17 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
+        $this->loadLibrary('server_control');
+        
+        //removes our cronjob if it's there
+        server_control::removeCronJob('/usr/bin/wget -q http://localhost/index.php/server/restart');
+        
+        //executes the stop script
         exec('nohup /usr/bin/php '.APPLICATION_DIR.'mcscripts'.DS.'stop.php'."> /dev/null 2>/dev/null &");
         pf_core::redirectUrl(pf_config::get('main_page'));
     }
     
+    //restarts the server if not online. No login check required
     public function restart()
     {
         $this->loadLibrary('server_conf');
