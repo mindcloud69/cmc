@@ -73,6 +73,8 @@ else: ?>
                                             <li><a href="<?php echo pf_config::get('main_page');?>/users/add">Add User</a></li>
                                         </ul>
                                     </li>
+                                    
+                                    <li <?php if ($page == 'settings') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/server">Server</a></li>
 
                                     
                             </ul>

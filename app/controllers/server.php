@@ -79,6 +79,24 @@ class server extends pf_controller
         pf_core::redirectUrl(pf_config::get('main_page'));
     }
     
+    public function restart()
+    {
+        $this->loadLibrary('server_conf');
+        //check if server is online
+        if (server_conf::checkOnline())
+        {
+            //we are online
+            die('Server Already Online');
+        }
+        
+        //if not online, we load it up
+        if (file_exists(APPLICATION_DIR.'mcscripts'.DS.'startup.sh'))
+        {
+            exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
+        }
+        else die('No Startup Script Found');
+    }
+    
     //start the server
     public function startup()
     {
@@ -86,36 +104,40 @@ class server extends pf_controller
         
         //load the server config library
         $this->loadLibrary('server_conf');
+        $this->loadLibrary('server_control');
         
         //get settings
         $settings = new pf_json();
         $settings->readJsonFile(pf_config::get('Json_Settings'));
         $data = $settings->get('startup_ram');
         
-        /*
         //check if server is online
         if (server_conf::checkOnline())
         {
             //we are online
             pf_events::dispayFatal('Server Already Running, Perhaps you should stop it first?');
         }
-        */
+        
         if ($_SERVER['REQUEST_METHOD']=='POST')
         {
             $ram = $_POST['maxram'];
             $restart = $_POST['restart'];
             
-            var_dump($restart);
-            die();
-            
-            //save this to the settings file for later
+            //if restart is checked, we create a cronjob to watch for server crashes and restart server.
+            if (pf_core::compareStrings($restart, 'true'));
+            {
+                server_control::createCronJob('*/10 * * * *', '/usr/bin/wget -q http://localhost/index.php/server/restart');
+            }
+
+            //save ram and restart settings to the settings file for later
             $settings->set('startup_ram', $ram);
+            $settings->set('restart_cron',$restart);
             
             //write the settings file
             $settings->writeJsonFile(pf_config::get('Json_Settings'));
             
             //get the bukkit_dir
-            $dir = $settings->get('bukkit_dir');
+            $dir = server_control::getBukkitDir();
             
             //write the script to the mcscripts folder
             $file = 'cd '.$dir."\n";
