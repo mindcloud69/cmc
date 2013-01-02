@@ -1,5 +1,5 @@
 <?php
-class log_server
+class server_control
 {
     public static function log($message)
     {
