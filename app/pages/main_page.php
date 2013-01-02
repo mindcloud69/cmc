@@ -26,6 +26,7 @@
   				$(this).tab('show');
 			})
 		
+                        //this deals with the CPU/MEM bar
                         function updatestats ()
                         {
                             //grab some general stats from the server
@@ -88,6 +89,8 @@
                             setTimeout(updatestats,10000);
                         }
                         
+                        
+                        //makes the menubars pretty (changes color based on load)
                         function colors(selector,value)
                         {
                             if (value >= 75){
@@ -99,6 +102,7 @@
                             }
                         }
                         
+                        //this collects and reports server data from the minecraft server
                         function serverinfo()
                         {
                             $.getJSON('<?php echo pf_config::get('main_page'); ?>/data/info',function(data){
@@ -123,6 +127,7 @@
                             });
                         }
                         
+                        //our document is ready, so let's fire off some functions
                         $(document).ready(function(){ 
                             $('#multijava').hide();
                             updatestats();
@@ -191,7 +196,7 @@
             *newest entries at the top*
                 <div class="tabbable">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#console" data-toggle="tab">Console</a></li>
+                        <li class="active"><a href="#console" data-toggle="tab">All</a></li>
                         <li><a href="#chat" data-toggle="tab">Chat</a></li>
                         <li><a href="#errors" data-toggle="tab">Errors</a></li>
                         <li><a href="#connection" data-toggle="tab">Connections</a></li>

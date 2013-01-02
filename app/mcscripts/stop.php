@@ -9,14 +9,7 @@
     send('save-all');
     sleep(5);
     send('stop');
-    sleep(30);
-    
-    //force any zombie server to close
-    exec ('pkill java'); //force all java's to close
-    
-    $dir = getcwd();
-    exec('nohup '.$dir .'/app/mscripts/startup.sh'."> /dev/null 2>/dev/null &");
-    
+    //sleep(30);
     
     function send($command)
     {

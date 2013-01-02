@@ -15,22 +15,9 @@ class server extends pf_controller
         //load the server config library
         $this->loadLibrary('server_conf');
         
-        //get settings
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        
-        $bukkit_dir = $settings->get('bukkit_dir');
-        
-        //our server log file
-        $log = $bukkit_dir . DS . 'server.log';
-        
-        //current time
-        $time = date('Y-m-d H:i:s');
-        
-        //log it in the server.log
-        
-        //exec('echo '.$time.' [CMC] Command: '.$command.' issued by User >> $log');
-        exec("echo $time [CMC] Command:$command issued by User >> $log");
+        //logging to server
+        $this->loadLibrary('log_server');
+        log_server::log($command . " issued by User");
         
         $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
         exec($command);
@@ -88,8 +75,38 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
+        $this->loadLibrary('server_control');
+        
+        server_control::log('Server Stopped By User');
+        
+        //removes our cronjob if it's there
+        server_control::removeCronJob('/usr/bin/wget -q http://localhost/index.php/server/restart');
+        
+        //executes the stop script
         exec('nohup /usr/bin/php '.APPLICATION_DIR.'mcscripts'.DS.'stop.php'."> /dev/null 2>/dev/null &");
         pf_core::redirectUrl(pf_config::get('main_page'));
+    }
+    
+    //restarts the server if not online. No login check required
+    public function restart()
+    {
+        $this->loadLibrary('server_conf');
+        
+        server_control::log('Restart Cron - Checking Server Connectable');
+        //check if server is online
+        if (server_conf::checkOnline())
+        {
+            //we are online
+            die('Server Already Online');
+        }
+        
+        server_control::log('Restart Cron - Server Down - Starting New Server!');
+        //if not online, we load it up
+        if (file_exists(APPLICATION_DIR.'mcscripts'.DS.'startup.sh'))
+        {
+            exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
+        }
+        else die('No Startup Script Found');
     }
     
     //start the server
@@ -99,12 +116,13 @@ class server extends pf_controller
         
         //load the server config library
         $this->loadLibrary('server_conf');
+        $this->loadLibrary('server_control');
         
         //get settings
         $settings = new pf_json();
         $settings->readJsonFile(pf_config::get('Json_Settings'));
         $data = $settings->get('startup_ram');
-
+        
         //check if server is online
         if (server_conf::checkOnline())
         {
@@ -115,15 +133,23 @@ class server extends pf_controller
         if ($_SERVER['REQUEST_METHOD']=='POST')
         {
             $ram = $_POST['maxram'];
+            $restart = $_POST['restart'];
             
-            //save this to the settings file for later
+            //if restart is checked, we create a cronjob to watch for server crashes and restart server.
+            if (pf_core::compareStrings($restart, 'true'));
+            {
+                server_control::createCronJob('*/10 * * * *', '/usr/bin/wget -q http://localhost/index.php/server/restart');
+            }
+
+            //save ram and restart settings to the settings file for later
             $settings->set('startup_ram', $ram);
+            $settings->set('restart_cron',$restart);
             
             //write the settings file
             $settings->writeJsonFile(pf_config::get('Json_Settings'));
             
             //get the bukkit_dir
-            $dir = $settings->get('bukkit_dir');
+            $dir = server_control::getBukkitDir();
             
             //write the script to the mcscripts folder
             $file = 'cd '.$dir."\n";
@@ -138,6 +164,8 @@ class server extends pf_controller
             $chmod = 'chmod +x ' . APPLICATION_DIR.'mcscripts'.DS.'startup.sh';
             exec($chmod);
             
+            //executes our new startup script
+            server_control::log('Server Started By User');
             exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
             
             pf_core::redirectUrl(pf_config::get('main_page'));

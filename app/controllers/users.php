@@ -47,6 +47,10 @@ class users extends pf_controller
         $q->bindParam(':Level', $level);
         $q->execute();
         
+        $this->loadLibrary('server_control');
+        
+        server_control::log('User Added: '.$username);
+        
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
         }
         
@@ -64,6 +68,11 @@ class users extends pf_controller
         $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
         $db = new db($sqlite);
         $db->delete('Users', 'ID = '.$_GET['id']);
+        
+        $this->loadLibrary('server_control');
+        
+        server_control::log('User Deleted:');
+        
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
     }
 }

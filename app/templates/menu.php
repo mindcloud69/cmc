@@ -19,16 +19,18 @@ $installed = $data->get('bukkit_dir'); //do we have a bukkit_dir?
 
 ?>
 
+<div class="container"> <!-- START CONTAINER -->
+    <div class="row">
+
 <?php 
 // if not installed we shorten the menu
 if (!$installed): ?>
-<div class="container"> <!-- START CONTAINER -->
-    <div class="row">
+
         <div class="span12">
 
             <div class="navbar"><!--START NAV-->
                     <div class="navbar-inner">
-                            <a class="brand" href="<?php echo pf_config::get('main_page'); ?>">CMC</a>
+                            <a class="brand" href="http://www.craftycontroller.com">CMC</a>
                             <ul class="nav">
                                     <!--Home-->
                                     <li <?php if ($page == 'main') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>">Home</a></li>
@@ -37,15 +39,11 @@ if (!$installed): ?>
                     </div>
             </div><!-- END NAV -->
         </div>
-    </div>
-</div>
 
 <?php 
 // WE ARE INSTALLED! WOOHOO!
 else: ?>
 
-<div class="container"> <!-- START CONTAINER -->
-    <div class="row">
         <div class="span12">
 
             <div class="navbar"><!--START NAV-->
@@ -75,21 +73,20 @@ else: ?>
                                             <li><a href="<?php echo pf_config::get('main_page');?>/users/add">Add User</a></li>
                                         </ul>
                                     </li>
+                                    
+                                    <li <?php if ($page == 'settings') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/settings">Settings</a></li>
 
                                     
+                            </ul>
                                     <ul class="nav pull-right">
-                                        <li <?php if ($page == 'login') echo 'class="active"'; ?> class="pull-right"> <?php echo $loginlink; ?> </li>
+                                        <li <?php if ($page == 'login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li>
                                     </ul>
                                     
-                            </ul>
                     </div>
             </div><!-- END NAV -->
         </div>
-    </div>
-</div>
+
 
 <?php endif;?>
-
-    
-
-
+    </div>
+</div>

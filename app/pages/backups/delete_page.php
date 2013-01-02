@@ -11,8 +11,8 @@
             <div class="container">
                 <div class="row">
                     <div class="valid">
-                        File Deleted!<br />
-                        File:<?php echo $data[0]; ?>
+                        Success!<br />
+                        Selected Backups Deleted!<br />
                     </div>
                 </div>
             </div>

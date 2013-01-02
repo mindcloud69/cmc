@@ -26,7 +26,8 @@
                                      '8192'=>'8GB Memory'
                                      ),$data)
                                 ?>
-                                
+                                <br />
+                                <?php pf_forms::checkbox('restart', 'Restart On Crash', 'true');?>
                                 <?php pf_forms::button('submit','Start','button rounded center');?>
                                 <?php pf_forms::closeForm();?>
                     </div>
