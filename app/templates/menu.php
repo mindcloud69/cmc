@@ -30,7 +30,7 @@ if (!$installed): ?>
 
             <div class="navbar"><!--START NAV-->
                     <div class="navbar-inner">
-                            <a class="brand" href="<?php echo pf_config::get('main_page'); ?>">CMC</a>
+                            <a class="brand" href="http://www.craftycontroller.com">CMC</a>
                             <ul class="nav">
                                     <!--Home-->
                                     <li <?php if ($page == 'main') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>">Home</a></li>
