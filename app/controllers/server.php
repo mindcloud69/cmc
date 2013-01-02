@@ -77,6 +77,8 @@ class server extends pf_controller
         
         $this->loadLibrary('server_control');
         
+        server_control::log('Server Stopped By User');
+        
         //removes our cronjob if it's there
         server_control::removeCronJob('/usr/bin/wget -q http://localhost/index.php/server/restart');
         
