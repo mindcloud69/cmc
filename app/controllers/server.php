@@ -162,6 +162,8 @@ class server extends pf_controller
             $chmod = 'chmod +x ' . APPLICATION_DIR.'mcscripts'.DS.'startup.sh';
             exec($chmod);
             
+            //executes our new startup script
+            server_control::log('Server Started By User');
             exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
             
             pf_core::redirectUrl(pf_config::get('main_page'));
