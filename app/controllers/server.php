@@ -89,6 +89,8 @@ class server extends pf_controller
     public function restart()
     {
         $this->loadLibrary('server_conf');
+        
+        server_control::log('Restart Cron - Checking Server Connectable');
         //check if server is online
         if (server_conf::checkOnline())
         {
@@ -96,6 +98,7 @@ class server extends pf_controller
             die('Server Already Online');
         }
         
+        server_control::log('Restart Cron - Server Down - Starting New Server!');
         //if not online, we load it up
         if (file_exists(APPLICATION_DIR.'mcscripts'.DS.'startup.sh'))
         {
