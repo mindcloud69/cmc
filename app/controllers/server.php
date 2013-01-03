@@ -80,7 +80,7 @@ class server extends pf_controller
         server_control::log('Server Stopped By User');
         
         //removes our cronjob if it's there
-        server_control::removeCronJob('/usr/bin/wget -q http://localhost/index.php/server/restart');
+        server_control::removeCronJob('http://localhost/index.php/server/restart'); //remove anything that calls the restart
         
         //executes the stop script
         exec('nohup /usr/bin/php '.APPLICATION_DIR.'mcscripts'.DS.'stop.php'."> /dev/null 2>/dev/null &");
@@ -123,6 +123,7 @@ class server extends pf_controller
         $settings = new pf_json();
         $settings->readJsonFile(pf_config::get('Json_Settings'));
         $data = $settings->get('startup_ram');
+        $restart_time = $settings->get('restart_check');
         
         //check if server is online
         if (server_conf::checkOnline())
@@ -139,7 +140,7 @@ class server extends pf_controller
             //if restart is checked, we create a cronjob to watch for server crashes and restart server.
             if (pf_core::compareStrings($restart, 'true'));
             {
-                server_control::createCronJob('*/10 * * * *', '/usr/bin/wget -q -O /tmp/cmc-crash-detect http://localhost/index.php/server/restart');
+                server_control::createCronJob('*/'.$restart_time.' * * * *', '/usr/bin/wget -q -O /tmp/cmc-crash-detect http://localhost/index.php/server/restart');
             }
 
             //save ram and restart settings to the settings file for later

@@ -57,6 +57,7 @@ class install extends pf_controller
         $adminname= trim($_POST['adminname']);
         $adminpass= trim($_POST['adminpass']);
         $bukkitdir= trim($_POST['bukkitdir']);
+        $bukkitrelease= trim($_POST['bukkitchannel']);
         
         //check to make sure we can write to where bukkit is installed
         if(file_put_contents($bukkitdir.'/CMCwritetest', 'writetest'))
@@ -114,6 +115,9 @@ class install extends pf_controller
         $settings->readJsonFile(pf_config::get('Json_Settings'));
         $settings->set('bukkit_dir', $bukkitdir);
         $settings->set('salt',$salt);
+        $settings->set('bukkit_channel', $bukkitrelease);
+        $settings->set('log_lines', '100');
+        $settings->set('restart_check', '15');
         if (!$settings->writeJsonFile(pf_config::get('Json_Settings')))
         {
             pf_events::dispayFatal ('Unable to Save Config - Is /cmc/app/config writable?');
