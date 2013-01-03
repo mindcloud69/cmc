@@ -13,8 +13,8 @@ $update_stable = false;
 $update_dev = false;
 
 //check branches (alpha,beta,rc,stable)
-if (parsetype($current[1]) < parsetype($stable[1])) $update_stable = true;
-if (parsetype($current[1]) < parsetype($dev[1])) $update_dev = true;
+if (parsetype($current[1]) > parsetype($stable[1])) $update_stable = true;
+if (parsetype($current[1]) > parsetype($dev[1])) $update_dev = true;
 
 //check our main numbers
 if ($current[0] < $stable[0]) $update_stable = true;
