@@ -39,6 +39,12 @@ body {
     padding: 7px 9px;
 }
 
+form {padding: 30px;}
+.table { 
+  border-spacing:5px;
+  border-collapse:collapse;
+}
+
 
 /*Navbar customization*/
 .navbar .nav > li > a:hover {

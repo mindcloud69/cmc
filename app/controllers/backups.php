@@ -85,9 +85,9 @@ class backups extends pf_controller
                 {
                     pf_events::dispayFatal('Unable To Delete: '.$file);
                 }
-                $this->loadView('backups/delete_page.php');
             }
         }
+        $this->loadView('backups/delete_page.php');
     }
 
 
