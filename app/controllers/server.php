@@ -91,6 +91,7 @@ class server extends pf_controller
     public function restart()
     {
         $this->loadLibrary('server_conf');
+        $this->loadLibrary('server_control');
         
         server_control::log('Restart Cron - Checking Server Connectable');
         //check if server is online
@@ -138,7 +139,7 @@ class server extends pf_controller
             //if restart is checked, we create a cronjob to watch for server crashes and restart server.
             if (pf_core::compareStrings($restart, 'true'));
             {
-                server_control::createCronJob('*/10 * * * *', '/usr/bin/wget -q http://localhost/index.php/server/restart');
+                server_control::createCronJob('*/10 * * * *', '/usr/bin/wget -q -O /tmp/cmc-crash-detect http://localhost/index.php/server/restart');
             }
 
             //save ram and restart settings to the settings file for later
