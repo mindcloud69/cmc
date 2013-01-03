@@ -39,26 +39,31 @@
                         <div class='alert span6 offset3'><?php echo $data['error'];?></div>
                     <?php else:?>
                         
-                    <form id="backupdelete" class= "span6 offset3" action="<?php echo pf_config::get('main_page');?>/backups/delete" method="POST">
+                    <form id="backupdelete" class= "span8 offset2" action="<?php echo pf_config::get('main_page');?>/backups/delete" method="POST">
                     <?php
                     if (!empty($data['backups']))
                     {
                         
                     //table of old backups
                     $table = new pf_tables();
-                    $table->startTable('backups', 0, null, 'table table-striped ');
+                    $table->startTable('backups', 0, 100, 'table table-striped ');
                     $table->startRow();
                     $table->addTableHeading('<input type="checkbox" id="selectall"/>');
                     $table->addTableHeading('Previous Backups');
-                    //$table->addTableHeading('Delete');
+                    $table->addTableHeading('Date Created');
                     $table->endRow();
                     $i = 0;
                     foreach ($data['backups'] as $backup)
                     {
                         $i++;
-                        $table->startRow();    
+                        
+                        //time backup was created/modified
+                        $createdate = date("m/d/Y H:i:s", filemtime($backup));
+                        
+                        $table->startRow();
                         $table->addcell('<input type="checkbox" class="delete" style="margin-left:8px;" name="file['.$i.']" value="'.$backup.'"/>');
-                        $table->addCell('<center>'.$backup.'</center>');
+                        $table->addCell($backup);
+                        $table->addCell('<center>'.$createdate.'</center');
                         //$table->addCell('<a class="button rounded span1" href="../backups/delete?file='.$backup.'">Delete</a>','center');
                         $table->endRow();
                     }
@@ -66,7 +71,7 @@
                     }
                     
                     ?>
-                    <input type="submit" value="Remove Selected Backups" class="button rounded center span6">
+                    <input type="submit" value="Remove Selected Backups" class="button rounded center span8">
                     </form>
                     <?php endif;?>
                     </div>

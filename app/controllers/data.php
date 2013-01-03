@@ -93,6 +93,14 @@ class data extends pf_controller
                 
             }
             
+            //any CMC Messages we Highlight Light Blue
+            if (preg_match('[CMC]', $line))
+            {
+                $line = '<span style="color:#08c;">'.$line."</span>";
+                $errorlog .= $line."\n";
+                
+            }
+            
             //look for chat
             if (strpos($line,' [INFO] <') !==false)
             {
