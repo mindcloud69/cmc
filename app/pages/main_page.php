@@ -159,7 +159,7 @@
                             <div id="online">
                                 Online!
                             </div>
-                            <strong>Bukkit Dir:</strong> <?php echo $data['bukkit_dir'];?> <br>
+                            <strong>Auto-Restart:</strong>  <br>
                             <strong>World:</strong> <?php echo $data['world'];?><br>
                             <strong>PvP:</strong><?php echo $data['pvp'];?><br>
                             <strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
