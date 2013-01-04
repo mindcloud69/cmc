@@ -1,3 +1,10 @@
+<?php
+//convert to string
+if ($data['current_cron'])
+    $data['current_cron'] = 'TRUE';
+else $data['current_cron'] = 'FALSE';
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,6 +25,8 @@
                     
                     .serverwarning {color:red;}
                     .serverlog{margin-top:25px;}
+                    
+                    .box{border:1px solid #aaa; padding:5px;}
 		</style>
                 
 		<script>
@@ -108,19 +117,20 @@
                             $.getJSON('<?php echo pf_config::get('main_page'); ?>/data/info',function(data){
                                 var online = data['online'];
                                 
-                                $( '#info' ).html ("<b>Craftbukkit Version:</b> "+data['version'] +"<br /><b>Players Connected:</b>"
-                                + data['players'] + " of " + data['max_players'] + '<br />' +
-                                '<b>MOTD:</b>' + data['motd'] +'<br />')
+                                $( '#info' ).html (
+                                "<b>Craftbukkit Version:</b> " +data['version'] +"<br />\n\
+                                <b>Players Connected:</b> " + data['players'] + " of " + data['max_players'] + '<br />'
+                                + '<b>MOTD:</b> ' + data['motd'] +'<br />')
                                 
                                 //if online
                                 if (online)
                                     {
-                                    $('#online').html('Online:Online!')
+                                    $('#online').html('<b>Online-Status</b>:Online!')
                                     $('#online').css({'color':'green'});
                                     }
                                 else
                                     {
-                                    $('#online').html('Online:Offline!')
+                                    $('#online').html('<b>Online-Status</b>:Offline!')
                                     $('#online').css({'color':'red'});    
                                     }
                             
@@ -152,35 +162,51 @@
 	<body>
         <?php pf_core::loadTemplate('menu'); ?>
             <div class="container">
-                <h1>Crafty Minecraft Control</h1><hr>
                 <div class="row">
-                    <div class="span4">
-                            <h2>General Info</h2>
-                            <div id="online">
-                                Online!
+                    <div class="span5 offset1">
+                            <div class="box">
+                                <h4 class="center"> CMC Quick Server Info</h4>
+                                <div id="online">Online!</div>
+                                <strong>Auto-Restart:</strong>  <?php echo $data['current_cron'];?><br>
+                                <strong>Last Backup:</strong>  Differed to Beta<br>
+                                <strong>Next Backup:</strong>  Differed to Beta<br>
+                                
                             </div>
-                            <strong>Auto-Restart:</strong>  <br>
-                            <strong>World:</strong> <?php echo $data['world'];?><br>
-                            <strong>PvP:</strong><?php echo $data['pvp'];?><br>
-                            <strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
-                            <strong>Game Type:</strong> <?php echo $data['gamemode'];?><br>
-                            <strong>Essentials Installed:</strong><?php echo $data['essentials'];?> <br>
-                            <strong>Other Plugins:</strong> <?php echo $data['pluggins'];?>
+                            <br />
+                            <div class="box">
+                                <h4 class="center"> Server Config</h4>
+                                <strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
+                                <strong>PvP:</strong><?php echo $data['pvp'];?><br>
+                                <strong>Game Type:</strong> <?php echo $data['gamemode'];?><br>
+                            </div>
+                            <br />
+                            <div class="box">
+                                <h4 class="center"> Plugins Info</h4>
+                                <strong>Essentials Installed:</strong><?php echo $data['essentials'];?> <br>
+                                <strong>Other Plugins:</strong> <?php echo $data['pluggins'];?>
+                            </div>
                     </div>
 
-                    <div class="span6">
-                            <h2>Server Load</h2>
-                            <span id='cores'>CPU Usage Based On X Cores</span>
-                            <div id="cpuwrap" class="">
-                                    <div id="cpu" class="bar"></div>
+                    <div class="span5">
+                            <div class="box">
+                                <h4 class="center">Server Load</h4>
+                                <p id='cores' class="center">CPU Usage Based On X Cores
+                                    <div id="cpuwrap" style="margin:0 auto;">
+                                            <div id="cpu" class="bar"></div>
+                                    </div>
+                                </p>
+                                <br>
+                                <p class="center">MEM Usage
+                                    <div id="memwrap" style="margin:0 auto;">
+                                            <div id="mem" class="bar"></div>
+                                    </div>
+                                </p>
                             </div>
-                            <br>
-                            MEM Usage
-                            <div id="memwrap" class="">
-                                    <div id="mem" class="bar"></div>
-                            </div>
-                            <div id="info">
-
+                            <br />
+                            <div class="box">
+                                <h4 class="center">Bukkit Info</h4>
+                                <div id="info" class="center">&nbsp;</div>
+                                
                             </div>
                             
                             <div id="multijava">
