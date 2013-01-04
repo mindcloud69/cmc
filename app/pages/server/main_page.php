@@ -15,12 +15,13 @@
                             <a class="button rounded" href="<?php echo pf_config::get('main_page') ?>/server/stop">Stop Server</a><br /><br />
                             <a class="button rounded" href="<?php echo pf_config::get('main_page') ?>/server/action">Issue Command</a><br /><br />
                             <a class="button rounded" href="<?php echo pf_config::get('main_page') ?>/server/say">Server Say</a><br /><br />
+                            <a class="button rounded" href="<?php echo pf_config::get('main_page') ?>/server/update">Update Bukkit</a><br /><br />
                     </div>
                     <div class="span6">
                         <p class="info">
                             Please NOTE: Stopping / Starting the server takes time and is ran in the background.
                             You can watch their progress from the main page by watching the server log as they run.
-                            Please Give the scripts time to work. These will be configurable in the next version.
+                            Please Give the scripts time to work. These will be configurable in future versions.
                         </p>
                         <br />
                     </div>

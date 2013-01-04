@@ -103,13 +103,39 @@ class server extends pf_controller
         
         server_control::log('Restart Cron - Server Down - Starting New Server!');
         //if not online, we load it up
-        if (file_exists(APPLICATION_DIR.'mcscripts'.DS.'startup.sh'))
-        {
+        //if (file_exists(APPLICATION_DIR.'mcscripts'.DS.'startup.sh'))
+        //{
             exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
-        }
-        else die('No Startup Script Found');
+            pf_core::redirectUrl(pf_config::get('main_page'));
+        //}
+        //else die('No Startup Script Found');
     }
     
+    //updates bukkit based on on branch selected
+    public function update()
+    {
+        $this->checkLogin();
+        
+        $this->loadLibrary('server_control');
+        
+        $settings = new pf_json();
+        $settings->readJsonFile(pf_config::get('Json_Settings'));
+        $bukkit_dir = $settings->get('bukkit_dir');
+        $channel = $settings->get('bukkit_channel');
+        
+        $settings->set('restart_check', false); //turn off the restart check as the stop command will remove the cron.
+        $settings->writeJsonFile(pf_config::get('Json_Settings'));
+        
+        //get the url for the download
+        if ($channel == 'Recommended') $url = 'http://dl.bukkit.org/latest-rb/craftbukkit.jar';
+        elseif ($channel == 'Beta') $url = 'http://dl.bukkit.org/latest-beta/craftbukkit.jar';
+        elseif ($channel == 'Dev') $url = 'http://dl.bukkit.org/latest-dev/craftbukkit.jar';
+        
+        require_once(APPLICATION_DIR.'/mcscripts/update.php');
+        
+    }
+
+
     //start the server
     public function startup()
     {
@@ -154,7 +180,8 @@ class server extends pf_controller
             $dir = server_control::getBukkitDir();
             
             //write the script to the mcscripts folder
-            $file = 'cd '.$dir."\n";
+            $file = "cd $dir \n";
+            //$file = 'cd '.$dir."\n";
             $file .= 'screen -dmS bukkit java -Xincgc -Xmx'.$ram.'M -jar craftbukkit.jar'."\n";
             
             //if we can't write, we throw an error
@@ -170,6 +197,7 @@ class server extends pf_controller
             server_control::log('Server Started By User');
             exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
             
+            //redirect to main page
             pf_core::redirectUrl(pf_config::get('main_page'));
         }
         
