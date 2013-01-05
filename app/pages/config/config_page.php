@@ -37,7 +37,7 @@ if (!key_exists('scooper-enabled', $data))
                                     
                                     <?php pf_forms::createForm('form', 'config_form span6 offset3', pf_config::get('main_page') . '/config/savesettings', 'POST')?>
                                     
-                                        <legend>Common Settings</legend>
+                                        <legend class="center">Common Settings</legend>
                                         <table>
                                             <tr>
                                             <th width="33%">Setting</th>
@@ -112,7 +112,7 @@ if (!key_exists('scooper-enabled', $data))
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3"><legend>Other Settings</legend></td>
+                                                <td colspan="3"><legend class="center">Other Settings</legend></td>
                                             </tr>
                                             <tr>
                                                 <td>Allow Flight:</td>
@@ -200,7 +200,7 @@ if (!key_exists('scooper-enabled', $data))
                                                 </td>
                                             </tr>
                                          </table>
-                                        <input type="submit" value="Save" class="button rounded span4"/>
+                                            <input type="submit" value="Save" class="button rounded span4"/>
                                     </form>
 			</div><!-- END ROW -->
                     </div>
