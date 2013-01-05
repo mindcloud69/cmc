@@ -17,10 +17,26 @@ class server_conf
         ini_set('display_errors','Off');
 
         //check to make sure file is there.
-        if (!file_exists($filename)) return false;
+        if (!file_exists($filename)) return false;//@todo: Throw error
         
-        $data=parse_ini_file($filename);
+        //$data=parse_ini_file($filename);
+        $file = file_get_contents($filename);
         
+        //break the file down to individual lines
+        $lines = explode("\n",$file);
+        
+        $data = array();
+        //for each line
+        foreach ($lines as $line)
+        {
+            //if not a commented line
+            if (substr($line, 0,1) !="#")
+            {
+                $tempdata = explode("=",$line);
+                $data[$tempdata[0]]=$tempdata[1];
+                
+            }
+        }
         foreach ($data as $setting=>$value)
         {
             if (!$value) $value='false';

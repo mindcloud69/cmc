@@ -1,3 +1,17 @@
+<?php
+//fix commonly empty values
+
+if (!key_exists('enable-command-block', $data))
+{
+    $data['enable-command-block']=false;
+}
+
+if (!key_exists('scooper-enabled', $data))
+{
+    $data['scooper-enabled']=false;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
