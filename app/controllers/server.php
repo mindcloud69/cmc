@@ -17,7 +17,7 @@ class server extends pf_controller
         
         //logging to server
         $this->loadLibrary('log_server');
-        log_server::log($command . " issued by User");
+        server_control::log($command . " issued by User");
         
         $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
         exec($command);
