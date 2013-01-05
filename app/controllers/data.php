@@ -99,11 +99,6 @@ class data extends pf_controller
             if (preg_match('[CMC]', $line))
             {
                 $line = '<span style="color:#08c;">'.$line."</span>";
-<<<<<<< HEAD
-                $errorlog .= $line."\n";
-=======
->>>>>>> 1-2-7-alpha
-                
             }
             
             //look for chat

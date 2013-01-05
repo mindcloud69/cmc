@@ -166,11 +166,7 @@ class server extends pf_controller
             //if restart is checked, we create a cronjob to watch for server crashes and restart server.
             if (pf_core::compareStrings($restart, 'true'));
             {
-<<<<<<< HEAD
-                server_control::createCronJob('*/10 * * * *', '/usr/bin/wget -q -O /tmp/cmc-crash-detect http://localhost/index.php/server/restart');
-=======
                 server_control::createCronJob('*/'.$restart_time.' * * * *', '/usr/bin/wget -q -O /tmp/cmc-crash-detect http://localhost/index.php/server/restart');
->>>>>>> 1-2-7-alpha
             }
 
             //save ram and restart settings to the settings file for later
