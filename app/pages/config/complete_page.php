@@ -19,7 +19,7 @@
                     <div class="span12">
                     <p class="center">
                         Here is your config file as it was generated. It has already been saved for you.<br />
-                        If all looks good, go ahead and <a href="<?php echo pf_config::get('main_page').'/scripts'; ?>">Click Here</a>
+                        If all looks good, go ahead and <a href="<?php echo pf_config::get('main_page').'/server'; ?>">Click Here</a>
                         To Start/Restart The Server
                     </p>
                     <pre>
