@@ -48,6 +48,14 @@ class main extends pf_controller
         
         $data['pluggins']=$list;
 
+        //do we have the auto-restart enabled?
+        $current_cron = exec('crontab -l | grep "server/restart"');
+        if (strpos($current_cron, 'server/restart'))
+        {
+            $data['current_cron']=TRUE;
+        }
+        else $data['current_cron']=FALSE;
+        
         //load our main page
         $this->loadView('main_page',$data);
         

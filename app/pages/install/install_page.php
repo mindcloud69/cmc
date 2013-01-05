@@ -5,6 +5,19 @@ if ($data['installed'])
     $installed = true;
 }
 else $installed=false;
+
+$loglines = array(
+    '100'=>'100',
+    '200'=>'200',
+    '300'=>'300',
+    '400'=>'400',
+    '500'=>'500',
+    '600'=>'600',
+    '700'=>'700',
+    '800'=>'800',
+    '900'=>'900',
+    '1000'=>'1000',
+);
 ?>
 
 
@@ -42,15 +55,17 @@ else $installed=false;
                     <?php }?>
                     
                     <center>
-                            <form class="span6 offset3" name="installform" method="POST" action="install/go">
-                                    <legend>Administrator Details</legend>
-                                    Admin Username<br/><input type="text" name="adminname" placeholder="Admin Username"><br>
-                                    Admin Password<br/><input type="text" name="adminpass" placeholder="Password"><br><br>
-
-                                    <legend>Other Details</legend>
-                                    Bukkit Location:<br/><input type="text" name="bukkitdir" placeholder="Bukkit Install Directory"><br><br>
-                                    <input type="submit" value="SAVE" class="button rounded span2"/>
-                            </form>
+                        <?php pf_forms::createForm('install', 'span6 offset3', pf_config::get('main_page').'/install/go', 'POST');?>
+                        <legend>Administrator Details</legend>
+                        Admin Username<br /><?php pf_forms::text('adminname', true, null, 'Admin Username');?><br />
+                        Admin Password<br /><?php pf_forms::text('adminpass', true, null, 'Admin Password');?><br />
+                        <legend>Other Details</legend>
+                        Bukkit Location:<br /><?php pf_forms::text('bukkitdir', true, null, 'Bukkit Install Directory');?><br />
+                        Bukkit Release Channel<br /><?php pf_forms::options('bukkitchannel', 'bukkitchannel', array('Recommeded'=>'Recommended','Beta'=>'Beta','Dev'=>'Dev')); ?><br />
+                        <input type="checkbox" value="stats" checked />Send Install Stats<br />
+                        <br />
+                        <input type="submit" value="SAVE" class="button rounded span2"/>
+                        <?php pf_forms::closeForm();?>
                     </center>
                 </div>
             </div>

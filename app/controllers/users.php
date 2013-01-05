@@ -71,7 +71,7 @@ class users extends pf_controller
         
         $this->loadLibrary('server_control');
         
-        server_control::log('User Deleted:');
+        server_control::log('User '.$_GET['user'].' Deleted:');
         
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
     }

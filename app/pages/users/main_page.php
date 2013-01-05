@@ -28,9 +28,9 @@
 			{
     			$table->startRow();
     			$table->addCell($user['ID']);
-   				$table->addCell($user['User']);
+                        $table->addCell($user['User']);
     			$table->addCell($user['Level']);
-    			$table->addCell('<a class="button rounded center" href="'.pf_config::get('main_page').'/users/delete?id='.$user['ID'].'">Delete </a>');
+    			$table->addCell('<center><a style="width:80px;" class="button rounded" href="'.pf_config::get('main_page').'/users/delete?id='.$user['ID'].'&user='.$user['User'].'">Delete </a></center>');
     			$table->endRow();
 			}
 
@@ -41,8 +41,7 @@
                 <div class="row">
                     <div class="span6 offset3">
                         <p>
-                            Please NOTE: Currently there is no difference between admins/users. This will be worked on in beta. We hope to make it
-                            possible to configure what section users have access to in the stable release.
+                            Please NOTE: Currently there is no difference between admins/users. This will be worked on in future versions.
                         </p>
                         <br />
                     </div>

@@ -72,8 +72,10 @@ class data extends pf_controller
         $settings->readJsonFile(pf_config::get('Json_Settings'));
         
         $bukkit_dir = $settings->get('bukkit_dir');
-        //tac reverse reads a file | grep -v removes any connections from localhost | head -75 displays the top 75 entries (which is actally the last 75)
-        $command = 'tac '.$bukkit_dir.DS.'server.log | grep -v 127.0.0.1 | grep -v /login | head -75';
+        $log_limit = $settings->get('log_lines');
+        
+        //tac reverse reads a file | grep -v removes any connections from localhost | head -$log_limit displays the top ?? entries (which is actually the last as it's reversed)
+        $command = 'tac '.$bukkit_dir.DS.'server.log | grep -v 127.0.0.1 | grep -v /login | head -'.$log_limit;
         //put output in to array
         exec($command,$output);
 
@@ -97,7 +99,10 @@ class data extends pf_controller
             if (preg_match('[CMC]', $line))
             {
                 $line = '<span style="color:#08c;">'.$line."</span>";
+<<<<<<< HEAD
                 $errorlog .= $line."\n";
+=======
+>>>>>>> 1-2-7-alpha
                 
             }
             

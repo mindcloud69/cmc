@@ -49,7 +49,7 @@ else: ?>
             <div class="navbar"><!--START NAV-->
                     <div class="navbar-inner">
                         
-                            <a class="brand" href="<?php echo pf_config::get('main_page'); ?>">CMC</a>
+                            <a class="brand" href="http://www.craftycontroller.com">CMC</a>
                             <ul class="nav">
                                     <!--Home-->
                                     <li <?php if ($page == 'main') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>">Home</a></li>
@@ -74,11 +74,11 @@ else: ?>
                                         </ul>
                                     </li>
                                     
-                                    <li <?php if ($page == 'settings') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/settings">Settings</a></li>
 
                                     
                             </ul>
                                     <ul class="nav pull-right">
+                                        <li <?php if ($page == 'settings') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/settings">CMC Settings</a></li>
                                         <li <?php if ($page == 'login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li>
                                     </ul>
                                     
