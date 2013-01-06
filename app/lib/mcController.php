@@ -133,5 +133,79 @@ class mcController
         }
         return self::$pluggins;
     }
+    
+    public static function CPUUsage()
+    {
+        //display cpu and mem usage of java
+        $command = 'ps -eo comm,%cpu,%mem | grep java';
+        
+        //display number of processes using "java"
+        $javacount = 'ps -eo comm,%cpu,%mem | grep -c java';
+        
+        //some string processing
+        $return = substr(exec($command), -9);
+        $info = explode('  ', $return);
+                
+        //if more than 1 java
+        if (exec($javacount) > 1)
+        {
+         $info['MultiJavas']=TRUE;
+        }
+        else $info['MultiJavas']=FALSE;
+        
+        //display number of cores
+        $info['cores'] = intval(exec('nproc'));
+        
+        return $info;
+    }
+    
+    public static function serverStatus($host){
+        $socket = @fsockopen($host, 25565, $errno, $errstr);
+   
+        if ($socket === false){
+            return false;
+        }
+   
+        fwrite($socket, "\xfe\x01");
+   
+        $data = fread($socket, 256);
+   
+        if (substr($data, 0, 1) != "\xff"){
+            return false;
+        }
+   
+        if (substr($data, 3, 5) == "\x00\xa7\x00\x31\x00"){
+            $data = explode("\x00", mb_convert_encoding(substr($data, 15), 'UTF-8', 'UCS-2'));
+        }else{
+            $data = explode('§', mb_convert_encoding(substr($data, 3), 'UTF-8', 'UCS-2'));
+        }
+   
+        if (count($data) == 3){
+            $info = array(
+                'version'        => '1.3.2',
+                'motd'            => $data[0],
+                'players'        => intval($data[1]),
+                'max_players'    => intval($data[2]),
+                'online'         => TRUE
+            );
+        }else{
+            $info = array(
+                'version'        => $data[0],
+                'motd'            => $data[1],
+                'players'        => intval($data[2]),
+                'max_players'    => intval($data[3]),
+                'online'         => TRUE
+            );
+        }
+   
+        return $info;
+    }
+    
+    public static function serverSend($command)
+    {
+        
+        $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
+        exec($command);
+    }
 }
 ?>
