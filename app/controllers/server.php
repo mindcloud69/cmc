@@ -12,15 +12,14 @@ class server extends pf_controller
     //send a command to screen
     private function send($command)
     {
-        //load the server config library
-        $this->loadLibrary('server_conf');
+        //load CMC library
+        $this->loadLibrary('CMC');
+        $this->loadLibrary('mcController');
         
-        //logging to server
-        $this->loadLibrary('server_control');
-        server_control::log($command . " issued by User");
+        $log = $command .' issued by User';
         
-        $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
-        exec($command);
+        CMC::log($log);
+        mcController::serverSend($command);
     }
     
     public function action()
@@ -75,12 +74,15 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
-        $this->loadLibrary('server_control');
+        //load CMC library
+        $this->loadLibrary('CMC');
+        $this->loadLibrary('mcController');
         
-        server_control::log('Server Stopped By User');
+        //log it
+        CMC::log('Server Stopped By User');
         
-        //removes our cronjob if it's there
-        server_control::removeCronJob('http://localhost/index.php/server/restart'); //remove anything that calls the restart
+        //removes our cronjob if it's there 
+        CMC::removeCronJob('http://localhost/index.php/server/restart');//remove anything that calls the restart
         
         //executes the stop script
         exec('nohup /usr/bin/php '.APPLICATION_DIR.'mcscripts'.DS.'stop.php'."> /dev/null 2>/dev/null &");
@@ -90,10 +92,12 @@ class server extends pf_controller
     //restarts the server if not online. No login check required
     public function restart()
     {
-        $this->loadLibrary('server_conf');
-        $this->loadLibrary('server_control');
+        //load CMC library
+        $this->loadLibrary('CMC');
+        $this->loadLibrary('mcController');
         
-        server_control::log('Restart Cron - Checking Server Connectable');
+        CMC::log('Restart Cron - Checking Server Connectable');
+
         //check if server is online
         if (server_conf::checkOnline())
         {
@@ -101,14 +105,10 @@ class server extends pf_controller
             die('Server Already Online');
         }
         
-        server_control::log('Restart Cron - Server Down - Starting New Server!');
         //if not online, we load it up
-        //if (file_exists(APPLICATION_DIR.'mcscripts'.DS.'startup.sh'))
-        //{
-            exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
-            pf_core::redirectUrl(pf_config::get('main_page'));
-        //}
-        //else die('No Startup Script Found');
+        CMC::log('Restart Cron - Server Down - Starting New Server!');
+        exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
+        pf_core::redirectUrl(pf_config::get('main_page'));
     }
     
     //updates bukkit based on on branch selected
@@ -116,8 +116,13 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
+        //load CMC library
+        $this->loadLibrary('CMC');
+        $this->loadLibrary('mcController');
+        
         $this->loadLibrary('server_control');
         
+        $bukkit_dir = mcController::getSetting('bukkit_dir');
         $settings = new pf_json();
         $settings->readJsonFile(pf_config::get('Json_Settings'));
         $bukkit_dir = $settings->get('bukkit_dir');
