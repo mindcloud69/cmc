@@ -28,7 +28,7 @@ class CMC
     public static function log($message)
     {
         //get bukkit_dir
-        $bukkit_dir = $this->getCMCSetting('bukkit_dir');
+        $bukkit_dir = self::getCMCSetting('bukkit_dir');
 
         //our server log file
         $log = $bukkit_dir . DS . 'server.log';
