@@ -12,7 +12,7 @@ else $failed=FALSE;
         <?php pf_core::loadTemplate('menu'); ?>
                                     
             <div id="login">
-                <form class="form-signin" id="login" action="<?php echo pf_config::get('main_page').pf_config::get('index_page')?>/login/action" method="POST">
+                <form class="form-signin" id="login" action="<?php echo MAIN_PAGE ?>/login/action" method="POST">
                         
                     <?php if ($failed) echo '<div id="failed" class="alert">Invalid Username/Password Combination</div>'; ?>
                     <legend>Please Login</legend>

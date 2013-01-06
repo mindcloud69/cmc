@@ -140,7 +140,8 @@
     define('BASE_URL',  pf_config::get('base_url'));
     define('MAIN_PAGE', pf_config::get('main_page'));
     define('ASSETS_DIR', BASE_URL . 'app/assets');
-    define('JSON_FILE',  pf_config::get('Json_Settings'));
+    define('SETTINGS_FILE',  pf_config::get('Json_Settings'));
+    define('DB_FILE',  pf_config::get('SQLite_DB'));
     
     
 /* =============================================================================

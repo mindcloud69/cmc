@@ -16,7 +16,7 @@ define('ENVIRONMENT','DEV'); //<-- default LIVE
 define('DEVPATH',''); //our dev subfolder if any <-- this is mainly used by developers
 define('LIVEPATH',''); //our live subfolder if any <- any folder inside /var/www
 
-//Currently this is SUPER untested...will test later in beta?
+//Currently this is SUPER untested...good luck getting it to work
 //if  using mod_rewrite set this to ''
 //if you are using mod_rewrite, don't forget to change your links to remove the index.php
 define('INDEXPAGE', 'index.php');
@@ -75,10 +75,10 @@ pf_config::set('stylesheet_dir', 'app/assets/css/');
 pf_config::set('java_dir', 'app/assets/js/');
 
 /* =============================================================================
- * SETTINGS SETUP - Our Json File to use for settings
+ * SETTINGS SETUP - Our Json File to use for settings and DB
  * ===========================================================================*/
 pf_config::set('Json_Settings', APPLICATION_DIR.'config'.DS.'settings.json');
-
+pf_config::set('SQLite_DB',APPLICATION_DIR.'config'.DS.'CMC.db');
 /* =============================================================================
  * REQUIRED VERSIONS - Our Required Versions of required sofware
  *                     I am using an array so if we need to add stuff later we can.

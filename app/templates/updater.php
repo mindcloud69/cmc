@@ -12,20 +12,38 @@ $current = explode("-",APP_VERSION);        //our current
 $update_stable = false;
 $update_dev = false;
 
+//compare versions
+$stable_number = version_compare(intval($current[0]), intval($stable[0]));
+$dev_number = version_compare(intval($current[0]), intval($dev[0]));
 
-
-//check our stable
-if ($current[0] < $stable[0]) $update_stable = true;
-else 
+//compare current to stable - if current less than stable
+if ($stable_number > 0 ) //if current less than stable
 {
-    if (parsetype($current[1]) < parsetype($stable[1])) $update_stable = true; //check branches (alpha,beta,rc,stable)
+    $update_stable = true;
+}
+elseif ( $stable_number = 0 ) //if equal versions
+{
+    //we check to see if the current sub-branch is more than stable sub-branch
+    if (parsetype($current[1]) < parsetype($stable[1]))
+    {
+    $update_stable = true; //check branches (alpha,beta,rc,stable)
+    echo 'true';
+    }
 }
 
-if ($current[0] < $dev[0]) $update_dev = true;
-else 
+//compare current to dev - if current less than dev
+if ($dev_number > 0 ) //if current less than dev
+{
+    $update_dev = true;
+}
+elseif ($dev_number = 0 ) //if equal versions
+{
+    //we check to see if the current sub-branch is more than stable sub-branch
+    if (parsetype($current[1]) < parsetype($dev[1]))
     {
-    if (parsetype($current[1]) < parsetype($dev[1])) $update_dev = true;
+    $update_dev = true; //check branches (alpha,beta,rc,stable)
     }
+}
 
 //inform of update
 if ($update_stable) echo '<div id="newrelease" class="span12 warning center" style="padding:0;background-image:none;"><a href="'.$result['stable_link'].'"><b>Update:</b>New Stable Release Available</a></div>';

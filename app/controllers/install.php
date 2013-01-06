@@ -5,7 +5,7 @@ class install extends pf_controller
     public function index()
     {
         $data = new pf_json();
-        $data->readJsonFile(pf_config::get('Json_Settings'));  //grab data from json
+        $data->readJsonFile(SETTINGS_FILE);  //grab data from json
         $page_data = array('installed'=> $data->get('bukkit_dir')); //do we have a bukkit_dir?
         
         //if we have a settings file, we are installed and we check a login.
@@ -13,6 +13,7 @@ class install extends pf_controller
         {
         $this->checkLogin ();
         }
+        
         $req = pf_config::get('requirements');
         $curver = (float)(substr(phpversion(), 0,3));
         
@@ -25,19 +26,18 @@ class install extends pf_controller
         //check php version
         if ($curver < $req['PHP']) $errors['type']='php';
         
-        
         //check read/write
         if (!file_put_contents(APPLICATION_DIR.'config/write-test-passed', 'testing')) $errors['type']='write';
+        
+        //delete the file we created
+        if (file_exists(APPLICATION_DIR.'config/write-test-passed')) unlink (APPLICATION_DIR .'config/write-test-passed');
         
         //if we have errors, we load the error page passing the type along with it
         if ($errors['type'] !== 'none')
         {
-            
-        $this->loadView('install/install_error_page.php',$errors);
-        die();
+            $this->loadView('install/install_error_page.php',$errors);
+            die();
         }
-        
-        
         
         //load install form
         $this->loadView('install/install_page.php',$page_data); //pass the array to the page
@@ -73,23 +73,23 @@ class install extends pf_controller
         
         //check for old settings
         pf_events::eventsAdd('Checking for old settings file');
-        if (file_exists(pf_config::get('Json_Settings')))
+        if (file_exists(SETTINGS_FILE))
         {
             pf_events::eventsAdd('removing old settings file');
-            if (!unlink(pf_config::get('Json_Settings')))
+            if (!unlink(SETTINGS_FILE))
             {
                 pf_events::eventsAdd('unable to delete old JSON settings file');
                 pf_events::dispayFatal('Unable to Delete Old JSON Settings File!');
             }
         }
         //delete old database if there.
-        if (file_exists(APPLICATION_DIR.'config'.DS.'CMC.db'))
+        if (file_exists(DB_FILE))
         {
-            unlink(APPLICATION_DIR.'config'.DS.'CMC.db');
+            unlink(DB_FILE);
         }
         
         //create new db object
-        $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
+        $sqlite = "sqlite:".DB_FILE;
         $db = new PDO($sqlite);
 
         //create new database table
@@ -112,13 +112,13 @@ class install extends pf_controller
         
         //write settings for bukkit dir
         $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
+        $settings->readJsonFile(SETTINGS_FILE);
         $settings->set('bukkit_dir', $bukkitdir);
         $settings->set('salt',$salt);
         $settings->set('bukkit_channel', $bukkitrelease);
         $settings->set('log_lines', '100');
         $settings->set('restart_check', '15');
-        if (!$settings->writeJsonFile(pf_config::get('Json_Settings')))
+        if (!$settings->writeJsonFile(SETTINGS_FILE))
         {
             pf_events::dispayFatal ('Unable to Save Config - Is /cmc/app/config writable?');
 

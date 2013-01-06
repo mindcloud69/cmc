@@ -4,32 +4,31 @@ class main extends pf_controller
 {
     public function index()
     {
+        $data = array();
         
         $this->loadLibrary('server_conf');
+        $this->loadLibrary('CMC');
+        $this->loadLibrary('mcController');
         
-        //grab the servers config
-        $data = array();
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
+        $data['bukkit_dir'] = CMC::getCMCSetting('bukkit_dir');
         
-        $data['bukkit_dir'] = $settings->get('bukkit_dir');
-        
-        if (!server_conf::grabConfig($data['bukkit_dir'].'/server.properties'))
+        if (!mcController::getMCConfig($data['bukkit_dir'].'/server.properties'))
         {
-            pf_events::dispayFatal('Unable To Find Server.Properties!<br /><a href="'.pf_config::get('main_page').'/install">Click Here To Install/Reinstall</a>');
+            pf_events::dispayFatal('Unable To Find Server.Properties!<br /><a href="'.MAIN_PAGE.'/install">Click Here To Install/Reinstall</a>');
         }
         
         //check if logged in
         $this->checkLogin();
         
         //get some info from the config file
-        $data['online']=server_conf::checkOnline();
-        $data['world'] = server_conf::getSetting('level-name');
-        $data['pvp'] = server_conf::getSetting('pvp');
-        $data['difficulty'] = server_conf::getSetting('difficulty');
-        $essentials = server_conf::checkEssentials($data['bukkit_dir']);
+        $data['online']=mcController::checkOnline();
+        $data['world'] = mcController::getSetting('level-name');
+        $data['pvp'] = mcController::getSetting('pvp');
+        //$data['difficulty'] = server_conf::getSetting('difficulty');
+        $data['difficulty'] = mcController::getSetting('difficulty');
+        $essentials = mcController::checkEssentials($data['bukkit_dir']);
 
-        $gamemode= server_conf::getSetting('gamemode');
+        $gamemode= mcController::getSetting('gamemode');
         if ($gamemode == 0) $gamemode = 'Survival';
         elseif ($gamemode == 1) $gamemode = 'Creative';
         elseif ($gamemode == 1) $gamemode = 'Adventure';
@@ -40,8 +39,8 @@ class main extends pf_controller
         $data['gamemode'] = $gamemode;
         
         $list = '';
-        server_conf::checkPluggins($data['bukkit_dir']);
-        foreach (server_conf::$pluggins as $plugin)
+        mcController::checkPluggins($data['bukkit_dir']);
+        foreach (mcController::$pluggins as $plugin)
         {
             $list .= ", ".$plugin;
         }

@@ -16,7 +16,7 @@ class login extends pf_controller
         {
             //get our salt
             $settings = new pf_json;
-            $settings->readJsonFile(pf_config::get('Json_Settings'));
+            $settings->readJsonFile(SETTINGS_FILE);
             $salt=$settings->get('salt');
             
             $username = $_POST['username'];
@@ -24,8 +24,7 @@ class login extends pf_controller
     
             $loginaccepted=false;
 
-            $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
-            require_once(SYSTEM_DIR.'core'.DS.'db.php');
+            $sqlite = "sqlite:".DB_FILE;
             $db = new PDO($sqlite) or die('unable to use SQLite');
             
             //get all users
@@ -38,6 +37,7 @@ class login extends pf_controller
                 {
                     // don't forget $user['Level']
                     $loginaccepted=true;
+                    $level = $user['Level'];
                     break;
                 }
             }
@@ -46,6 +46,7 @@ class login extends pf_controller
         {
             pf_auth::setLoggedin();
             pf_auth::saveVar('user', $username);
+            pf_auth::saveVar('level', $level);
             pf_core::redirectUrl(pf_config::get('main_page'));
         }
         else 
