@@ -12,13 +12,20 @@ $current = explode("-",APP_VERSION);        //our current
 $update_stable = false;
 $update_dev = false;
 
-//check branches (alpha,beta,rc,stable)
-if (parsetype($current[1]) > parsetype($stable[1])) $update_stable = true;
-if (parsetype($current[1]) > parsetype($dev[1])) $update_dev = true;
 
-//check our main numbers
+
+//check our stable
 if ($current[0] < $stable[0]) $update_stable = true;
+else 
+{
+    if (parsetype($current[1]) < parsetype($stable[1])) $update_stable = true; //check branches (alpha,beta,rc,stable)
+}
+
 if ($current[0] < $dev[0]) $update_dev = true;
+else 
+    {
+    if (parsetype($current[1]) < parsetype($dev[1])) $update_dev = true;
+    }
 
 //inform of update
 if ($update_stable) echo '<div id="newrelease" class="span12 warning center" style="padding:0;background-image:none;"><a href="'.$result['stable_link'].'"><b>Update:</b>New Stable Release Available</a></div>';
@@ -31,9 +38,10 @@ function parsetype($type)
     
     $level = 0;
     if ($type == 'alpha') $level = 0;
-    if ($type == 'beta') $level = 1;
-    if ($type == 'rc') $level = 2;
-    if ($type == 'stable') $level = 3;
+    elseif ($type == 'beta') $level = 1;
+    elseif ($type == 'rc') $level = 2;
+    elseif ($type == 'stable') $level = 3;
+    else $level=0;
     return $level;
 }
 
