@@ -1,21 +1,13 @@
-## Version 1.2.7.a - New Features/Enhancements
- * Craftbukkit Auto-Updater
- * Essentials Config
- * Permissions Config
-<br />
-## Version 1.2.6.Stable - Free Open Source Release
- * only security fixes 
- * Fix releases will have this format 1.2.6.Stable.x <-- x being 1-99 depending on fixes issued
-<br />
-## Version 1.2.6.RC1 - Open Testing
- * Bug Fixes Only
-<br />
-## Version 1.2.6.b - Feature Freeze
- * Closed Beta Testing (later this will be open)
- * Configurable script actions (configure the echo's wait times etc)
- * Backups
-<br />
-## Version 1.2.6.a - New Features/Enahancements
- * op/kick/ban players
- * parse chat from server log and display in seperate chat tab
- * parse color codes from server log
+Alpha's will get released every week (or so) as a "dev" build, CMC's will be notified of this build as a "dev". 
+Huge projects/re-writes will be reserved for alpha's only.
+
+Beta's will get released about every other week as a 'dev' build, CMC will be notified of this build as a "dev".
+New features can be added in a beta branch, but only if they don't require huge re-writes. The version
+should be considered "working" when released and ready for joe-blow to install and run.
+
+RC will get released about every 3 weeks as a "stable" build, CMC will be notified of this build as stable. 
+Most users will be expected to upgrade. Alphas/Betas will be deleted in git. A new X.X.X-alpha
+will be created in git, and started.
+
+Stable will get released about once a month. CMC will be notified of this build as stable. All users will be 
+expected to upgrade unless they are running dev only branches. The RC branch in git will be removed.
