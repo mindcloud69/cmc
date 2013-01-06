@@ -62,7 +62,7 @@ $loglines = array(
                         <legend>Other Details</legend>
                         Bukkit Location:<br /><?php pf_forms::text('bukkitdir', true, null, 'Bukkit Install Directory');?><br />
                         Bukkit Release Channel<br /><?php pf_forms::options('bukkitchannel', 'bukkitchannel', array('Recommeded'=>'Recommended','Beta'=>'Beta','Dev'=>'Dev')); ?><br />
-                        <input type="checkbox" value="stats" checked />Send Install Stats<br />
+                        
                         <br />
                         <input type="submit" value="SAVE" class="button rounded span2"/>
                         <?php pf_forms::closeForm();?>
