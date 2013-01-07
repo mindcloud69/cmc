@@ -46,7 +46,7 @@
  * ===========================================================================*/    
     //load settings file with our config and our events logger
     require_once (SYSTEM_DIR.'core'.DS.'pf_config.php'); //loads our settings class
-    require_once (APPLICATION_DIR.'config'.DS. 'config.php'); //loads our config
+    require_once (SYSTEM_DIR.'config'.DS. 'config.php'); //loads our config
 
 /* =============================================================================
  * EVENTS REPORTING - setup events reporting/timezone
