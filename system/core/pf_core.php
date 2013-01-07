@@ -120,7 +120,7 @@ class pf_core {
  * Compares 2 versions
  * ===========================================================================*/
     public static function compare_versions($a,$b)
-{
+    {   
     //break the numbers down
     $a = explode('.',  rtrim($a, '.0')); //split versions into pieces and remove .0
     $b = explode('.',  rtrim($b, '.0')); //split versions into pieces and remove .0
@@ -143,8 +143,26 @@ class pf_core {
     //At this point, we know that to the depth that A and B extend to, they are equivalent. 
     //Either the loop ended because A is shorter than B, or both are equal. 
     return (count($a) < count($b)) ? -1 : 0; 
-}
+    }
     
+    //makes a random code
+    public static function randomCode($length)
+    {
+        $code = '';
+        $possible = "2346789bcdfghjkmnpqrtvwxyzABCDFGHJKLMNPQRTVWXYZ";  //possible chars
+        $maxlength = strlen($possible);
+        $i=0;
+        while ($i < $length)
+        {
+            $char = substr($possible, mt_rand(0, $maxlength-1), 1);
+            if (!strstr($code,$char)) //have we already used this char?
+            {
+                    $code .=$char;
+                    $i++;
+            }
+        }
+        return $code;
+    }
 }//end of class
 
 ?>

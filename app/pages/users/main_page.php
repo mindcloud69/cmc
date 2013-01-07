@@ -21,6 +21,7 @@
 			$table->addTableHeading('ID');
 			$table->addTableHeading('Name');
 			$table->addTableHeading('Level');
+                        $table->addTableHeading('Edit');
 			$table->addTableHeading('Delete');
 			$table->endRow();
 
@@ -30,6 +31,7 @@
     			$table->addCell($user['ID']);
                         $table->addCell($user['User']);
     			$table->addCell($user['Level']);
+                        $table->addCell('<center><a style="width:80px;" class="button rounded" href="'.pf_config::get('main_page').'/users/edit?id='.$user['ID'].'">Edit </a></center>');
     			$table->addCell('<center><a style="width:80px;" class="button rounded" href="'.pf_config::get('main_page').'/users/delete?id='.$user['ID'].'&user='.$user['User'].'">Delete </a></center>');
     			$table->endRow();
 			}

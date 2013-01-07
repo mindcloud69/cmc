@@ -47,8 +47,6 @@ class users extends pf_controller
         $q->bindParam(':Level', $level);
         $q->execute();
         
-        $this->loadLibrary('server_control');
-        
         CMC::log('User Added: '.$username .' by User:' .pf_auth::getVar('user'));
         
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
@@ -74,6 +72,61 @@ class users extends pf_controller
         CMC::log('User '.$_GET['user'].' Deleted by User:' .pf_auth::getVar('user'));
         
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
+    }
+    public function edit()
+    {
+        $this->checkLogin();
+        //connect DB
+        $sqlite = "sqlite:".DB_FILE;
+        $db = new PDO($sqlite);
+        
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            //get our salt
+            $salt = CMC::getCMCSetting('salt');
+            
+            
+            //grab post data
+            $level = $_POST['level'];
+            $id=$_POST['id'];
+            
+            if (isset($_POST['resetpass']) == TRUE)
+            {
+                $newpass=$_POST['resetpass'];
+                $newpass=  pf_auth::hashThis($newpass, $salt);
+                $sql="UPDATE Users SET Level=?, Pass=? WHERE ID=?";
+                $q = $db->prepare($sql);
+                $q->execute(array($level,$newpass,$id));
+            }
+            else
+            {
+            $newpass = trim($_POST['newpass']);
+            $newpass =  pf_auth::hashThis($newpass, $salt);
+            $sql="UPDATE Users SET Level=?,Pass=? WHERE ID=?";
+            $q = $db->prepare($sql);
+            $q->execute(array($level,$id));
+            }
+            
+            pf_core::redirectUrl(MAIN_PAGE.'/users');
+            
+        }
+        
+        if (isset($_GET['id'])==false)
+        {
+            pf_events::dispayFatal('Invalid ID Specified');
+        }
+        
+        $results = $db->prepare('Select * FROM Users WHERE ID ='.$_GET['id']);
+        $results->execute();
+        $data = $results->fetch();
+        
+        //close the DB
+        $db=null;
+        
+        $this->loadView('users/edit_page.php',$data);
+        
+        
     }
 }
 ?>
