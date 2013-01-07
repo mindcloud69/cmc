@@ -4,9 +4,7 @@ class install extends pf_controller
 {
     public function index()
     {
-        $data = new pf_json();
-        $data->readJsonFile(SETTINGS_FILE);  //grab data from json
-        $page_data = array('installed'=> $data->get('bukkit_dir')); //do we have a bukkit_dir?
+        $page_data = array('installed'=> CMC::getCMCSetting('bukkit_dir')); //do we have a bukkit_dir?
         
         //if we have a settings file, we are installed and we check a login.
         if ($page_data['installed']) 
@@ -110,19 +108,13 @@ class install extends pf_controller
         
         $statement->execute();
         
-        //write settings for bukkit dir
-        $settings = new pf_json();
-        $settings->readJsonFile(SETTINGS_FILE);
-        $settings->set('bukkit_dir', $bukkitdir);
-        $settings->set('salt',$salt);
-        $settings->set('bukkit_channel', $bukkitrelease);
-        $settings->set('log_lines', '100');
-        $settings->set('restart_check', '15');
-        if (!$settings->writeJsonFile(SETTINGS_FILE))
-        {
-            pf_events::dispayFatal ('Unable to Save Config - Is /cmc/app/config writable?');
-
-        }
+        //write our settings file
+        CMC::writeCMCSetting('bukkit_dir', $bukkitdir);
+        CMC::writeCMCSetting('salt',$salt);
+        CMC::writeCMCSetting('bukkit_channel', $bukkitrelease);
+        CMC::writeCMCSetting('log_lines', '100');
+        CMC::writeCMCSetting('restart_check', '15');
+        
         $this->loadView('install/complete_page.php');
         
     }

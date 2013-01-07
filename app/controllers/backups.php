@@ -13,7 +13,7 @@ class backups extends pf_controller
         //get our config
         mcController::getMCConfig($bukkit_dir.DS.'server.properties');
         
-        $level = mcController::getSetting('level_name');
+        $level = mcController::getSetting('level-name');
         
         //all world directories in an array
         $data=array();
@@ -50,22 +50,15 @@ class backups extends pf_controller
     
     public function delete()
     {
-        //var_dump($_POST);
         $this->checkLogin();
-        
-        //for logging to server
-        $this->loadLibrary('server_control');
-        
         
         if ($_SERVER['REQUEST_METHOD'] !='POST')
         {
             pf_core::redirectUrl(pf_config::get('main_page').'/backups');
         }
         
-        //get our dir
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        $bukkit_dir = $settings->get('bukkit_dir');
+        //get our bukkit dir
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         
         foreach ($_POST['file'] as $file)
         {
@@ -74,7 +67,7 @@ class backups extends pf_controller
             {
                 if (unlink($file)) //delete the file
                 {
-                    server_control::log('Backup '.$file .' Deleted');
+                    CMC::log('Backup '.$file .' Deleted');
                 }
                 else //can't delete, throw error
                 {
@@ -93,14 +86,8 @@ class backups extends pf_controller
             pf_core::redirectUrl(pf_config::get('main_page'));
         }
 
-        //for logging to server
-        $this->loadLibrary('server_control');
-        
-        //get our dir
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        $bukkit_dir = $settings->get('bukkit_dir');
-        
+        //get our bukkit dir
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         $backup_dir = $bukkit_dir.DS.'CMC_backups';
         
         //check for the backup dir, if it doesn't exist, we make it
@@ -110,8 +97,8 @@ class backups extends pf_controller
         }
 
         //send the save off command
-        $this->send("save-off");
-        $this->send('save-all');
+        mcController::serverSend('save-off');
+        mcController::serverSend('save-all');
         sleep(5);
         
         foreach ($_POST as $dir)
@@ -122,35 +109,26 @@ class backups extends pf_controller
             if (is_dir($dir))
             {
                 //log to server log the backup was started
-                server_control::log('Backup Started For World:'. $name[2]);
+                CMC::log('Backup Started By User: '.pf_auth::getVar('user').' For World:'. $name[2]);
                 $command = 'tar -zcf ' . $backup_dir.DS.$name[2] . "-".date('m-d-y-Gis').'.tar.gz ' . $dir."\n";
                 exec('nohup '.$command."> /dev/null 2>/dev/null &");
+                
+                //log backups complete for that world
+                CMC::log('Backups Complete For World:'. $name[2]);
             }
             
         }
         
         //turn back on save.
-        $this->send('save-on');
+        mcController::serverSend('save-on');
+        //$this->send('save-on');
         
         //record the last backup
-        $settings->set('last_backup', date('m/d/Y'));
+        CMC::writeCMCSetting('last_backup', date('m/d/Y'));
         
-        //write the file
-        if (!$settings->writeJsonFile(pf_config::get('Json_Settings')))
-        {
-            pf_html::clearPreviousBuffer();
-            pf_events::dispayFatal('Unable to save settings! Is app/config writeable?');
-        }
-        server_control::log('Backups Complete For World:'. $name[2]);
+        //load the page
         $this->loadView('/backups/backup_complete_page.php');
         
-    }
-    
-    //sends a command to the server
-    private function send($command)
-    {
-        $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
-        exec($command);
     }
 }
 ?>

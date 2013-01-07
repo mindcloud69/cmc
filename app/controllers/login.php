@@ -15,9 +15,7 @@ class login extends pf_controller
         if ($_SERVER['REQUEST_METHOD']=="POST")
         {
             //get our salt
-            $settings = new pf_json;
-            $settings->readJsonFile(SETTINGS_FILE);
-            $salt=$settings->get('salt');
+            $salt=CMC::getCMCSetting('salt');
             
             $username = $_POST['username'];
             $password = pf_auth::hashThis($_POST['password'], $salt);

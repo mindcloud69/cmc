@@ -10,20 +10,14 @@ class data extends pf_controller
     public function general()
     {
         $data = array();
-        if ($this->loadLibrary('server_conf.php'))
-        {
-        $data['online']=server_conf::checkOnline();
-        }
         
-        if ($this->loadLibrary('server_info.php'))
-        {
-            $server = new server_info;
-            $info = $server->mc_Usage();
-            $data['CPU']=round($info[0],2);
-            $data['MEM']=round($info[1],2);
-            $data['MULTI']=$info['MultiJavas'];
-            $data['CORES']=$info['cores'];
-        }
+        $data['online']=  mcController::checkOnline();
+        
+        $info = mcController::CPUUsage();
+        $data['CPU']=round($info[0],2);
+        $data['MEM']=round($info[1],2);
+        $data['MULTI']=$info['MultiJavas'];
+        $data['CORES']=$info['cores'];
         pf_html::clearPreviousBuffer();
         echo json_encode($data);
     }
@@ -31,10 +25,7 @@ class data extends pf_controller
     public function info()
     {
         error_reporting(E_ALL);
-        //pf_html::clearPreviousBuffer();
-        $this->loadLibrary('server_info.php');
-        $server = new server_info;
-        $info = $server->mc_Status('127.0.0.1');
+        $info=  mcController::serverStatus('127.0.0.1');
         echo json_encode($info);
     }
     
@@ -66,13 +57,8 @@ class data extends pf_controller
         $chatlog = '';
         $conlog = '';
         
-        //grab the servers config
-        $data = array();
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        
-        $bukkit_dir = $settings->get('bukkit_dir');
-        $log_limit = $settings->get('log_lines');
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
+        $log_limit = CMC::getCMCSetting('log_lines');
         
         //tac reverse reads a file | grep -v removes any connections from localhost | head -$log_limit displays the top ?? entries (which is actually the last as it's reversed)
         $command = 'tac '.$bukkit_dir.DS.'server.log | grep -v 127.0.0.1 | grep -v /login | head -'.$log_limit;

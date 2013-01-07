@@ -7,12 +7,14 @@ class users extends pf_controller
         $this->checkLogin();
         
         //load up the database
-        $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
+        
+        $sqlite = "sqlite:".DB_FILE;
         $db = new PDO($sqlite);
         
         //grab our users
         $results= $db->query('SELECT * FROM Users');
         
+        //close the DB
         $db=null;
         
         $this->loadView('users/main_page.php',$results);
@@ -31,14 +33,12 @@ class users extends pf_controller
         $level = trim($_POST['level']);
         
         //get our salt
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        $salt = $settings->get('salt');
+        $salt = CMC::getCMCSetting('salt');
         
         //salt our password
         $password=  pf_auth::hashThis($password, $salt);
         
-        $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
+        $sqlite = "sqlite:".DB_FILE;
         $db = new PDO($sqlite);
         
         $q = $db->prepare('INSERT INTO Users (User,Pass,Level) values(:User,:Pass,:Level)');
@@ -49,7 +49,7 @@ class users extends pf_controller
         
         $this->loadLibrary('server_control');
         
-        server_control::log('User Added: '.$username);
+        CMC::log('User Added: '.$username .' by User:' .pf_auth::getVar('user'));
         
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
         }
@@ -65,13 +65,13 @@ class users extends pf_controller
             pf_events::dispayFatal('Invalide ID Specified');
         }
         
-        $sqlite = "sqlite:".APPLICATION_DIR.'config'.DS.'CMC.db';
+        $sqlite = "sqlite:".DB_FILE;
         $db = new db($sqlite);
         $db->delete('Users', 'ID = '.$_GET['id']);
         
         $this->loadLibrary('server_control');
         
-        server_control::log('User '.$_GET['user'].' Deleted:');
+        CMC::log('User '.$_GET['user'].' Deleted by User:' .pf_auth::getVar('user'));
         
         pf_core::redirectUrl(pf_config::get('main_page').'/users');
     }

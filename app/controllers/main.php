@@ -6,10 +6,6 @@ class main extends pf_controller
     {
         $data = array();
         
-        $this->loadLibrary('server_conf');
-        $this->loadLibrary('CMC');
-        $this->loadLibrary('mcController');
-        
         $data['bukkit_dir'] = CMC::getCMCSetting('bukkit_dir');
         
         if (!mcController::getMCConfig($data['bukkit_dir'].'/server.properties'))
