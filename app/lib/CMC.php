@@ -21,7 +21,13 @@ class CMC
         $settings = new pf_json();
         $settings->readJsonFile(SETTINGS_FILE);
         $settings->set($setting, $value);
-        $settings->writeJsonFile(SETTINGS_FILE);
+        
+        //if we can't write to the file, we throw an error
+        if (!$settings->writeJsonFile(SETTINGS_FILE))
+        {
+            pf_html::clearPreviousBuffer();
+            pf_events::dispayFatal('Unable to save settings! Is app/config writeable?');
+        }
     }
     
     //logs to server.log
