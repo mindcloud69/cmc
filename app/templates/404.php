@@ -23,7 +23,7 @@
                         <p class="center">
                             Not really, but the page your looking for doesn't actually exist.<br />
                             Perhaps you should double check your link and make sure it's correct or <br/>
-                            <a class="large" href="<?php echo pf_config::get('base_url').pf_config::get('index_page');?>"> Hit up the main site</a>
+                            <a class="large" href="<?php echo MAIN_PAGE;?>"> Hit up the main site</a>
                         </p>
                         <?php pf_events::eventsDisplay();?>
                 </div>
