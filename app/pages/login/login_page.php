@@ -2,7 +2,7 @@
 if (key_exists('failed', $data))$failed=true;
 else $failed=FALSE;
 ?>
-
+<!DOCTYPE html>
 <html>	
 	<head>
 		<?php pf_core::loadTemplate('header'); ?>

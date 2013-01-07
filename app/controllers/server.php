@@ -12,10 +12,6 @@ class server extends pf_controller
     //send a command to screen
     private function send($command)
     {
-        //load CMC library
-        $this->loadLibrary('CMC');
-        $this->loadLibrary('mcController');
-        
         $log = $command .' issued by '. pf_auth::getVar('user');
         
         CMC::log($log);
@@ -74,10 +70,6 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
-        //load CMC library
-        $this->loadLibrary('CMC');
-        $this->loadLibrary('mcController');
-        
         //log it
         CMC::log('Server Stopped By '.pf_auth::getVar('user'));
         
@@ -92,10 +84,6 @@ class server extends pf_controller
     //restarts the server if not online. No login check required
     public function restart()
     {
-        //load CMC library
-        $this->loadLibrary('CMC');
-        $this->loadLibrary('mcController');
-        
         CMC::log('Restart Cron - Checking Server Connectable');
 
         //check if server is online
@@ -116,10 +104,6 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
-        //load CMC library
-        $this->loadLibrary('CMC');
-        $this->loadLibrary('mcController');
-        
         $channel = CMC::getCMCSetting('bukkit_channel');
         
         CMC::writeCMCSetting('restart_check', false); //turn off the restart check as the stop command will remove the cron.
@@ -138,10 +122,6 @@ class server extends pf_controller
     public function startup()
     {
         $this->checkLogin();
-        
-        //load CMC library
-        $this->loadLibrary('CMC');
-        $this->loadLibrary('mcController');
         
         $data= CMC::getCMCSetting('startup_ram');
         $restart_time = CMC::getCMCSetting('restart_check');

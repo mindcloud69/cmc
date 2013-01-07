@@ -9,11 +9,8 @@ class players extends pf_controller
     
     public function banned()
     {
-        //shows banned players
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        
-        $data['bukkit_dir'] = $settings->get('bukkit_dir');
+        //get our bukkit dir
+        $data['bukkit_dir'] = CMC::getCMCSetting('bukkit_dir');
         
         $bannedfile = explode("\n",file_get_contents($data['bukkit_dir'].'/banned-players.txt'));
         
@@ -37,7 +34,6 @@ class players extends pf_controller
             );
         }
         $this->loadView('players/banned.php', $data);
-        
     }
 }
 
