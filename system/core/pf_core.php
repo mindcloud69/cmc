@@ -116,6 +116,35 @@ class pf_core {
         return (boolean)$data;
     }    
     
+/* =============================================================================
+ * Compares 2 versions
+ * ===========================================================================*/
+    public static function compare_versions($a,$b)
+{
+    //break the numbers down
+    $a = explode('.',  rtrim($a, '.0')); //split versions into pieces and remove .0
+    $b = explode('.',  rtrim($b, '.0')); //split versions into pieces and remove .0
+    
+    //iterate over each part of a
+    foreach ($a as $depth => $aVal)
+    {
+        //if B matches A to this depth, comare the values
+        if (isset($b[$depth]))
+        {
+            if ($aVal > $b[$depth]) return 1; //Return A > B | A is Greater than B
+            else if ($aVal < $b[$depth]) return -1; //Return A < B | A is Less than B
+        }
+        //if B doesn't match A at this depth, then A comes after B in sort order
+        else
+        {
+            return 1; //Return A > B | A is Greater than B
+        }
+    }
+    //At this point, we know that to the depth that A and B extend to, they are equivalent. 
+    //Either the loop ended because A is shorter than B, or both are equal. 
+    return (count($a) < count($b)) ? -1 : 0; 
+}
+    
 }//end of class
 
 ?>

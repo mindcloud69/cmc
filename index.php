@@ -24,7 +24,7 @@
  * APP SETTINGS
  * ===========================================================================*/
     define('APP_NAME','Crafty Minecraft Controller');
-    define('APP_VERSION', '1.2.8-Alpha-build:1');
+    define('APP_VERSION', '1.2.8-Alpha');
 
 /* =============================================================================
  * BASIC SETTINGS - used for increased readablity
@@ -46,8 +46,8 @@
  * ===========================================================================*/    
     //load settings file with our config and our events logger
     require_once (SYSTEM_DIR.'core'.DS.'pf_config.php'); //loads our settings class
-    require_once (SYSTEM_DIR.'config'.DS. 'config.php'); //loads our config
-
+    require_once (APPLICATION_DIR.'config'.DS. 'config.php'); //loads our config
+    
 /* =============================================================================
  * EVENTS REPORTING - setup events reporting/timezone
  * ===========================================================================*/
@@ -92,12 +92,6 @@
         pf_events::$show_debug=false;
         pf_events::eventsAdd('Environment Set To LIVE');
     }
-
-/*
- * Autoload
- */    
-    if (file_exists(SYSTEM_DIR.'config'.DS.'autoload.php')) 
-            require_once SYSTEM_DIR.'config'.DS.'autoload.php';
     
 /* =============================================================================
  * OUTPUT BUFFERING - Turns it on, This is VERY useful for us.
@@ -110,7 +104,6 @@
  * ===========================================================================*/        
     session_start();
     pf_events::eventsAdd('Sessions Started');
-    
 /* =============================================================================
  * CONFIG BASE URL - Needed for all pf_html settings, and just useful in general
  * ===========================================================================*/
@@ -139,16 +132,6 @@
         pf_config::set('main_page', pf_config::get('base_url') . INDEXPAGE);
         pf_events::eventsAdd('main_page set to: '. pf_config::get('main_page'));
     }
-    
-/* =============================================================================
- * MOAR DEFINES - These are to help shorten calls to common things
- * ===========================================================================*/    
-    define('BASE_URL',  pf_config::get('base_url'));
-    define('MAIN_PAGE', pf_config::get('main_page'));
-    define('ASSETS_DIR', BASE_URL . 'app/assets');
-    define('SETTINGS_FILE',  pf_config::get('Json_Settings'));
-    define('DB_FILE',  pf_config::get('SQLite_DB'));
-    
     
 /* =============================================================================
  * ROUTER - Load/Configure the router object and do routing
