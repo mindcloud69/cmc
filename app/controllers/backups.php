@@ -7,16 +7,13 @@ class backups extends pf_controller
         $this->checkLogin();
         
         //get our dir and last backup
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        $bukkit_dir = $settings->get('bukkit_dir');
-        $last_backup = $settings->get('last_backup');
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
+        $last_backup = CMC::getCMCSetting('last_backup');
         
         //get our config
-        $this->loadLibrary('server_conf');
-        server_conf::grabConfig($bukkit_dir.DS.'server.properties');
+        mcController::getMCConfig($bukkit_dir.DS.'server.properties');
         
-        $level = server_conf::getSetting('level-name');
+        $level = mcController::getSetting('level_name');
         
         //all world directories in an array
         $data=array();
@@ -36,9 +33,7 @@ class backups extends pf_controller
         $this->checkLogin();
         
         //get our dir and last backup
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        $bukkit_dir = $settings->get('bukkit_dir');
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         
         $backup_dir = $bukkit_dir.DS.'CMC_backups'.DS;
         $files = glob($backup_dir."*.tar*");

@@ -92,6 +92,12 @@
         pf_events::$show_debug=false;
         pf_events::eventsAdd('Environment Set To LIVE');
     }
+
+/*
+ * Autoload
+ */    
+    if (file_exists(SYSTEM_DIR.'config'.DS.'autoload.php')) 
+            require_once SYSTEM_DIR.'config'.DS.'autoload.php';
     
 /* =============================================================================
  * OUTPUT BUFFERING - Turns it on, This is VERY useful for us.

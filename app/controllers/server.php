@@ -16,7 +16,7 @@ class server extends pf_controller
         $this->loadLibrary('CMC');
         $this->loadLibrary('mcController');
         
-        $log = $command .' issued by User';
+        $log = $command .' issued by '. pf_auth::getVar('user');
         
         CMC::log($log);
         mcController::serverSend($command);
@@ -79,7 +79,7 @@ class server extends pf_controller
         $this->loadLibrary('mcController');
         
         //log it
-        CMC::log('Server Stopped By User');
+        CMC::log('Server Stopped By '.pf_auth::getVar('user'));
         
         //removes our cronjob if it's there 
         CMC::removeCronJob('http://localhost/index.php/server/restart');//remove anything that calls the restart
@@ -120,24 +120,17 @@ class server extends pf_controller
         $this->loadLibrary('CMC');
         $this->loadLibrary('mcController');
         
-        $this->loadLibrary('server_control');
+        $channel = CMC::getCMCSetting('bukkit_channel');
         
-        $bukkit_dir = mcController::getSetting('bukkit_dir');
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        $bukkit_dir = $settings->get('bukkit_dir');
-        $channel = $settings->get('bukkit_channel');
-        
-        $settings->set('restart_check', false); //turn off the restart check as the stop command will remove the cron.
-        $settings->writeJsonFile(pf_config::get('Json_Settings'));
-        
+        CMC::writeCMCSetting('restart_check', false); //turn off the restart check as the stop command will remove the cron.
+                
         //get the url for the download
         if ($channel == 'Recommended') $url = 'http://dl.bukkit.org/latest-rb/craftbukkit.jar';
         elseif ($channel == 'Beta') $url = 'http://dl.bukkit.org/latest-beta/craftbukkit.jar';
         elseif ($channel == 'Dev') $url = 'http://dl.bukkit.org/latest-dev/craftbukkit.jar';
         
+        //launch the updater
         require_once(APPLICATION_DIR.'/mcscripts/update.php');
-        
     }
 
 
@@ -146,18 +139,15 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
-        //load the server config library
-        $this->loadLibrary('server_conf');
-        $this->loadLibrary('server_control');
+        //load CMC library
+        $this->loadLibrary('CMC');
+        $this->loadLibrary('mcController');
         
-        //get settings
-        $settings = new pf_json();
-        $settings->readJsonFile(pf_config::get('Json_Settings'));
-        $data = $settings->get('startup_ram');
-        $restart_time = $settings->get('restart_check');
+        $data= CMC::getCMCSetting('startup_ram');
+        $restart_time = CMC::getCMCSetting('restart_check');
         
         //check if server is online
-        if (server_conf::checkOnline())
+        if (mcController::checkOnline())
         {
             //we are online
             pf_events::dispayFatal('Server Already Running, Perhaps you should stop it first?');
@@ -171,22 +161,18 @@ class server extends pf_controller
             //if restart is checked, we create a cronjob to watch for server crashes and restart server.
             if (pf_core::compareStrings($restart, 'true'));
             {
-                server_control::createCronJob('*/'.$restart_time.' * * * *', '/usr/bin/wget -q -O /tmp/cmc-crash-detect http://localhost/index.php/server/restart');
+                CMC::createCronJob('*/'.$restart_time.' * * * *', '/usr/bin/wget -q -O /tmp/cmc-crash-detect http://localhost/index.php/server/restart');
             }
 
             //save ram and restart settings to the settings file for later
-            $settings->set('startup_ram', $ram);
-            $settings->set('restart_cron',$restart);
-            
-            //write the settings file
-            $settings->writeJsonFile(pf_config::get('Json_Settings'));
+            CMC::writeCMCSetting('startup_ram', $ram);
+            CMC::writeCMCSetting('restart_cron',$restart);
             
             //get the bukkit_dir
-            $dir = server_control::getBukkitDir();
+            $dir = CMC::getCMCSetting('bukkit_dir');
             
             //write the script to the mcscripts folder
             $file = "cd $dir \n";
-            //$file = 'cd '.$dir."\n";
             $file .= 'screen -dmS bukkit java -Xincgc -Xmx'.$ram.'M -jar craftbukkit.jar'."\n";
             
             //if we can't write, we throw an error
@@ -195,11 +181,12 @@ class server extends pf_controller
                 pf_events::dispayFatal('Unable to save script! Is app/mcscripts writable?');
             }
             
+            //change the file to executable
             $chmod = 'chmod +x ' . APPLICATION_DIR.'mcscripts'.DS.'startup.sh';
             exec($chmod);
             
             //executes our new startup script
-            server_control::log('Server Started By User');
+            CMC::log('Server Started By '.pf_auth::getVar('user'));
             exec(APPLICATION_DIR.'mcscripts'.DS.'startup.sh');
             
             //redirect to main page
