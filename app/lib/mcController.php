@@ -92,21 +92,22 @@ class mcController
     {
         $player_files = glob($world_dir .'/players/*.dat');
         
-        echo "<table>";
+        $playersinfo = array();
         foreach ($player_files as $file) 
         {
-            echo "<tr>";
             //get the last time it was modified
             $last_modified = date ('m-d-y h:i a',filemtime($file));
+
             //removes the dir
             $file = substr($file, strlen($world_dir.DIRECTORY_SEPARATOR . 'players/'));
-            //removes the extention
-            $file = substr($file, 0,-4);
-            echo "<td>".$file . '</td> <td>last seen ' . $last_modified . "</td><td><a href='users/deluser.php?user=".$file."'>Delete User</a></td>";
-            echo "</tr>";
             
+            //removes the extention
+            $player = substr($file, 0,-4);
+            $playersinfo[] = array('last_seen' => $last_modified,'name' => $player);
         }
-        echo "</table>";
+        
+        return $playersinfo;
+        
     }
     
     public static function checkEssentials($bukkit_dir)

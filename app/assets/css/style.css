@@ -11,7 +11,7 @@ body {
 .table{
     border:1px solid black;
 }
-.table td{padding:12px 0px;}
+.table td{padding:12px}
 
 /*Forms*/
 .form-signin {
@@ -82,4 +82,8 @@ padding: 10px;
 }
 #users tr:nth-child(even) {
 background: #8CD;
+}
+
+.even{
+    background: #0be;
 }

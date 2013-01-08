@@ -66,6 +66,8 @@ else: ?>
                                         </ul>
                                     </li>
                                     
+                                    <li id="server"<?php if ($page == 'players') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/players"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/accessibility.png"/>&nbsp;Players</a></li>
+                                    
                                     <li id="users"<?php if ($page == 'users') echo 'class="active"'; ?> class="dropdown">
                                         <a href="#" class='dropdown-toggle' data-toggle="dropdown"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/user.png"/>&nbsp;Users<b class="caret"></b></a>
                                         <ul class="dropdown-menu" roll="menu">
