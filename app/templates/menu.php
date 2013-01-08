@@ -6,7 +6,7 @@ $page = $route['CONTROLLER'];
 //check to see if the user is logged in
 if (pf_auth::checkLogin()===TRUE) //if logged in, we show a "logout" button
 {
-    $loginlink = '<a href="'.pf_config::get('main_page').'/login/logout"><img src="'.pf_config::get('base_url').'/app/assets/site_images/icons/16px/locked.png"/>&nbsp;Logout</a>';
+    $loginlink = '<a href="'.pf_config::get('main_page').'/login/logout"><img src="'.pf_config::get('base_url').'/app/assets/site_images/icons/16px/locked.png"/>&nbsp;Logout '.pf_auth::getVar('user').'</a>';
 }
 else //if not logged in, we show a login link :)
 {
