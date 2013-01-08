@@ -4,18 +4,10 @@ if (!$data['restart_check'])
     $data['restart_check'] = '15';
 }
 
-$logselect = array(
-    '100'=>'100',
-    '200'=>'200',
-    '300'=>'300',
-    '400'=>'400',
-    '500'=>'500',
-    '600'=>'600',
-    '700'=>'700',
-    '800'=>'800',
-    '900'=>'900',
-    '1000'=>'1000'
-    );
+
+$logselect = range(100,1000,100);//generate an array counting from 100 to 1000 by 100's
+$cronjob = range(1,59);//generate an array counting from 1 to 59 by 1's
+
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +47,8 @@ $logselect = array(
                         </tr>
                         <tr>
                             <td>Auto Restart Check:</td>
-                            <td><?php pf_forms::text('auto_restart', true, $data['restart_check'], null);?></td>
+                            <td><?php pf_forms::options('auto_restart', 'auto_restart', $cronjob, $data['restart_check']);?></td>
+                            
                             <td>Number Of Minutes to check for a hung server if restart on crash is enabled</td>
                         </tr>
 
