@@ -45,11 +45,15 @@ class pf_auth {
         self::saveVar('level', $level);
     }
     
-    public static function lockPage($level,$errorMessage)
+    public static function lockPage($level,$errorMessage,$neverlockedlevel='Admin')
     {
         $userlevel = self::getVar('level');
         
         if (pf_core::compareStrings($userlevel, $level))
+        {
+            return true;
+        }
+        elseif (pf_core::compareStrings($userlevel, $neverlockedlevel))
         {
             return true;
         }

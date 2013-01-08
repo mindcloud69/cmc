@@ -64,7 +64,6 @@
                         $table->addcell('<input type="checkbox" class="delete" style="margin-left:8px;" name="file['.$i.']" value="'.$backup.'"/>');
                         $table->addCell($backup);
                         $table->addCell('<center>'.$createdate.'</center');
-                        //$table->addCell('<a class="button rounded span1" href="../backups/delete?file='.$backup.'">Delete</a>','center');
                         $table->endRow();
                     }
                     $table->renderTable();
