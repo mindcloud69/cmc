@@ -44,7 +44,7 @@ class login extends pf_controller
         {
             pf_auth::setLoggedin();
             pf_auth::saveVar('user', $username);
-            pf_auth::saveVar('level', $level);
+            pf_auth::setUserLevel($level);
             pf_core::redirectUrl(pf_config::get('main_page'));
         }
         else 

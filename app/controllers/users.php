@@ -6,8 +6,10 @@ class users extends pf_controller
     {
         $this->checkLogin();
         
-        //load up the database
+        //lock to admins only
+        pf_auth::lockPage('Admin', 'This Page Is Admin Only!');
         
+        //load up the database
         $sqlite = "sqlite:".DB_FILE;
         $db = new PDO($sqlite);
         
@@ -22,7 +24,10 @@ class users extends pf_controller
     
     public function add()
     {
+        //lock to admins only
         $this->checkLogin();
+        
+        pf_auth::lockPage('Admin', 'This Page Is Admin Only!');
         
         if ($_SERVER['REQUEST_METHOD']=='POST')
         {
@@ -54,9 +59,13 @@ class users extends pf_controller
         
         else $this->loadView('users/add_users_page.php');
     }
+    
     public function delete()
     {
         $this->checkLogin();
+        
+        //lock to admins only
+        pf_auth::lockPage('Admin', 'This Page Is Admin Only!');
         
         if (isset($_GET['id'])==false)
         {
@@ -76,6 +85,10 @@ class users extends pf_controller
     public function edit()
     {
         $this->checkLogin();
+        
+        //lock to admins only
+        pf_auth::lockPage('Admin', 'This Page Is Admin Only!');
+        
         //connect DB
         $sqlite = "sqlite:".DB_FILE;
         $db = new PDO($sqlite);
@@ -99,13 +112,19 @@ class users extends pf_controller
                 $q = $db->prepare($sql);
                 $q->execute(array($level,$newpass,$id));
             }
+            elseif ($_POST['newpass'] != "")
+            {
+                $newpass = trim($_POST['newpass']);
+                $newpass =  pf_auth::hashThis($newpass, $salt);
+                $sql="UPDATE Users SET Level=?,Pass=? WHERE ID=?";
+                $q = $db->prepare($sql);
+                $q->execute(array($level,$newpass,$id));
+            }
             else
             {
-            $newpass = trim($_POST['newpass']);
-            $newpass =  pf_auth::hashThis($newpass, $salt);
-            $sql="UPDATE Users SET Level=?,Pass=? WHERE ID=?";
-            $q = $db->prepare($sql);
-            $q->execute(array($level,$newpass,$id));
+                $sql="UPDATE Users SET Level=? WHERE ID=?";
+                $q = $db->prepare($sql);
+                $q->execute(array($level,$id));
             }
             
             pf_core::redirectUrl(MAIN_PAGE.'/users');

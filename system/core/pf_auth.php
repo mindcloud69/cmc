@@ -40,6 +40,29 @@ class pf_auth {
         return true;
     }
     
+    public static function setUserLevel($level)
+    {
+        self::saveVar('level', $level);
+    }
+    
+    public static function lockPage($level,$errorMessage)
+    {
+        $userlevel = self::getVar('level');
+        
+        if (pf_core::compareStrings($userlevel, $level))
+        {
+            return true;
+        }
+        else
+        {
+            $data=array('error'=>$errorMessage);
+            pf_core::loadTemplate('error', $data);
+            die();
+            return false;
+        } 
+    }
+    
+    
     public static function loggout()
     {
         $_SESSION=array();
