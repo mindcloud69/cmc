@@ -105,7 +105,7 @@ class users extends pf_controller
             $newpass =  pf_auth::hashThis($newpass, $salt);
             $sql="UPDATE Users SET Level=?,Pass=? WHERE ID=?";
             $q = $db->prepare($sql);
-            $q->execute(array($level,$id));
+            $q->execute(array($level,$newpass,$id));
             }
             
             pf_core::redirectUrl(MAIN_PAGE.'/users');
