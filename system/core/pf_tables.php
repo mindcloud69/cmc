@@ -49,10 +49,10 @@ class pf_tables {
     }
     
     //adds a cell
-    public function addCell($content,$span=0)
+    public function addCell($content,$span=0,$align='left')
     {
         if ($span > 0) $cell= "\t\t\t<td colspan='$span'>";
-        else $cell= "\t\t\t<td>";
+        else $cell= "\t\t\t".'<td align="'.$align.'">';
         $cell .=$content."</td>\n";
         $this->temprow.=$cell;
     }
