@@ -145,7 +145,31 @@ class users extends pf_controller
         
         $this->loadView('users/edit_page.php',$data);
         
+    }
+    
+    public function access()
+    {
+        $this->checkLogin();
         
+        //lock to admins only
+        pf_auth::lockPage('Admin', 'This Page Is Admin Only!');
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $pageaccess = array();
+            $pageaccess['config']=$_POST['config'];
+            $pageaccess['server']= $_POST['server'];
+            $pageaccess['backup']= $_POST['backup'];
+            CMC::writeCMCSetting('pageaccess', $pageaccess);
+            pf_core::redirectUrl(MAIN_PAGE.'/users');
+        }
+        else
+        {
+            $data=CMC::getCMCSetting('pageaccess');
+            $this->loadView('users/access_page.php',$data);
+        }
+        
+                
     }
 }
 ?>

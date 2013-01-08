@@ -71,6 +71,7 @@ else: ?>
                                         <ul class="dropdown-menu" roll="menu">
                                             <li><a href="<?php echo pf_config::get('main_page');?>/users">View Users</a></li>
                                             <li><a href="<?php echo pf_config::get('main_page');?>/users/add">Add User</a></li>
+                                            <li><a href="<?php echo pf_config::get('main_page');?>/users/access">Access Control</a></li>
                                         </ul>
                                     </li>
                                     
