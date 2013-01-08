@@ -6,6 +6,10 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
+        
         $this->loadView('server/main_page');
     }
     
@@ -21,6 +25,10 @@ class server extends pf_controller
     public function action()
     {
         $this->checkLogin();
+        
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
         
         //if no action/command passed via url we load the main page again
         if ( (!isset($_GET['action'])) && (!isset($_GET['command'])) )
@@ -47,6 +55,10 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
+        
         //if no command passed via url
         if (!isset($_GET['command']))
         {
@@ -69,6 +81,10 @@ class server extends pf_controller
     public function stop()
     {
         $this->checkLogin();
+        
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
         
         //log it
         CMC::log('Server Stopped By '.pf_auth::getVar('user'));
@@ -104,6 +120,10 @@ class server extends pf_controller
     {
         $this->checkLogin();
         
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
+        
         $channel = CMC::getCMCSetting('bukkit_channel');
         
         CMC::writeCMCSetting('restart_check', false); //turn off the restart check as the stop command will remove the cron.
@@ -122,6 +142,10 @@ class server extends pf_controller
     public function startup()
     {
         $this->checkLogin();
+        
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
         
         $data= CMC::getCMCSetting('startup_ram');
         $restart_time = CMC::getCMCSetting('restart_check');

@@ -160,16 +160,20 @@ class users extends pf_controller
             $pageaccess['config']=$_POST['config'];
             $pageaccess['server']= $_POST['server'];
             $pageaccess['backup']= $_POST['backup'];
+            $pageaccess['settings']= $_POST['settings'];
             CMC::writeCMCSetting('pageaccess', $pageaccess);
-            pf_core::redirectUrl(MAIN_PAGE.'/users');
-        }
-        else
-        {
-            $data=CMC::getCMCSetting('pageaccess');
-            $this->loadView('users/access_page.php',$data);
+            $saved =true;
         }
         
-                
+        $data=CMC::getCMCSetting('pageaccess');
+        if (!$data)
+        {
+            //default values
+            $data = array('config'=>'User','server'=>'User','backup'=>'User','settings'=>'User');
+        }
+        if (isset($saved)) $data['saved']=true;
+        
+        $this->loadView('users/access_page.php',$data);
     }
 }
 ?>

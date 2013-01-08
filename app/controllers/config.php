@@ -6,6 +6,10 @@ class config extends pf_controller
     {
         $this->checkLogin();
         
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['config'], 'Sorry, You do not have access to this page!');
+        
         $data = array('bukkit_dir'=> CMC::getCMCSetting('bukkit_dir'));
         mcController::getMCConfig($data['bukkit_dir'].DS.'server.properties');
         $data = mcController::$server_data;

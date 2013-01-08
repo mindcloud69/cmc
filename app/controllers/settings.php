@@ -7,6 +7,10 @@ class settings extends pf_controller
     {
         $this->checkLogin();
         
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['settings'], 'Sorry, You do not have access to this page!');
+        
         //write the new settings
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {

@@ -1,5 +1,8 @@
 <?php
-$newpass = pf_core::randomCode(8);
+if (key_exists('saved', $data))
+{
+    $saved=true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,14 +17,23 @@ $newpass = pf_core::randomCode(8);
                         
             <div class="container">
                 <div class="row">
+                    <?php
+                    if (isset($saved))
+                    {
+                        echo '<div class="valid span4 offset4">Settings Saved!</div><br /><br />';
+                    }
+                    ?>
                     
                     <?php pf_forms::createForm('access','span4 offset4',MAIN_PAGE.'/users/access','POST'); ?>
                     <legend class="center">Edit Page Access</legend>
+                    
+                    
                     <div class="info">User Pages are ALWAYS Admin Only!</div>
                     
                     Config Pages: <?php pf_forms::options('config', 'config',array('Admin'=>'Admin','User'=>'User'),$data['config']); ?><br />
                     Server Pages: <?php pf_forms::options('server', 'server',array('Admin'=>'Admin','User'=>'User'),$data['server']); ?><br />
                     Backups Pages: <?php pf_forms::options('backup', 'backup',array('Admin'=>'Admin','User'=>'User'),$data['backup']); ?><br />
+                    CMC Settings : <?php pf_forms::options('settings', 'settings',array('Admin'=>'Admin','User'=>'User'),$data['settings']); ?><br />
                     
                     <?php pf_forms::button('submit', 'Edit Access','button rounded span4'); ?>
                     <?php pf_forms::closeForm(); ?>

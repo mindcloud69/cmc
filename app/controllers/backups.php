@@ -6,6 +6,10 @@ class backups extends pf_controller
     {
         $this->checkLogin();
         
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['backup'], 'Sorry, You do not have access to this page!');
+        
         //get our dir and last backup
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         $last_backup = CMC::getCMCSetting('last_backup');
@@ -32,6 +36,10 @@ class backups extends pf_controller
     {
         $this->checkLogin();
         
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['backup'], 'Sorry, You do not have access to this page!');
+        
         //get our dir and last backup
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         
@@ -51,6 +59,10 @@ class backups extends pf_controller
     public function delete()
     {
         $this->checkLogin();
+        
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['backup'], 'Sorry, You do not have access to this page!');
         
         if ($_SERVER['REQUEST_METHOD'] !='POST')
         {
