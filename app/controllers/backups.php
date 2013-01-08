@@ -79,7 +79,7 @@ class backups extends pf_controller
             {
                 if (unlink($file)) //delete the file
                 {
-                    CMC::log('Backup '.$file .' Deleted');
+                    CMC::log('Backup '.$file .' Deleted By: '.pf_auth::getVar('user'));
                 }
                 else //can't delete, throw error
                 {

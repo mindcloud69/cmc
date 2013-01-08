@@ -54,7 +54,6 @@ class main extends pf_controller
         //load our main page
         $this->loadView('main_page',$data);
         
-        
     }
 }
 ?>

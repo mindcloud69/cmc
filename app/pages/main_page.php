@@ -9,12 +9,14 @@ else $data['current_cron'] = 'FALSE';
 <html>
 	<head>
 		<?php pf_core::loadTemplate('header'); ?>
-		<style>
+            
+                <script type="text/javascript" src="http://jsgauge.googlecode.com/svn/trunk/src/gauge.js"></script>
+                <script type="text/javascript" src="http://jsgauge.googlecode.com/svn/trunk/src/jquery.gauge.js"></script>
+		
+                <style>
                     .online{color:green;}
                     .offline{color:red;}
 
-                    #cpuwrap,#memwrap{color:black;border:1px solid black;width:400px;}
-                    
                     #console { white-space: pre; height:300px;overflow:auto;}
                     #chat { white-space: pre; height:300px;overflow:auto;}
                     #errors { white-space: pre; height:300px;overflow:auto;}
@@ -28,7 +30,6 @@ else $data['current_cron'] = 'FALSE';
                     
                     .box{border:1px solid #aaa; padding:5px;}
 		</style>
-                
 		<script>
 			$('#tab a').click(function (e) {
   				e.preventDefault();
@@ -52,37 +53,33 @@ else $data['current_cron'] = 'FALSE';
                                 $('#multijava').show();
                             }
                             
-                            //set the HTML to the correct value
-                            $( "#cpu").html(cpu +'%');
-                            $( "#mem").html(mem +'%');
                             $( "#cores").html('CPU Usage Based On '+ cores +' Cores');
                             
                             
                             //change the bar's width based on cpu and core
                             if (cores = 1)
                                 {
-                                    $( "#cpu").animate({width: cpu * 4},500);
+                                    $('#cpu').gauge('setValue', cpu);
                                 }
                             else if (cores = 2)
                                 {
-                                    $( "#cpu").animate({width: cpu * 2},500);
+                                    $('#cpu').gauge('setValue', cpu / 2);
+                                        
+                                    //$( "#cpu").animate({height: cpu },500);
                                 }
                             else if (cores = 4)
                                 {
-                                    $( "#cpu").animate({width: cpu},500);
+                                    $('#cpu').gauge('setValue', cpu / 4);
                                 }
                             else if (cores = 8)
                                 {
-                                    $( "#cpu").animate({width: cpu / 2},500);
+                                    $('#cpu').gauge('setValue', cpu / 8);
                                 }
                                 
                             //same with mem usage                                
-                            $( "#mem").animate({width: mem*4},500);
+                            $('#mem').gauge('setValue', mem);    
+                            //$( "#mem").animate({height: mem*4},500);
                                 
-                            //change the bar's colors based on new usage (values)'
-                            colors("#cpu",cpu);
-                            colors("#mem",mem);
-                            
                             }); //end main json data call
                             
                             //updates our server logs
@@ -142,18 +139,44 @@ else $data['current_cron'] = 'FALSE';
                             $('#multijava').hide();
                             updatestats();
                             
+                           $("#cpu")
+                          .gauge({
+                             colorOfCenterCircleFill:'#000000',//center of needle
+                             colorOfCenterCircleStroke:'#000000',//outline of center
+                             colorOfPointerFill:'#000000',//color of needle
+                             colorOfPointerStroke:'#000000',//outline of needle
+                             unitsLabel: '%',
+                             majorTicks:10,
+                             minorTicks:1, //number of ticks between major ticks
+                             min: 0,
+                             max: 100,
+                             label: 'CPU',
+                             bands: [
+                                 {color: "#ffff00", from: 50, to: 74},
+                                 {color: "#ff0000", from: 75, to: 100}
+                                 ]
+                           })
+                           
+                           $("#mem")
+                          .gauge({
+                             colorOfCenterCircleFill:'#000000',//center of needle
+                             colorOfCenterCircleStroke:'#000000',//outline of center
+                             colorOfPointerFill:'#000000',//color of needle
+                             colorOfPointerStroke:'#000000',//outline of needle
+                             unitsLabel: '%',
+                             majorTicks:10,
+                             minorTicks:1, //number of ticks between major ticks
+                             min: 0,
+                             max: 100,
+                             label: 'MEM',
+                             bands: [
+                                 {color: "#ffff00", from: 50, to: 74},
+                                 {color: "#ff0000", from: 75, to: 100}
+                                 ]
+                           })
+                           
+                          
                         });
-                        
-                        $(function(){
-							$('#test').speedometer();
-
-							$('.changeSpeedometer').click(function(){
-								$('#test').speedometer({ percentage: $('.speedometer').val() || 0 });
-							});
-
-						});
-
-                        
 		</script>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -163,57 +186,37 @@ else $data['current_cron'] = 'FALSE';
         <?php pf_core::loadTemplate('menu'); ?>
             <div class="container">
                 <div class="row">
-                    <div class="span5 offset1">
-                            <div class="box">
-                                <h4 class="center"> CMC Quick Server Info</h4>
-                                <div id="online">Online!</div>
-                                <strong>Auto-Restart:</strong>  <?php echo $data['current_cron'];?><br>
-                                <strong>Last Backup:</strong>  Differed to Beta<br>
-                                <strong>Next Backup:</strong>  Differed to Beta<br>
-                                
-                            </div>
-                            <br />
-                            <div class="box">
-                                <h4 class="center"> Server Config</h4>
-                                <strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
-                                <strong>PvP:</strong><?php echo $data['pvp'];?><br>
-                                <strong>Game Type:</strong> <?php echo $data['gamemode'];?><br>
-                            </div>
-                            <br />
-                            <div class="box">
-                                <h4 class="center"> Plugins Info</h4>
-                                <strong>Essentials Installed:</strong><?php echo $data['essentials'];?> <br>
-                                <strong>Other Plugins:</strong> <?php echo $data['pluggins'];?>
-                            </div>
-                    </div>
+                    <h1 class="center">CMC Server Overview</h1>
+                    <div class="span12">
 
-                    <div class="span5">
-                            <div class="box">
+                        <div id="gauges" class="span6">
                                 <h4 class="center">Server Load</h4>
-                                <p id='cores' class="center">CPU Usage Based On X Cores
-                                    <div id="cpuwrap" style="margin:0 auto;">
-                                            <div id="cpu" class="bar"></div>
-                                    </div>
-                                </p>
-                                <br>
-                                <p class="center">MEM Usage
-                                    <div id="memwrap" style="margin:0 auto;">
-                                            <div id="mem" class="bar"></div>
-                                    </div>
-                                </p>
-                            </div>
-                            <br />
-                            <div class="box">
-                                <h4 class="center">Bukkit Info</h4>
+                                <p id='cores' class="center">CPU Usage Based On X Cores</p>
+                                <canvas id="cpu" class="span2 offset1" height="300"></canvas>
+                                <canvas id="mem" class="span2" height="300"></canvas>
+                                <br style="clear:both;"/>
                                 <div id="info" class="center">&nbsp;</div>
-                                
-                            </div>
-                            
-                            <div id="multijava">
-                                Multiple Java's have been found, perhaps you have
-                                multiple server running due to an error? You should
-                                fix this. Time to break out SSH! <--later we will offer to fix this
-                            </div>
+                        </div>
+
+                        <div class="span4" >
+                            <h4 class="center">Quick Stats:</h4>
+                            <div id="online">Online!</div>
+                            <strong>Auto-Restart:</strong>  <?php echo $data['current_cron'];?><br>
+                            <strong>Last Backup:</strong>  Differed to Beta<br>
+                            <strong>Next Backup:</strong>  Differed to Beta<br>
+                            <br />
+                            <strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
+                            <strong>PvP:</strong><?php echo $data['pvp'];?><br>
+                            <strong>Game Type:</strong> <?php echo $data['gamemode'];?><br>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="multijava" class="span10 offset1">
+                        Multiple Java's have been found, perhaps you have
+                        multiple server running due to an error? You should
+                        fix this. Time to break out SSH! <--later we will offer to fix this
                     </div>
                 </div>
             </div>
