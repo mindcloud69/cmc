@@ -4,17 +4,24 @@
         pf_html::metaTag('Generator', 'Phils Framework');
 
         //stylesheets
-        pf_html::stylesheet('bootstrap.css');
-        pf_html::stylesheet('bootstrap-responsive.css');
+        //pf_html::stylesheet('bootstrap.css');
+        //pf_html::stylesheet('bootstrap-responsive.css');
         pf_html::stylesheet('frame.css');
         pf_html::stylesheet('style.css');
+        
+        pf_html::stylesheet('foundation.min.css');
+        
 
 
         //jquery love
-        pf_html::scriptExternal('http://code.jquery.com/jquery-latest.js');//perhaps we should use Googles CDN?
+        pf_html::scriptInternal('jquery.js');//Jquery Love
         pf_html::scriptInternal('showHideToggle.js');//framework show/hide jquery plugin
-        pf_html::scriptInternal('bootstrap.js'); //bootstrap js
+        pf_html::scriptInternal('foundation.min.js'); //Foundation js
+        pf_html::scriptInternal('modernizr.foundation.js'); //Another Foundation js
+        pf_html::scriptInternal('jquery.foundation.tabs.js'); //Another Foundation js
+        pf_html::scriptInternal('jquery.foundation.navigation.js'); //Another Foundation js
+        pf_html::scriptInternal('jquery.foundation.accordian.js'); //Another Foundation js
         ?>
 
-        <title>Minecraft Server Control</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CMC - Crafty Minecraft Controller</title>
+        <meta name="viewport" content="width=device-width">

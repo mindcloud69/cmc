@@ -17,18 +17,16 @@ else $data['current_cron'] = 'FALSE';
                     .online{color:green;}
                     .offline{color:red;}
 
-                    #console { white-space: pre; height:300px;overflow:auto;}
-                    #chat { white-space: pre; height:300px;overflow:auto;}
-                    #errors { white-space: pre; height:300px;overflow:auto;}
-                    #connection { white-space: pre; height:300px;overflow:auto;}
-                    
+                    #logload { white-space: pre; height:350px;overflow:auto;}
                     
                     #multijava{font-size:14px;color:red;}
                     
                     .serverwarning {color:red;}
                     .serverlog{margin-top:25px;}
                     
-                    .box{border:1px solid #aaa; padding:5px;}
+                    .button-group{background:none;}
+                    
+                    
 		</style>
 		<script>
 			$('#tab a').click(function (e) {
@@ -64,8 +62,6 @@ else $data['current_cron'] = 'FALSE';
                             else if (cores = 2)
                                 {
                                     $('#cpu').gauge('setValue', cpu / 2);
-                                        
-                                    //$( "#cpu").animate({height: cpu },500);
                                 }
                             else if (cores = 4)
                                 {
@@ -78,15 +74,8 @@ else $data['current_cron'] = 'FALSE';
                                 
                             //same with mem usage                                
                             $('#mem').gauge('setValue', mem);    
-                            //$( "#mem").animate({height: mem*4},500);
                                 
                             }); //end main json data call
-                            
-                            //updates our server logs
-                            $('#console').load('<?php echo pf_config::get('main_page')?>/data/mainlog');
-                            $('#errors').load('<?php echo pf_config::get('main_page')?>/data/errorlog');
-                            $('#chat').load('<?php echo pf_config::get('main_page')?>/data/chatlog');
-                            $('#connection').load('<?php echo pf_config::get('main_page')?>/data/connectionlog');
                             
                             //updates player info etc
                             serverinfo();
@@ -95,18 +84,6 @@ else $data['current_cron'] = 'FALSE';
                             setTimeout(updatestats,10000);
                         }
                         
-                        
-                        //makes the menubars pretty (changes color based on load)
-                        function colors(selector,value)
-                        {
-                            if (value >= 75){
-                                $(selector ).css({ 'background': '#D00' });
-                            } else if (value >= 50){
-                                $(selector ).css({ 'background': '#EE0' });
-                            } else{
-                                $(selector ).css({ 'background': '#0A0' });
-                            }
-                        }
                         
                         //this collects and reports server data from the minecraft server
                         function serverinfo()
@@ -138,6 +115,24 @@ else $data['current_cron'] = 'FALSE';
                         $(document).ready(function(){ 
                             $('#multijava').hide();
                             updatestats();
+                            
+                            $('#logload').load('<?php echo pf_config::get('main_page')?>/data/mainlog');
+                            
+                            $('#chat').click(function() {
+                                $('#logload').load ('<?php echo pf_config::get('main_page')?>/data/chatlog');
+                            });
+                            
+                            $('#all').click(function() {
+                                $('#logload').load ('<?php echo pf_config::get('main_page')?>/data/mainlog');
+                            });
+                            
+                            $('#errors').click(function() {
+                                $('#logload').load ('<?php echo pf_config::get('main_page')?>/data/errorlog');
+                            });
+                            
+                            $('#connections').click(function() {
+                                $('#logload').load ('<?php echo pf_config::get('main_page')?>/data/connectionlog');
+                            });
                             
                            $("#cpu")
                           .gauge({
@@ -184,21 +179,38 @@ else $data['current_cron'] = 'FALSE';
 	
 	<body>
         <?php pf_core::loadTemplate('menu'); ?>
-            <div class="container">
+            
+            <!-- Content -->
                 <div class="row">
-                    <h1 class="center">CMC Server Overview</h1>
-                    <div class="span12">
+                    <div id="multijava" class="twelve columns alert warning">
+                        Multiple Java's have been found, perhaps you have
+                        multiple server running due to an error? You should
+                        fix this. Time to break out SSH! <--later we will offer to fix this
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="twelve columns offset-by-three">
+                            <h2 >CMC Server Overview</h2>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="twelve columns">
 
-                        <div id="gauges" class="span6">
-                                <h4 class="center">Server Load</h4>
-                                <p id='cores' class="center">CPU Usage Based On X Cores</p>
-                                <canvas id="cpu" class="span2 offset1" height="300"></canvas>
-                                <canvas id="mem" class="span2" height="300"></canvas>
-                                <br style="clear:both;"/>
-                                <div id="info" class="center">&nbsp;</div>
+                        <div id="gauges" class="eight columns">
+                                <h4 class="six columns centered offset-by-four">Server Load</h4>
+                                
+                                <div class="row">
+                                    <div class="four columns offset-by-one"><canvas id="cpu" height="150" width="150"></canvas></div>
+                                    <div class="four columns pull-one"><canvas id="mem" height="150" width="150"></canvas></div>
+                                </div>
+                                <p id='cores' class="twelve columns"style="text-align:center;">CPU Usage Based On X Cores</p>
+                                
+                                
                         </div>
 
-                        <div class="span4" >
+                        <div class="four columns panel">
                             <h4 class="center">Quick Stats:</h4>
                             <div id="online">Online!</div>
                             <strong>Auto-Restart:</strong>  <?php echo $data['current_cron'];?><br>
@@ -208,43 +220,32 @@ else $data['current_cron'] = 'FALSE';
                             <strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
                             <strong>PvP:</strong><?php echo $data['pvp'];?><br>
                             <strong>Game Type:</strong> <?php echo $data['gamemode'];?><br>
+                            <br />
+                            <div id="info">&nbsp;</div>
                         </div>
-
                     </div>
                 </div>
-                <div class="row">
-                    <div id="multijava" class="span10 offset1">
-                        Multiple Java's have been found, perhaps you have
-                        multiple server running due to an error? You should
-                        fix this. Time to break out SSH! <--later we will offer to fix this
+            
+                <br />
+                <hr>
+                <br />
+            <div class="row">
+                <div class="twelve columns">
+                    
+                    <ul class="button-group even four-up">
+                      <li id="all"><a href="#" class="button secondary">All Messages</a></li>
+                      <li id="chat"><a href="#" class="button secondary">Chat Only</a></li>
+                      <li id="errors"><a href="#" class="button secondary">Errors Only</a></li>
+                      <li id="connections"><a href="#" class="button secondary">Connections</a></li>
+                    </ul>
+                    
+
+                    <div id="logload" class="twelve columns panel">
+                        
                     </div>
+                    
                 </div>
             </div>
-            
-            <div class="container serverlog">
-            *newest entries at the top*
-                <div class="tabbable">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#console" data-toggle="tab">All</a></li>
-                        <li><a href="#chat" data-toggle="tab">Chat</a></li>
-                        <li><a href="#errors" data-toggle="tab">Errors</a></li>
-                        <li><a href="#connection" data-toggle="tab">Connections</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="console">
-                    
-                        </div>
-                    <div class="tab-pane" id="chat">
-                        <div class="warning">Scheduled for Beta Release</div>
-                    </div>
-                    <div class="tab-pane" id="errors">
-                        <div class="warning">Scheduled for Beta Release</div>
-                    </div>
-                    <div class="tab-pane" id="connection">
-                        <div class="warning">Scheduled for Beta Release</div>
-                    </div>
-                    </div><!-- END 10 SPAN -->
-                </div> <!-- END ROW -->
 
         <?php pf_core::loadTemplate('footer'); ?>
     </body>

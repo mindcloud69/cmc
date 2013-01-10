@@ -1,16 +1,13 @@
 <?php
-//get the active Controller
-$route=pf_config::get('ROUTE');
-$page = $route['CONTROLLER'];
 
 //check to see if the user is logged in
 if (pf_auth::checkLogin()===TRUE) //if logged in, we show a "logout" button
 {
-    $loginlink = '<a href="'.pf_config::get('main_page').'/login/logout"><img src="'.pf_config::get('base_url').'/app/assets/site_images/icons/16px/locked.png"/>&nbsp;Logout '.pf_auth::getVar('user').'</a>';
+    $loginlink = '<a href="'.pf_config::get('main_page').'/login/logout"><img src="'.pf_config::get('base_url').'/app/assets/site_images/used/locked.png"/>&nbsp;Logout '.pf_auth::getVar('user').'</a>';
 }
 else //if not logged in, we show a login link :)
 {
-    $loginlink = '<a href="'.pf_config::get('main_page').'/login"><img src="'.pf_config::get('base_url').'/app/assets/site_images/icons/16px/locked.png"/>&nbsp;Login</a>';
+    $loginlink = '<a href="'.pf_config::get('main_page').'/login"><img src="'.pf_config::get('base_url').'/app/assets/site_images/used/locked.png"/>&nbsp;Login</a>';
 }
 //check to see if we are installed
 $data = new pf_json();
@@ -19,77 +16,87 @@ $installed = $data->get('bukkit_dir'); //do we have a bukkit_dir?
 
 ?>
 
-<div class="container"> <!-- START CONTAINER -->
-    <div class="row">
 
 <?php 
 // if not installed we shorten the menu
 if (!$installed): ?>
+<!-- Top Bar -->
+<div class="contain-to-grid">
+    <nav class="top-bar"> <!-- Branding -->
+        <ul>
+            <!-- Title Area -->
+            <li class="name">
+                <h1>
+                  <a href="http://www.craftycontroller.com">CMC</a>
+                </h1>
+            </li>
+            <li class="toggle-topbar"><a href="http://www.craftycontroller.com">CMC</a></li>
+        </ul>
+        <section>
+            <ul class="left">
+                <li id="home"<?php if ($page == 'main') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/home.png"/>&nbsp;Home</a></li>
+                <li id="install"<?php if ($page == 'install') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/install"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/key.png"/>&nbsp;Install</a></li>
+            </ul>
+        </section>
+    </nav>
+</div>
+<!-- End Top Bar -->
 
-        <div class="span12">
-
-            <div class="navbar"><!--START NAV-->
-                    <div class="navbar-inner">
-                            <a class="brand" href="http://www.craftycontroller.com">CMC</a>
-                            <ul class="nav">
-                                    <!--Home-->
-                                    <li id="home"<?php if ($page == 'main') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/home.png"/>&nbsp;Home</a></li>
-                                    <li id="install"<?php if ($page == 'install') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/install"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/key.png"/>&nbsp;Install</a></li>
-                            </ul>
-                    </div>
-            </div><!-- END NAV -->
-        </div>
 
 <?php 
 // WE ARE INSTALLED! WOOHOO!
 else: ?>
+<!-- Top Bar -->
+<div class="contain-to-grid">
+    <nav class="top-bar"> <!-- Branding -->
+        <ul>
+            <!-- Title Area -->
+            <li class="name">
+                <h1>
+                  <a href="http://www.craftycontroller.com">CMC</a>
+                </h1>
+            </li>
+            <li class="toggle-topbar"><a href="http://www.craftycontroller.com">CMC</a></li>
+        </ul>
 
-        <div class="span12">
+    <section>
+        <ul class="left">
+            
+            <li><a href="<?php echo pf_config::get('main_page'); ?>"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/home.png"/>&nbsp;Home</a></li>
 
-            <div class="navbar"><!--START NAV-->
-                    <div class="navbar-inner">
-                        
-                            <a class="brand" href="http://www.craftycontroller.com">CMC</a>
-                            <ul class="nav">
-                                    <!--Home-->
-                                    <li id="home"<?php if ($page == 'main') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/home.png"/>&nbsp;Home</a></li>
+            <li class="has-dropdown"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/broadcast.png"/>&nbsp;Server</a>
+                <ul class="dropdown">
+                    <li><a href="<?php echo pf_config::get('main_page'); ?>/config">Config</a></li>
+                    <li><a href="<?php echo pf_config::get('main_page'); ?>/server">Server Commands</a></li>
+                    <li><a href="<?php echo pf_config::get('main_page'); ?>/server/update">Update</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-dropdown"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/box-add.png"/>&nbsp;Backups</a>
+                <ul class="dropdown">
+                    <li><a href="<?php echo pf_config::get('main_page');?>/backups">Backups</a></li>
+                    <li><a href="<?php echo pf_config::get('main_page');?>/backups/view">List Backups</a></li>
+                </ul>
+            </li>
+        
+            <li ><a href="<?php echo pf_config::get('main_page'); ?>/players"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/accessibility.png"/>&nbsp;Players</a></li>
+            
+            <li class="has-dropdown"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/user.png"/>&nbsp;Users</a>
+                <ul class="dropdown">
+                    <li><a href="<?php echo pf_config::get('main_page');?>/users">View Users</a></li>
+                    <li><a href="<?php echo pf_config::get('main_page');?>/users/add">Add User</a></li>
+                    <li><a href="<?php echo pf_config::get('main_page');?>/users/access">Access Control</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
 
-                                    <li id="config"<?php if ($page == 'config') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/config"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/wrench.png"/>&nbsp;Config</a></li>
-
-                                    <li id="server"<?php if ($page == 'server') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/server"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/broadcast.png"/>&nbsp;Server</a></li>
-                                    
-                                    <li id="backups"<?php if ($page == 'backups') echo 'class="active"'; ?> class="dropdown">
-                                        <a href="#" class='dropdown-toggle' data-toggle="dropdown"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/box-add.png"/>&nbsp;Backups<b class="caret"></b></a>
-                                        <ul class="dropdown-menu" roll="menu">
-                                            <li><a href="<?php echo pf_config::get('main_page');?>/backups">Backups</a></li>
-                                            <li><a href="<?php echo pf_config::get('main_page');?>/backups/view">List Backups</a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                    <li id="server"<?php if ($page == 'players') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/players"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/accessibility.png"/>&nbsp;Players</a></li>
-                                    
-                                    <li id="users"<?php if ($page == 'users') echo 'class="active"'; ?> class="dropdown">
-                                        <a href="#" class='dropdown-toggle' data-toggle="dropdown"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/user.png"/>&nbsp;Users<b class="caret"></b></a>
-                                        <ul class="dropdown-menu" roll="menu">
-                                            <li><a href="<?php echo pf_config::get('main_page');?>/users">View Users</a></li>
-                                            <li><a href="<?php echo pf_config::get('main_page');?>/users/add">Add User</a></li>
-                                            <li><a href="<?php echo pf_config::get('main_page');?>/users/access">Access Control</a></li>
-                                        </ul>
-                                    </li>
-                                    
-
-                                    
-                            </ul>
-                                    <ul class="nav pull-right">
-                                        <li id="settings"<?php if ($page == 'settings') echo 'class="active"'; ?> ><a href="<?php echo pf_config::get('main_page'); ?>/settings"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/icons/16px/cog.png"/>&nbsp;CMC Settings</a></li>
-                                        <li id="logout"<?php if ($page == 'login') echo 'class="active"'; ?>> <?php echo $loginlink; ?> </li>
-                                    </ul>
-                                    
-                    </div>
-            </div><!-- END NAV -->
-        </div>
-
-
-<?php endif;?>
-    </div>
+    <section>
+        <ul class="right">
+            <li><a href="<?php echo pf_config::get('main_page'); ?>/settings"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/cog.png"/>&nbsp;CMC Settings</a></li>
+            <li> <?php echo $loginlink; ?> </li>
+        </ul>
+    </section>
+    </nav>
 </div>
+<?php endif;?>

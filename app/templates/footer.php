@@ -5,16 +5,39 @@ else $date = pf_config::get('creation_date') . " - " . $this_year;
 
 
 ?>
-<center><div class="footer">
-&copy; <?php echo $date; ?> - <a href="http://www.craftycontroller.com">Crafty Minecraft Controller</a> <?php echo "v" . APP_VERSION; ?><br />
-<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Created By:</span><a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/ptarrant/cmc" property="cc:attributionName" rel="cc:attributionURL">Phillip Tarant</a> | 
-OS License: <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">BY-SA 3.0</a> | 
-Donate via: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=H2HNTLFZAJRXG&lc=US&item_name=Phillip%20Tarrant&item_number=CMC&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Paypal</a>
-</div></center>
 
-<div class="container"><div class="row">
-<?php 
-//call our updater function
-pf_core::loadTemplate('updater');
-?>
-</div></div>
+
+
+<!-- Footer -->
+
+  <footer class="row">
+    <div class="twelve columns">
+      <hr />
+      <div class="row">
+        <div class="four columns">
+            <p>&copy; <?php echo $date; ?> <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"></span><a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/ptarrant/cmc" property="cc:attributionName" rel="cc:attributionURL">Phillip Tarrant</a></p>
+        </div>
+		
+        <div class="four columns">
+            <p class='center'>
+                Crafty Minecraft Controller<br />
+                Version: <?php echo APP_VERSION; ?>
+            </p>
+        </div>
+		
+        <div class="two columns">
+            <ul class="link-list center">
+                <li><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">License</a></li>
+                <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=H2HNTLFZAJRXG&lc=US&item_name=Phillip%20Tarrant&item_number=CMC&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Donate</a></li>
+            </ul>
+        </div>
+		
+      </div>
+      <div class="row">
+        <?php 
+        //call our updater function
+        pf_core::loadTemplate('updater');
+        ?>
+        </div>
+    </div>
+  </footer>
