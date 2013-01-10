@@ -72,10 +72,10 @@ else: ?>
                 </ul>
             </li>
             
-            <li class="has-dropdown"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/box-add.png"/>&nbsp;Backups</a>
+            <li class="has-dropdown"><a href="<?php echo pf_config::get('main_page');?>/backups"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/box-add.png"/>&nbsp;Backups</a>
                 <ul class="dropdown">
                     <li><a href="<?php echo pf_config::get('main_page');?>/backups">Backups</a></li>
-                    <li><a href="<?php echo pf_config::get('main_page');?>/backups/view">List Backups</a></li>
+                    <li><a href="<?php echo pf_config::get('main_page');?>/backups/scheduled">Scheduled Backups</a></li>
                 </ul>
             </li>
         

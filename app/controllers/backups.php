@@ -142,5 +142,10 @@ class backups extends pf_controller
         $this->loadView('/backups/backup_complete_page.php');
         
     }
+    
+    public function scheduled()
+    {
+        echo "Coming Soon!";
+    }
 }
 ?>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-            <?php pf_core::loadTemplate('header'); ?>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             
             <SCRIPT language="javascript">
@@ -28,18 +27,16 @@
             
 	</head>
         <body>
-        <?php pf_core::loadTemplate('menu'); ?>
-            <h3 class="center">Backup Management</h3>
                         
             <div class="container">
                 <div class="row">
                     
                     <?php
                     if (key_exists('error', $data)):?>
-                        <div class='alert span6 offset3'><?php echo $data['error'];?></div>
+                    <div class="six columns"><div class='alert'><?php echo $data['error'];?></div></div>
                     <?php else:?>
                         
-                    <form id="backupdelete" class= "span8 offset2" action="<?php echo pf_config::get('main_page');?>/backups/delete" method="POST">
+                    <form id="backupdelete" class= "eight columns offset-by-two" action="<?php echo pf_config::get('main_page');?>/backups/delete" method="POST">
                     <?php
                     if (!empty($data['backups']))
                     {
@@ -70,11 +67,10 @@
                     }
                     
                     ?>
-                    <input type="submit" value="Remove Selected Backups" class="button rounded center span8">
+                        <div class="twelve offset-by-two "><input type="submit" value="Remove Selected Backups" class=" alert eight columns button rounded center"></div>
                     </form>
                     <?php endif;?>
                     </div>
             </div>
-            <?php pf_core::loadTemplate('footer'); ?>
     </body>
 </html>
