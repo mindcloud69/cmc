@@ -7,15 +7,14 @@
         <body>
             <?php pf_core::loadTemplate('menu'); ?>
 
-            <div class="container">
                     <h3 class="center">Player Management</h3>
                     <div class="row">
-                        <div class="span10 offset1">
-                            <div id="banned" class="span10">
+                        <div class="ten columns offset-by-one">
+                            <div id="banned" class="twelve columns">
                                 <h4 class="center">All Players for World:<?php echo $data['world']; ?></h4>
                                 <?php
                                 $table = new pf_tables();
-                                $table->startTable('players', null, null, 'table tablestripped');
+                                $table->startTable('players', null, null, 'table tablestripped twelve');
                                 $table->startRow();
                                 $table->addTableHeading('Player');
                                 $table->addTableHeading('Last Seen');
@@ -37,8 +36,8 @@
                         
                     </div>        
                 <div class="row">
-                    <div class="span10 offset1">
-                        <div id="banned" class="span3 offset1">
+                    <div class="twelve columns offset-by-one">
+                        <div id="banned" class="four columns">
                             <h4 class="center">Banned Players</h4>
                             <?php
                             $table = new pf_tables();
@@ -62,7 +61,7 @@
                             ?>
                         </div>
                         
-                        <div id="banned" class="span3">
+                        <div id="banned" class="four columns">
                             <h4 class="center">Banned IP Addresses</h4>
                             <?php
                             $table = new pf_tables();
@@ -87,7 +86,7 @@
                             ?>
                         </div>
                         
-                        <div id="ops" class="span2">
+                        <div id="ops" class="four columns">
                             <h4 class="center">OP'ed Players</h4>
                             <?php
                             $table = new pf_tables();
@@ -107,7 +106,6 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- END CONTAINER -->
 	</body>
 </html>
 
