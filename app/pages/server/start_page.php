@@ -6,10 +6,9 @@
 	</head>
         <body>
         <?php pf_core::loadTemplate('menu'); ?>
-            <div class="container">
                 <div class="row">
-                    <div class="span4 offset4">
-                        <h1 class="center">Start Server Script</h1>
+                    <div class="four columns offset-by-four panel">
+                        <h3 class="center">Start Server</h3>
                         
                                 <?php pf_forms::createForm('startserver', 'startserver center', pf_config::get('main_page').'/server/startup', "POST");?>
                         
@@ -28,11 +27,10 @@
                                 ?>
                                 <br />
                                 <?php pf_forms::checkbox('restart', 'Restart On Crash', 'true');?>
-                                <?php pf_forms::button('submit','Start','button rounded center');?>
+                                <?php pf_forms::button('submit','Start','button rounded center success');?>
                                 <?php pf_forms::closeForm();?>
                     </div>
                 </div>
-            </div>
             <?php pf_core::loadTemplate('footer'); ?>
     </body>
 </html>

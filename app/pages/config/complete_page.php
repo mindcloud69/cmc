@@ -2,27 +2,21 @@
 <html>
 	<head>
 		<?php pf_core::loadTemplate('header'); ?>
-                <style>
-                    select {width:100px;}
-                    input[type=text] {
-                       width: 100px;
-                    }
-                </style>
 	</head>
         
         <body>
         <?php pf_core::loadTemplate('menu'); ?>
             
-            <div class="container">
+            <div class="row">
                 <h3 class="center">SUCCESS!</h3>
-                <div class="row">
-                    <div class="span12">
-                    <p class="center">
+                    <div class="twelve columns">
+                        
+                    <p class="center info">
                         Here is your config file as it was generated. It has already been saved for you.<br />
                         If all looks good, go ahead and <a href="<?php echo pf_config::get('main_page').'/server'; ?>">Click Here</a>
                         To Start/Restart The Server
                     </p>
-                    <pre>
+                    <pre class="panel">
                     <?php echo $data['file']; ?>
                     </pre>
                     </div>

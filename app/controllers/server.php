@@ -13,6 +13,17 @@ class server extends pf_controller
         $this->loadView('server/main_page');
     }
     
+    public function startstop()
+    {
+        $this->checkLogin();
+        
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
+        
+        $this->loadView('server/startstop_page');
+    }
+            
     //send a command to screen
     private function send($command)
     {
@@ -96,6 +107,9 @@ class server extends pf_controller
         
         //removes our cronjob if it's there 
         CMC::removeCronJob('http://localhost/index.php/server/restart');//remove anything that calls the restart
+        
+        
+        CMC::writeCMCSetting('restart_check', false); //turn off the restart check as the stop command will remove the cron.
         
         //executes the stop script
         exec('nohup /usr/bin/php '.APPLICATION_DIR.'mcscripts'.DS.'stop.php'."> /dev/null 2>/dev/null &");
