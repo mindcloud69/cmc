@@ -64,7 +64,7 @@ else: ?>
             
             <li><a href="<?php echo pf_config::get('main_page'); ?>"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/home.png"/>&nbsp;Home</a></li>
 
-            <li class="has-dropdown"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/broadcast.png"/>&nbsp;Server</a>
+            <li class="has-dropdown"><a href="<?php echo pf_config::get('main_page'); ?>/server"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/broadcast.png"/>&nbsp;Server</a>
                 <ul class="dropdown">
                     <li><a href="<?php echo pf_config::get('main_page'); ?>/config">Config</a></li>
                     <li><a href="<?php echo pf_config::get('main_page'); ?>/server">Server Commands</a></li>

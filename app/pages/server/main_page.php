@@ -28,6 +28,7 @@
                 <div class="row">
                     <div class="four columns">
                         <ul class="nav-bar vertical">
+                            <li id="config"><a href="<?php echo pf_config::get('main_page'); ?>/config"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/wrench.png"/>&nbsp;Config</a></li>
                             <li id="start"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/broadcast.png"/>&nbsp;Start/Stop Server</a></li>
                             <li id="command"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/rocket.png"/>&nbsp;Commands</a></li>
                             <li id="say"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/comments.png"/>&nbsp;Say</a></li>

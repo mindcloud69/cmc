@@ -144,6 +144,7 @@ class server extends pf_controller
         pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
         
         $channel = CMC::getCMCSetting('bukkit_channel');
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         
         CMC::writeCMCSetting('restart_check', false); //turn off the restart check as the stop command will remove the cron.
                 

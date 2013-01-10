@@ -65,7 +65,7 @@ ob_start();
              <div class="container">
                 <div class="row">
                     <h1 class="center">Update Bukkit</h1>
-                    <div id="downloading" class="span10 offset1">
+                    <div id="downloading" class="panel">
                         You are downloading the <?php echo $channel;?> branch of bukkit.<br />
                         <?php
                         download_remote($url, '/tmp/craftbukkit.jar');
