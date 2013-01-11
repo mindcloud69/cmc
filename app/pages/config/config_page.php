@@ -196,7 +196,7 @@ if (!key_exists('scooper-enabled', $data))
                                 </tr>
                              </table>
                             
-                                <input class="twelve columns button radius" type="submit" value="Save" />
+                                <input class="twelve columns button radius success" type="submit" value="Save" />
                     </form>
             </div><!-- END ROW -->
             <?php pf_core::loadTemplate('footer'); ?>

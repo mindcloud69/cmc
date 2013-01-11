@@ -4,8 +4,26 @@ if (!$data['restart_check'])
     $data['restart_check'] = '15';
 }
 
+if (!$data['saved'])
+{
+    $data['saved']=false;
+}
 
-$logselect = range(100,1000,100);//generate an array counting from 100 to 1000 by 100's
+$logselect = array(
+    '100'=>'100',
+    '200'=>'200',
+    '300'=>'300',
+    '400'=>'400',
+    '500'=>'500',
+    '600'=>'600',
+    '700'=>'700',
+    '800'=>'800',
+    '900'=>'900',
+    '1000'=>'1000'
+);
+
+
+
 $cronjob = range(1,59);//generate an array counting from 1 to 59 by 1's
 
 ?>
@@ -18,18 +36,20 @@ $cronjob = range(1,59);//generate an array counting from 1 to 59 by 1's
         
         <body>
         <?php pf_core::loadTemplate('menu'); ?>
-                                    
-             <div class="container">
+                
+            <?php if ($data['saved']==true):?>
+            <div class="row">
+                <div class="four columns centered">
+                <div class="valid" >Settings Saved!</div>
+                </div>
+            </div>
+            <?php endif;?>
+            
                 <div class="row">
                     <h1 class="center">Configure CMC</h1>
-                    <?php pf_forms::createForm('config', 'config span8 offset2', pf_config::get('main_page')."/settings", 'POST'); ?>
+                    <?php pf_forms::createForm('config', 'config eight offset-by-two panel', pf_config::get('main_page')."/settings", 'POST'); ?>
                     
-                    <table class="span6 offset1" cellpadding="5">
-                        <tr>
-                            <th>Setting</th>
-                            <th>Value</th>
-                            <th>Description</th>
-                        </tr>
+                    <table class="twelve columns" cellpadding="5">
                         <tr>
                             <td>Bukkit Dir:</td>
                             <td><?php pf_forms::text('bukkit_dir', true, $data['bukkit_dir'], null);?></td>
@@ -56,10 +76,10 @@ $cronjob = range(1,59);//generate an array counting from 1 to 59 by 1's
                     
                     </table>
                     <br />
-                        <?php pf_forms::button('submit', 'Save CMC Config', 'button rounded span8'); ?>
-                        <?php pf_forms::closeForm();?>
+                        <?php pf_forms::button('submit', 'Save CMC Config', 'success button rounded twelve'); ?>
+                    
+                    <?php pf_forms::closeForm();?>
                 </div>
-             </div>
         
             <?php pf_core::loadTemplate('footer'); ?>
 	</body>

@@ -116,22 +116,22 @@ else $data['current_cron'] = 'FALSE';
                             $('#multijava').hide();
                             updatestats();
                             
-                            $('#logload').load('<?php echo pf_config::get('main_page')?>/data/mainlog');
+                            $('#logload').load('<?php echo MAIN_PAGE;?>/data/mainlog');
                             
                             $('#chat').click(function() {
-                                $('#logload').load ('<?php echo pf_config::get('main_page')?>/data/chatlog');
+                                $('#logload').load ('<?php echo MAIN_PAGE;?>/data/chatlog');
                             });
                             
                             $('#all').click(function() {
-                                $('#logload').load ('<?php echo pf_config::get('main_page')?>/data/mainlog');
+                                $('#logload').load ('<?php echo MAIN_PAGE;?>/data/mainlog');
                             });
                             
                             $('#errors').click(function() {
-                                $('#logload').load ('<?php echo pf_config::get('main_page')?>/data/errorlog');
+                                $('#logload').load ('<?php echo MAIN_PAGE;?>/data/errorlog');
                             });
                             
                             $('#connections').click(function() {
-                                $('#logload').load ('<?php echo pf_config::get('main_page')?>/data/connectionlog');
+                                $('#logload').load ('<?php echo MAIN_PAGE;?>/data/connectionlog');
                             });
                             
                            $("#cpu")

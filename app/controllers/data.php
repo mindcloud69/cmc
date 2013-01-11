@@ -64,7 +64,7 @@ class data extends pf_controller
         $command = 'tac '.$bukkit_dir.DS.'server.log | grep -v 127.0.0.1 | grep -v /login | head -'.$log_limit;
         //put output in to array
         exec($command,$output);
-
+        
         foreach ($output as $line)
         {
             //terminal color codes

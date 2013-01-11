@@ -11,6 +11,8 @@ class settings extends pf_controller
         //lock to user level
         pf_auth::lockPage($userlevels['settings'], 'Sorry, You do not have access to this page!');
         
+        $data = array();
+        
         //write the new settings
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
@@ -19,19 +21,21 @@ class settings extends pf_controller
             CMC::writeCMCSetting('log_lines', $_POST['log_lines']);
             CMC::writeCMCSetting('restart_check', $_POST['auto_restart']);
             
-            $this->loadView('settings/settings_saved_page.php');
+            $data['saved']=true;
         }
-        //get the old settings and display them
         else
         {
-            $data = array();
-            $data['bukkit_dir'] = CMC::getCMCSetting('bukkit_dir');
-            $data['bukkit_channel'] = CMC::getCMCSetting('bukkit_channel');
-            $data['log_lines'] = CMC::getCMCSetting('log_lines');
-            $data['restart_check'] = CMC::getCMCSetting('restart_check');
-
-            $this->loadView('settings/settings_page.php',$data);
+        $data['saved']=false; //we didn't save any settings
         }
+        
+        //get the old settings and display them
+        $data['bukkit_dir'] = CMC::getCMCSetting('bukkit_dir');
+        $data['bukkit_channel'] = CMC::getCMCSetting('bukkit_channel');
+        $data['log_lines'] = CMC::getCMCSetting('log_lines');
+        $data['restart_check'] = CMC::getCMCSetting('restart_check');
+        
+        
+        $this->loadView('settings/settings_page.php',$data);
     }
 }
 ?>
