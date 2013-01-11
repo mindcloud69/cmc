@@ -17,7 +17,7 @@ else $data['current_cron'] = 'FALSE';
                     .online{color:green;}
                     .offline{color:red;}
 
-                    #logload { white-space: pre; height:350px;overflow:auto;}
+                    #mainlog,#errorlog,#chatlog,#connlog { white-space: pre; height:350px;overflow:auto;margin-top:0px;padding-top: 0px;}
                     
                     #multijava{font-size:14px;color:red;}
                     
@@ -25,14 +25,14 @@ else $data['current_cron'] = 'FALSE';
                     .serverlog{margin-top:25px;}
                     
                     .button-group{background:none;}
-                    
+                    #filters{margin:0px;}
                     
 		</style>
 		<script>
-			$('#tab a').click(function (e) {
+			/*$('#tab a').click(function (e) {
   				e.preventDefault();
   				$(this).tab('show');
-			})
+			})*/
 		
                         //this deals with the CPU/MEM bar
                         function updatestats ()
@@ -80,6 +80,12 @@ else $data['current_cron'] = 'FALSE';
                             //updates player info etc
                             serverinfo();
                             
+                            //update logs
+                            $('#mainlog').load('<?php echo MAIN_PAGE;?>/data/mainlog');
+                            $('#chatlog').load('<?php echo MAIN_PAGE;?>/data/chatlog');
+                            $('#errorlog').load('<?php echo MAIN_PAGE;?>/data/errorlog');
+                            $('#connlog').load('<?php echo MAIN_PAGE;?>/data/connectionlog');
+                            
                             //call yourself again after 10 seconds
                             setTimeout(updatestats,10000);
                         }
@@ -116,22 +122,47 @@ else $data['current_cron'] = 'FALSE';
                             $('#multijava').hide();
                             updatestats();
                             
-                            $('#logload').load('<?php echo MAIN_PAGE;?>/data/mainlog');
+                            //show the main log but hide others
+                                $('#mainlog').show();
+                                $('#errorlog').hide();
+                                $('#connlog').hide();
+                                $('#chatlog').hide();
                             
+                            //on chat click
                             $('#chat').click(function() {
-                                $('#logload').load ('<?php echo MAIN_PAGE;?>/data/chatlog');
+                                $('#mainlog').hide();
+                                $('#errorlog').hide();
+                                $('#connlog').hide();
+                                $('#chatlog').show();
+                                
                             });
                             
+                            //on all click
                             $('#all').click(function() {
-                                $('#logload').load ('<?php echo MAIN_PAGE;?>/data/mainlog');
+                                //$('#logload').load ('<?php echo MAIN_PAGE;?>/data/mainlog');
+                                 $('#mainlog').show();
+                                $('#errorlog').hide();
+                                $('#connlog').hide();
+                                $('#chatlog').hide();
                             });
                             
+                            //on errors click
                             $('#errors').click(function() {
-                                $('#logload').load ('<?php echo MAIN_PAGE;?>/data/errorlog');
+                                //$('#logload').load ('<?php echo MAIN_PAGE;?>/data/errorlog');
+                                $('#mainlog').hide();
+                                $('#errorlog').show();
+                                $('#connlog').hide();
+                                $('#chatlog').hide();
+                                
                             });
                             
+                            //on connections click
                             $('#connections').click(function() {
-                                $('#logload').load ('<?php echo MAIN_PAGE;?>/data/connectionlog');
+                                //$('#logload').load ('<?php echo MAIN_PAGE;?>/data/connectionlog');
+                                $('#mainlog').hide();
+                                $('#errorlog').hide();
+                                $('#connlog').show();
+                                $('#chatlog').hide();
                             });
                             
                            $("#cpu")
@@ -169,8 +200,6 @@ else $data['current_cron'] = 'FALSE';
                                  {color: "#ff0000", from: 75, to: 100}
                                  ]
                            })
-                           
-                          
                         });
 		</script>
 		
@@ -202,12 +231,12 @@ else $data['current_cron'] = 'FALSE';
                                 <h4 class="six columns centered offset-by-four">Server Load</h4>
                                 
                                 <div class="row">
-                                    <div class="four columns offset-by-one"><canvas id="cpu" height="150" width="150"></canvas></div>
-                                    <div class="four columns pull-one"><canvas id="mem" height="150" width="150"></canvas></div>
+                                    <div class="eight columns centered">
+                                        <canvas id="cpu" height="180" width="180"></canvas>
+                                        <canvas id="mem" height="180" width="180"></canvas>
+                                    </div>
                                 </div>
                                 <p id='cores' class="twelve columns"style="text-align:center;">CPU Usage Based On X Cores</p>
-                                
-                                
                         </div>
 
                         <div class="four columns panel">
@@ -225,14 +254,11 @@ else $data['current_cron'] = 'FALSE';
                         </div>
                     </div>
                 </div>
-            
                 <br />
-                <hr>
-                <br />
+                <h4 class="center" style="margin:2px;padding: 0px;">Server Logs</h4>
             <div class="row">
                 <div class="twelve columns">
-                    
-                    <ul class="button-group even four-up">
+                    <ul id="filters" class="button-group even four-up">
                       <li id="all"><a href="#" class="button secondary">All Messages</a></li>
                       <li id="chat"><a href="#" class="button secondary">Chat Only</a></li>
                       <li id="errors"><a href="#" class="button secondary">Errors Only</a></li>
@@ -240,9 +266,11 @@ else $data['current_cron'] = 'FALSE';
                     </ul>
                     
 
-                    <div id="logload" class="twelve columns panel">
-                        
-                    </div>
+                    <div id="mainlog" class="twelve columns panel"></div>
+                    <div id="chatlog" class="twelve columns panel"></div>
+                    <div id="errorlog" class="twelve columns panel"></div>
+                    <div id="connlog" class="twelve columns panel"></div>
+                    <p class="center" style="color:red;margin:0px;padding:0px;">**Refreshes every 10 seconds**</p>
                     
                 </div>
             </div>
