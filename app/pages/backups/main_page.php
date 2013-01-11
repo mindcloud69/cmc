@@ -47,13 +47,12 @@ else $last_backup = $data['last_backup'];
                 <div id="main" class="row">
                     <?php pf_forms::createForm('backup', 'backupform four offset-by-four columns panel', pf_config::get('main_page')."/backups/action", 'POST'); ?>
                     
-                    <p>Your Last Backup Was:<br />
-                    <?php echo $last_backup; ?><br /></p>
+                    <p><b>Your Last Backup Was:</b> <?php echo $last_backup; ?><br /></p>
                     
-                    <p>Please check all worlds you wish to backup.</p>
+                    <p><b>Check the worlds you wish to backup.</b></p>
                     <label class="checkbox"><?php pf_forms::checkbox('world1', $data[0], $data[0]);?></label>
                     <label class="checkbox"><?php if (key_exists(1, $data)) pf_forms::checkbox('world2', $data[1], $data[1]);?></label>
-                    <label class="checkbox"><?php if (key_exists(2, $data)) pf_forms::checkbox('world3', $data[2], $data[2]);?></label>
+                    <label class="checkbox"><?php if (key_exists(2, $data)) pf_forms::checkbox('world3', $data[2], $data[2]);?></label><br />
                     <?php pf_forms::button('submit', 'Manual Backup', 'twelve button rounded success'); ?>
                     <?php pf_forms::closeForm();?>
                 <br />

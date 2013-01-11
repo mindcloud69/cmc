@@ -26,7 +26,7 @@
                                     $table->startRow();
                                     $table->addCell($info['name']);
                                     $table->addCell($info['last_seen']);
-                                    $table->addCell('<a class="center button rounded" href="'.MAIN_PAGE.'/players/delete?name='.$info['name'].'">Delete Players File</a>',null,'center');
+                                    $table->addCell('<a class="eight offset-by-two button rounded" href="'.MAIN_PAGE.'/players/delete?name='.$info['name'].'">Delete Players File</a>',null,'center');
                                     $table->endRow();
                                 }
                                 $table->renderTable();
@@ -36,7 +36,7 @@
                         
                     </div>        
                 <div class="row">
-                    <div class="twelve columns offset-by-one">
+                    <div class="twelve columns">
                         <div id="banned" class="four columns">
                             <h4 class="center">Banned Players</h4>
                             <?php

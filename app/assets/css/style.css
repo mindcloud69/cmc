@@ -57,7 +57,7 @@ form {padding: 30px;}
     background:#08C;
     color:#fff;
 }
-/*Users Table*/
+/*Users Table
 #users table {
     width:100%;
     border: 1px solid #B0;
@@ -83,7 +83,7 @@ padding: 10px;
 #users tr:nth-child(even) {
 background: #8CD;
 }
-
+*/
 .even{
     background: #0be;
 }

@@ -8,19 +8,16 @@
         <?php pf_core::loadTemplate('menu'); ?>
             <h3 class="center">User Management</h3>
                         
-            <div class="container">
                 <div class="row">
-                    
-                    <?php pf_forms::createForm('adduser','span4 offset4',pf_config::get('main_page').'/users/add'); ?>
-                    <legend class="center">Add a User</legend>
+                    <h4 class="center">Add A User</h4>
+                    <?php pf_forms::createForm('adduser','four columns offset-by-four panel',pf_config::get('main_page').'/users/add'); ?>
                     Username: <?php pf_forms::text('username', true, null, 'Username'); ?><br />
                     Password: <?php pf_forms::text('password', true, null, 'Password'); ?><br />
-                    User Level: <?php pf_forms::options('level', 'level',array('Admin'=>'Admin','User'=>'User'),'User'); ?><br />
-                    <?php pf_forms::button('submit', 'Add User','button rounded span4'); ?>
+                    User Level: <?php pf_forms::options('level', 'level',array('Admin'=>'Admin','User'=>'User'),'User'); ?><br /><br />
+                    <?php pf_forms::button('submit', 'Add User','success twelve button rounded'); ?>
                     <?php pf_forms::closeForm(); ?>
                     
                 </div>
-            </div>
             <?php pf_core::loadTemplate('footer'); ?>
     </body>
 </html>

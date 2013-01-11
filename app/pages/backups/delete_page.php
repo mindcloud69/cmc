@@ -3,6 +3,7 @@
 	<head>
             <?php pf_core::loadTemplate('header'); ?>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="refresh" content="2;URL='<?php echo MAIN_PAGE; ?>/backups'" />  
 	</head>
         <body>
         <?php pf_core::loadTemplate('menu'); ?>

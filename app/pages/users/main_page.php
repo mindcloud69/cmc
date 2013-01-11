@@ -8,15 +8,10 @@
         <?php pf_core::loadTemplate('menu'); ?>
             <h3 class="center">User Management</h3>
                         
-            <div class="container">
                 <div class="row">
-                    
-                    
                         <?php
-
 			$table = new pf_tables();
-        
-			$table->startTable('users',0,NULL,'table table-striped span6 offset3');
+			$table->startTable('users',0,NULL,'table table-striped ten columns offset-by-one');
 			$table->startRow();
 			$table->addTableHeading('ID');
 			$table->addTableHeading('Name');
@@ -31,24 +26,25 @@
     			$table->addCell($user['ID']);
                         $table->addCell($user['User']);
     			$table->addCell($user['Level']);
-                        $table->addCell('<center><a style="width:80px;" class="button rounded" href="'.pf_config::get('main_page').'/users/edit?id='.$user['ID'].'">Edit </a></center>');
-    			$table->addCell('<center><a style="width:80px;" class="button rounded" href="'.pf_config::get('main_page').'/users/delete?id='.$user['ID'].'&user='.$user['User'].'">Delete </a></center>');
+                        $table->addCell('<center><a style="width:80px;" class="button rounded secondary" href="'.pf_config::get('main_page').'/users/edit?id='.$user['ID'].'">Edit </a></center>');
+    			$table->addCell('<center><a style="width:80px;" class="button rounded alert" href="'.pf_config::get('main_page').'/users/delete?id='.$user['ID'].'&user='.$user['User'].'">Delete </a></center>');
     			$table->endRow();
 			}
 
 			$table->renderTable();
                         ?>
-                    
                 </div>
                 <div class="row">
-                    <div class="span6 offset3">
-                        <p>
-                            Please NOTE: Currently there is no difference between admins/users. This will be worked on in future versions.
+                    <div class="ten columns offset-by-one">
+                        <p class="six columns center">
+                            <a class="button rounded success" href="<?php echo MAIN_PAGE ?>/users/add">Add A User</a>
+                        </p>
+                        <p class="six columns center">
+                            <a class="button rounded secondary" href="<?php echo MAIN_PAGE ?>/users/access">Page Access Control</a>
                         </p>
                         <br />
                     </div>
                 </div>
-            </div>
             <?php pf_core::loadTemplate('footer'); ?>
     </body>
 </html>

@@ -14,32 +14,70 @@ if (key_exists('saved', $data))
         <body>
         <?php pf_core::loadTemplate('menu'); ?>
             <h3 class="center">User Management</h3>
+            <h4 class="center">Edit Page Access</h4>
                         
-            <div class="container">
                 <div class="row">
                     <?php
                     if (isset($saved))
                     {
-                        echo '<div class="valid span4 offset4">Settings Saved!</div><br /><br />';
+                        echo '<div class="valid four offset-by-four">Settings Saved!</div><br /><br />';
                     }
                     ?>
                     
-                    <?php pf_forms::createForm('access','span4 offset4',MAIN_PAGE.'/users/access','POST'); ?>
-                    <legend class="center">Edit Page Access</legend>
+                    <?php pf_forms::createForm('access','six columns centered panel',MAIN_PAGE.'/users/access','POST'); ?>
                     
                     
-                    <div class="info">User Pages are ALWAYS Admin Only!</div>
+                    <div class="info center">User Pages are ALWAYS Admin Only!</div><br />
                     
-                    Config Pages: <?php pf_forms::options('config', 'config',array('Admin'=>'Admin','User'=>'User'),$data['config']); ?><br />
-                    Server Pages: <?php pf_forms::options('server', 'server',array('Admin'=>'Admin','User'=>'User'),$data['server']); ?><br />
-                    Backups Pages: <?php pf_forms::options('backup', 'backup',array('Admin'=>'Admin','User'=>'User'),$data['backup']); ?><br />
-                    CMC Settings : <?php pf_forms::options('settings', 'settings',array('Admin'=>'Admin','User'=>'User'),$data['settings']); ?><br />
+                    <div class="row">
+                        <div class="three columns">
+                            <label class="right inline">Config Pages:</label>
+                        </div>
+                        <div class="nine columns">
+                            <?php pf_forms::options('config', 'config',array('Admin'=>'Admin','User'=>'User'),$data['config']); ?>
+                        </div>
+                    </div>
+                    <br />
                     
-                    <?php pf_forms::button('submit', 'Edit Access','button rounded span4'); ?>
+                    <div class="row">
+                        <div class="thre columns">
+                            <label class="right inline">Server Pages:</label>
+                        </div>
+                        <div class="nine columns">
+                            <?php pf_forms::options('server', 'server',array('Admin'=>'Admin','User'=>'User'),$data['server']); ?>
+                        </div>
+                    </div>
+                    <br />
+                    
+                    <div class="row">
+                        <div class="three columns">
+                            <label class="right inline">Backup Pages:</label>
+                        </div>
+                        <div class="nine columns">
+                            <?php pf_forms::options('backup', 'backup',array('Admin'=>'Admin','User'=>'User'),$data['backup']); ?>
+                        </div>
+                    </div>
+                    <br />
+                    
+                    <div class="row">
+                        <div class="three columns">
+                            <label class="right inline">CMC Settings:</label>
+                        </div>
+                        <div class="nine columns">
+                        <?php pf_forms::options('settings', 'settings',array('Admin'=>'Admin','User'=>'User'),$data['settings']); ?>    
+                        </div>
+                    </div>
+                    <br />
+                    
+                    <div class="row">
+                        <div class="twelve columns centered">
+                            <?php pf_forms::button('submit', 'Edit Access','button rounded twelve'); ?>
+                        </div>
+                    </div>
                     <?php pf_forms::closeForm(); ?>
                     
                 </div>
-            </div>
+            
             <?php pf_core::loadTemplate('footer'); ?>
     </body>
 </html>
