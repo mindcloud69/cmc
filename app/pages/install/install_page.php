@@ -41,8 +41,8 @@ $loglines = array(
                         
                 <div class="row">
                     <?php if ($installed){?>
-                        <div class="alert six centered offset-by-three">
-                                <h3>Oh SNAP - you've already installed CMC!</h3>
+                        <div class="alert ten columns centered">
+                                <h5 class="center">Oh SNAP - you've already installed CMC!</h5>
                                 <p class="center">
                                 It's OK, don't panic, we can get through this together.<br />
                                 <a href="<?php echo pf_config::get('main_page');?>">CLICK HERE TO ABORT!</a>
@@ -60,7 +60,7 @@ $loglines = array(
                         Admin Password<br /><?php pf_forms::text('adminpass', true, null, 'Admin Password');?><br />
                         <h3>Other Details</h3>
                         Bukkit Location:<br /><?php pf_forms::text('bukkitdir', true, null, 'Bukkit Install Directory');?><br />
-                        Bukkit Release Channel<br /><?php pf_forms::options('bukkitchannel', 'bukkitchannel', array('Recommeded'=>'Recommended','Beta'=>'Beta','Dev'=>'Dev')); ?><br />
+                        Auto Update Channel<br /><?php pf_forms::options('update_channel', 'update_channel', array('Bukkit RC'=>'Bukkit RC','Bukkit Beta'=>'Bukkit Beta','Bukkit Dev'=>'Bukkit Dev','Vanilla'=>'Minecraft Vanilla','Custom'=>'Custom')); ?><br />
                         
                         <br />
                         <input type="submit" value="SAVE" class="button rounded span2"/>

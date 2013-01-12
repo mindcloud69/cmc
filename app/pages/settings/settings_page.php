@@ -56,9 +56,14 @@ $cronjob = array_combine($keys, $keys);
                             <td>Where Bukkit is installed.</td>
                         </tr>
                         <tr>
-                            <td>Bukkit Release Channel:</td>
-                            <td><?php pf_forms::options('bukkit_channel', 'bukkitchannel', array('Recommeded'=>'Recommended','Beta'=>'Beta','Dev'=>'Dev'),$data['bukkit_channel']); ?></td>
-                            <td><b>Default: Recommended</b> - Preferred Channel of Bukkit. Used When CMC Downloads Updates</td>
+                            <td>Update Channel:</td>
+                            <td><?php pf_forms::options('update_channel', 'update_channel', array('Bukkit RC'=>'Bukkit RC','Bukkit Beta'=>'Bukkit Beta','Bukkit Dev'=>'Bukkit Dev','Vanilla'=>'Minecraft Vanilla','Custom'=>'Custom'),$data['update_channel']); ?></td>
+                            <td><b>Default: Bukkit RC</b> - Auto-Update URL. Used When CMC Downloads Server Updates</td>
+                        </tr>
+                        <tr>
+                            <td>Custom Update URL:</td>
+                            <td><?php pf_forms::text('custom_url', null, $data['custom_url'], null);?></td>
+                            <td><b>Default: Blank</b> - Custom Auto-Update URL. Used When CMC Downloads Server Updates</td>
                         </tr>
                         <tr>
                             <td>Log Lines:</td>
@@ -75,9 +80,8 @@ $cronjob = array_combine($keys, $keys);
                             <td><?php pf_forms::text('jarfile',true,$data['jarfile']);?></td>
                             <td><b>Default: Bukkit</b> - Set to bukkit.jar, minecraft_server.jar, or any other custom fork you may run </td>
                         </tr>
-                        
                         <tr>
-                            <td colspan="3"><div class="six columns centered center"><a target="_blank" href="http://www.craftycontroller.com/wiki/doku.php?id=configuration"><img src="<?php echo ASSETS_DIR?>/site_images/used/support.png"/> &nbsp; Need Help?</a></div></td>
+                            <td colspan="3"><div class="six columns centered center"><a class="button rounded secondary"target="_blank" href="http://www.craftycontroller.com/wiki/doku.php?id=configuration"><img src="<?php echo ASSETS_DIR?>/site_images/used/support.png"/> &nbsp; Need Help?</a></div></td>
                         </tr>
                     
                     

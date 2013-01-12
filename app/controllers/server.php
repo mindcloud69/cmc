@@ -122,7 +122,7 @@ class server extends pf_controller
         CMC::log('Restart Cron - Checking Server Connectable');
 
         //check if server is online
-        if (server_conf::checkOnline())
+        if (mcController::checkOnline())
         {
             //we are online
             die('Server Already Online');
@@ -140,21 +140,48 @@ class server extends pf_controller
         $this->checkLogin();
         
         $userlevels = CMC::getCMCSetting('pageaccess');
+        
         //lock to user level
         pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
         
-        $channel = CMC::getCMCSetting('bukkit_channel');
+        //turn off the restart check because we are going to stop the server
+        CMC::writeCMCSetting('restart_check', false); //turn off the restart check as the stop command will remove the cron.
+
+        
+        //get some settings
+        $channel = CMC::getCMCSetting('update_channel');
+        $custom_url = CMC::getCMCSetting('custom_url');
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         
-        CMC::writeCMCSetting('restart_check', false); //turn off the restart check as the stop command will remove the cron.
-                
-        //get the url for the download
-        if ($channel == 'Recommended') $url = 'http://dl.bukkit.org/latest-rb/craftbukkit.jar';
-        elseif ($channel == 'Beta') $url = 'http://dl.bukkit.org/latest-beta/craftbukkit.jar';
-        elseif ($channel == 'Dev') $url = 'http://dl.bukkit.org/latest-dev/craftbukkit.jar';
         
+        
+        
+        //get the url for the download
+        if (pf_core::compareStrings($channel, 'bukkit rc')) $url = 'http://dl.bukkit.org/latest-rb/craftbukkit.jar';
+        elseif (pf_core::compareStrings($channel, 'bukkit beta')) $url = 'http://dl.bukkit.org/latest-beta/craftbukkit.jar';
+        elseif (pf_core::compareStrings($channel, 'bukkit dev')) $url = 'http://dl.bukkit.org/latest-dev/craftbukkit.jar';
+        elseif (pf_core::compareStrings($channel, 'vanilla')) $url = 'https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft_server.jar';
+            
+        //did they setup a custom url? if so we need to use that
+        //making sure it's not '' and the channel is set to custom.
+        if ( ($custom_url !='') && (pf_core::compareStrings($channel, 'custom')) )
+        {
+            $url = $custom_url;
+        }
+        
+        $data = array('channel'=>$channel,'url'=>$url,'bukkit_dir',$bukkit_dir);
+
+        //if they wanna go, we do the updater, if not, we show the page :)
+        if (!empty($_GET['go']))
+        {
         //launch the updater
         require_once(APPLICATION_DIR.'/mcscripts/update.php');
+            
+        }
+        else
+        {
+        $this->loadView('updater/updater_page.php',$data);
+        }
     }
 
 

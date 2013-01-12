@@ -24,7 +24,7 @@ ob_start();
     
     function download_remote($url , $save_path)
     {
-        echo 'Starting Download...';
+        echo 'Starting Download of '. $url .'...';
         $f = fopen( $save_path , 'w+');
 
         $handle = fopen($url , "rb");
@@ -66,7 +66,6 @@ ob_start();
                 <div class="row">
                     <h1 class="center">Update Bukkit</h1>
                     <div id="downloading" class="panel">
-                        You are downloading the <?php echo $channel;?> branch of bukkit.<br />
                         <?php
                         download_remote($url, '/tmp/craftbukkit.jar');
                         
@@ -93,7 +92,7 @@ ob_start();
                         rename($bukkit_dir.'/craftbukkit.jar', $bukkit_dir.'/craftbukkit.old');
                         rename('/tmp/craftbukkit.jar', $bukkit_dir.'/craftbukkit.jar');
                         
-                        //make it executible
+                        //make it executable
                         exec("chmod +x $bukkit_dir/craftbukkit.jar");
                         
                         echo "Update Complete.... Go Start Your Server and Pray<br />";

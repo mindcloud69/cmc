@@ -55,7 +55,7 @@ class install extends pf_controller
         $adminname= trim($_POST['adminname']);
         $adminpass= trim($_POST['adminpass']);
         $bukkitdir= trim($_POST['bukkitdir']);
-        $bukkitrelease= trim($_POST['bukkitchannel']);
+        $update_channel= trim($_POST['update_channel']);
         
         //check to make sure we can write to where bukkit is installed
         if(file_put_contents($bukkitdir.'/CMCwritetest', 'writetest'))
@@ -111,7 +111,7 @@ class install extends pf_controller
         //write our settings file
         CMC::writeCMCSetting('bukkit_dir', $bukkitdir);
         CMC::writeCMCSetting('salt',$salt);
-        CMC::writeCMCSetting('bukkit_channel', $bukkitrelease);
+        CMC::writeCMCSetting('update_channel', $update_channel);
         CMC::writeCMCSetting('log_lines', '100');
         CMC::writeCMCSetting('restart_check', '15');
         CMC::writeCMCSetting('jarfile', 'craftbukkit.jar');
