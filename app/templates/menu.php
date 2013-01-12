@@ -10,9 +10,7 @@ else //if not logged in, we show a login link :)
     $loginlink = '<a href="'.MAIN_PAGE.'/login"><img src="'.pf_config::get('base_url').'/app/assets/site_images/used/locked.png"/>&nbsp;Login</a>';
 }
 //check to see if we are installed
-$data = new pf_json();
-$data->readJsonFile(APPLICATION_DIR.'config'.DS.'settings.json');  //grab data from json
-$installed = $data->get('bukkit_dir'); //do we have a bukkit_dir?
+$installed = CMC::getCMCSetting('bukkit_dir');
 
 ?>
 

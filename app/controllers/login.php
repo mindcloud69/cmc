@@ -4,6 +4,12 @@ class login extends pf_controller
 {
     public function index()
     {
+        //check to see if we are installed, if not, we launch the installer
+        if (!CMC::getCMCSetting('bukkit_dir'))
+        {
+            pf_core::redirectUrl(MAIN_PAGE.'/install');
+        }
+        
         if (isset($_GET['failed'])) $data = array('failed' => TRUE);
         else $data = array();
         $this->loadView('login/login_page.php',$data);

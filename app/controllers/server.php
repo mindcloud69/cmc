@@ -167,8 +167,17 @@ class server extends pf_controller
         //lock to user level
         pf_auth::lockPage($userlevels['server'], 'Sorry, You do not have access to this page!');
         
+        //grab some settings
         $data= CMC::getCMCSetting('startup_ram');
         $restart_time = CMC::getCMCSetting('restart_check');
+        $jar = CMC::getCMCSetting('jarfile');
+        
+        //make sure the .jar ends in .jar if not we add the .jar on to it
+        if (!pf_core::compareStrings(substr($jar,-4), '.jar'))
+        {
+            $jar.='.jar';
+        }
+                
         
         //check if server is online
         if (mcController::checkOnline())
@@ -197,7 +206,7 @@ class server extends pf_controller
             
             //write the script to the mcscripts folder
             $file = "cd $dir \n";
-            $file .= 'screen -dmS bukkit java -Xincgc -Xmx'.$ram.'M -jar craftbukkit.jar'."\n";
+            $file .= 'screen -dmS bukkit java -Xincgc -Xmx'.$ram.'M -jar ' . $jar . "\n";
             
             //if we can't write, we throw an error
             if (! file_put_contents(APPLICATION_DIR.'mcscripts'.DS.'startup.sh', $file))

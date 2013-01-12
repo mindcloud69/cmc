@@ -24,8 +24,8 @@ $logselect = array(
 
 
 
-$cronjob = range(1,59);//generate an array counting from 1 to 59 by 1's
-
+$keys = range(1,59);//generate an array counting from 1 to 59 by 1's
+$cronjob = array_combine($keys, $keys);
 ?>
 
 <!DOCTYPE html>
@@ -47,31 +47,38 @@ $cronjob = range(1,59);//generate an array counting from 1 to 59 by 1's
             
                 <div class="row">
                     <h1 class="center">Configure CMC</h1>
-                    <?php pf_forms::createForm('config', 'config eight offset-by-two panel', pf_config::get('main_page')."/settings", 'POST'); ?>
+                    <?php pf_forms::createForm('config', 'config twelve offset-by-one panel', pf_config::get('main_page')."/settings", 'POST'); ?>
                     
-                    <table class="twelve columns" cellpadding="5">
+                    <table class="twelve columns" cellpadding="0">
                         <tr>
                             <td>Bukkit Dir:</td>
-                            <td><?php pf_forms::text('bukkit_dir', true, $data['bukkit_dir'], null);?></td>
+                            <td width="40%"><?php pf_forms::text('bukkit_dir', true, $data['bukkit_dir'], null);?></td>
                             <td>Where Bukkit is installed.</td>
                         </tr>
                         <tr>
                             <td>Bukkit Release Channel:</td>
                             <td><?php pf_forms::options('bukkit_channel', 'bukkitchannel', array('Recommeded'=>'Recommended','Beta'=>'Beta','Dev'=>'Dev'),$data['bukkit_channel']); ?></td>
-                            <td>Preferred Channel of Bukkit. Used When CMC Downloads Updates</td>
+                            <td><b>Default: Recommended</b> - Preferred Channel of Bukkit. Used When CMC Downloads Updates</td>
                         </tr>
                         <tr>
                             <td>Log Lines:</td>
                             <td><?php pf_forms::options('log_lines', 'loglines',$logselect,$data['log_lines'])?></td>
-                            <td>Number of lines to load from the log on the main page</td>
+                            <td><b>Default: 100</b> - Number of lines to load from the log on the main page</td>
                         </tr>
                         <tr>
                             <td>Auto Restart Check:</td>
                             <td><?php pf_forms::options('auto_restart', 'auto_restart', $cronjob, $data['restart_check']);?></td>
-                            
-                            <td>Number Of Minutes to check for a hung server if restart on crash is enabled</td>
+                            <td><b>Default: 15</b> - Number Of Minutes to check for a hung server if restart on crash is enabled</td>
                         </tr>
-
+                        <tr>
+                            <td>Server Jar File:</td>
+                            <td><?php pf_forms::text('jarfile',true,$data['jarfile']);?></td>
+                            <td><b>Default: Bukkit</b> - Set to bukkit.jar, minecraft_server.jar, or any other custom fork you may run </td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="3"><div class="six columns centered center"><a target="_blank" href="http://www.craftycontroller.com/wiki/doku.php?id=configuration"><img src="<?php echo ASSETS_DIR?>/site_images/used/support.png"/> &nbsp; Need Help?</a></div></td>
+                        </tr>
                     
                     
                     </table>

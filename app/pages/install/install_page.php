@@ -39,10 +39,9 @@ $loglines = array(
             <?php pf_core::loadTemplate('menu'); ?>
             <h3 class="center">Install Crafty Minecraft Controller</h3>
                         
-            <div class="container">
                 <div class="row">
                     <?php if ($installed){?>
-                        <div class="alert span6 offset3">
+                        <div class="alert six centered offset-by-three">
                                 <h3>Oh SNAP - you've already installed CMC!</h3>
                                 <p class="center">
                                 It's OK, don't panic, we can get through this together.<br />
@@ -55,11 +54,11 @@ $loglines = array(
                     <?php }?>
                     
                     <center>
-                        <?php pf_forms::createForm('install', 'span6 offset3', pf_config::get('main_page').'/install/go', 'POST');?>
-                        <legend>Administrator Details</legend>
+                        <?php pf_forms::createForm('install', 'six columns centered', pf_config::get('main_page').'/install/go', 'POST');?>
+                        <h3>Administrator Details</h3>
                         Admin Username<br /><?php pf_forms::text('adminname', true, null, 'Admin Username');?><br />
                         Admin Password<br /><?php pf_forms::text('adminpass', true, null, 'Admin Password');?><br />
-                        <legend>Other Details</legend>
+                        <h3>Other Details</h3>
                         Bukkit Location:<br /><?php pf_forms::text('bukkitdir', true, null, 'Bukkit Install Directory');?><br />
                         Bukkit Release Channel<br /><?php pf_forms::options('bukkitchannel', 'bukkitchannel', array('Recommeded'=>'Recommended','Beta'=>'Beta','Dev'=>'Dev')); ?><br />
                         
@@ -68,7 +67,6 @@ $loglines = array(
                         <?php pf_forms::closeForm();?>
                     </center>
                 </div>
-            </div>
         <?php pf_core::loadTemplate('footer'); ?>
     </body>
 </html>

@@ -4,12 +4,23 @@ class main extends pf_controller
 {
     public function index()
     {
+        
+        //if we don't have a bukkit dir, we go to the install controller
+        if (!CMC::getCMCSetting('bukkit_dir'))
+        {
+            pf_core::redirectUrl(MAIN_PAGE.'/install');
+        }
+        
+        
         $data = array();
         
+        //get our bukkit dir
         $data['bukkit_dir'] = CMC::getCMCSetting('bukkit_dir');
         
+        //load the server.properties, if not there, we throw an error in their face
         if (!mcController::getMCConfig($data['bukkit_dir'].'/server.properties'))
         {
+            
             pf_events::dispayFatal('Unable To Find Server.Properties!<br /><a href="'.MAIN_PAGE.'/install">Click Here To Install/Reinstall</a>');
         }
         

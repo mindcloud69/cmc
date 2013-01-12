@@ -114,6 +114,7 @@ class install extends pf_controller
         CMC::writeCMCSetting('bukkit_channel', $bukkitrelease);
         CMC::writeCMCSetting('log_lines', '100');
         CMC::writeCMCSetting('restart_check', '15');
+        CMC::writeCMCSetting('jarfile', 'craftbukkit.jar');
         
         $this->loadView('install/complete_page.php');
         
