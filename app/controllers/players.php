@@ -2,13 +2,13 @@
 
 class players extends pf_controller
 {
-    public function nope()
-    {
-        echo 'This is a work in progress,showing banned players, listing all players in the world, with the ability to delete them....also a list of ops i guess';
-    }
     
     public function delete()
     {
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['players'], 'Sorry, You do not have access to this page!');
+        
         //make sure a file name is given
         if (!isset($_GET['name']))
         {
@@ -48,6 +48,10 @@ class players extends pf_controller
     
     public function index()
     {
+        $userlevels = CMC::getCMCSetting('pageaccess');
+        //lock to user level
+        pf_auth::lockPage($userlevels['players'], 'Sorry, You do not have access to this page!');
+        
         //get our bukkit dir
         $data['bukkit_dir'] = CMC::getCMCSetting('bukkit_dir');
         

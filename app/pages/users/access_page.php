@@ -61,6 +61,16 @@ if (key_exists('saved', $data))
                     
                     <div class="row">
                         <div class="three columns">
+                            <label class="right inline">Player Pages:</label>
+                        </div>
+                        <div class="nine columns">
+                            <?php pf_forms::options('players', 'players',array('Admin'=>'Admin','User'=>'User'),$data['players']); ?>
+                        </div>
+                    </div>
+                    <br />
+                    
+                    <div class="row">
+                        <div class="three columns">
                             <label class="right inline">CMC Settings:</label>
                         </div>
                         <div class="nine columns">

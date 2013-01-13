@@ -13,9 +13,10 @@
 	</head>
         <body>
         <?php pf_core::loadTemplate('menu'); ?>
-            <div class="container">
-                <div class="row">
-                        <div id="error" class="alert span6 offset3" style="text-align:center;"><b>FATAL ERROR</b>:<?php echo $data['error']?> </div>                    
+                <div class="row" style="margin-top: 25px;">
+                    <div class="six columns centered">
+                        <div id="error" class="alert center centered" style="text-align:center;"><b>FATAL ERROR</b>:<?php echo $data['error']?> </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="span12">
@@ -27,7 +28,6 @@
                         ?>
                     </div>
                 </div>
-            </div>
             <?php pf_core::loadTemplate('footer'); ?>
     </body>
 </html>
