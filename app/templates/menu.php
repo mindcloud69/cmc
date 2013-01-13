@@ -66,14 +66,14 @@ else: ?>
                 <ul class="dropdown">
                     <li><a href="<?php echo MAIN_PAGE; ?>/config">Config</a></li>
                     <li><a href="<?php echo MAIN_PAGE; ?>/server">Server Commands</a></li>
-                    <li><a href="<?php echo MAIN_PAGE; ?>/server/update">Update</a></li>
+                    <li><a href="<?php echo MAIN_PAGE; ?>/server/update">Update Server</a></li>
                 </ul>
             </li>
             
             <li class="has-dropdown"><a href="<?php echo MAIN_PAGE;?>/backups"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/box-add.png"/>&nbsp;Backups</a>
                 <ul class="dropdown">
                     <li><a href="<?php echo MAIN_PAGE;?>/backups">Backups</a></li>
-                    <li><a href="<?php echo MAIN_PAGE;?>/backups/scheduled">Scheduled Backups</a></li>
+                    <!--<li><a href="<?php echo MAIN_PAGE;?>/backups/scheduled">Scheduled Backups</a></li> will enable in 1.2.9-->
                 </ul>
             </li>
         
@@ -97,10 +97,19 @@ else: ?>
     </section>
     </nav>
     <br>
-                    <!--[if IE]>
-	                	<div class="alert center">
-	                		Your current browser is not supported! <a href="https://www.google.com/intl/en/chrome/browser/">Click here</a> to download a better browser.
-	                	</div>
-	                <![endif]-->
 </div>
+
 <?php endif;?>
+
+
+    <!--[if IE]>
+    <div class="row">
+        <div class="six centered columns" style="margin-top:25px;">
+                <div class="alert rounded centered">
+                        Your current browser is not supported!<br />
+                        Your experience may not be optimal <br />
+                        <a href="https://www.google.com/intl/en/chrome/browser/">Click here</a> to download a better browser.
+                </div>
+            </div>
+    </div>
+        <![endif]-->
