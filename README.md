@@ -14,7 +14,7 @@ This system requires the following:
  * Apache Version: 2.2.20 (default on ubuntu)
  * PHP Version 5.3.6 (default on ubuntu)
  * SQLite 3 Support
- * Bukkit and some type of Java.
+ * Bukkit/Minecraft and some type of Java.
 
 ##Helpful Links##
   * [Main Page](http://www.craftycontroller.com)
