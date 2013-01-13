@@ -96,5 +96,11 @@ else: ?>
         </ul>
     </section>
     </nav>
+    <br>
+                    <!--[if IE]>
+	                	<div class="alert center">
+	                		Your current browser is not supported! <a href="https://www.google.com/intl/en/chrome/browser/">Click here</a> to download a better browser.
+	                	</div>
+	                <![endif]-->
 </div>
 <?php endif;?>

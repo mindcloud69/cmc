@@ -208,11 +208,6 @@ else $data['current_cron'] = 'FALSE';
 	
 	<body>
         <?php pf_core::loadTemplate('menu'); ?>
-                    <!--[if IE]>
-	                	<div class="error">
-	                		Your current browser is not supported! <a href="https://www.google.com/intl/en/chrome/browser/">Click here</a> to download a better browser.
-	                	</div>
-	                <![endif]-->
             <!-- Content -->
                 <div class="row">
                     <div id="multijava" class="twelve columns alert warning">
