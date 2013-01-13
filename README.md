@@ -7,7 +7,7 @@ parse and view server logs, send commands to the server, backup your server to y
 <br />
 
 ##Version 1.2.8-Alpha-Build:3
-[Changelog]<http://www.craftycontroller.com/wiki/doku.php?id=changelog>
+[Changelog](http://www.craftycontroller.com/wiki/doku.php?id=changelog)
 
 ##Requirements
 This system requires the following:
@@ -17,12 +17,12 @@ This system requires the following:
  * Bukkit and some type of Java.
 
 ##Helpful Links##
-[Main Page]<http://www.craftycontroller.com>
-[Wiki]<http://www.craftycontroller.com/wiki/doku.php>
-[Forums]<http://www.craftycontroller.com/forums/index.php>
+  * [Main Page](http://www.craftycontroller.com)
+  * [Wiki](http://www.craftycontroller.com/wiki/doku.php)
+  * [Forums](http://www.craftycontroller.com/forums/index.php)
 
 ##Fresh Install Help
-[WIKI - Fresh Install Help]<http://www.craftycontroller.com/wiki/doku.php?id=installation>
+[WIKI - Fresh Install Help](http://www.craftycontroller.com/wiki/doku.php?id=installation)
 
 ##License / Copyright
 **All code except where noted is subject to the following copyright:**
@@ -31,6 +31,6 @@ All rights reserved.
 
 Design Interface by: 1001Zippy and Phillip Tarrant
 
-[LICENSE - BY-SA Unported]<http://creativecommons.org/licenses/by-sa/3.0/legalcode.
+[LICENSE - BY-SA Unported](http://creativecommons.org/licenses/by-sa/3.0/legalcode)
 
  
