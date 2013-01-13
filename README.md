@@ -1,7 +1,13 @@
 Crafty-Minecraft-Controller
 ===========================
-*A Completely OPEN SOURCE Server Controller for Bukkit (or Minecraft)*<br />
+*A Completely OPEN SOURCE Server Controller for Bukkit, Vanilla Minecraft, or other server forks.*<br />
+Crafty Minecraft Controller is a 100% Open Source (and free) server control webapp for your Bukkit/Minecraft server. 
+It can do the following: change all options in your server.properties, start/stop/restart the server, OP/deOP/ban/unban/kick players, 
+parse and view server logs, send commands to the server, backup your server to your disk, create users and user levels (i.e Admin, User) and more!
+<br />
 
+##Version 1.2.8-Alpha-Build:3
+[Changelog]<http://www.craftycontroller.com/wiki/doku.php?id=changelog>
 
 ##Requirements
 This system requires the following:
@@ -10,31 +16,21 @@ This system requires the following:
  * SQLite 3 Support
  * Bukkit and some type of Java.
 
-###fresh install help
-If doing a fresh install on ubuntu you can select the LAMP setup config, or
+##Helpful Links##
+[Main Page]<http://www.craftycontroller.com>
+[Wiki]<http://www.craftycontroller.com/wiki/doku.php>
+[Forums]<http://www.craftycontroller.com/forums/index.php>
 
-* sudo apt-get install apache2
-
-* sudo apt-get install php5
-
-* sudo apt-get install libapache2-mod-php5
-
-* sudo apt-get install php5-sqlite
-
-* sudo /etc/init.d/apache2 restart
-
-* Currently to save data www-data must have access to /var/www and the dir bukkit is installed to.
-    * chown -R www-data /var/www
-    * chown -R www-data /bukkit (or where ever bukkit is installed)
-
+##Fresh Install Help
+[WIKI - Fresh Install Help]<http://www.craftycontroller.com/wiki/doku.php?id=installation>
 
 ##License / Copyright
-
+**All code except where noted is subject to the following copyright:**
 Copyright (c) 2012-2013, Phillip Tarrant
 All rights reserved.
 
 Design Interface by: 1001Zippy and Phillip Tarrant
 
-License: http://creativecommons.org/licenses/by-sa/3.0/legalcode
+[LICENSE - BY-SA Unported]<http://creativecommons.org/licenses/by-sa/3.0/legalcode.
 
  
