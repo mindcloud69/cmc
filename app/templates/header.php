@@ -14,6 +14,7 @@
 
 
         //jquery love
+        pf_html::scriptExternal('http://code.jquery.com/jquery-1.8.3.min.js');
         pf_html::scriptInternal('jquery.js');//Jquery Love
         pf_html::scriptInternal('showHideToggle.js');//framework show/hide jquery plugin
         
