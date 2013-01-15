@@ -10,22 +10,9 @@
         pf_html::stylesheet('style.css');
         pf_html::stylesheet('foundation.min.css');
         
-        
-
-
         //jquery love
         pf_html::scriptExternal('http://code.jquery.com/jquery-1.8.3.min.js');
-        pf_html::scriptInternal('jquery.js');//Jquery Love
         pf_html::scriptInternal('showHideToggle.js');//framework show/hide jquery plugin
-        
-        /*
-        pf_html::scriptInternal('foundation.min.js'); //Foundation js
-        pf_html::scriptInternal('modernizr.foundation.js'); //Another Foundation js
-        pf_html::scriptInternal('jquery.foundation.tabs.js'); //Another Foundation js
-        pf_html::scriptInternal('jquery.foundation.navigation.js'); //Another Foundation js
-        pf_html::scriptInternal('jquery.foundation.accordian.js'); //Another Foundation js
-         * 
-         */
         ?>
 
         <title>CMC - Crafty Minecraft Controller</title>
