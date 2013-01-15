@@ -14,7 +14,7 @@
                         
                                 Max Amount Of Ram To Use:<br />
 
-                                    <? pf_forms::options('maxram', 'maxram',array(
+                                    <?php pf_forms::options('maxram', 'maxram',array(
                                      '1024'=>'1GB Memory',
                                      '2048'=>'2GB Memory',
                                      '3072'=>'3GB Memory',
