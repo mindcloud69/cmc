@@ -32,8 +32,8 @@ if (!$installed): ?>
         </ul>
         <section>
             <ul class="left">
-                <li id="home"<?php if ($page == 'main') echo 'class="active"'; ?> ><a href="<?php echo MAIN_PAGE; ?>"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/home.png"/>&nbsp;Home</a></li>
-                <li id="install"<?php if ($page == 'install') echo 'class="active"'; ?> ><a href="<?php echo MAIN_PAGE; ?>/install"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/key.png"/>&nbsp;Install</a></li>
+                <li id="home"><a href="<?php echo MAIN_PAGE; ?>"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/home.png"/>&nbsp;Home</a></li>
+                <li id="install"><a href="<?php echo MAIN_PAGE; ?>/install"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/key.png"/>&nbsp;Install</a></li>
             </ul>
         </section>
     </nav>
