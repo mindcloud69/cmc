@@ -1,6 +1,6 @@
 <?php
 //get current version
-$remotedata = file_get_contents('http://www.craftycontroller.com/data.php?info=latest&type=json');
+$remotedata = file_get_contents('http://www.craftycontroller.com/data.php?info=linux');
 $result = json_decode($remotedata,true);
 
 //split versions based on number and type

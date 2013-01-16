@@ -47,7 +47,7 @@ $cronjob = array_combine($keys, $keys);
             
                 <div class="row">
                     <h1 class="center">Configure CMC</h1>
-                    <?php pf_forms::createForm('config', 'config twelve offset-by-one panel', pf_config::get('main_page')."/settings", 'POST'); ?>
+                    <?php pf_forms::createForm('config', 'config twelve panel', pf_config::get('main_page')."/settings", 'POST'); ?>
                     
                     <table class="twelve columns" cellpadding="0">
                         <tr>
