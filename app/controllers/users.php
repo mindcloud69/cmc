@@ -159,7 +159,7 @@ class users extends pf_controller
             $pageaccess = array();
             $pageaccess['config']=$_POST['config'];
             $pageaccess['server']= $_POST['server'];
-            $pageaccess['backup']= $_POST['backup'];
+            $pageaccess['worlds']= $_POST['worlds'];
             $pageaccess['players']= $_POST['players'];
             $pageaccess['settings']= $_POST['settings'];
             CMC::writeCMCSetting('pageaccess', $pageaccess);
@@ -170,7 +170,7 @@ class users extends pf_controller
         if (!$data)
         {
             //default values
-            $data = array('config'=>'User','server'=>'User','backup'=>'User','settings'=>'User','players'=>'User');
+            $data = array('config'=>'User','server'=>'User','worlds'=>'User','settings'=>'User','players'=>'User');
         }
         if (isset($saved)) $data['saved']=true;
         

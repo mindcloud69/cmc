@@ -8,7 +8,7 @@ class backups extends pf_controller
         
         $userlevels = CMC::getCMCSetting('pageaccess');
         //lock to user level
-        pf_auth::lockPage($userlevels['backup'], 'Sorry, You do not have access to this page!');
+        pf_auth::lockPage($userlevels['worlds'], 'Sorry, You do not have access to this page!');
         
         //get our dir and last backup
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
@@ -17,7 +17,28 @@ class backups extends pf_controller
         //get our config
         mcController::getMCConfig($bukkit_dir.DS.'server.properties');
         
+        //$level = mcController::getSetting('level-name');
+        //if we set the level name via URL...
+        if (isset($_GET['level']))
+        {
+            $level = $_GET['level'];
+        }
+        else //we pull the current level
+        {
         $level = mcController::getSetting('level-name');
+        }
+        
+        //if _nether selected
+        if (substr($level, -7)=='_nether')
+        {
+            $level = substr($level, 0,-7);
+        }
+        
+        //if _the_end selected
+        if (substr($level, -8)=='_the_end')
+        {
+            $level = substr($level, 0,-8);
+        }
         
         //all world directories in an array
         $data=array();
@@ -38,7 +59,7 @@ class backups extends pf_controller
         
         $userlevels = CMC::getCMCSetting('pageaccess');
         //lock to user level
-        pf_auth::lockPage($userlevels['backup'], 'Sorry, You do not have access to this page!');
+        pf_auth::lockPage($userlevels['worlds'], 'Sorry, You do not have access to this page!');
         
         //get our dir and last backup
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
@@ -62,7 +83,7 @@ class backups extends pf_controller
         
         $userlevels = CMC::getCMCSetting('pageaccess');
         //lock to user level
-        pf_auth::lockPage($userlevels['backup'], 'Sorry, You do not have access to this page!');
+        pf_auth::lockPage($userlevels['worlds'], 'Sorry, You do not have access to this page!');
         
         if ($_SERVER['REQUEST_METHOD'] !='POST')
         {
@@ -146,6 +167,36 @@ class backups extends pf_controller
     public function scheduled()
     {
         echo "Coming Soon!";
+    }
+    
+    public function download()
+    {
+        if (isset($_GET['file']))
+        {
+            //get the filepath
+            $filepath=$_GET['file'];
+            
+            $parts = explode('/', $filepath);
+            $file = end($parts);
+            //echo $file."<br />";
+            //echo $filepath."<br />";
+            //echo filesize($filepath)."<br />";
+            //die();
+            ob_clean();
+            
+            //create the download code
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . $file . '"'); 
+            header("Content-length: " . filesize($filepath)); 
+            header("Content-Transfer-Encoding: binary");
+            readfile($filepath);
+        }
+        else 
+        {
+            echo '<meta http-equiv="refresh" content="3;url='.MAIN_PAGE.'/backups">';
+            echo 'Unable to locate that file!';
+        }
     }
 }
 ?>

@@ -36,7 +36,7 @@
                     <div class="six columns"><div class='alert'><?php echo $data['error'];?></div></div>
                     <?php else:?>
                         
-                    <form id="backupdelete" class= "eight columns offset-by-two" action="<?php echo pf_config::get('main_page');?>/backups/delete" method="POST">
+                    <form id="backupdelete" class= "ten centered columns " action="<?php echo pf_config::get('main_page');?>/backups/delete" method="POST">
                     <?php
                     if (!empty($data['backups']))
                     {
@@ -48,6 +48,8 @@
                     $table->addTableHeading('<input type="checkbox" id="selectall"/>');
                     $table->addTableHeading('Previous Backups');
                     $table->addTableHeading('Date Created');
+                    $table->addTableHeading('Filesize');
+                    $table->addTableHeading('Download');
                     $table->endRow();
                     $i = 0;
                     foreach ($data['backups'] as $backup)
@@ -61,6 +63,8 @@
                         $table->addcell('<input type="checkbox" class="delete" style="margin-left:8px;" name="file['.$i.']" value="'.$backup.'"/>');
                         $table->addCell($backup);
                         $table->addCell('<center>'.$createdate.'</center');
+                        $table->addCell('<center>'.pf_core::formatBytes(filesize($backup)).'</center');
+                        $table->addCell('<center><a class="button rounded success" href="'.MAIN_PAGE.'/backups/download?file='.$backup.'">Download</a></center');
                         $table->endRow();
                     }
                     $table->renderTable();

@@ -51,10 +51,10 @@ if (key_exists('saved', $data))
                     
                     <div class="row">
                         <div class="three columns">
-                            <label class="right inline">Backup Pages:</label>
+                            <label class="right inline">World Pages:</label>
                         </div>
                         <div class="nine columns">
-                            <?php pf_forms::options('backup', 'backup',array('Admin'=>'Admin','User'=>'User'),$data['backup']); ?>
+                            <?php pf_forms::options('worlds', 'backup',array('Admin'=>'Admin','User'=>'User'),$data['worlds']); ?>
                         </div>
                     </div>
                     <br />

@@ -70,9 +70,10 @@ else: ?>
                 </ul>
             </li>
             
-            <li class="has-dropdown"><a href="<?php echo MAIN_PAGE;?>/backups"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/box-add.png"/>&nbsp;Backups</a>
+            <li class="has-dropdown"><a href="<?php echo MAIN_PAGE;?>/worlds"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/globe.png"/>&nbsp;Worlds</a>
                 <ul class="dropdown">
-                    <li><a href="<?php echo MAIN_PAGE;?>/backups">Backups</a></li>
+                    <li><a href="<?php echo MAIN_PAGE;?>/worlds">Worlds</a></li>
+                    <li><a href="<?php echo MAIN_PAGE;?>/backups">Backup Current</a></li>
                     <!--<li><a href="<?php echo MAIN_PAGE;?>/backups/scheduled">Scheduled Backups</a></li> will enable in 1.2.9-->
                 </ul>
             </li>
