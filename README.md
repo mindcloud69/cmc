@@ -6,7 +6,7 @@ It can do the following: change all options in your server.properties, start/sto
 parse and view server logs, send commands to the server, backup your server to your disk, create users and user levels (i.e Admin, User) and more!
 <br />
 
-##Version 1.2.8-Beta-Build:1
+##Version 1.2.9-Alpha-Build:1
 [Changelog](http://www.craftycontroller.com/wiki/doku.php?id=changelog)
 
 ##Requirements
