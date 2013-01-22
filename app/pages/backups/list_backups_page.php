@@ -36,7 +36,7 @@
                     <div class="six columns"><div class='alert'><?php echo $data['error'];?></div></div>
                     <?php else:?>
                         
-                    <form id="backupdelete" class= "ten centered columns " action="<?php echo pf_config::get('main_page');?>/backups/delete" method="POST">
+                    <form id="backupdelete" class= "twelve centered columns " action="<?php echo pf_config::get('main_page');?>/backups/delete" method="POST">
                     <?php
                     if (!empty($data['backups']))
                     {

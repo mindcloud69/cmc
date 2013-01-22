@@ -26,7 +26,6 @@ class worlds extends pf_controller
             if (file_exists($dir .'/uid.dat'))
             {
                 $worlds[]=$dir;
-            //echo $dir .' is a world directory!';
             }
         }
         

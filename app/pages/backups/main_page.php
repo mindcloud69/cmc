@@ -45,7 +45,9 @@ else $last_backup = $data['last_backup'];
                 </div>
                 
                 <div id="main" class="row">
-                    <?php pf_forms::createForm('backup', 'backupform four offset-by-four columns panel', pf_config::get('main_page')."/backups/action", 'POST'); ?>
+                    <div class="six columns">
+                        
+                    <?php pf_forms::createForm('backup', 'ten columns backupform panel', MAIN_PAGE."/backups/action", 'POST'); ?>
                     
                     <p><b>Your Last Backup Was:</b> <?php echo $last_backup; ?><br /></p>
                     
@@ -55,7 +57,17 @@ else $last_backup = $data['last_backup'];
                     <label class="checkbox"><?php if (key_exists(2, $data)) pf_forms::checkbox('world3', $data[2], $data[2]);?></label><br />
                     <?php pf_forms::button('submit', 'Manual Backup', 'twelve button rounded success'); ?>
                     <?php pf_forms::closeForm();?>
-                <br />
+                    <br />
+                    </div>
+                    <div class="six columns panel">
+                        <b>Next Scheduled Backup:</b>1/22/2013 at 3am.<br /><br />
+                        <b>Current Schedule:</b>Daily at 3am.<br /><br />
+                        <b>Worlds Scheduled:</b><br /><br />
+                        carmex<br />
+                        carmex_nether<br />
+                        carmex_the_end<br /><br />
+                        <a href="#" class="rounded button secondary">Change Schedule</a>
+                    </div>
                 </div>
                 
             </div>

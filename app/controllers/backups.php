@@ -17,7 +17,6 @@ class backups extends pf_controller
         //get our config
         mcController::getMCConfig($bukkit_dir.DS.'server.properties');
         
-        //$level = mcController::getSetting('level-name');
         //if we set the level name via URL...
         if (isset($_GET['level']))
         {
@@ -119,6 +118,84 @@ class backups extends pf_controller
             pf_core::redirectUrl(pf_config::get('main_page'));
         }
 
+        foreach ($_POST as $dir)
+        {
+            //$name = explode('/', $dir);
+            $name=end(explode("/",$dir));
+            
+            //backup each directory
+            $this->doBackup($dir, $name);
+        }
+        
+        //load the page
+        $this->loadView('/backups/backup_complete_page.php');
+        
+    }
+    
+    public function schedule()
+    {
+        //if getting
+        if ($_SERVER['REQUEST_METHOD'] == 'GET')
+        {
+        //get our bukkit dir
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
+        
+        $data = array();
+        $data['name']=$_GET['dir'];
+        $data['dir']=$bukkit_dir."/".$_GET['dir'];
+        $this->loadView('backups/schedule_page.php',$data);
+        }
+        
+        //if submiting form
+        elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $command = $_POST['command'];
+            $world = $_POST['world'];
+            $hour = $_POST['hour'];
+            $time = "0 $hour * * *";
+            
+            //create the cronjob
+            CMC::createCronJob($time, $command);
+            CMC::log('Backups Scheduled By User: '.pf_auth::getVar('user').' Backups will run daily at '. $hour .":00 hours");
+            
+            //get old scheduled backup array
+            $schedules = array();
+            $schedules = CMC::getCMCSetting('scheduled_backups');
+            if (!$schedules)
+            {
+                //if never set a scheduled task
+                $schedules = array();
+            }
+            //add entry for this world
+            $schedules[$world]=$hour;
+            CMC::writeCMCSetting('scheduled_backups', $schedules);
+            
+        }
+        
+        //if no data, we redirect via mainpage
+        else
+        {
+            pf_core::redirectUrl(MAIN_PAGE."/backups");
+        }
+    }
+    
+    public function scheduled()
+    {
+        if (!isset($_GET['dir']))
+        {
+            echo 'Directory Not Found!';
+            die();
+        }
+        
+        $dir = $_GET['dir'];
+        $name = $_GET['name'];
+        
+        //backup the directory
+        $this->doBackup($dir, $name);
+    }
+    
+    public function doBackup($dir,$name)
+    {
         //get our bukkit dir
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         $backup_dir = $bukkit_dir.DS.'CMC_backups';
@@ -134,39 +211,23 @@ class backups extends pf_controller
         mcController::serverSend('save-all');
         sleep(5);
         
-        foreach ($_POST as $dir)
-        {
-            $name = explode('/', $dir);
-            
-            //for each dir, back it up
+        //for each dir, back it up
             if (is_dir($dir))
             {
                 //log to server log the backup was started
-                CMC::log('Backup Started By User: '.pf_auth::getVar('user').' For World:'. $name[2]);
-                $command = 'tar -zcf ' . $backup_dir.DS.$name[2] . "-".date('m-d-y-Gis').'.tar.gz ' . $dir."\n";
+                CMC::log('Backup Started By User: '.pf_auth::getVar('user').' For World:'. $name);
+                $command = 'tar -zcf ' . $backup_dir.DS.$name . "-".date('m-d-y-Gis').'.tar.gz ' . $dir."\n";
                 exec('nohup '.$command."> /dev/null 2>/dev/null &");
                 
                 //log backups complete for that world
-                CMC::log('Backups Complete For World:'. $name[2]);
+                CMC::log('Backups Complete For World:'. $name);
             }
             
-        }
-        
         //turn back on save.
         mcController::serverSend('save-on');
-        //$this->send('save-on');
         
         //record the last backup
         CMC::writeCMCSetting('last_backup', date('m/d/Y'));
-        
-        //load the page
-        $this->loadView('/backups/backup_complete_page.php');
-        
-    }
-    
-    public function scheduled()
-    {
-        echo "Coming Soon!";
     }
     
     public function download()
