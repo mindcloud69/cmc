@@ -50,6 +50,8 @@ ob_start();
         echo '<br />Download Complete<br />';
     }
 
+    
+    
 ?>
 
 
@@ -67,7 +69,7 @@ ob_start();
                     <h1 class="center">Update Bukkit</h1>
                     <div id="downloading" class="panel">
                         <?php
-                        download_remote($url, '/tmp/craftbukkit.jar');
+                        download_remote($url, '/tmp/updated-server.jar');
                         
                         //shutdown the server
                         send('say ###Stopping Server In 30 Seconds###');
@@ -89,11 +91,11 @@ ob_start();
                         sleep(20);
                         
                         //move the file
-                        rename($bukkit_dir.'/craftbukkit.jar', $bukkit_dir.'/craftbukkit.old');
-                        rename('/tmp/craftbukkit.jar', $bukkit_dir.'/craftbukkit.jar');
+                        rename($bukkit_dir.'/'.$jarfile.'.jar', $bukkit_dir.'/'.$jarfile.'.old');
+                        rename('/tmp/updated-server.jar', $bukkit_dir.'/'.$jarfile.'.jar');
                         
                         //make it executable
-                        exec("chmod +x $bukkit_dir/craftbukkit.jar");
+                        exec("chmod +x $bukkit_dir.'/'.$jarfile.'jar");
                         
                         echo "Update Complete.... Go Start Your Server and Pray<br />";
                         ?>

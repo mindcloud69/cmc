@@ -152,6 +152,7 @@ class server extends pf_controller
         $channel = CMC::getCMCSetting('update_channel');
         $custom_url = CMC::getCMCSetting('custom_url');
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
+        $jarfile = CMC::getCMCSetting('jarfile');
         
         
         
