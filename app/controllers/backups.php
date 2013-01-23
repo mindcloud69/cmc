@@ -210,10 +210,10 @@ class backups extends pf_controller
         else $name = end(explode("/",$dir));
         
         //backup the directory
-        $this->doBackup($dir, $name);
+        $this->doBackup($dir, $name,true);
     }
     
-    public function doBackup($dir,$name)
+    public function doBackup($dir,$name,$scheduled=null)
     {
         //get our bukkit dir
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
@@ -233,8 +233,17 @@ class backups extends pf_controller
         //for each dir, back it up
             if (is_dir($dir))
             {
-                //log to server log the backup was started
-                CMC::log('Backup Started By User: '.pf_auth::getVar('user').' For World:'. $name);
+                //if this is a scheduled backup, we log it one way.
+                if ($scheduled)
+                {
+                    CMC::log('Scheduled Backup Started For World:'. $name);
+                }
+                else
+                {
+                    //log to server log the backup was started
+                    CMC::log('Backup Started By User: '.pf_auth::getVar('user').' For World:'. $name);
+                }
+                
                 $command = 'tar -zcf ' . $backup_dir.DS.$name . "-".date('m-d-y-Gis').'.tar.gz ' . $dir."\n";
                 exec('nohup '.$command."> /dev/null 2>/dev/null &");
                 
