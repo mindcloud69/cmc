@@ -9,6 +9,10 @@ $current_level = mcController::getSetting('level-name');
 
 //get current world schedules
 $schedules = CMC::getCMCSetting('scheduled_backups');
+if (!$schedules)
+{
+    $schedules = array();
+}
 ?>
 
 <!DOCTYPE html>
