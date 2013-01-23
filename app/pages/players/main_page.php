@@ -26,7 +26,7 @@
                                     $table->startRow();
                                     $table->addCell($info['name']);
                                     $table->addCell($info['last_seen']);
-                                    $table->addCell('<a class="eight offset-by-two button rounded" href="'.MAIN_PAGE.'/players/delete?name='.$info['name'].'">Delete Players File</a>',null,'center');
+                                    $table->addCell('<a class="alert eight offset-by-two button rounded" href="'.MAIN_PAGE.'/players/delete?name='.$info['name'].'">Delete Players File</a>',null,'center');
                                     $table->endRow();
                                 }
                                 $table->renderTable();
@@ -41,7 +41,7 @@
                             <h4 class="center">Banned Players</h4>
                             <?php
                             $table = new pf_tables();
-                            $table->startTable('bannedplayers', null, null, 'table tablestripped');
+                            $table->startTable('bannedplayers', null, null, 'table twelve columns tablestripped');
                             $table->startRow();
                             $table->addTableHeading('Player');
                             $table->addTableHeading('Banned Since');
@@ -65,7 +65,7 @@
                             <h4 class="center">Banned IP Addresses</h4>
                             <?php
                             $table = new pf_tables();
-                            $table->startTable('bannedips', null, null, 'table tablestripped');
+                            $table->startTable('bannedips', null, null, 'table twelve columns tablestripped');
                             $table->startRow();
                             $table->addTableHeading('IP');
                             $table->addTableHeading('Banned Since');
@@ -90,7 +90,7 @@
                             <h4 class="center">OP'ed Players</h4>
                             <?php
                             $table = new pf_tables();
-                            $table->startTable('ops', null, null, 'table tablestripped');
+                            $table->startTable('ops', null, null, 'table twelve columns tablestripped');
                             $table->startRow();
                             $table->addTableHeading('Player');
                             $table->endRow();
