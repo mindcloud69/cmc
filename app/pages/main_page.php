@@ -98,7 +98,7 @@ else $data['current_cron'] = 'FALSE';
                                 var online = data['online'];
                                 
                                 $( '#info' ).html (
-                                "<b>Craftbukkit Version:</b> " +data['version'] +"<br />\n\
+                                "<b>Server Version:</b> " +data['version'] +"<br />\n\
                                 <b>Players Connected:</b> " + data['players'] + " of " + data['max_players'] + '<br />'
                                 + '<b>MOTD:</b> ' + data['motd'] +'<br />')
                                 
