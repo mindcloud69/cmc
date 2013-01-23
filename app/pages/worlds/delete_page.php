@@ -15,6 +15,7 @@
                 <div class="six columns centered">
                     <p class="valid"><?php echo $data ?> deleted!</p>
                     <p>You will be re-directed to the world listing page shortly.</p>
+                    <a class="six button rounded" href="<?php echo MAIN_PAGE?>/worlds">Go Back</a>
                 </div>
             </div>
             <?php pf_core::loadTemplate('footer'); ?>
