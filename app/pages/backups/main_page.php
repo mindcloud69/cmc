@@ -7,7 +7,15 @@ else $last_backup = $data['last_backup'];
 
 //get scheduled backup count
 $backups = CMC::getCMCSetting('scheduled_backups');
+
+if ($backups)
+{
 $number = count($backups);
+}
+ else 
+{
+$number = 0;    
+}
 
 ?>
 
@@ -67,9 +75,12 @@ $number = count($backups);
                         You have <b><?php echo $number; ?></b> Backups Scheduled<br /><br />
                         <b></b>
                         <?php 
-                        foreach ($backups as $world=>$time)
+                        if ($backups)
                         {
-                            echo "<b>$world</b>" . ' at ' . $time . '00 hours - daily'."<br />\n<br />\n";
+                            foreach ($backups as $world=>$time)
+                            {
+                                echo "<b>$world</b>" . ' at ' . $time . '00 hours - daily'."<br />\n<br />\n";
+                            }
                         }
                         ?>
                         
