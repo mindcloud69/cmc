@@ -168,7 +168,7 @@ class backups extends pf_controller
             
             //create the cronjob
             CMC::createCronJob($time, $command);
-            CMC::log('Backups Scheduled By User: '.pf_auth::getVar('user').' Backups will run daily at '. $hour .":00 hours");
+            CMC::log('Scheduled Backup Created/Changed By User: '.pf_auth::getVar('user').' '. $world . ' will backedup daily at '. $hour .":00 hours");
             
             //get old scheduled backup array
             $schedules = array();
