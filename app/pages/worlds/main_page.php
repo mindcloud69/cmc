@@ -69,7 +69,7 @@ $schedules = CMC::getCMCSetting('scheduled_backups');
                         if (isset($time))
                         {
                             $table->addCell('<a href="'.MAIN_PAGE.'/backups/schedule?dir='.substr($world, strlen($bukkit_dir)+1).'" class="button secondary rounded">Change Schedule</a>');
-                            $table->addCell('Scheduled for <br />'.$time . '00 hours - nightly');
+                            $table->addCell('Scheduled for <br />'.$time . '00 hours - daily');
                         }
                         else
                         {

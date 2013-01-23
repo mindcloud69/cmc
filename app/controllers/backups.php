@@ -65,6 +65,9 @@ class backups extends pf_controller
         
         $backup_dir = $bukkit_dir.DS.'CMC_backups'.DS;
         $files = glob($backup_dir."*.tar*");
+        
+        usort($files, create_function('$a,$b', 'return filemtime($b) - filemtime($a);'));
+        
         $data['backups']=$files;
         
         
@@ -73,7 +76,13 @@ class backups extends pf_controller
             $data['error']='No Backups Found!';
         }
         
-        $this->loadView('backups/list_backups_page.php',$data);
+        //if requesting a view
+        if (isset($_GET['view']))
+        {
+            $view=$_GET['view'];
+            $this->loadView('backups/view_backups_page.php',$data);
+        }
+        else $this->loadView('backups/list_backups_page.php',$data);
     }
     
     public function delete()
@@ -154,6 +163,9 @@ class backups extends pf_controller
             $hour = $_POST['hour'];
             $time = "0 $hour * * *";
             
+            //remove the cronjob relating to this world
+            CMC::removeCronJob($command);
+            
             //create the cronjob
             CMC::createCronJob($time, $command);
             CMC::log('Backups Scheduled By User: '.pf_auth::getVar('user').' Backups will run daily at '. $hour .":00 hours");
@@ -170,6 +182,7 @@ class backups extends pf_controller
             $schedules[$world]=$hour;
             CMC::writeCMCSetting('scheduled_backups', $schedules);
             
+            pf_core::redirectUrl(MAIN_PAGE."/worlds");
         }
         
         //if no data, we redirect via mainpage
@@ -177,6 +190,7 @@ class backups extends pf_controller
         {
             pf_core::redirectUrl(MAIN_PAGE."/backups");
         }
+        
     }
     
     public function scheduled()
@@ -188,7 +202,12 @@ class backups extends pf_controller
         }
         
         $dir = $_GET['dir'];
+        
+        if (isset($_GET['name']))
+        {
         $name = $_GET['name'];
+        }
+        else $name = end(explode("/",$dir));
         
         //backup the directory
         $this->doBackup($dir, $name);

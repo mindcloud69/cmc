@@ -73,8 +73,8 @@ else: ?>
             <li class="has-dropdown"><a href="<?php echo MAIN_PAGE;?>/worlds"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/globe.png"/>&nbsp;Worlds</a>
                 <ul class="dropdown">
                     <li><a href="<?php echo MAIN_PAGE;?>/worlds">Worlds</a></li>
-                    <li><a href="<?php echo MAIN_PAGE;?>/backups">Backup Current</a></li>
-                    <!--<li><a href="<?php echo MAIN_PAGE;?>/backups/scheduled">Scheduled Backups</a></li> will enable in 1.2.9-->
+                    <li><a href="<?php echo MAIN_PAGE;?>/backups">Backups Overview</a></li>
+                    <li><a href="<?php echo MAIN_PAGE;?>/backups/view?view=all">View Backups</a></li>
                 </ul>
             </li>
         

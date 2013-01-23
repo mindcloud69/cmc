@@ -2,7 +2,7 @@
 <html>
 	<head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            
+            <?php pf_core::loadTemplate('header'); ?>
             <SCRIPT language="javascript">
                 $(function(){
 
@@ -27,7 +27,7 @@
             
 	</head>
         <body>
-                        
+            <?php pf_core::loadTemplate('menu'); ?>
             <div class="container">
                 <div class="row">
                     
@@ -35,7 +35,9 @@
                     if (key_exists('error', $data)):?>
                     <div class="six columns centered"><div class='alert'><?php echo $data['error'];?></div></div>
                     <?php else:?>
-                    <h5 class="center">Sorted By Date - Latest at top</h5>
+                        
+                    <h3 class="center">View Backups</h3>
+                    <h4 class="center">Sorted By Date - Latest at top</h4>
                     <form id="backupdelete" class= "twelve centered columns " action="<?php echo pf_config::get('main_page');?>/backups/delete" method="POST">
                     <?php
                     if (!empty($data['backups']))

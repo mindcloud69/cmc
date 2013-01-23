@@ -5,6 +5,10 @@ if ($data['last_backup']==false)
 }
 else $last_backup = $data['last_backup'];
 
+//get scheduled backup count
+$backups = CMC::getCMCSetting('scheduled_backups');
+$number = count($backups);
+
 ?>
 
 <!DOCTYPE html>
@@ -60,13 +64,17 @@ else $last_backup = $data['last_backup'];
                     <br />
                     </div>
                     <div class="six columns panel">
-                        <b>Next Scheduled Backup:</b>1/22/2013 at 3am.<br /><br />
-                        <b>Current Schedule:</b>Daily at 3am.<br /><br />
-                        <b>Worlds Scheduled:</b><br /><br />
-                        carmex<br />
-                        carmex_nether<br />
-                        carmex_the_end<br /><br />
-                        <a href="#" class="rounded button secondary">Change Schedule</a>
+                        You have <b><?php echo $number; ?></b> Backups Scheduled<br /><br />
+                        <b></b>
+                        <?php 
+                        foreach ($backups as $world=>$time)
+                        {
+                            echo "<b>$world</b>" . ' at ' . $time . '00 hours - daily'."<br />\n<br />\n";
+                        }
+                        ?>
+                        
+                        
+                        <a href="<?php echo MAIN_PAGE ?>/worlds" class="rounded button secondary">View/Edit Schedules</a>
                     </div>
                 </div>
                 
