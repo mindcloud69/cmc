@@ -34,7 +34,7 @@ class data extends pf_controller
         //cleans all our 127.0.0.1 connection attempts
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         $command = "sed --in-place '/127.0.0.1/d' ".$bukkit_dir . DS .'server.log';
-        //exec($command);
+        exec($command);
     }
     
     public function mainlog()
