@@ -204,7 +204,6 @@ class mcController
     
     public static function serverSend($command)
     {
-        
         $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
         exec($command);
     }

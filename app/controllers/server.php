@@ -29,11 +29,12 @@ class server extends pf_controller
     {
         $log = $command .' issued by '. pf_auth::getVar('user');
         
-        CMC::log($log);
         
         ///a little sanitation
         $command = stripslashes($command);
         $command = strip_tags($command);
+        
+        CMC::log($log);
         
         mcController::serverSend($command);
     }
