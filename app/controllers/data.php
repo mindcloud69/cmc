@@ -29,6 +29,14 @@ class data extends pf_controller
         echo json_encode($info);
     }
     
+    private function cleanlog()
+    {
+        //cleans all our 127.0.0.1 connection attempts
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
+        $command = "sed --in-place '/127.0.0.1/d' ".$bukkit_dir . DS .'server.log';
+        exec($command);
+    }
+    
     public function mainlog()
     {
         echo $this->parselog('main');
@@ -49,13 +57,22 @@ class data extends pf_controller
         echo $this->parselog('connection');
     }
     
+    public function cmclog()
+    {
+        echo $this->parselog('cmc');
+    }
+    
     private function parselog($type=null)
     {
+        //clean the log of 127.0.0.1 connection attempts
+        $this->cleanlog();
+        
         //log types
         $mainlog = '';
         $errorlog = '';
         $chatlog = '';
         $conlog = '';
+        $cmclog = '';
         
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         $log_limit = CMC::getCMCSetting('log_lines');
@@ -85,6 +102,7 @@ class data extends pf_controller
             if (preg_match('[CMC]', $line))
             {
                 $line = '<span style="color:#08c;">'.$line."</span>";
+                $cmclog .=$line."\n";
             }
             
             //look for chat
@@ -109,6 +127,7 @@ class data extends pf_controller
         if ($type == 'error') return $errorlog;
         if ($type == 'chat') return $chatlog;
         if ($type == 'connection') return $conlog;
+        if ($type == 'cmc') return $cmclog;
         else return $mainlog;
     }
 }

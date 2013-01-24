@@ -17,7 +17,7 @@ else $data['current_cron'] = 'FALSE';
                     .online{color:green;}
                     .offline{color:red;}
 
-                    #mainlog,#errorlog,#chatlog,#connlog { white-space: pre; height:350px;overflow:auto;margin-top:0px;padding-top: 0px;}
+                    #mainlog,#errorlog,#chatlog,#connlog,#cmclog { white-space: pre; height:350px;overflow:auto;margin-top:0px;padding-top: 0px;}
                     
                     #multijava{font-size:14px;color:red;}
                     
@@ -85,6 +85,7 @@ else $data['current_cron'] = 'FALSE';
                             $('#chatlog').load('<?php echo MAIN_PAGE;?>/data/chatlog');
                             $('#errorlog').load('<?php echo MAIN_PAGE;?>/data/errorlog');
                             $('#connlog').load('<?php echo MAIN_PAGE;?>/data/connectionlog');
+                            $('#cmclog').load('<?php echo MAIN_PAGE;?>/data/cmclog');
                             
                             //call yourself again after 10 seconds
                             setTimeout(updatestats,10000);
@@ -127,6 +128,7 @@ else $data['current_cron'] = 'FALSE';
                                 $('#errorlog').hide();
                                 $('#connlog').hide();
                                 $('#chatlog').hide();
+                                $('#cmclog').hide();
                             
                             //on chat click
                             $('#chat').click(function() {
@@ -134,6 +136,7 @@ else $data['current_cron'] = 'FALSE';
                                 $('#errorlog').hide();
                                 $('#connlog').hide();
                                 $('#chatlog').show();
+                                $('#cmclog').hide();
                                 
                             });
                             
@@ -144,6 +147,7 @@ else $data['current_cron'] = 'FALSE';
                                 $('#errorlog').hide();
                                 $('#connlog').hide();
                                 $('#chatlog').hide();
+                                $('#cmclog').hide();
                             });
                             
                             //on errors click
@@ -153,6 +157,7 @@ else $data['current_cron'] = 'FALSE';
                                 $('#errorlog').show();
                                 $('#connlog').hide();
                                 $('#chatlog').hide();
+                                $('#cmclog').hide();
                                 
                             });
                             
@@ -163,6 +168,17 @@ else $data['current_cron'] = 'FALSE';
                                 $('#errorlog').hide();
                                 $('#connlog').show();
                                 $('#chatlog').hide();
+                                $('#cmclog').hide();
+                            });
+                            
+                            //on cmc click
+                            $('#cmc').click(function() {
+                                //$('#logload').load ('<?php echo MAIN_PAGE;?>/data/cmclog');
+                                $('#mainlog').hide();
+                                $('#errorlog').hide();
+                                $('#connlog').hide();
+                                $('#chatlog').hide();
+                                $('#cmclog').show();
                             });
                             
                            $("#cpu")
@@ -254,21 +270,25 @@ else $data['current_cron'] = 'FALSE';
                     </div>
                 </div>
                 <br />
+                
+                <!---LOG BUTTONS-->
                 <h4 class="center" style="margin:2px;padding: 0px;">Server Logs</h4>
             <div class="row">
                 <div class="twelve columns">
-                    <ul id="filters" class="button-group even four-up">
+                    <ul id="filters" class="button-group even five-up">
                       <li id="all"><a href="#" class="button secondary">All Messages</a></li>
                       <li id="chat"><a href="#" class="button secondary">Chat Only</a></li>
                       <li id="errors"><a href="#" class="button secondary">Errors Only</a></li>
                       <li id="connections"><a href="#" class="button secondary">Connections</a></li>
+                      <li id="cmc"><a href="#" class="button secondary">CMC Actions</a></li>
                     </ul>
                     
-
+                    <!---LOG DIVS-->
                     <div id="mainlog" class="twelve columns panel"></div>
                     <div id="chatlog" class="twelve columns panel"></div>
                     <div id="errorlog" class="twelve columns panel"></div>
                     <div id="connlog" class="twelve columns panel"></div>
+                    <div id="cmclog" class="twelve columns panel"></div>
                     <p class="center" style="color:red;margin:0px;padding:0px;">**Refreshes every 10 seconds**</p>
                     
                 </div>
