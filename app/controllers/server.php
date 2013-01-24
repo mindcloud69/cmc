@@ -223,7 +223,7 @@ class server extends pf_controller
             //if restart is checked, we create a cronjob to watch for server crashes and restart server.
             if (pf_core::compareStrings($restart, 'true'));
             {
-                echo 'cronstarted';
+                //echo 'cronstarted';
                 $times = '*/'.$restart_time.' * * * *';
                 CMC::createCronJob($times, '/usr/bin/wget -q -O /tmp/cmc-crash-detect http://localhost/index.php/server/restart');
             }
