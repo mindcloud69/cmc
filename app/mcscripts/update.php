@@ -1,25 +1,13 @@
 <?php
 ob_start();
-    function send($command)
-    {
-        $command = "screen -S bukkit -p 0 -X stuff '".$command."\n' ";
-        exec($command);
-    }
-    
+
+    //flushes content
     function myFlush() {
         //echo(str_repeat(' ', 256));
         if (@ob_get_contents()) {
             @ob_end_flush();
         }
         flush();
-    }
-    
-    function formatBytes($size, $precision = 2)
-    {
-        $base = log($size) / log(1024);
-        $suffixes = array('', 'k', 'M', 'G', 'T');   
-
-        return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
     }
     
     function download_remote($url , $save_path)
@@ -100,20 +88,21 @@ ob_start();
                         //stop the server
                         mcController::serverSend('stop');
                         sleep(20);
-                        echo 'Server Stopped...';
+                        echo 'Server Stopped...<br />';
                         
                         
                         //move the file
-                        echo 'Renaming '. $jarfile. ' to ' . substr($jarfile, 0,-3) . '.old...';
+                        echo 'Renaming '. $jarfile. ' to ' . substr($jarfile, 0,-3) . '.old...<br />';
                         rename($bukkit_dir.'/'.$jarfile, $bukkit_dir.'/'.substr($jarfile, 0,-3).'.old');
                         
-                        echo 'Copying over new jarfile: '.$jarfile;
+                        echo 'Copying over new jarfile: '.$jarfile.'<br />';
                         rename('/tmp/updated-server.jar', $bukkit_dir.'/'.$jarfile);
                         
                         //make it executable
                         exec('chmod +x '.$bukkit_dir .DS.$jarfile);
                         
                         echo "Update Complete.... Go Start Your Server<br />";
+                        CMC::log('Update Complete!')
                         ?>
                     </div>
                  </div>

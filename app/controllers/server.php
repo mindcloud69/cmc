@@ -135,7 +135,7 @@ class server extends pf_controller
         pf_core::redirectUrl(pf_config::get('main_page'));
     }
     
-    //updates bukkit based on on branch selected
+    //updates server based on on branch selected
     public function update()
     {
         $this->checkLogin();
@@ -148,6 +148,9 @@ class server extends pf_controller
         //turn off the restart check because we are going to stop the server
         CMC::writeCMCSetting('restart_check', false); //turn off the restart check as the stop command will remove the cron.
 
+        
+        //log that we are updating
+        CMC::log('Server update started by: '.pf_auth::getVar('user'));
         
         //get some settings
         $channel = CMC::getCMCSetting('update_channel');
