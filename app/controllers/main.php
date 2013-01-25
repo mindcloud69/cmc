@@ -17,6 +17,9 @@ class main extends pf_controller
         //get our bukkit dir
         $data['bukkit_dir'] = CMC::getCMCSetting('bukkit_dir');
         
+        //get last backup
+        $data['last_backup']=CMC::getCMCSetting('last_backup');
+        
         //load the server.properties, if not there, we throw an error in their face
         if (!mcController::getMCConfig($data['bukkit_dir'].'/server.properties'))
         {

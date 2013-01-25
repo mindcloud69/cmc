@@ -255,7 +255,7 @@ class backups extends pf_controller
         mcController::serverSend('save-on');
         
         //record the last backup
-        CMC::writeCMCSetting('last_backup', date('m/d/Y'));
+        CMC::writeCMCSetting('last_backup', date('m/d/Y g:m a'));
     }
     
     public function download()

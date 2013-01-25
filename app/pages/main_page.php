@@ -257,9 +257,8 @@ else $data['current_cron'] = 'FALSE';
                         <div class="four columns panel">
                             <h4 class="center">Quick Stats:</h4>
                             <div id="online">Online!</div>
-                            <strong>Auto-Restart:</strong>  <?php echo $data['current_cron'];?><br>
-                            <strong>Last Backup:</strong>  Differed to Beta<br>
-                            <strong>Next Backup:</strong>  Differed to Beta<br>
+                            <strong>Auto-Restart:</strong> <?php echo $data['current_cron'];?><br>
+                            <strong>Last Backup:</strong> <?php echo $data['last_backup'];?> <br>
                             <br />
                             <strong>Difficulty:</strong> <?php echo $data['difficulty'];?><br>
                             <strong>PvP:</strong><?php echo $data['pvp'];?><br>
