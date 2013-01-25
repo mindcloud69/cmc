@@ -7,7 +7,7 @@ ob_start();
     }
     
     function myFlush() {
-        echo(str_repeat(' ', 256));
+        //echo(str_repeat(' ', 256));
         if (@ob_get_contents()) {
             @ob_end_flush();
         }
@@ -24,7 +24,7 @@ ob_start();
     
     function download_remote($url , $save_path)
     {
-        echo 'Starting Download of '. $url .'...';
+        echo 'Starting Download of '. $url .' . . . ';
         $f = fopen( $save_path , 'w+');
 
         $handle = fopen($url , "rb");
@@ -39,7 +39,7 @@ ob_start();
             $seconds = date('s');
             if ($seconds %3 == 0)
             {
-                echo ".";
+                echo ". ";
                 myFlush();
             }
             
@@ -66,43 +66,59 @@ ob_start();
                                     
              <div class="container">
                 <div class="row">
-                    <h1 class="center">Update Bukkit</h1>
-                    <div id="downloading" class="panel">
+                    <h1 class="center">Update Server Jar</h1>
+                    <h5 class="info">Depending on your download speed, this might take awhile...</h5>
+                    <div id="downloading" class="ten columns centered panel">
                         <?php
+                        mcController::serverSend('say testing updater');
+                        
                         download_remote($url, '/tmp/updated-server.jar');
                         
-                        //shutdown the server
-                        send('say ###Stopping Server In 30 Seconds###');
+                        //announce we are stopping in 30 seconds
+                        mcController::serverSend('say ###Stopping Server In 30 Seconds###');
                         echo 'Giving Everyone 30 seconds to disconnect<br />';
                         myFlush();
                         sleep(30);
-                        send('say ###Stopping Server In 10 Seconds###');
+                        
+                        //announce we are stopping in 10 seconds
+                        mcController::serverSend('say ###Stopping Server In 10 Seconds###');
                         echo 'Giving Everyone 10 seconds to disconnect<br />';
                         myFlush();
                         sleep(5);
-                        send('say ###Stopping Server In 5 Seconds###');
+                        
+                        //announce we are stopping in 5 seconds
+                        mcController::serverSend('say ###Stopping Server In 5 Seconds###');
                         echo 'Giving Everyone 5 seconds to disconnect<br />';
                         myFlush();
-                        send('save-all');
+                        
+                        //save all data to disk
+                        mcController::serverSend('save-all');
                         sleep(5);
                         echo 'Stopping Server and waiting 20 seconds<br />';
                         myFlush();
-                        send('stop');
+                        
+                        //stop the server
+                        mcController::serverSend('stop');
                         sleep(20);
+                        echo 'Server Stopped...';
+                        
                         
                         //move the file
-                        rename($bukkit_dir.'/'.$jarfile.'.jar', $bukkit_dir.'/'.$jarfile.'.old');
-                        rename('/tmp/updated-server.jar', $bukkit_dir.'/'.$jarfile.'.jar');
+                        echo 'Renaming '. $jarfile. ' to ' . substr($jarfile, 0,-3) . '.old...';
+                        rename($bukkit_dir.'/'.$jarfile, $bukkit_dir.'/'.substr($jarfile, 0,-3).'.old');
+                        
+                        echo 'Copying over new jarfile: '.$jarfile;
+                        rename('/tmp/updated-server.jar', $bukkit_dir.'/'.$jarfile);
                         
                         //make it executable
-                        exec("chmod +x $bukkit_dir.'/'.$jarfile.'jar");
+                        exec('chmod +x '.$bukkit_dir .DS.$jarfile);
                         
-                        echo "Update Complete.... Go Start Your Server and Pray<br />";
+                        echo "Update Complete.... Go Start Your Server<br />";
                         ?>
                     </div>
                  </div>
              </div>
         
-            <?php pf_core::loadTemplate('footer'); ?>
+            <?php pf_core::loadTemplate("footer"); ?>
 	</body>
 </html>

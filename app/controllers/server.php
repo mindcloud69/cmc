@@ -155,9 +155,6 @@ class server extends pf_controller
         $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
         $jarfile = CMC::getCMCSetting('jarfile');
         
-        
-        
-        
         //get the url for the download
         if (pf_core::compareStrings($channel, 'bukkit rc')) $url = 'http://dl.bukkit.org/latest-rb/craftbukkit.jar';
         elseif (pf_core::compareStrings($channel, 'bukkit beta')) $url = 'http://dl.bukkit.org/latest-beta/craftbukkit.jar';
@@ -176,6 +173,7 @@ class server extends pf_controller
         //if they wanna go, we do the updater, if not, we show the page :)
         if (!empty($_GET['go']))
         {
+            
         //launch the updater
         require_once(APPLICATION_DIR.'/mcscripts/update.php');
             

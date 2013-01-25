@@ -8,17 +8,22 @@
         <?php pf_core::loadTemplate('menu'); ?>
                                     
                 <div class="row">
-                    <h3 class="center">Update Bukkit</h3>
+                    <h3 class="center">Update Server Jar</h3>
                     <div class="six columns centered">
                         <p class="info twelve">
-                        You are downloading an update for <?php echo $data['channel'];?><br />
-                        
                         <?php
                         if ($data['channel'] == 'Custom')
                         {
-                        echo 'You will be downloading it from this URL:<br />' .$data['url']. '<br />';
+                        echo 'You are downloading an update for a Custom Defined Server: '.$jarfile."<br /><br />\n";
+                        echo 'You will be downloading it from this URL:<br />' .$data['url']. "<br />\n";
+                        }
+                        else
+                        {
+                        echo 'You are downloading an update for '.$data['channel']."<br /><br />\n";
+                        echo 'You will be downloading it from this URL:<br />' .$data['url']. "<br />\n";
                         }
                         ?>
+                        
                         <br />
                         These can take some time, and WILL SHUTDOWN your server to do the update. 
                         These Normally take 5 minutes or more. 
