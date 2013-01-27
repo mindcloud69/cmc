@@ -8,11 +8,9 @@ if ( !defined('SYSTEM_DIR')) exit ('No direct script access allowed');
 
 class pf_router
 {
-    public static $baseURL; //our base path for the app (subfolder)
     public static $controller_directory = 'controllers'; //directory that holds controllers
     public static $default_controller = 'home'; //our default controller
     public static $default_action = 'index'; //our default action
-    
     
     private $route = array();             //our route array
     
@@ -21,49 +19,68 @@ class pf_router
      */
     public function parseURI()
     {
-        //setup the base path (basically anything after the base_url (determined by index.php)
-        $basepath = strtolower(self::$baseURL);
-        $basepath = substr($basepath, strlen(pf_config::get('base_url')));
+        //get the URI
+        $uri = $_SERVER['REQUEST_URI'];
         
-        //get path
-        $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
-        $path = strtolower(preg_replace('/[^a-zA-Z0-9]\//', "", $path));
-        
-        //remove basepath from path
-        if (strpos($path, $basepath) === 0) 
+        //if no index.php in there we set everything as default and return it
+        if (strpos($uri, INDEXPAGE) === false)
         {
-            $path = substr($path, strlen($basepath));
-        }
-        
-        //remove the first /
-        if (substr($path, 0,1)=="/")
-        {
-            $path = substr($path, 1);
-        }
-        
-        //convert URL parts into array
-        $url_parts = explode("/",$path,2); //explode the URI into parts
-
-        
-        
-        /*if no page specified we use the default*/
-        if (empty($url_parts[0])) 
             $this->route['CONTROLLER'] = self::$default_controller;
+            $this->route['ACTION'] = self::$default_action;
+            return $this->route;
+        }
+        
+        //find where /index.php is in the uri
+        $pos = strpos($uri, '/'.INDEXPAGE);
+        
+        //remove everything before and /index.php
+        $uri = substr($uri, $pos +  strlen('/'.INDEXPAGE)); 
+        
+        //if nothing was after index.php the string is "false" so we check for that
+        if (!$uri)
+        {
+            $this->route['CONTROLLER'] = self::$default_controller;
+            $this->route['ACTION'] = self::$default_action;
+            return $this->route; 
+        }
+        
+        //remove the first / if there is one.
+        if (substr($uri, 0,1)=="/")
+        {
+            $uri = substr($uri, 1);
+        }
+        
+        /*if there is stuff left, it must be our controller and action
+        so let's parse that   */
+        
+        //split the url up into parts
+        $parts = explode('/', $uri);
+        
+        if (empty($parts[0])) 
+        {
+            $this->route['CONTROLLER'] = self::$default_controller;
+        }
         else 
-            $this->route['CONTROLLER'] = $url_parts[0]; //the first part is the controller}
+        {
+            $this->route['CONTROLLER'] = $parts[0]; //the first part is the controller
+            array_shift($parts); //remove the controller from the array
+        }
         
         /*find/define the action page*/
-        if (key_exists(1, $url_parts)) 
+        if (key_exists(0, $parts)) 
         {
-            $this->route['ACTION']=$url_parts[1];
+            $this->route['ACTION']=$parts[0];
+            array_shift($parts); //remove the action from the array
         }
         else
+        {
             $this->route['ACTION'] = self::$default_action;
+        }
         
         /*All other params we just pass along in an array*/
-        if (key_exists(2, $url_parts)) 
+        if (key_exists(0, $parts)) 
         {
-            $this->route['PARAMS']=explode("/", $url_parts[1]);
+            $this->route['PARAMS']=$parts;
         }
         
         return $this->route;
@@ -81,7 +98,6 @@ class pf_router
         else return false;
     }
     
-    public function setBaseURL($baseURL) {self::$baseURL = $baseURL;}
     public function setDefaultController($controller) {self::$default_controller = $controller;}
     public function setDefaultAction($action){self::$default_action=$action;}
     public function setControllerDirectory($dir) {self::$controller_directory = $dir;}

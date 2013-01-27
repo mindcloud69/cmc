@@ -10,15 +10,13 @@
 define('TIMEZONE','America/New_York');
 
 //this should be set to "DEV" or "LIVE"
-define('ENVIRONMENT','DEV'); //<-- default LIVE
+define('ENVIRONMENT','DEV'); //<-- default LIVE (the dev's many times kinda forget to change this)
 
 //set to any subfolder you have if not using one set to ''
 define('DEVPATH',''); //our dev subfolder if any <-- this is mainly used by developers
 define('LIVEPATH',''); //our live subfolder if any <- any folder inside /var/www
 
-//Currently this is SUPER untested...good luck getting it to work
-//if  using mod_rewrite set this to ''
-//if you are using mod_rewrite, don't forget to change your links to remove the index.php
+//Your index page, this MUST BE SET!
 define('INDEXPAGE', 'index.php');
 
 /* =============================================================================

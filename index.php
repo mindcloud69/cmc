@@ -93,9 +93,9 @@
         pf_events::eventsAdd('Environment Set To LIVE');
     }
 
-/*
- * Autoload
- */    
+/* =============================================================================
+ * AUTOLOAD - This auto-loads any files we need loaded such as libs
+ * ===========================================================================*/   
     if (file_exists(SYSTEM_DIR.'config'.DS.'autoload.php')) 
             require_once SYSTEM_DIR.'config'.DS.'autoload.php';
     
@@ -128,11 +128,10 @@
         pf_events::eventsAdd('base_url set to: '.'http://'.$_SERVER['HTTP_HOST'].'/'.pf_config::get('base_path').'/');
     }
     
-    //if not using an index page (mod_rewrite)
+    //if indexpage not set, we crap out
     if (INDEXPAGE == '')
     {
-        pf_config::set('main_page', pf_config::get('base_url'));
-        pf_events::eventsAdd('main_page set to: '. pf_config::get('main_page'));
+        pf_events::dispayFatal('No Index Page Set!');
     }
     else
     {
@@ -168,9 +167,6 @@
         pf_events::dispayFatal('Base_url or index_page not set!');
     }
     
-   pf_events::eventsAdd('Setting Base URL for Router to: ' . pf_config::get('main_page'));
-    $router->setBaseURL(pf_config::get('main_page'));
-    
     //set the router controller dir
     pf_events::eventsAdd("Setting router controller dir to: ". APPLICATION_DIR.'controllers'.DS);
     $router->setControllerDirectory(APPLICATION_DIR.'controllers'.DS);
@@ -187,6 +183,20 @@
     pf_events::eventsAdd('Getting requested URL');
     $route = $router->parseURI();
     pf_config::set('ROUTE', $route);
+    
+    // ==================
+    // Router Debugging Area
+    // ==================
+    /*
+    echo '<br /><b>Your base URL:</b>';
+    var_dump(pf_config::get('base_url'));
+    echo '<br /><b>Your ASSET URL:</b>:'.ASSETS_DIR.'<br />';
+    echo '<b>your route:</b> ';
+    var_dump($route);
+    die();
+     * 
+     */
+    
     //require the controller file
     pf_events::eventsAdd('Loading Controller: '.APPLICATION_DIR.'controllers'.DS.$route['CONTROLLER'].".php");
     
