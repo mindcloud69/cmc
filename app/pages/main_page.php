@@ -8,10 +8,10 @@ else $data['current_cron'] = 'FALSE';
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php pf_core::loadTemplate('header'); ?>
-            
-                <script type="text/javascript" src="http://jsgauge.googlecode.com/svn/trunk/src/gauge.js"></script>
-                <script type="text/javascript" src="http://jsgauge.googlecode.com/svn/trunk/src/jquery.gauge.js"></script>
+		<?php pf_core::loadTemplate('header'); 
+                pf_html::scriptInternal('gauge.js'); //http://jsgauge.googlecode.com
+                pf_html::scriptInternal('jquery.gauge.js'); //http://jsgauge.googlecode.com
+                ?>
 		
                 <style>
                     .online{color:green;}
