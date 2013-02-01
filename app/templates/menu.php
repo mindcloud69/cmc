@@ -67,6 +67,7 @@ else: ?>
                     <li><a href="<?php echo MAIN_PAGE; ?>/config">Config</a></li>
                     <li><a href="<?php echo MAIN_PAGE; ?>/server">Server Commands</a></li>
                     <li><a href="<?php echo MAIN_PAGE; ?>/server/update">Update Server</a></li>
+                    <li><a href="<?php echo MAIN_PAGE; ?>/pluggins">Pluggin Management</a></li>
                 </ul>
             </li>
             

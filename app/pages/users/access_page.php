@@ -80,6 +80,16 @@ if (key_exists('saved', $data))
                     <br />
                     
                     <div class="row">
+                        <div class="three columns">
+                            <label class="right inline">Pluggins:</label>
+                        </div>
+                        <div class="nine columns">
+                        <?php pf_forms::options('pluggins', 'pluggins',array('Admin'=>'Admin','User'=>'User'),$data['pluggins']); ?>    
+                        </div>
+                    </div>
+                    <br />
+                    
+                    <div class="row">
                         <div class="twelve columns centered">
                             <?php pf_forms::button('submit', 'Edit Access','button rounded twelve'); ?>
                         </div>

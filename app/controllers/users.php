@@ -162,6 +162,7 @@ class users extends pf_controller
             $pageaccess['worlds']= $_POST['worlds'];
             $pageaccess['players']= $_POST['players'];
             $pageaccess['settings']= $_POST['settings'];
+            $pageaccess['pluggins']= $_POST['pluggins'];
             CMC::writeCMCSetting('pageaccess', $pageaccess);
             $saved =true;
         }
@@ -170,7 +171,7 @@ class users extends pf_controller
         if (!$data)
         {
             //default values
-            $data = array('config'=>'User','server'=>'User','worlds'=>'User','settings'=>'User','players'=>'User');
+            $data = array('config'=>'User','server'=>'User','worlds'=>'User','settings'=>'User','players'=>'User','pluggins'=>'User');
         }
         if (isset($saved)) $data['saved']=true;
         
