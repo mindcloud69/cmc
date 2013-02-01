@@ -77,7 +77,18 @@ class mcController
     
     public static function checkOnline()
     {
-        $online = @fsockopen("127.0.0.1", 25565, $errno, $errstr, 1);
+        if (empty(self::$server_data)) //if server_data is empty, we grab config
+        {
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
+        self::getMCConfig($bukkit_dir.DS.'server.properties');
+        }
+        
+        //get our server port
+        $port = self::getSetting('server-port');
+        
+        if (!$port) $port = '25565'; //set to default if undefined/false
+        
+        $online = @fsockopen("127.0.0.1", $port, $errno, $errstr, 1);
         if ($online) return true;
         else return false;
     }
