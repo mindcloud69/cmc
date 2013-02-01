@@ -58,7 +58,7 @@ ob_start();
                     <h5 class="info">Depending on your download speed, this might take awhile...</h5>
                     <div id="downloading" class="ten columns centered panel">
                         <?php
-                        mcController::serverSend('say testing updater');
+                        mcController::serverSend('Starting Server Update - Prepare to log off');
                         
                         download_remote($url, '/tmp/updated-server.jar');
                         
