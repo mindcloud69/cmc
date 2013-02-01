@@ -21,6 +21,8 @@ class pf_router
     {
         //get the URI
         $uri = $_SERVER['REQUEST_URI'];
+        $uri = strtolower(preg_replace('/[^a-zA-Z0-9]\//', "", $uri));
+        $uri = strtok($uri, '?');
         
         //if no index.php in there we set everything as default and return it
         if (strpos($uri, INDEXPAGE) === false)
