@@ -32,6 +32,7 @@
                             <li id="start"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/broadcast.png"/>&nbsp;Start/Stop Server</a></li>
                             <li id="command"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/rocket.png"/>&nbsp;Commands</a></li>
                             <li id="say"><a href="#"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/comments.png"/>&nbsp;Say</a></li>
+                            <li id="say"><a href="<?php echo MAIN_PAGE ?>/data/clearlog"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/book.png"/>&nbsp;Clear Log</a></li>
                             <li id="update"><a href="<?php echo pf_config::get('main_page')?>/server/update"><img src="<?php echo pf_config::get('base_url');?>/app/assets/site_images/used/update.png"/>&nbsp;Update Server</a></li>
                         </ul>
                     </div>

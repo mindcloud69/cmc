@@ -37,6 +37,15 @@ class data extends pf_controller
         exec($command);
     }
     
+    public function clearlog()
+    {
+        $bukkit_dir = CMC::getCMCSetting('bukkit_dir');
+        $command = "echo '' > ".$bukkit_dir . DS . 'server.log';
+        exec($command);
+        CMC::log('Log Cleared By '. pf_auth::getVar('user'));
+        pf_core::redirectUrl(MAIN_PAGE.'/server');
+    }
+    
     public function mainlog()
     {
         echo $this->parselog('main');
