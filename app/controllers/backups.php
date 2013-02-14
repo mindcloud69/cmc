@@ -141,6 +141,23 @@ class backups extends pf_controller
         
     }
     
+    public function resetschedule()
+    {
+        //reset scheduled backup array
+        $schedules = array();
+        CMC::writeCMCSetting('scheduled_backups', $schedules);
+        
+        //remove all scheduled backups related to CMC
+        CMC::removeCronJob('/usr/bin/wget -q -O /tmp/cmc-backup http://localhost/index.php/backups/scheduled');
+        
+        //log the fact we removed every schedule backup
+        CMC::log('ALL Schedule Backups Removed By User:'.pf_auth::getVar('user'));
+        
+        //go to the backups page
+        pf_core::redirectUrl(MAIN_PAGE."/backups");
+    }
+
+
     public function schedule()
     {
         //if getting

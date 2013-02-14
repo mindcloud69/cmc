@@ -85,7 +85,8 @@ $number = 0;
                         ?>
                         
                         
-                        <a href="<?php echo MAIN_PAGE ?>/worlds" class="rounded button secondary">View/Edit Schedules</a>
+                        <a href="<?php echo MAIN_PAGE ?>/worlds" class="rounded button secondary">View/Edit Schedules</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="<?php echo MAIN_PAGE ?>/backups/resetschedule" class="rounded button alert">Remove All Schedules</a>
                     </div>
                 </div>
                 
