@@ -273,6 +273,11 @@ class backups extends pf_controller
         
         //record the last backup
         CMC::writeCMCSetting('last_backup', date('m/d/Y g:m a'));
+        
+        //remove backups older than X (5) days
+        $days = '5';
+        $command = 'find '.$backup_dir.'* -mtime +'.$days.' -exec rm {} \;';
+        exec($command);
     }
     
     public function download()
